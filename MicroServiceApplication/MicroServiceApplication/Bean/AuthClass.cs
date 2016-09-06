@@ -17,7 +17,7 @@ namespace MicroServiceApplication.Bean
             httpClient.MaxResponseContentBufferSize = 256000;
             httpClient.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)");
 
-            String url = "http://www.yun9.com/auth";
+            String url = AppConfig.GetInstance().LoginUrl;
 
             List<KeyValuePair<String,String>> paramList = new List<KeyValuePair<String,String>>();
             paramList.Add(new KeyValuePair<string, string>("userno",userNo));
@@ -30,7 +30,7 @@ namespace MicroServiceApplication.Bean
             {
                 JObject jo = JObject.Parse(result);
                 //设置登录环境变量
-                SessionClass.GetInstance().User = new Bean.UserClass(jo.ToObject<JObject>());
+                Session.GetInstance().User = new Bean.User(jo.ToObject<JObject>());
                 return true;
             }
             else

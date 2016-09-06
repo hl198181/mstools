@@ -21,21 +21,13 @@ namespace MicroServiceApplication
         {
             InstFactory instFactory = new InstFactory();
 
-            List<InstClass> instList = instFactory.queryByUserById(SessionClass.GetInstance().User.Id);
-
-            //ColumnHeader ch = new ColumnHeader();
-
-            //ch.Text = "列标题1";   //设置列标题 
-
-            //ch.Width = 120;    //设置列宽度 
-
-            //ch.TextAlign = HorizontalAlignment.Left;   //设置列的对齐方式 
+            List<Inst> instList = instFactory.queryByUserById(Session.GetInstance().User.Id);
 
             this.InstListView.View = View.Details;
             this.InstListView.FullRowSelect = true;
             this.InstListView.Columns.Add("机构名称", 300, HorizontalAlignment.Left);
             this.InstListView.BeginUpdate();
-            foreach(InstClass item in instList){
+            foreach(Inst item in instList){
                 ListViewItem lvi = new ListViewItem();
                 lvi.Text = item.Name;
                 lvi.Tag = item;
@@ -56,8 +48,8 @@ namespace MicroServiceApplication
             if (selectCount > 0)//若selectCount大於0，说明用户有选中某列。
             {
                 ListViewItem listViewItem = this.InstListView.SelectedItems[0];
-                InstClass inst = (InstClass)listViewItem.Tag;
-                SessionClass.GetInstance().Inst = inst;
+                Inst inst = (Inst)listViewItem.Tag;
+                Session.GetInstance().Inst = inst;
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();

@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Data.OleDb;
 using System.Data.Sql;
 using MicroServiceApplication.Bean;
+using MicroServiceApplication.Common;
 
 namespace MicroServiceApplication
 {
@@ -16,39 +17,44 @@ namespace MicroServiceApplication
     {
         ExportKisClass exportKis = new ExportKisClass();
 
+        private Client client;
+        private Inst inst;
+        private User user;
+
         private void exports(string categoryname)
         {
             ExportBean exportBean = new ExportBean();
 
-            exportBean.Instid = this.instidTextBox.Text;
-            exportBean.Clientid = this.clientidTextBox.Text;
+            if (this.inst == null || this.inst.Id == null)
+            {
+                MessageBox.Show("无法获取当前机构信息！");
+                return;
+            }
+
+            if (this.user == null || this.user.Id == null)
+            {
+                MessageBox.Show("无法获取当前用户信息！");
+                return;
+            }
+
+            if (this.client == null || this.client.Id == null)
+            {
+                MessageBox.Show("请选择客户信息！");
+                return;
+            }
+
+            exportBean.Instid = this.inst.Id;
+            exportBean.Clientid = this.client.Id;
             exportBean.Accountcyclesn = this.accountcyclesnTextBox.Text;
-            exportBean.Createby = this.createbyTextBox.Text;
+            exportBean.Createby = this.user.Id;
             exportBean.Categoryname = categoryname;
-
-            if (exportBean.Instid == null || exportBean.Instid == "")
-            {
-                MessageBox.Show("请输入机构id");
-                return;
-            }
-
-            if (exportBean.Clientid == null || exportBean.Clientid == "")
-            {
-                MessageBox.Show("请输入客户id");
-                return;
-            }
 
             if (exportBean.Accountcyclesn == null || exportBean.Accountcyclesn == "")
             {
                 MessageBox.Show("请输入月份");
                 return;
             }
-
-            if (exportBean.Createby == null || exportBean.Createby == "")
-            {
-                MessageBox.Show("请输入操作人ID");
-                return;
-            }
+           
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.InitialDirectory = "c:\\";//注意这里写路径时要用c:\\而不是c:\
@@ -81,8 +87,10 @@ namespace MicroServiceApplication
       
         private void MainForm_Load(object sender, EventArgs e)
         {
-            this.instidTextBox.Text = SessionClass.GetInstance().Inst.Id;
-            this.createbyTextBox.Text = SessionClass.GetInstance().User.Id;
+            this.inst = Session.GetInstance().Inst;
+            this.user = Session.GetInstance().User;
+
+            this.createbyTextBox.Text = this.user.Name;
         }
    
         private void selectPathButton_Click(object sender, EventArgs e)
@@ -123,6 +131,17 @@ namespace MicroServiceApplication
         private void LocalreporttaxToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.exports("localreporttax");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            List<Client> clientList = CommonManager.selectClient();
+
+            if (clientList != null && clientList.Count > 0)
+            {
+                this.client = clientList[0];
+                this.clientidTextBox.Text = this.client.Fullname;
+            }
         }
     }
 }

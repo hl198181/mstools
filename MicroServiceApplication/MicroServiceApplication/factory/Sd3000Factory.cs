@@ -69,11 +69,7 @@ namespace MicroServiceApplication.factory
             {
                 context.Connection.Close();
             }
-
-
-
-
-
+         
             //SqlDataAdapter myDataAdapter = new SqlDataAdapter("select * from credence", mycon);
             //DataSet myDataSet = new DataSet();		// 创建DataSet
             //myDataAdapter.Fill(myDataSet, "credence");

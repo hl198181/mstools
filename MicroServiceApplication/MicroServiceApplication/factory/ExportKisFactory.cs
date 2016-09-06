@@ -160,16 +160,8 @@ namespace MicroServiceApplication
     }
     class ExportKisClass
     {
-        private string _ErrInfo = "";
-
-        public string ErrInfo
+        public void Create(string filename,string tablename)
         {
-            get { return _ErrInfo; }
-        }
-
-        public bool Create(string filename,string tablename)
-        {
-            bool r = false;
             string outconnstring = string.Format("Provider = Microsoft.Jet.OLEDB.4.0 ;Data Source ={0};Extended Properties=dBASE IV;", filename);
             OleDbConnection outConn = new OleDbConnection(outconnstring);
             OleDbCommand dc = outConn.CreateCommand();
@@ -179,11 +171,10 @@ namespace MicroServiceApplication
                 dc.CommandType = CommandType.Text;
                 dc.CommandText = "CREATE TABLE " + tablename + " (FDate Date,FPeriod Numeric(4,0),FGroup Char(4),FNum Numeric(4,0),FEntryID Numeric(4,0),FExp Char(60),FAcctID Char(30),FClsName1 Char(20),FObjID1 Char(10),FObjName1 Char(20),FClsName2 Char(20),FObjID2 Char(10),FObjName2 Char(20),FClsName3 Char(20),FObjID3 Char(10),FObjName3 Char(20),FClsName4 Char(20),FObjID4 Char(10),FObjName4 Char(20),FTransID Char(10),FCyID Char(3),FExchRate Numeric(19,10),FDC Char(1),FFCyAmt Numeric(14,2),FQty Numeric(8,2),FPrice Numeric(10,7),FDebit Numeric(14,2),FCredit Numeric(14,2),FSettlCode Char(8),FSettleNo Char(8),FPrepare Char(8),FPay Char(8),FCash Char(8),FPoster Char(8),FChecker Char(8),FAttchment Numeric(5,0),FPosted Logical,FModule Char(2),FDeleted Logical,FSerialNo Numeric(10,0))";
                 dc.ExecuteNonQuery();
-                r = true;
             }
             catch (Exception c)
             {
-                _ErrInfo = c.Message;
+                throw c;
             }
             finally
             {
@@ -192,16 +183,13 @@ namespace MicroServiceApplication
                     outConn.Close();
                 outConn.Dispose();
             }
-            return r;
         }
 
-        public bool Save(string filename,string tablename,List<KisVoucherInfo> vouchers)
+        public void Save(string filename,string tablename,List<KisVoucherInfo> vouchers)
         {
-            bool r=false;
             string outconnstring = string.Format("Provider = Microsoft.Jet.OLEDB.4.0 ;Data Source ={0};Extended Properties=dBASE IV;", filename);
             OleDbConnection outConn=new OleDbConnection(outconnstring);
             
-            _ErrInfo="";
             try
             {
                 outConn.Open();
@@ -213,11 +201,10 @@ namespace MicroServiceApplication
                     dc.ExecuteNonQuery();
                     dc.Dispose();
                 }
-                r = true;
             }
             catch(Exception err)
             {
-                _ErrInfo=err.Message;
+                throw err;
             }
             finally
             {
@@ -226,7 +213,6 @@ namespace MicroServiceApplication
                 
                 outConn.Dispose();
             }
-            return r;
         }
 
         private DateTime GetTime(string timeStamp)
@@ -253,10 +239,10 @@ namespace MicroServiceApplication
             if (joDatas == null) throw new Exception("服务器返回数据错误。无法获取datas属性");
 
             var joResult = joDatas["result"];
-            if (joResult == null) throw new Exception("服务器返回数据错误，无法获取result属性。");
+            if (joResult == null) throw new Exception("当月无导出数据!");
             
             var jaVoucherItems = joResult["voucherItems"];
-            if (jaVoucherItems == null) throw new Exception("服务器返回数据错误，无法获取凭证结果。");
+            if (jaVoucherItems == null) throw new Exception("当月无凭证分录数据！");
 
             foreach (JObject item in jaVoucherItems)
             {
@@ -287,12 +273,8 @@ namespace MicroServiceApplication
 
         public JObject getData(string instid, string clientid, string accountcyclesn, string createby, string categoryname)
         {
-            HttpClient httpClient = new HttpClient();
-            httpClient.MaxResponseContentBufferSize = 256000;
-            httpClient.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)");
-            httpClient.DefaultRequestHeaders.Add("Authorization", "Basic c2VydmljZTpjNUNVN0ZBNVZOczdNOXJUZVlHU3pXZGpETzBWZmY=");
-
-            String url = "http://www.yun9.com/service/voucher/instance/exports";
+            HttpClient httpClient = AppConfig.GetInstance().crateHttpClient();
+            String url = AppConfig.GetInstance().BaseUrl + "/voucher/instance/exports";
 
             List<KeyValuePair<String, String>> paramList = new List<KeyValuePair<String, String>>();
             paramList.Add(new KeyValuePair<string, string>("instid", instid));
@@ -305,46 +287,34 @@ namespace MicroServiceApplication
             String result = response.Content.ReadAsStringAsync().Result;
             httpClient.Dispose();
 
-
-            JObject jo = JObject.Parse(result);
-            int stateCode = jo.GetValue("statusCode").ToObject<int>();
-            string message = jo.GetValue("message").ToString();
-            if (stateCode == 200)
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
+                JObject jo = JObject.Parse(result);
                 return jo;
-            }
-            else
+            }else
             {
-                MessageBox.Show(message);
-                return null;
+                throw new Exception("获取凭证数据错误!"+response.ReasonPhrase.ToString());
             }
         }
 
         public void exports(ExportBean exportBean)
         {
-            
-            JObject results = getData(exportBean.Instid, exportBean.Clientid, exportBean.Accountcyclesn, exportBean.Createby, exportBean.Categoryname);
 
-            JObject datas = results.GetValue("datas").ToObject<JObject>();
-
-            Accountcycle accountcycle = new Accountcycle(datas.GetValue("accountcycle").ToObject<JObject>());
-
-            List<KisVoucherInfo> vouchers = buildData(results);
-
-            if (!this.Create(exportBean.Path, exportBean.FileName))
+            try
             {
-                MessageBox.Show("创建数据文件错误:" + this.ErrInfo);
-                return;
-            }
+                JObject results = getData(exportBean.Instid, exportBean.Clientid, exportBean.Accountcyclesn, exportBean.Createby, exportBean.Categoryname);
+                JObject datas =(JObject)results["datas"];
+                
+                List <KisVoucherInfo> vouchers = buildData(results);
 
-            if (!this.Save(exportBean.Path, exportBean.FileName, vouchers))
-            {
-                MessageBox.Show("写入数据文件错误:" + this.ErrInfo);
-                return;
-            }
-            else
-            {
+                this.Create(exportBean.Path, exportBean.FileName);
+                this.Save(exportBean.Path, exportBean.FileName, vouchers);
+
                 MessageBox.Show("导出成功!");
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show("导出错误:"+e.Message);
             }
         }
 

@@ -18,7 +18,7 @@ namespace MicroServiceApplication
         {
             InitializeComponent();
             //LayoutMdi(MdiLayout.Cascade);
-            this.Text = this.Text + " - "+ SessionClass.GetInstance().Inst.Name;
+            this.Text = this.Text + " - "+ Session.GetInstance().Inst.Name;
         }
 
         private void KisToolStripMenuItem_Click(object sender, EventArgs e)

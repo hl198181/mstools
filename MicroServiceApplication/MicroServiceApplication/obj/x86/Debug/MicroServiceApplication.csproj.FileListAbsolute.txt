@@ -99,3 +99,4 @@ D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\
 D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\MicroServiceApplication.csproj.GenerateResource.Cache
 D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\MicroServiceApplication.exe.manifest
 D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\MicroServiceApplication.application
+D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\MicroServiceApplication.Common.SelectClientForm.resources

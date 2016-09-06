@@ -6,33 +6,33 @@ using MicroServiceApplication.Bean;
 
 namespace MicroServiceApplication
 {
-    class SessionClass
+    class Session
     {
-        private static SessionClass instance;
+        private static Session instance;
         private static object _lock = new object();
 
-        private UserClass _user;
+        private User _user;
 
-        internal UserClass User
+        internal User User
         {
             get { return _user; }
             set { _user = value; }
         }
 
-        private InstClass _inst;
+        private Inst _inst;
 
-        internal InstClass Inst
+        internal Inst Inst
         {
             get { return _inst; }
             set { _inst = value; }
         }
 
-        private SessionClass()
+        private Session()
         {
 
         }
 
-        public static SessionClass GetInstance()
+        public static Session GetInstance()
         {
             if (instance == null)
             {
@@ -40,7 +40,7 @@ namespace MicroServiceApplication
                 {
                     if (instance == null)
                     {
-                        instance = new SessionClass();
+                        instance = new Session();
                     }
                 }
             }

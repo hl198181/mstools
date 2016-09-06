@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace MicroServiceApplication.Bean
 {
-    class InstClass
+    class Inst
     {
         private string _id;
 
@@ -42,7 +42,7 @@ namespace MicroServiceApplication.Bean
             set { logourl = value; }
         }
        
-        public InstClass(JObject jobject)
+        public Inst(JObject jobject)
         {
             
             this.Name = jobject.GetValue("name").ToString();
@@ -55,15 +55,11 @@ namespace MicroServiceApplication.Bean
 
     class InstFactory
     {
-        public List<InstClass> queryByUserById(string userid){
-            List<InstClass> instList = new List<InstClass>();
+        public List<Inst> queryByUserById(string userid){
+            List<Inst> instList = new List<Inst>();
 
-            HttpClient httpClient = new HttpClient();
-            httpClient.MaxResponseContentBufferSize = 256000;
-            httpClient.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)");
-            httpClient.DefaultRequestHeaders.Add("Authorization", "Basic c2VydmljZTpjNUNVN0ZBNVZOczdNOXJUZVlHU3pXZGpETzBWZmY=");
-
-            String url = "http://www.yun9.com/service/user/inst?userid=" + userid;
+            HttpClient httpClient = AppConfig.GetInstance().crateHttpClient();
+            String url = AppConfig.GetInstance().BaseUrl+"/user/inst?userid=" + userid;
             HttpResponseMessage response = httpClient.GetAsync(url).Result;
             String result = response.Content.ReadAsStringAsync().Result;
             httpClient.Dispose();
@@ -78,8 +74,8 @@ namespace MicroServiceApplication.Bean
 
             foreach (var item in ja)
             {
-                
-                InstClass inst = new InstClass(item.Value<JObject>());
+
+                Inst inst = new Inst(item.Value<JObject>());
                 instList.Add(inst);
             }
 

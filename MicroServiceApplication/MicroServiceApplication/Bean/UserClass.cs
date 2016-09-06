@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 
 namespace MicroServiceApplication.Bean
 {
-    class UserClass
+    class User
     {
         private string _id;
 
@@ -33,7 +33,7 @@ namespace MicroServiceApplication.Bean
         }
 
 
-        public UserClass(JObject jobject)
+        public User(JObject jobject)
         {
             this.Name = jobject.GetValue("name").ToString();
             this.No = jobject.GetValue("no").ToString();
