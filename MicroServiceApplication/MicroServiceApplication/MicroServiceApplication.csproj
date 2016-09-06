@@ -9,12 +9,12 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MicroServiceApplication</RootNamespace>
-    <AssemblyName>MicroServiceApplication</AssemblyName>
+    <AssemblyName>小微服辅助工具</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\LEON\Desktop\Demo\</PublishUrl>
+    <PublishUrl>C:\Users\hl198\Desktop\Demo\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -24,7 +24,11 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>2</ApplicationRevision>
+    <TargetCulture>zh-Hans</TargetCulture>
+    <ProductName>小微服辅助工具</ProductName>
+    <PublisherName>顶聚科技</PublisherName>
+    <SuiteName>小微服辅助工具</SuiteName>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
