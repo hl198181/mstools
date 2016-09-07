@@ -95,6 +95,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.groupBox1);
             this.Name = "SelectAccountcycleForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "选择月份";
             this.Load += new System.EventHandler(this.SelectAccountcycleForm_Load);
             this.groupBox1.ResumeLayout(false);

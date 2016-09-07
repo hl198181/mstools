@@ -100,3 +100,4 @@ D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\
 D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\小微服辅助工具.application
 D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\小微服辅助工具.exe
 D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\小微服辅助工具.pdb
+D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\MicroServiceApplication.csprojResolveAssemblyReference.cache

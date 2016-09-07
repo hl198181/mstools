@@ -45,15 +45,15 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ClientSubjectDataGridView = new System.Windows.Forms.DataGridView();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ClientSubjectDataGridView)).BeginInit();
-            this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -215,29 +215,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "导出信息";
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.ClientSubjectDataGridView);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(0, 30);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 100, 3, 3);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.groupBox2.Size = new System.Drawing.Size(1237, 661);
-            this.groupBox2.TabIndex = 15;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "新增科目-请在将凭证文件导入财务系统之前，在财务系统输入以下科目";
-            // 
-            // ClientSubjectDataGridView
-            // 
-            this.ClientSubjectDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ClientSubjectDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ClientSubjectDataGridView.Location = new System.Drawing.Point(3, 38);
-            this.ClientSubjectDataGridView.Name = "ClientSubjectDataGridView";
-            this.ClientSubjectDataGridView.RowTemplate.Height = 37;
-            this.ClientSubjectDataGridView.Size = new System.Drawing.Size(1231, 620);
-            this.ClientSubjectDataGridView.TabIndex = 0;
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 3;
@@ -263,13 +240,36 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1231, 251);
             this.tableLayoutPanel1.TabIndex = 17;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.ClientSubjectDataGridView);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(10, 10);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 100, 3, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.groupBox2.Size = new System.Drawing.Size(1217, 671);
+            this.groupBox2.TabIndex = 15;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "新增科目-请在将凭证文件导入财务系统之前，在财务系统输入以下科目";
+            // 
+            // ClientSubjectDataGridView
+            // 
+            this.ClientSubjectDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ClientSubjectDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ClientSubjectDataGridView.Location = new System.Drawing.Point(3, 38);
+            this.ClientSubjectDataGridView.Name = "ClientSubjectDataGridView";
+            this.ClientSubjectDataGridView.RowTemplate.Height = 37;
+            this.ClientSubjectDataGridView.Size = new System.Drawing.Size(1211, 630);
+            this.ClientSubjectDataGridView.TabIndex = 0;
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 326);
             this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(0, 30, 0, 0);
+            this.panel1.Padding = new System.Windows.Forms.Padding(10);
             this.panel1.Size = new System.Drawing.Size(1237, 691);
             this.panel1.TabIndex = 16;
             // 
@@ -289,10 +289,10 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.ClientSubjectDataGridView)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ClientSubjectDataGridView)).EndInit();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
