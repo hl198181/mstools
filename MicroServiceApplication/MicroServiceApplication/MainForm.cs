@@ -17,9 +17,10 @@ namespace MicroServiceApplication
         public MainForm()
         {
             InitializeComponent();
-            //LayoutMdi(MdiLayout.Cascade);
-            this.Text = this.Text + " - "+ Session.GetInstance().Inst.Name;
+           
         }
+
+
 
         private void KisToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -51,6 +52,29 @@ namespace MicroServiceApplication
                 sd3000Form.Activate();
             }
             
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            this.Text = this.Text + " - " + Session.GetInstance().Inst.Name;
+
+            ToolStripMenuItem menuItem = new ToolStripMenuItem();
+            menuItem.Name = "exportvoucher";
+            menuItem.Text = "凭证导出";
+
+            this.menuStrip1.Items.Add(menuItem);
+
+            ToolStripMenuItem kisMenuItem = new ToolStripMenuItem();
+            kisMenuItem.Name = "kis";
+            kisMenuItem.Text = "金蝶标准凭证格式";
+            kisMenuItem.Click += new EventHandler(KisToolStripMenuItem_Click);
+            menuItem.DropDownItems.Add(kisMenuItem);
+
+            ToolStripMenuItem sd3000MenuItem = new ToolStripMenuItem();
+            sd3000MenuItem.Name = "sd3000";
+            sd3000MenuItem.Text = "速达3000";
+            sd3000MenuItem.Click += new EventHandler(Sd300ToolStripMenuItem_Click);
+            menuItem.DropDownItems.Add(sd3000MenuItem);
         }
     }
 }

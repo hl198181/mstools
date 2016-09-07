@@ -14,7 +14,7 @@
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\hl198\Desktop\Demo\</PublishUrl>
+    <PublishUrl>C:\Users\hl198\Desktop\小微服-辅助工具\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -28,11 +28,12 @@
     <ProductName>小微服辅助工具</ProductName>
     <PublisherName>顶聚科技</PublisherName>
     <SuiteName>小微服辅助工具</SuiteName>
-    <ApplicationRevision>4</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <BootstrapperComponentsUrl>C:\Program Files %28x86%29\Microsoft Visual Studio 14.0\SDK\Bootstrapper\Packages\</BootstrapperComponentsUrl>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -114,11 +115,18 @@
     <Compile Include="Bean\AccountcycleClass.cs" />
     <Compile Include="Bean\AuthClass.cs" />
     <Compile Include="Bean\AppConfigClass.cs" />
+    <Compile Include="Bean\ClientSubjectClass.cs" />
     <Compile Include="Bean\ClientClass.cs" />
     <Compile Include="Bean\ExportBean.cs" />
     <Compile Include="Bean\InstClass.cs" />
     <Compile Include="Bean\UserClass.cs" />
     <Compile Include="Common\CommonManager.cs" />
+    <Compile Include="Common\SelectAccountcycleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Common\SelectAccountcycleForm.Designer.cs">
+      <DependentUpon>SelectAccountcycleForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Common\SelectClientForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,6 +168,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Common\SelectAccountcycleForm.resx">
+      <DependentUpon>SelectAccountcycleForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Common\SelectClientForm.resx">
       <DependentUpon>SelectClientForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -200,11 +211,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 和 x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>

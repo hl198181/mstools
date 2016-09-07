@@ -22,5 +22,20 @@ namespace MicroServiceApplication.Common
                 return null;
             }
         }
+
+        public static List<Accountcycle> selectAccountcycle()
+        {
+            SelectAccountcycleForm selectAccountcycleForm = new SelectAccountcycleForm();
+            selectAccountcycleForm.ShowDialog();
+
+            if (selectAccountcycleForm.DialogResult == DialogResult.OK)
+            {
+                return selectAccountcycleForm.CurrAccountcycle;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
