@@ -8,6 +8,7 @@ using System.Net.Http;
 using Newtonsoft.Json.Linq;
 using System.Windows.Forms;
 using MicroServiceApplication.Bean;
+using MicroServiceApplication.Common;
 
 namespace MicroServiceApplication
 {
@@ -215,14 +216,7 @@ namespace MicroServiceApplication
             }
         }
 
-        private DateTime GetTime(string timeStamp)
-        {
-            DateTime dtStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
-            long lTime = long.Parse(timeStamp + "0000");
-            //long lTime = long.Parse(timeStamp);
-            TimeSpan toNow = new TimeSpan(lTime); 
-            return dtStart.Add(toNow);  
-        }
+      
 
         private int GetCreatetime()
         {
@@ -248,7 +242,7 @@ namespace MicroServiceApplication
             {
                 KisVoucherInfo voucherItem = new KisVoucherInfo();
                 
-                DateTime bizDate = GetTime(item["FDate"].ToString());
+                DateTime bizDate = Util.GetTime(item["FDate"].ToString());
 
                 voucherItem.FDate = bizDate;
                 voucherItem.FPeriod = item.GetValue("FPeriod").ToObject<int>();

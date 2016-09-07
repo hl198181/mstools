@@ -43,15 +43,15 @@
             this.button2 = new System.Windows.Forms.Button();
             this.exportInfoPanel = new System.Windows.Forms.Panel();
             this.subjectPanel = new System.Windows.Forms.Panel();
-            this.ClientSubjectDataGridView = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ClientSubjectDataGridView = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.exportInfoPanel.SuspendLayout();
             this.subjectPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ClientSubjectDataGridView)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ClientSubjectDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -218,16 +218,6 @@
             this.subjectPanel.Size = new System.Drawing.Size(1643, 551);
             this.subjectPanel.TabIndex = 3;
             // 
-            // ClientSubjectDataGridView
-            // 
-            this.ClientSubjectDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ClientSubjectDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ClientSubjectDataGridView.Location = new System.Drawing.Point(3, 31);
-            this.ClientSubjectDataGridView.Name = "ClientSubjectDataGridView";
-            this.ClientSubjectDataGridView.RowTemplate.Height = 37;
-            this.ClientSubjectDataGridView.Size = new System.Drawing.Size(1617, 497);
-            this.ClientSubjectDataGridView.TabIndex = 0;
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.ClientSubjectDataGridView);
@@ -238,6 +228,16 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "新科目列表";
+            // 
+            // ClientSubjectDataGridView
+            // 
+            this.ClientSubjectDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ClientSubjectDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ClientSubjectDataGridView.Location = new System.Drawing.Point(3, 31);
+            this.ClientSubjectDataGridView.Name = "ClientSubjectDataGridView";
+            this.ClientSubjectDataGridView.RowTemplate.Height = 37;
+            this.ClientSubjectDataGridView.Size = new System.Drawing.Size(1617, 497);
+            this.ClientSubjectDataGridView.TabIndex = 0;
             // 
             // Sd3000Form
             // 
@@ -259,8 +259,8 @@
             this.tableLayoutPanel1.PerformLayout();
             this.exportInfoPanel.ResumeLayout(false);
             this.subjectPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.ClientSubjectDataGridView)).EndInit();
             this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ClientSubjectDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

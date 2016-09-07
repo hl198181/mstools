@@ -120,6 +120,7 @@
     <Compile Include="Bean\ExportBean.cs" />
     <Compile Include="Bean\InstClass.cs" />
     <Compile Include="Bean\UserClass.cs" />
+    <Compile Include="Common\Util.cs" />
     <Compile Include="Common\CommonManager.cs" />
     <Compile Include="Common\SelectAccountcycleForm.cs">
       <SubType>Form</SubType>

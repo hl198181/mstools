@@ -71,7 +71,7 @@ namespace MicroServiceApplication.voucher
             }
             catch (Exception e)
             {
-                MessageBox.Show("导出凭证时出现错误:" + e.Message);
+                MessageBox.Show(e.Message);
             }
         }
 
