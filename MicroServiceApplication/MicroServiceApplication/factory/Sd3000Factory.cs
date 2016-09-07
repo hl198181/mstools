@@ -1122,7 +1122,8 @@ namespace MicroServiceApplication.factory
             credid = context.ExportBean.Accountcyclesn + credid;
 
             //获取凭证字id
-            string credtypeid = this.getGroupNameId(voucher.Items[0].Groupname, context);
+            //string credtypeid = this.getGroupNameId(voucher.Items[0].Groupname, context);
+            string credtypeid = this.getGroupNameId("记", context);
             if (credtypeid == null || credtypeid == "") throw new Exception("无法获取凭证字："+ voucher.Items[0].Groupname+",对应的ID!");
 
             context.MaxCredno++;

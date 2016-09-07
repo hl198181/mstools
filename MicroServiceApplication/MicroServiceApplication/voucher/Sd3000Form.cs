@@ -68,6 +68,7 @@ namespace MicroServiceApplication.voucher
             {
                 Sd3000Factory factory = new Sd3000Factory();
                 factory.exports(exportBean);
+                MessageBox.Show("凭证导出成功！请登录财务系统查看结果!");
             }
             catch (Exception e)
             {
