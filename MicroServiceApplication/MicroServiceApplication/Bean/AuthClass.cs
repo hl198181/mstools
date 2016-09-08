@@ -13,10 +13,7 @@ namespace MicroServiceApplication.Bean
 
         public Boolean checkIn(String userNo, String password)
         {
-            HttpClient httpClient = new HttpClient();
-            httpClient.MaxResponseContentBufferSize = 256000;
-            httpClient.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)");
-
+            HttpClient httpClient = AppConfig.GetInstance().crateHttpClient();
             String url = AppConfig.GetInstance().LoginUrl;
 
             List<KeyValuePair<String,String>> paramList = new List<KeyValuePair<String,String>>();

@@ -109,7 +109,7 @@ namespace MicroServiceApplication
         private void queryClientNewSubject(string clientid)
         {
             ClientSubjectFactory csf = new ClientSubjectFactory();
-            List<ClientSubject> clientSubjects = csf.query(clientid, 1);
+            List<ClientSubject> clientSubjects = csf.query(clientid, 1,1);
 
 
             DataTable clientSubjectDt = new DataTable();

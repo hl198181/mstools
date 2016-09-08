@@ -44,19 +44,27 @@
             this.exportInfoPanel = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.dbIpTextBox = new System.Windows.Forms.TextBox();
-            this.accsetNameTextBox = new System.Windows.Forms.TextBox();
-            this.dbUserTextBox = new System.Windows.Forms.TextBox();
-            this.dbPasswordTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.dbUserTextBox = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.dbPasswordTextBox = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
+            this.accsetNameTextBox = new System.Windows.Forms.TextBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             this.subjectPanel = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ClientSubjectDataGridView = new System.Windows.Forms.DataGridView();
-            this.button4 = new System.Windows.Forms.Button();
+            this.exportSubjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.开始导出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OutputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BankDealToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PayrollToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PaytaxreportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.LocalreporttaxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -72,26 +80,32 @@
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.导出ToolStripMenuItem});
+            this.导出ToolStripMenuItem,
+            this.exportSubjectToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(1643, 41);
+            this.menuStrip1.Size = new System.Drawing.Size(1643, 44);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // 导出ToolStripMenuItem
             // 
             this.导出ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.IncomeToolStripMenuItem});
+            this.IncomeToolStripMenuItem,
+            this.OutputToolStripMenuItem,
+            this.BankDealToolStripMenuItem,
+            this.PayrollToolStripMenuItem,
+            this.PaytaxreportToolStripMenuItem,
+            this.LocalreporttaxToolStripMenuItem});
             this.导出ToolStripMenuItem.Name = "导出ToolStripMenuItem";
-            this.导出ToolStripMenuItem.Size = new System.Drawing.Size(74, 35);
-            this.导出ToolStripMenuItem.Text = "导出";
+            this.导出ToolStripMenuItem.Size = new System.Drawing.Size(122, 38);
+            this.导出ToolStripMenuItem.Text = "导出凭证";
             // 
             // IncomeToolStripMenuItem
             // 
             this.IncomeToolStripMenuItem.Name = "IncomeToolStripMenuItem";
-            this.IncomeToolStripMenuItem.Size = new System.Drawing.Size(161, 38);
+            this.IncomeToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
             this.IncomeToolStripMenuItem.Text = "进项";
             this.IncomeToolStripMenuItem.Click += new System.EventHandler(this.IncomeToolStripMenuItem_Click);
             // 
@@ -216,7 +230,7 @@
             this.exportInfoPanel.Controls.Add(this.groupBox3);
             this.exportInfoPanel.Controls.Add(this.groupBox1);
             this.exportInfoPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.exportInfoPanel.Location = new System.Drawing.Point(0, 41);
+            this.exportInfoPanel.Location = new System.Drawing.Point(0, 44);
             this.exportInfoPanel.Margin = new System.Windows.Forms.Padding(0);
             this.exportInfoPanel.Name = "exportInfoPanel";
             this.exportInfoPanel.Padding = new System.Windows.Forms.Padding(10);
@@ -263,33 +277,6 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(1583, 308);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 150);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(82, 24);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "账套：";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 50);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(106, 24);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "用户名：";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 100);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(82, 24);
-            this.label7.TabIndex = 3;
-            this.label7.Text = "密码：";
-            // 
             // dbIpTextBox
             // 
             this.dbIpTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -300,14 +287,14 @@
             this.dbIpTextBox.Text = "localhost";
             this.dbIpTextBox.TextChanged += new System.EventHandler(this.dbIpTextBox_TextChanged);
             // 
-            // accsetNameTextBox
+            // label4
             // 
-            this.accsetNameTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.accsetNameTextBox.Location = new System.Drawing.Point(175, 153);
-            this.accsetNameTextBox.Name = "accsetNameTextBox";
-            this.accsetNameTextBox.ReadOnly = true;
-            this.accsetNameTextBox.Size = new System.Drawing.Size(1405, 35);
-            this.accsetNameTextBox.TabIndex = 5;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(154, 24);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "服务器地址：";
             // 
             // dbUserTextBox
             // 
@@ -319,6 +306,15 @@
             this.dbUserTextBox.Text = "sa";
             this.dbUserTextBox.TextChanged += new System.EventHandler(this.dbUserTextBox_TextChanged);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 50);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(106, 24);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "用户名：";
+            // 
             // dbPasswordTextBox
             // 
             this.dbPasswordTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -329,14 +325,14 @@
             this.dbPasswordTextBox.TabIndex = 7;
             this.dbPasswordTextBox.TextChanged += new System.EventHandler(this.dbPasswordTextBox_TextChanged);
             // 
-            // label4
+            // label7
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(154, 24);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "服务器地址：";
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 100);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(82, 24);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "密码：";
             // 
             // button3
             // 
@@ -348,11 +344,39 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // accsetNameTextBox
+            // 
+            this.accsetNameTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.accsetNameTextBox.Location = new System.Drawing.Point(175, 153);
+            this.accsetNameTextBox.Name = "accsetNameTextBox";
+            this.accsetNameTextBox.ReadOnly = true;
+            this.accsetNameTextBox.Size = new System.Drawing.Size(1405, 35);
+            this.accsetNameTextBox.TabIndex = 5;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(175, 203);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(205, 44);
+            this.button4.TabIndex = 9;
+            this.button4.Text = "选择账套";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 150);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(82, 24);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "账套：";
+            // 
             // subjectPanel
             // 
             this.subjectPanel.Controls.Add(this.groupBox2);
             this.subjectPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.subjectPanel.Location = new System.Drawing.Point(0, 683);
+            this.subjectPanel.Location = new System.Drawing.Point(0, 686);
             this.subjectPanel.Name = "subjectPanel";
             this.subjectPanel.Padding = new System.Windows.Forms.Padding(10);
             this.subjectPanel.Size = new System.Drawing.Size(1643, 551);
@@ -379,15 +403,63 @@
             this.ClientSubjectDataGridView.Size = new System.Drawing.Size(1617, 497);
             this.ClientSubjectDataGridView.TabIndex = 0;
             // 
-            // button4
+            // exportSubjectToolStripMenuItem
             // 
-            this.button4.Location = new System.Drawing.Point(175, 203);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(205, 44);
-            this.button4.TabIndex = 9;
-            this.button4.Text = "选择账套";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.exportSubjectToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.开始导出ToolStripMenuItem,
+            this.TestToolStripMenuItem});
+            this.exportSubjectToolStripMenuItem.Name = "exportSubjectToolStripMenuItem";
+            this.exportSubjectToolStripMenuItem.Size = new System.Drawing.Size(122, 38);
+            this.exportSubjectToolStripMenuItem.Text = "科目设置";
+            // 
+            // 开始导出ToolStripMenuItem
+            // 
+            this.开始导出ToolStripMenuItem.Name = "开始导出ToolStripMenuItem";
+            this.开始导出ToolStripMenuItem.Size = new System.Drawing.Size(281, 38);
+            this.开始导出ToolStripMenuItem.Text = "科目导出";
+            this.开始导出ToolStripMenuItem.Click += new System.EventHandler(this.开始导出ToolStripMenuItem_Click);
+            // 
+            // TestToolStripMenuItem
+            // 
+            this.TestToolStripMenuItem.Name = "TestToolStripMenuItem";
+            this.TestToolStripMenuItem.Size = new System.Drawing.Size(281, 38);
+            this.TestToolStripMenuItem.Text = "设置为已经导入";
+            this.TestToolStripMenuItem.Click += new System.EventHandler(this.TestToolStripMenuItem_Click);
+            // 
+            // OutputToolStripMenuItem
+            // 
+            this.OutputToolStripMenuItem.Name = "OutputToolStripMenuItem";
+            this.OutputToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
+            this.OutputToolStripMenuItem.Text = "销项";
+            this.OutputToolStripMenuItem.Click += new System.EventHandler(this.OutputToolStripMenuItem_Click);
+            // 
+            // BankDealToolStripMenuItem
+            // 
+            this.BankDealToolStripMenuItem.Name = "BankDealToolStripMenuItem";
+            this.BankDealToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
+            this.BankDealToolStripMenuItem.Text = "银行回单";
+            this.BankDealToolStripMenuItem.Click += new System.EventHandler(this.BankDealToolStripMenuItem_Click);
+            // 
+            // PayrollToolStripMenuItem
+            // 
+            this.PayrollToolStripMenuItem.Name = "PayrollToolStripMenuItem";
+            this.PayrollToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
+            this.PayrollToolStripMenuItem.Text = "工资表";
+            this.PayrollToolStripMenuItem.Click += new System.EventHandler(this.PayrollToolStripMenuItem_Click);
+            // 
+            // PaytaxreportToolStripMenuItem
+            // 
+            this.PaytaxreportToolStripMenuItem.Name = "PaytaxreportToolStripMenuItem";
+            this.PaytaxreportToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
+            this.PaytaxreportToolStripMenuItem.Text = "国税";
+            this.PaytaxreportToolStripMenuItem.Click += new System.EventHandler(this.PaytaxreportToolStripMenuItem_Click);
+            // 
+            // LocalreporttaxToolStripMenuItem
+            // 
+            this.LocalreporttaxToolStripMenuItem.Name = "LocalreporttaxToolStripMenuItem";
+            this.LocalreporttaxToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
+            this.LocalreporttaxToolStripMenuItem.Text = "地税";
+            this.LocalreporttaxToolStripMenuItem.Click += new System.EventHandler(this.LocalreporttaxToolStripMenuItem_Click);
             // 
             // Sd3000Form
             // 
@@ -450,5 +522,13 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.ToolStripMenuItem exportSubjectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 开始导出ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem TestToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem OutputToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem BankDealToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem PayrollToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem PaytaxreportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem LocalreporttaxToolStripMenuItem;
     }
 }

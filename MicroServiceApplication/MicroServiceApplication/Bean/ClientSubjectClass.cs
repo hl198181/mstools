@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace MicroServiceApplication.Bean
@@ -109,11 +110,11 @@ namespace MicroServiceApplication.Bean
 
     class ClientSubjectFactory
     {
-        public List<ClientSubject> query(string clientid,int isnew)
+        public List<ClientSubject> query(string clientid,int isnew,int audit)
         {
             HttpClient httpClient = AppConfig.GetInstance().crateHttpClient();
 
-            String url = AppConfig.GetInstance().BaseUrl + "/client/subject?clientid="+clientid+"&isnew="+isnew+"&disabled=0";
+            String url = AppConfig.GetInstance().BaseUrl + "/client/subject?clientid="+clientid+"&isnew="+isnew+"&audit="+ audit + "&disabled=0";
             HttpResponseMessage response = httpClient.GetAsync(url).Result;
             String result = response.Content.ReadAsStringAsync().Result;
             httpClient.Dispose();
@@ -134,6 +135,44 @@ namespace MicroServiceApplication.Bean
             }
 
             return clientSubjectList;
+        }
+
+        public void updateIsNew(List<ClientSubject> clientSubjects,int isNew)
+        {
+            HttpClient httpClient = AppConfig.GetInstance().crateHttpClient();
+
+            String url = AppConfig.GetInstance().BaseUrl + "/client/subject";
+
+            JArray ja = new JArray();
+
+            foreach (ClientSubject item in clientSubjects)
+            {
+                JObject jo = new JObject();
+
+                jo.Add("id", item.Id);
+                jo.Add("isnew", isNew);
+                ja.Add(jo);
+            }
+
+            string requestJson = ja.ToString();
+
+            HttpContent httpContent = new StringContent(requestJson);
+            httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            HttpResponseMessage response = httpClient.PostAsync(new Uri(url), httpContent).Result;
+            String result = response.Content.ReadAsStringAsync().Result;
+            httpClient.Dispose();
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+               
+            }
+            else
+            {
+                throw new Exception("设置科目状态错误." + response.RequestMessage.ToString());
+            }
+
+        
         }
     }
 }

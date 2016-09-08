@@ -88,6 +88,7 @@ D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\bin\Debu
 D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\bin\Debug\System.Threading.Tasks.xml
 D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\MicroServiceApplication.csproj.App.config
 D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\MicroServiceApplication.csprojResolveAssemblyReference.cache
+D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\MicroServiceApplication.Common.SelectAccsetForm.resources
 D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\MicroServiceApplication.Common.SelectAccountcycleForm.resources
 D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\MicroServiceApplication.Common.SelectClientForm.resources
 D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\MicroServiceApplication.MainForm.resources
@@ -101,4 +102,3 @@ D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\
 D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\小微服辅助工具.application
 D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\小微服辅助工具.exe
 D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\小微服辅助工具.pdb
-D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\MicroServiceApplication.Common.SelectAccsetForm.resources

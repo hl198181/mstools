@@ -20,6 +20,7 @@ namespace MicroServiceApplication.voucher
         private User user;
         private Accountcycle accountcycle;
         private Sd3000Accset accset;
+        private List<ClientSubject> clientSubjects;
 
         public Sd3000Form()
         {
@@ -118,6 +119,71 @@ namespace MicroServiceApplication.voucher
                 MessageBox.Show(e.Message);
             }
         }
+
+        private void exportSubject()
+        {
+            ExportBean exportBean = new ExportBean();
+
+            if (this.inst == null || this.inst.Id == null)
+            {
+                MessageBox.Show("无法获取当前机构信息！");
+                return;
+            }
+
+            if (this.user == null || this.user.Id == null)
+            {
+                MessageBox.Show("无法获取当前用户信息！");
+                return;
+            }
+
+            if (this.client == null || this.client.Id == null)
+            {
+                MessageBox.Show("请选择客户信息！");
+                return;
+            }
+
+            if (this.accountcycle == null || this.accountcycle.Sn == null)
+            {
+                MessageBox.Show("请选择月份！");
+                return;
+            }
+
+            if (this.accset == null)
+            {
+                MessageBox.Show("请选择账套！");
+                return;
+            }
+
+            if (this.accset.Corpname != this.client.Fullname)
+            {
+                DialogResult dr = MessageBox.Show("选择的客户与账套名称不一致，是否继续导入?", "系统提示", MessageBoxButtons.OKCancel);
+
+                if (dr != DialogResult.OK)
+                {
+                    return;
+                }
+            }
+
+            exportBean.Instid = this.inst.Id;
+            exportBean.Clientid = this.client.Id;
+            exportBean.Accountcyclesn = this.accountcycle.Sn;
+            exportBean.Createby = this.user.Id;
+            try
+            {
+                Sd3000Factory factory = new Sd3000Factory();
+                factory.exportsSubject(exportBean, this.accset);
+
+                ClientSubjectFactory csf = new ClientSubjectFactory();
+                csf.updateIsNew(this.clientSubjects, 0);
+                this.queryClientNewSubject(this.client.Id);
+
+                MessageBox.Show("科目导出成功！请登录财务系统查看结果!");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
         
         private void button1_Click(object sender, EventArgs e)
         {
@@ -155,16 +221,15 @@ namespace MicroServiceApplication.voucher
         private void queryClientNewSubject(string clientid)
         {
             ClientSubjectFactory csf = new ClientSubjectFactory();
-            List<ClientSubject> clientSubjects = csf.query(clientid, 1);
-
-
+            this.clientSubjects = csf.query(clientid, 1,1);
+            
             DataTable clientSubjectDt = new DataTable();
 
             clientSubjectDt.Columns.Add("ID", Type.GetType("System.String"));
             clientSubjectDt.Columns.Add("科目编号", Type.GetType("System.String"));
             clientSubjectDt.Columns.Add("科目名称", Type.GetType("System.String"));
 
-            foreach (ClientSubject item in clientSubjects)
+            foreach (ClientSubject item in this.clientSubjects)
             {
                 DataRow datarow = clientSubjectDt.NewRow();
 
@@ -263,6 +328,56 @@ namespace MicroServiceApplication.voucher
         private void dbPasswordTextBox_TextChanged(object sender, EventArgs e)
         {
             this.resetAccset();
+        }
+
+        private void 开始导出ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.exportSubject();
+        }
+
+        private void TestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.client == null)
+            {
+                MessageBox.Show("请先选择客户!");
+            }
+            try
+            {
+                ClientSubjectFactory csf = new ClientSubjectFactory();
+                csf.updateIsNew(this.clientSubjects, 0);
+                this.queryClientNewSubject(this.client.Id);
+                MessageBox.Show("设置成功!");
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show(e1.Message);
+            }
+            
+        }
+
+        private void OutputToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.exports("output");
+        }
+
+        private void BankDealToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.exports("bankbill");
+        }
+
+        private void PayrollToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.exports("payroll");
+        }
+
+        private void PaytaxreportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.exports("paytaxreport");
+        }
+
+        private void LocalreporttaxToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.exports("localreporttax");
         }
     }
 }

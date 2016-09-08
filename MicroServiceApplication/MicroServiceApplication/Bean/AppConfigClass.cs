@@ -41,7 +41,8 @@ namespace MicroServiceApplication.Bean
             return instance;
         }
 
-        private string _baseUrl = "http://www.yun9.com/service";
+        //private string _baseUrl = "http://www.yun9.com/service";
+        private string _baseUrl = "http://192.168.31.209:9080/service";
 
         public string BaseUrl
         {

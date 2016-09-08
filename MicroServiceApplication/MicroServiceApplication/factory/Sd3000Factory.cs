@@ -824,6 +824,9 @@ namespace MicroServiceApplication.factory
         private int _moneyid;
         private string _name;
         private string _fullname;
+        private bool _dcflag;
+        private bool _detailflag;
+
 
         public int Subid
         {
@@ -887,6 +890,32 @@ namespace MicroServiceApplication.factory
             set
             {
                 _fullname = value;
+            }
+        }
+
+        public bool Dcflag
+        {
+            get
+            {
+                return _dcflag;
+            }
+
+            set
+            {
+                _dcflag = value;
+            }
+        }
+
+        public bool Detailflag
+        {
+            get
+            {
+                return _detailflag;
+            }
+
+            set
+            {
+                _detailflag = value;
             }
         }
     }
@@ -993,78 +1022,260 @@ namespace MicroServiceApplication.factory
         }
     }
 
-    class Sd3000Factory
+    class ExportSd3000Context
     {
-        class ExportSd3000Context
+        private ExportBean _exportBean;
+
+        private List<Sd3000Voucher> _vouchers;
+
+        private List<string> _sqls = new List<string>();
+
+        public ExportBean ExportBean
         {
-            private ExportBean _exportBean;
+            get { return _exportBean; }
+            set { _exportBean = value; }
+        }
+        private int _maxCredid;
 
-            private List<Sd3000Voucher> _vouchers;
+        public int MaxCredid
+        {
+            get { return _maxCredid; }
+            set { _maxCredid = value; }
+        }
+        private int _maxCredcode;
 
-            private List<string> _sqls = new List<string>();
+        public int MaxCredcode
+        {
+            get { return _maxCredcode; }
+            set { _maxCredcode = value; }
+        }
 
-            public ExportBean ExportBean
+        private int _maxCredno;
+
+
+        internal List<Sd3000Voucher> Vouchers
+        {
+            get
             {
-                get { return _exportBean; }
-                set { _exportBean = value; }
-            }
-            private int _maxCredid;
-
-            public int MaxCredid
-            {
-                get { return _maxCredid; }
-                set { _maxCredid = value; }
-            }
-            private int _maxCredcode;
-
-            public int MaxCredcode
-            {
-                get { return _maxCredcode; }
-                set { _maxCredcode = value; }
-            }
-
-            private int _maxCredno;
-
-       
-            internal List<Sd3000Voucher> Vouchers
-            {
-                get
-                {
-                    return _vouchers;
-                }
-
-                set
-                {
-                    _vouchers = value;
-                }
+                return _vouchers;
             }
 
-            public List<string> Sqls
+            set
             {
-                get
-                {
-                    return _sqls;
-                }
-
-                set
-                {
-                    _sqls = value;
-                }
-            }
-
-            public int MaxCredno
-            {
-                get
-                {
-                    return _maxCredno;
-                }
-
-                set
-                {
-                    _maxCredno = value;
-                }
+                _vouchers = value;
             }
         }
+
+        public List<string> Sqls
+        {
+            get
+            {
+                return _sqls;
+            }
+
+            set
+            {
+                _sqls = value;
+            }
+        }
+
+        public int MaxCredno
+        {
+            get
+            {
+                return _maxCredno;
+            }
+
+            set
+            {
+                _maxCredno = value;
+            }
+        }
+    }
+
+    class ExportSubjectContext
+    {
+        private ExportBean _exportBean;
+
+        private List<Sd3000Subject> _subjects;
+
+        private Dictionary<string, Accoptions> _accoptionsDict;
+
+        private List<ClientSubject> _clientSubjects;
+
+        private int _maxSubid;
+
+        private List<string> _sqls = new List<string>();
+
+        internal ExportBean ExportBean
+        {
+            get
+            {
+                return _exportBean;
+            }
+
+            set
+            {
+                _exportBean = value;
+            }
+        }
+
+        public List<string> Sqls
+        {
+            get
+            {
+                return _sqls;
+            }
+
+            set
+            {
+                _sqls = value;
+            }
+        }
+
+        internal Dictionary<string, Accoptions> AccoptionsDict
+        {
+            get
+            {
+                return _accoptionsDict;
+            }
+
+            set
+            {
+                _accoptionsDict = value;
+            }
+        }
+
+        internal List<ClientSubject> ClientSubjects
+        {
+            get
+            {
+                return _clientSubjects;
+            }
+
+            set
+            {
+                _clientSubjects = value;
+            }
+        }
+
+        public int MaxSubid
+        {
+            get
+            {
+                return _maxSubid;
+            }
+
+            set
+            {
+                _maxSubid = value;
+            }
+        }
+
+        internal List<Sd3000Subject> Subjects
+        {
+            get
+            {
+                return _subjects;
+            }
+
+            set
+            {
+                _subjects = value;
+            }
+        }
+    }
+
+    class Accoptions
+    {
+        private int _optionid;
+        private string _optionname;
+        private string _optionvalue;
+        private string _optionlimit;
+        private string _memo;
+        private string _lcode;
+
+        public int Optionid
+        {
+            get
+            {
+                return _optionid;
+            }
+
+            set
+            {
+                _optionid = value;
+            }
+        }
+
+        public string Optionname
+        {
+            get
+            {
+                return _optionname;
+            }
+
+            set
+            {
+                _optionname = value;
+            }
+        }
+
+        public string Optionvalue
+        {
+            get
+            {
+                return _optionvalue;
+            }
+
+            set
+            {
+                _optionvalue = value;
+            }
+        }
+
+        public string Optionlimit
+        {
+            get
+            {
+                return _optionlimit;
+            }
+
+            set
+            {
+                _optionlimit = value;
+            }
+        }
+
+        public string Memo
+        {
+            get
+            {
+                return _memo;
+            }
+
+            set
+            {
+                _memo = value;
+            }
+        }
+
+        public string Lcode
+        {
+            get
+            {
+                return _lcode;
+            }
+
+            set
+            {
+                _lcode = value;
+            }
+        }
+    }
+
+    class Sd3000Factory
+    {
        
         private SqlConnection createConnection(Sd3000Accset accset)
         {
@@ -1121,7 +1332,7 @@ namespace MicroServiceApplication.factory
             {
             }
         }
-
+        
         private void getData(ExportSd3000Context context)
         {
             HttpClient httpClient = AppConfig.GetInstance().crateHttpClient();
@@ -1564,5 +1775,229 @@ namespace MicroServiceApplication.factory
                 connection.Close();
             }
         }
+
+        private Dictionary<string,Accoptions> queryAccoptions(Sd3000Accset accset)
+        {
+            SqlConnection connection = this.createConnection(accset);
+            Dictionary<string, Accoptions> dict = new Dictionary<string, Accoptions>();
+
+            string sql = "select optionid,optionname,optionvalue,optionlimit,memo,lcode from accoptions;";
+
+            SqlDataAdapter myDataAdapter = new SqlDataAdapter(sql, connection);
+            DataSet myDataSet = new DataSet();      // 创建DataSet
+
+            try
+            {
+                myDataAdapter.Fill(myDataSet, "accoptions");
+                DataTable myTable = myDataSet.Tables["accoptions"];
+
+                if (myTable.Rows.Count > 0)
+                {
+                    foreach(DataRow row in myTable.Rows)
+                    {
+                        Accoptions accoptions = new Accoptions();
+                        accoptions.Optionid = int.Parse(row[myTable.Columns["optionid"]].ToString());
+                        accoptions.Optionname = row[myTable.Columns["optionname"]] == null ? null : row[myTable.Columns["optionname"]].ToString(); 
+                        accoptions.Optionvalue = row[myTable.Columns["optionvalue"]] == null ? null : row[myTable.Columns["optionvalue"]].ToString();
+                        accoptions.Optionlimit = row[myTable.Columns["optionlimit"]] == null ? null : row[myTable.Columns["optionlimit"]].ToString();
+                        accoptions.Memo = row[myTable.Columns["memo"]] == null ? null : row[myTable.Columns["memo"]].ToString();
+                        accoptions.Lcode = row[myTable.Columns["lcode"]] == null ? null : row[myTable.Columns["lcode"]].ToString();
+
+                        dict.Add(accoptions.Optionname, accoptions);
+
+                    }
+                }
+               
+                return dict;
+            }
+            finally
+            {
+                myDataSet.Dispose();
+                myDataAdapter.Dispose();
+                connection.Close();
+            }
+        }
+        
+        public void exportsSubject(ExportBean exportBean, Sd3000Accset accset)
+        {
+            ExportSubjectContext context = new ExportSubjectContext();
+            context.ExportBean = exportBean;
+
+            try
+            {
+                ClientSubjectFactory csf = new ClientSubjectFactory();
+                context.ClientSubjects = csf.query(exportBean.Clientid, 1,1);
+                context.AccoptionsDict = this.queryAccoptions(accset);
+                context.MaxSubid = this.getSd3000SubjectMaxId(accset);
+                context.Subjects = this.buildSd3000Subject(context, accset);
+                this.executeSubject(context,accset);
+                //回写状态
+                this.updateIsNewState(context);
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+                throw e;
+            }
+            finally { }
+        }
+
+        private void executeSubject(ExportSubjectContext context, Sd3000Accset accset)
+        {
+
+            SqlConnection connection = this.createConnection(accset);
+            connection.Open();
+            SqlTransaction tr = connection.BeginTransaction();
+
+            try
+            {
+                //开始构建SQL
+                foreach (Sd3000Subject item in context.Subjects)
+                {
+                    SqlCommand subjectItemCmd = connection.CreateCommand();
+                    subjectItemCmd.Transaction = tr;
+
+                    string credenceSql = "insert into subject (subid,subcode,moneyid,name,dcflag,detailflag,hswbflag,attrflag,fullname) values (@subid,@subcode,@moneyid,@name,@dcflag,@detailflag,@hswbflag,@attrflag,@fullname)";
+                    subjectItemCmd.CommandText = credenceSql;
+                    subjectItemCmd.Parameters.Add("@subid", SqlDbType.Int);
+                    subjectItemCmd.Parameters.Add("@subcode", SqlDbType.VarChar);
+                    subjectItemCmd.Parameters.Add("@moneyid", SqlDbType.Int);
+                    subjectItemCmd.Parameters.Add("@name", SqlDbType.VarChar);
+                    subjectItemCmd.Parameters.Add("@dcflag", SqlDbType.VarChar);
+                    subjectItemCmd.Parameters.Add("@detailflag", SqlDbType.VarChar);
+                    subjectItemCmd.Parameters.Add("@hswbflag", SqlDbType.Int);
+                    subjectItemCmd.Parameters.Add("@attrflag", SqlDbType.VarChar);
+                    subjectItemCmd.Parameters.Add("@fullname", SqlDbType.VarChar);
+
+                    subjectItemCmd.Parameters["@subid"].Value = item.Subid;
+                    subjectItemCmd.Parameters["@subcode"].Value = item.Subcode;
+                    subjectItemCmd.Parameters["@moneyid"].Value = item.Moneyid;
+                    subjectItemCmd.Parameters["@name"].Value = item.Name;
+                    subjectItemCmd.Parameters["@dcflag"].Value = item.Dcflag == true ? "T" : "F";
+                    subjectItemCmd.Parameters["@detailflag"].Value = item.Detailflag == true ? "T" : "F";
+                    subjectItemCmd.Parameters["@hswbflag"].Value = 0;
+                    subjectItemCmd.Parameters["@attrflag"].Value = 4;
+                    subjectItemCmd.Parameters["@fullname"].Value = item.Fullname;
+
+                    int result = subjectItemCmd.ExecuteNonQuery();
+                }
+
+                //提交事物
+                tr.Commit();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+                //回滚事物
+                tr.Rollback();
+                throw e;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        private void updateIsNewState(ExportSubjectContext context)
+        {
+
+        }
+
+        private List<Sd3000Subject> buildSd3000Subject(ExportSubjectContext context,Sd3000Accset accset)
+        {
+            //查找货币id
+            Sd3000Currency currency = this.getCurrency("人民币", accset);
+
+            List<Sd3000Subject> sd3000Subjects = new List<Sd3000Subject>();
+            foreach (ClientSubject item in context.ClientSubjects)
+            {
+                string fullname = this.getSd3000SubjectFullName(context,item,accset);
+                context.MaxSubid++;
+                Sd3000Subject sds = new Sd3000Subject();
+
+                sds.Subid = context.MaxSubid;
+                sds.Fullname = fullname;
+                sds.Moneyid = currency.Moneyid;
+                sds.Name = item.Label;
+                sds.Subcode = item.Sn;
+                sds.Dcflag = item.Debitcredit == "de" ? true : false;
+                sds.Detailflag = true;
+                sd3000Subjects.Add(sds);
+            }
+
+            return sd3000Subjects;
+        }
+
+        private int getSd3000SubjectMaxId(Sd3000Accset accset)
+        {
+            SqlConnection connection = this.createConnection(accset);
+
+            string sql = "select max(subid) as subid from subject";
+
+            SqlDataAdapter myDataAdapter = new SqlDataAdapter(sql, connection);
+            DataSet myDataSet = new DataSet();      // 创建DataSet
+
+            try
+            {
+                myDataAdapter.Fill(myDataSet, "subject");
+                DataTable myTable = myDataSet.Tables["subject"];
+                
+                string sbid = myTable.Rows[0][myTable.Columns["subid"]] == null ? "0" : myTable.Rows[0][myTable.Columns["subid"]].ToString();
+                return int.Parse(sbid);
+            }
+            finally
+            {
+                myDataSet.Dispose();
+                myDataAdapter.Dispose();
+                connection.Close();
+            }
+
+        }
+
+        private string getSd3000SubjectFullName(ExportSubjectContext context, ClientSubject clientSubject, Sd3000Accset accset)
+        {
+            string subjectname = "";
+            int currIndex = 0;
+
+            for (int i = 1; i < 11; i++)
+            {
+                currIndex = currIndex + int.Parse(context.AccoptionsDict["SC"+i+"LENGTH"].Optionvalue);
+
+                if (currIndex > clientSubject.Sn.Length) break;
+
+                string currSubjectNo = clientSubject.Sn.Substring(0, currIndex);
+
+                if (currSubjectNo != null && currSubjectNo != "")
+                {
+                    if (currSubjectNo.Length < clientSubject.Sn.Length)
+                    {
+                        Sd3000Subject sd3000Subject = this.getSubject(currSubjectNo, accset);
+
+                        if (subjectname == "")
+                        {
+                            subjectname = sd3000Subject.Name;
+                        }
+                        else
+                        {
+                            subjectname = subjectname + "→" + sd3000Subject.Name;
+                        }
+                    }else
+                    {
+                        if (subjectname == "")
+                        {
+                            subjectname = clientSubject.Label;
+                        }
+                        else
+                        {
+                            subjectname = subjectname + "→" + clientSubject.Label;
+                        }
+                    }
+                }
+            }
+
+            return subjectname;
+        }
+        
     }
 }
