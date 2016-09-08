@@ -42,13 +42,27 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.exportInfoPanel = new System.Windows.Forms.Panel();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.dbIpTextBox = new System.Windows.Forms.TextBox();
+            this.accsetNameTextBox = new System.Windows.Forms.TextBox();
+            this.dbUserTextBox = new System.Windows.Forms.TextBox();
+            this.dbPasswordTextBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             this.subjectPanel = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ClientSubjectDataGridView = new System.Windows.Forms.DataGridView();
+            this.button4 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.exportInfoPanel.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.subjectPanel.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ClientSubjectDataGridView)).BeginInit();
@@ -84,11 +98,11 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.tableLayoutPanel1);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(10, 10);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(20);
-            this.groupBox1.Size = new System.Drawing.Size(1623, 252);
+            this.groupBox1.Size = new System.Drawing.Size(1623, 260);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "导出信息";
@@ -114,13 +128,13 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.11243F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.88757F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 52F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1583, 184);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1583, 192);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // createbyTextBox
             // 
             this.createbyTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.createbyTextBox.Location = new System.Drawing.Point(131, 134);
+            this.createbyTextBox.Location = new System.Drawing.Point(131, 142);
             this.createbyTextBox.Name = "createbyTextBox";
             this.createbyTextBox.ReadOnly = true;
             this.createbyTextBox.Size = new System.Drawing.Size(1289, 35);
@@ -132,7 +146,7 @@
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(122, 64);
+            this.label1.Size = new System.Drawing.Size(122, 68);
             this.label1.TabIndex = 0;
             this.label1.Text = "客户：";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -141,9 +155,9 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(3, 64);
+            this.label2.Location = new System.Drawing.Point(3, 68);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(122, 67);
+            this.label2.Size = new System.Drawing.Size(122, 71);
             this.label2.TabIndex = 1;
             this.label2.Text = "月份：";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -160,7 +174,7 @@
             // accountcycleTextBox
             // 
             this.accountcycleTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.accountcycleTextBox.Location = new System.Drawing.Point(131, 67);
+            this.accountcycleTextBox.Location = new System.Drawing.Point(131, 71);
             this.accountcycleTextBox.Name = "accountcycleTextBox";
             this.accountcycleTextBox.ReadOnly = true;
             this.accountcycleTextBox.Size = new System.Drawing.Size(1289, 35);
@@ -170,7 +184,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(3, 131);
+            this.label3.Location = new System.Drawing.Point(3, 139);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(122, 53);
             this.label3.TabIndex = 4;
@@ -189,7 +203,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(1426, 67);
+            this.button2.Location = new System.Drawing.Point(1426, 71);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(154, 56);
             this.button2.TabIndex = 6;
@@ -199,24 +213,150 @@
             // 
             // exportInfoPanel
             // 
+            this.exportInfoPanel.Controls.Add(this.groupBox3);
             this.exportInfoPanel.Controls.Add(this.groupBox1);
             this.exportInfoPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.exportInfoPanel.Location = new System.Drawing.Point(0, 41);
             this.exportInfoPanel.Margin = new System.Windows.Forms.Padding(0);
             this.exportInfoPanel.Name = "exportInfoPanel";
             this.exportInfoPanel.Padding = new System.Windows.Forms.Padding(10);
-            this.exportInfoPanel.Size = new System.Drawing.Size(1643, 272);
+            this.exportInfoPanel.Size = new System.Drawing.Size(1643, 642);
             this.exportInfoPanel.TabIndex = 2;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.tableLayoutPanel2);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox3.Location = new System.Drawing.Point(10, 270);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(20);
+            this.groupBox3.Size = new System.Drawing.Size(1623, 368);
+            this.groupBox3.TabIndex = 1;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "账套信息";
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 172F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Controls.Add(this.dbIpTextBox, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label4, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.dbUserTextBox, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label6, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.dbPasswordTextBox, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label7, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.button3, 1, 5);
+            this.tableLayoutPanel2.Controls.Add(this.accsetNameTextBox, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.button4, 1, 4);
+            this.tableLayoutPanel2.Controls.Add(this.label5, 0, 3);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(20, 48);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 6;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1583, 308);
+            this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 150);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(82, 24);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "账套：";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 50);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(106, 24);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "用户名：";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 100);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(82, 24);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "密码：";
+            // 
+            // dbIpTextBox
+            // 
+            this.dbIpTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dbIpTextBox.Location = new System.Drawing.Point(175, 3);
+            this.dbIpTextBox.Name = "dbIpTextBox";
+            this.dbIpTextBox.Size = new System.Drawing.Size(1405, 35);
+            this.dbIpTextBox.TabIndex = 4;
+            this.dbIpTextBox.Text = "localhost";
+            this.dbIpTextBox.TextChanged += new System.EventHandler(this.dbIpTextBox_TextChanged);
+            // 
+            // accsetNameTextBox
+            // 
+            this.accsetNameTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.accsetNameTextBox.Location = new System.Drawing.Point(175, 153);
+            this.accsetNameTextBox.Name = "accsetNameTextBox";
+            this.accsetNameTextBox.ReadOnly = true;
+            this.accsetNameTextBox.Size = new System.Drawing.Size(1405, 35);
+            this.accsetNameTextBox.TabIndex = 5;
+            // 
+            // dbUserTextBox
+            // 
+            this.dbUserTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dbUserTextBox.Location = new System.Drawing.Point(175, 53);
+            this.dbUserTextBox.Name = "dbUserTextBox";
+            this.dbUserTextBox.Size = new System.Drawing.Size(1405, 35);
+            this.dbUserTextBox.TabIndex = 6;
+            this.dbUserTextBox.Text = "sa";
+            this.dbUserTextBox.TextChanged += new System.EventHandler(this.dbUserTextBox_TextChanged);
+            // 
+            // dbPasswordTextBox
+            // 
+            this.dbPasswordTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dbPasswordTextBox.Location = new System.Drawing.Point(175, 103);
+            this.dbPasswordTextBox.Name = "dbPasswordTextBox";
+            this.dbPasswordTextBox.PasswordChar = '*';
+            this.dbPasswordTextBox.Size = new System.Drawing.Size(1405, 35);
+            this.dbPasswordTextBox.TabIndex = 7;
+            this.dbPasswordTextBox.TextChanged += new System.EventHandler(this.dbPasswordTextBox_TextChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(154, 24);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "服务器地址：";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(175, 253);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(205, 51);
+            this.button3.TabIndex = 8;
+            this.button3.Text = "连接测试";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // subjectPanel
             // 
             this.subjectPanel.Controls.Add(this.groupBox2);
             this.subjectPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.subjectPanel.Location = new System.Drawing.Point(0, 313);
+            this.subjectPanel.Location = new System.Drawing.Point(0, 683);
             this.subjectPanel.Name = "subjectPanel";
             this.subjectPanel.Padding = new System.Windows.Forms.Padding(10);
             this.subjectPanel.Size = new System.Drawing.Size(1643, 551);
-            this.subjectPanel.TabIndex = 3;
+            this.subjectPanel.TabIndex = 4;
             // 
             // groupBox2
             // 
@@ -239,11 +379,21 @@
             this.ClientSubjectDataGridView.Size = new System.Drawing.Size(1617, 497);
             this.ClientSubjectDataGridView.TabIndex = 0;
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(175, 203);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(205, 44);
+            this.button4.TabIndex = 9;
+            this.button4.Text = "选择账套";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // Sd3000Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1643, 933);
+            this.ClientSize = new System.Drawing.Size(1643, 1269);
             this.Controls.Add(this.subjectPanel);
             this.Controls.Add(this.exportInfoPanel);
             this.Controls.Add(this.menuStrip1);
@@ -258,6 +408,9 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.exportInfoPanel.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.subjectPanel.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ClientSubjectDataGridView)).EndInit();
@@ -285,5 +438,17 @@
         private System.Windows.Forms.Panel subjectPanel;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView ClientSubjectDataGridView;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox dbIpTextBox;
+        private System.Windows.Forms.TextBox accsetNameTextBox;
+        private System.Windows.Forms.TextBox dbUserTextBox;
+        private System.Windows.Forms.TextBox dbPasswordTextBox;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
     }
 }

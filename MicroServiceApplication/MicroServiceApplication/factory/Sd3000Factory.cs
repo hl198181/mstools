@@ -890,6 +890,109 @@ namespace MicroServiceApplication.factory
             }
         }
     }
+
+    class Sd3000Accset
+    {
+        private string _accsetid;
+        private string _accsetname;
+        private string _corpname;
+        private string _dbHost;
+        private string _dbName;
+        private string _dbUser;
+        private string _dbPassword;
+
+        public string Accsetid
+        {
+            get
+            {
+                return _accsetid;
+            }
+
+            set
+            {
+                _accsetid = value;
+            }
+        }
+
+        public string Accsetname
+        {
+            get
+            {
+                return _accsetname;
+            }
+
+            set
+            {
+                _accsetname = value;
+            }
+        }
+
+        public string Corpname
+        {
+            get
+            {
+                return _corpname;
+            }
+
+            set
+            {
+                _corpname = value;
+            }
+        }
+
+        public string DbHost
+        {
+            get
+            {
+                return _dbHost;
+            }
+
+            set
+            {
+                _dbHost = value;
+            }
+        }
+
+        public string DbName
+        {
+            get
+            {
+                return _dbName;
+            }
+
+            set
+            {
+                _dbName = value;
+            }
+        }
+
+        public string DbUser
+        {
+            get
+            {
+                return _dbUser;
+            }
+
+            set
+            {
+                _dbUser = value;
+            }
+        }
+
+        public string DbPassword
+        {
+            get
+            {
+                return _dbPassword;
+            }
+
+            set
+            {
+                _dbPassword = value;
+            }
+        }
+    }
+
     class Sd3000Factory
     {
         class ExportSd3000Context
@@ -962,20 +1065,41 @@ namespace MicroServiceApplication.factory
                 }
             }
         }
-
-        string connurl = "Data Source=192.168.31.185;Initial Catalog=SD11001N_Sample;Persist Security Info=True;User ID=sa;Password=sybase12";
-
-        private SqlConnection createConnection()
+       
+        private SqlConnection createConnection(Sd3000Accset accset)
         {
-            SqlConnection connection = new SqlConnection(connurl);
+            string connecturl = "Data Source=" + accset.DbHost + ";Initial Catalog=" + accset.DbName + ";Persist Security Info=True;User ID=" + accset.DbUser + ";Password=" + accset.DbPassword;
+            SqlConnection connection = new SqlConnection(connecturl);
             return connection;
         }
 
-        public void exports(ExportBean exportBean)
+        public void connectTest(Sd3000Accset accset)
         {
+            SqlConnection connection  =this.createConnection(accset);
+
+            string sql = "select max(credid) as credid from credence where 1=2";
+
+            SqlDataAdapter myDataAdapter = new SqlDataAdapter(sql, connection);
+            DataSet myDataSet = new DataSet();      // 创建DataSet
+            try
+            {
+                myDataAdapter.Fill(myDataSet, "credence");
+                DataTable myTable = myDataSet.Tables["credence"];
+                string credid = myTable.Rows[0][myTable.Columns["credid"]].ToString();
+            }
+            finally
+            {
+                myDataSet.Dispose();
+                myDataAdapter.Dispose();
+                connection.Close();
+            }
+        }
+
+        public void exports(ExportBean exportBean,Sd3000Accset accset)
+        {
+
             ExportSd3000Context context = new ExportSd3000Context();
             context.ExportBean = exportBean;
-
 
             try
             {
@@ -983,11 +1107,10 @@ namespace MicroServiceApplication.factory
                 this.getData(context);
 
                 //获取当前Credid
-                this.getCredid(context);
-                this.getCredcode(context);
-                this.getCredno(context);
-
-                this.execute(context);
+                this.getCredid(context,accset);
+                this.getCredcode(context, accset);
+                this.getCredno(context, accset);
+                this.execute(context, accset);
             }
             catch (Exception e)
             {
@@ -997,22 +1120,6 @@ namespace MicroServiceApplication.factory
             finally
             {
             }
-         
-            //SqlDataAdapter myDataAdapter = new SqlDataAdapter("select * from credence", mycon);
-            //DataSet myDataSet = new DataSet();		// 创建DataSet
-            //myDataAdapter.Fill(myDataSet, "credence");
-
-            //DataTable myTable = myDataSet.Tables["credence"];
-
-            //foreach (DataRow myRow in myTable.Rows)
-            //{
-            //    foreach (DataColumn myColumn in myTable.Columns)
-            //    {
-            //        Console.WriteLine(myRow[myColumn]);	//遍历表中的每个单元格
-            //    }
-            //}
-
-            //mycon.Close();
         }
 
         private void getData(ExportSd3000Context context)
@@ -1064,10 +1171,10 @@ namespace MicroServiceApplication.factory
             return vouchers;
         }
 
-        private void execute(ExportSd3000Context context)
+        private void execute(ExportSd3000Context context,Sd3000Accset accset)
         {
 
-            SqlConnection connection = this.createConnection();
+            SqlConnection connection = this.createConnection(accset);
             connection.Open();
             SqlTransaction tr = connection.BeginTransaction();
 
@@ -1076,7 +1183,7 @@ namespace MicroServiceApplication.factory
                 //开始构建SQL
                 foreach (Sd3000Voucher item in context.Vouchers)
                 {
-                    this.buildCredence(context, item, connection,tr);
+                    this.buildCredence(context, item, connection,tr,accset);
                 }
 
                 //提交事物
@@ -1095,7 +1202,7 @@ namespace MicroServiceApplication.factory
            
         }
 
-        private void buildCredence(ExportSd3000Context context,Sd3000Voucher voucher,SqlConnection connection, SqlTransaction tr)
+        private void buildCredence(ExportSd3000Context context,Sd3000Voucher voucher,SqlConnection connection, SqlTransaction tr,Sd3000Accset accset)
         {
             if (voucher == null || voucher.Items == null || voucher.Items.Count <= 0) return;
 
@@ -1123,7 +1230,7 @@ namespace MicroServiceApplication.factory
 
             //获取凭证字id
             //string credtypeid = this.getGroupNameId(voucher.Items[0].Groupname, context);
-            string credtypeid = this.getGroupNameId("记", context);
+            string credtypeid = this.getGroupNameId("记", context,accset);
             if (credtypeid == null || credtypeid == "") throw new Exception("无法获取凭证字："+ voucher.Items[0].Groupname+",对应的ID!");
 
             context.MaxCredno++;
@@ -1169,17 +1276,17 @@ namespace MicroServiceApplication.factory
             //凭证明细
             foreach(Sd3000VoucherItem item in voucher.Items)
             {
-                this.buildCreditem(context, credid, item, connection, tr);
+                this.buildCreditem(context, credid, item, connection, tr,accset);
             }
         }
 
-        private void buildCreditem(ExportSd3000Context context,string credid, Sd3000VoucherItem voucherItem, SqlConnection connection, SqlTransaction tr)
+        private void buildCreditem(ExportSd3000Context context,string credid, Sd3000VoucherItem voucherItem, SqlConnection connection, SqlTransaction tr,Sd3000Accset accset)
         {
 
             //查找货币id
-            Sd3000Currency currency =  this.getCurrency("人民币");
+            Sd3000Currency currency =  this.getCurrency("人民币", accset);
             //查找科目id
-            Sd3000Subject subject = this.getSubject(voucherItem.Subjectno);
+            Sd3000Subject subject = this.getSubject(voucherItem.Subjectno,accset);
 
             SqlCommand creditemCmd = connection.CreateCommand();
             creditemCmd.Transaction = tr;
@@ -1213,9 +1320,9 @@ namespace MicroServiceApplication.factory
         }
 
         //获取凭证字id
-        private string getGroupNameId(string groupname,ExportSd3000Context context)
+        private string getGroupNameId(string groupname,ExportSd3000Context context, Sd3000Accset accset)
         {
-            SqlConnection connection = this.createConnection();
+            SqlConnection connection = this.createConnection(accset);
 
             string sql = "select * from credtype where name = '"+groupname+"'";
 
@@ -1240,9 +1347,9 @@ namespace MicroServiceApplication.factory
         }
 
         //获取凭证最大序号
-        private void getCredid(ExportSd3000Context context)
+        private void getCredid(ExportSd3000Context context, Sd3000Accset accset)
         {
-            SqlConnection connection = this.createConnection();
+            SqlConnection connection = this.createConnection(accset);
 
             string sql = "select max(credid) as credid from credence where credid like '" + context.ExportBean.Accountcyclesn + "%'";
             
@@ -1279,9 +1386,9 @@ namespace MicroServiceApplication.factory
           
         }
 
-        private void getCredcode(ExportSd3000Context context)
+        private void getCredcode(ExportSd3000Context context, Sd3000Accset accset)
         {
-            SqlConnection connection = this.createConnection();
+            SqlConnection connection = this.createConnection(accset);
 
             string sql = "select max(credcode) as credcode from credence where credid like '" + context.ExportBean.Accountcyclesn + "%'";
 
@@ -1313,9 +1420,9 @@ namespace MicroServiceApplication.factory
 
         }
 
-        private void getCredno(ExportSd3000Context context)
+        private void getCredno(ExportSd3000Context context, Sd3000Accset accset)
         {
-            SqlConnection connection = this.createConnection();
+            SqlConnection connection = this.createConnection(accset);
 
             string sql = "select max(credno) as credno from credence where credid like '" + context.ExportBean.Accountcyclesn + "%'";
 
@@ -1347,9 +1454,9 @@ namespace MicroServiceApplication.factory
 
         }
 
-        private Sd3000Currency getCurrency(string name)
+        private Sd3000Currency getCurrency(string name, Sd3000Accset accset)
         {
-            SqlConnection connection = this.createConnection();
+            SqlConnection connection = this.createConnection(accset);
 
             string sql = "select moneyid,rate,upflag,shopid,name from currency where name = '" + name+"'";
 
@@ -1378,9 +1485,9 @@ namespace MicroServiceApplication.factory
 
         }
 
-        private Sd3000Subject getSubject(string code)
+        private Sd3000Subject getSubject(string code,Sd3000Accset accset)
         {
-            SqlConnection connection = this.createConnection();
+            SqlConnection connection = this.createConnection(accset);
 
             string sql = "select subid,subcode,moneyid,name,fullname from subject where subcode = '" + code + "'";
 
@@ -1409,6 +1516,53 @@ namespace MicroServiceApplication.factory
                 connection.Close();
             }
 
+        }
+
+        public List<Sd3000Accset> queryAccset(string dbuser,string dbpassword,string dbip,string dbprefix)
+        {
+            //
+            if (dbuser == null || dbip == null || dbuser == "" || dbip == "") return null;
+
+            List<Sd3000Accset> accsetList = new List<Sd3000Accset>();
+
+            string connecturl = "Data Source=" + dbip + ";Initial Catalog=master;Persist Security Info=True;User ID=" + dbuser + ";Password=" + dbpassword;
+            SqlConnection connection = new SqlConnection(connecturl);
+
+            string tableName = dbprefix+"SDAccset..ACCSET";
+            string sql = "select accsetid,accsetname,corpname from "+tableName+" where DELFLAG = 'F'";
+
+            SqlDataAdapter myDataAdapter = new SqlDataAdapter(sql, connection);
+            DataSet myDataSet = new DataSet();      // 创建DataSet
+
+            try
+            {
+                myDataAdapter.Fill(myDataSet, tableName);
+                DataTable myTable = myDataSet.Tables[tableName];
+
+                if (myTable.Rows.Count > 0)
+                {
+                    foreach(DataRow row in myTable.Rows)
+                    {
+                        Sd3000Accset accset = new Sd3000Accset();
+
+                        accset.Accsetid = row[myTable.Columns["accsetid"]].ToString();
+                        accset.Accsetname = row[myTable.Columns["accsetname"]].ToString();
+                        accset.Corpname = row[myTable.Columns["corpname"]].ToString();
+                        accset.DbName = dbprefix + accset.Accsetname;
+                        accset.DbHost = dbip;
+                        accset.DbPassword = dbpassword;
+                        accset.DbUser = dbuser;
+                        accsetList.Add(accset);
+                    }
+                }
+                return accsetList;
+            }
+            finally
+            {
+                myDataSet.Dispose();
+                myDataAdapter.Dispose();
+                connection.Close();
+            }
         }
     }
 }

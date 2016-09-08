@@ -19,6 +19,7 @@ namespace MicroServiceApplication.voucher
         private Inst inst;
         private User user;
         private Accountcycle accountcycle;
+        private Sd3000Accset accset;
 
         public Sd3000Form()
         {
@@ -28,6 +29,32 @@ namespace MicroServiceApplication.voucher
         private void IncomeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.exports("income");
+        }
+
+        private void connectTest()
+        {
+            if (this.accset == null)
+            {
+                MessageBox.Show("请选择账套!");
+                return;
+            }
+
+            try
+            {
+                Sd3000Factory factory = new Sd3000Factory();
+                factory.connectTest(this.accset);
+                MessageBox.Show("连接成功！");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+
+        private void resetAccset()
+        {
+            this.accset = null;
+            this.accsetNameTextBox.Text = "";
         }
 
         private void exports(string categoryname)
@@ -58,7 +85,23 @@ namespace MicroServiceApplication.voucher
                 MessageBox.Show("请选择月份！");
                 return;
             }
+
+            if (this.accset == null)
+            {
+                MessageBox.Show("请选择账套！");
+                return;
+            }
             
+            if (this.accset.Corpname != this.client.Fullname)
+            {
+                DialogResult dr = MessageBox.Show("选择的客户与账套名称不一致，是否继续导入?","系统提示",MessageBoxButtons.OKCancel);
+
+                if (dr != DialogResult.OK)
+                {
+                    return;
+                }
+            }
+
             exportBean.Instid = this.inst.Id;
             exportBean.Clientid = this.client.Id;
             exportBean.Accountcyclesn = this.accountcycle.Sn;
@@ -67,7 +110,7 @@ namespace MicroServiceApplication.voucher
             try
             {
                 Sd3000Factory factory = new Sd3000Factory();
-                factory.exports(exportBean);
+                factory.exports(exportBean, this.accset);
                 MessageBox.Show("凭证导出成功！请登录财务系统查看结果!");
             }
             catch (Exception e)
@@ -75,7 +118,7 @@ namespace MicroServiceApplication.voucher
                 MessageBox.Show(e.Message);
             }
         }
-
+        
         private void button1_Click(object sender, EventArgs e)
         {
             List<Client> clientList = CommonManager.selectClient();
@@ -164,6 +207,62 @@ namespace MicroServiceApplication.voucher
                 this.accountcycle = accountcycleList[0];
                 this.accountcycleTextBox.Text = this.accountcycle.Name;
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.connectTest();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (this.dbIpTextBox.Text == "" || this.dbIpTextBox.Text == null)
+            {
+                MessageBox.Show("请输入账套服务器地址!");
+                return ;
+            }
+            
+            if (this.dbUserTextBox.Text == "" || this.dbUserTextBox.Text == null)
+            {
+                MessageBox.Show("请输入账套数据库用户名!");
+                return ;
+            }
+            if (this.dbPasswordTextBox.Text == null)
+            {
+                this.dbPasswordTextBox.Text = "";
+            }
+
+            Sd3000Factory sdfactory = new Sd3000Factory();
+            try
+            {
+                List<Sd3000Accset> accsetList = sdfactory.queryAccset(this.dbUserTextBox.Text, this.dbPasswordTextBox.Text, this.dbIpTextBox.Text, "SD11001N_");
+                this.accset = CommonManager.selectAccset(accsetList);
+                if (this.accset != null)
+                {
+                    this.accsetNameTextBox.Text = this.accset.Corpname + "[" + this.accset.DbName + "]";
+                }
+            }
+            catch(Exception e1)
+            {
+                Console.WriteLine(e1.StackTrace);
+                MessageBox.Show(e1.Message);
+            }
+            
+        }
+
+        private void dbIpTextBox_TextChanged(object sender, EventArgs e)
+        {
+            this.resetAccset();
+        }
+
+        private void dbUserTextBox_TextChanged(object sender, EventArgs e)
+        {
+            this.resetAccset();
+        }
+
+        private void dbPasswordTextBox_TextChanged(object sender, EventArgs e)
+        {
+            this.resetAccset();
         }
     }
 }
