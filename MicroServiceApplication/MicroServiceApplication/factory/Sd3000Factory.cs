@@ -1562,7 +1562,7 @@ namespace MicroServiceApplication.factory
             SqlCommand credenceCmd = connection.CreateCommand();
             credenceCmd.Transaction = tr;
 
-            string credenceSql = "insert into credence (credid,shopid,rptid,credtype,credcode,credno,creddate,billnumber,billmaker,relevantbillid,updatetime,credtypeid,printcount) values (@credid,@shopid,@rptid,@credtype,@credcode,@credno,@creddate,@billnumber,@billmaker,@relevantbillid,@updatetime,@credtypeid,@printcount)";
+            string credenceSql = "insert into credence (credid,shopid,rptid,credtype,credcode,credno,creddate,billnumber,billmaker,relevantbillid,updatetime,credtypeid,printcount,checkflag,postflag) values (@credid,@shopid,@rptid,@credtype,@credcode,@credno,@creddate,@billnumber,@billmaker,@relevantbillid,@updatetime,@credtypeid,@printcount,@checkflag,@postflag)";
             credenceCmd.CommandText = credenceSql;
 
             credenceCmd.Parameters.Add("@credid",SqlDbType.VarChar);
@@ -1578,6 +1578,8 @@ namespace MicroServiceApplication.factory
             credenceCmd.Parameters.Add("@updatetime", SqlDbType.DateTime);
             credenceCmd.Parameters.Add("@credtypeid", SqlDbType.Int);
             credenceCmd.Parameters.Add("@printcount", SqlDbType.Int);
+            credenceCmd.Parameters.Add("@checkflag", SqlDbType.VarChar);
+            credenceCmd.Parameters.Add("@postflag", SqlDbType.VarChar);
 
             credenceCmd.Parameters["@credid"].Value = credid;
             credenceCmd.Parameters["@shopid"].Value = 0;
@@ -1592,7 +1594,8 @@ namespace MicroServiceApplication.factory
             credenceCmd.Parameters["@updatetime"].Value = voucher.Items[0].Createdate;
             credenceCmd.Parameters["@credtypeid"].Value = credtypeid;
             credenceCmd.Parameters["@printcount"].Value = 0;
-
+            credenceCmd.Parameters["@checkflag"].Value = "F";
+            credenceCmd.Parameters["@postflag"].Value = "F";
             int result = credenceCmd.ExecuteNonQuery();
 
             //凭证明细
@@ -1629,7 +1632,7 @@ namespace MicroServiceApplication.factory
 
             creditemCmd.Parameters["@credid"].Value = credid;
             creditemCmd.Parameters["@fenluno"].Value = voucherItem.Sort;
-            creditemCmd.Parameters["@rate"].Value = 20;
+            creditemCmd.Parameters["@rate"].Value = 1;
             creditemCmd.Parameters["@rawdebit"].Value = 0;
             creditemCmd.Parameters["@rawcredit"].Value = 0;
             creditemCmd.Parameters["@debit"].Value = voucherItem.Debit;
