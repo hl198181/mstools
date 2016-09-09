@@ -1631,7 +1631,7 @@ namespace MicroServiceApplication.factory
             creditemCmd.Parameters.Add("@brief", SqlDbType.VarChar);
 
             creditemCmd.Parameters["@credid"].Value = credid;
-            creditemCmd.Parameters["@fenluno"].Value = voucherItem.Sort;
+            creditemCmd.Parameters["@fenluno"].Value = voucherItem.Sort + 1; //需要从1开始
             creditemCmd.Parameters["@rate"].Value = 1;
             creditemCmd.Parameters["@rawdebit"].Value = 0;
             creditemCmd.Parameters["@rawcredit"].Value = 0;

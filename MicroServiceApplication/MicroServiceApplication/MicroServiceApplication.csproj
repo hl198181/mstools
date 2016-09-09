@@ -28,7 +28,7 @@
     <ProductName>小微服辅助工具</ProductName>
     <PublisherName>顶聚科技</PublisherName>
     <SuiteName>小微服辅助工具</SuiteName>
-    <ApplicationRevision>7</ApplicationRevision>
+    <ApplicationRevision>8</ApplicationRevision>
     <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
