@@ -388,10 +388,16 @@ namespace MicroServiceApplication.voucher
                 return;
             }
 
+            if (this.client == null)
+            {
+                MessageBox.Show("请先选择客户!");
+                return;
+            }
+
             try
             {
                 Sd3000Factory sdf = new Sd3000Factory();
-                sdf.initSubjectBySd3000(this.accset);
+                sdf.initSubjectBySd3000(this.accset,this.client,Session.GetInstance().User);
                 MessageBox.Show("初始化成功，请打开小微服查看!");
 
             }

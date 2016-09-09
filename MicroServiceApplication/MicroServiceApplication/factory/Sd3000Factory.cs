@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
 using MicroServiceApplication.Common;
+using System.Net.Http.Headers;
 
 namespace MicroServiceApplication.factory
 {
@@ -1389,8 +1390,16 @@ namespace MicroServiceApplication.factory
             }
         }
 
-        public void initSubjectBySd3000(Sd3000Accset accset)
+        
+
+        public void initSubjectBySd3000(Sd3000Accset accset,Client client,User user)
         {
+            if (client == null) throw new ArgumentException("请选择客户信息！");
+            if (user == null) throw new ArgumentException("用户信息必须输入！");
+            if (accset == null)  throw new ArgumentException("请选择账套信息！");
+            if (client.Id == null) throw new ArgumentException("客户信息必须输入！");
+
+
             List<Sd3000Subject> sdSubjectList= this.getSd3000Subject(accset);
 
             if (sdSubjectList == null || sdSubjectList.Count <= 0)
@@ -1398,7 +1407,15 @@ namespace MicroServiceApplication.factory
                 throw new Exception("无法从速达读取科目信息！");
             }
 
+            //清理现有科目
+            ClientSubjectFactory csf = new ClientSubjectFactory();
+            csf.clean(client.Id);
 
+            //写入科目
+            foreach (Sd3000Subject item in sdSubjectList)
+            {
+                csf.addBySd3000Subject(item, client, user);
+            }
         }
         public void exports(ExportBean exportBean,Sd3000Accset accset)
         {
@@ -1925,9 +1942,7 @@ namespace MicroServiceApplication.factory
                 context.MaxSubid = this.getSd3000SubjectMaxId(accset);
                 context.Subjects = this.buildSd3000Subject(context, accset);
                 this.executeSubject(context,accset);
-                //回写状态
-                this.updateIsNewState(context);
-
+                
             }
             catch (Exception e)
             {
@@ -1993,10 +2008,6 @@ namespace MicroServiceApplication.factory
             }
         }
 
-        private void updateIsNewState(ExportSubjectContext context)
-        {
-
-        }
 
         private List<Sd3000Subject> buildSd3000Subject(ExportSubjectContext context,Sd3000Accset accset)
         {
@@ -2164,7 +2175,7 @@ namespace MicroServiceApplication.factory
                                 subject.Relevantid = int.Parse(value);
                             }catch(Exception e1)
                             {
-                                Console.WriteLine("转换relevantid："+ value+",错误，跳过处理!");
+                                Console.WriteLine("转换relevantid："+ value+",错误，跳过处理!"+e1.Message);
                             }
                         }
                         if (row[myTable.Columns["fullname"]] != null)

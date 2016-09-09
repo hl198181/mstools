@@ -138,14 +138,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="小微服辅助工具.exe" size="98816">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="小微服辅助工具.exe" size="99840">
       <assemblyIdentity name="小微服辅助工具" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>GZK+mYhgyKaXntKBDLaq02ZTgnE=</dsig:DigestValue>
+        <dsig:DigestValue>L2MuCnQ5gMI0Vppa6RS4c9HcJn0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

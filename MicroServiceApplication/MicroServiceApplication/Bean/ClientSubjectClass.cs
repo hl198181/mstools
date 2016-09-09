@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using MicroServiceApplication.factory;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -173,6 +174,68 @@ namespace MicroServiceApplication.Bean
             }
 
         
+        }
+
+        public void addBySd3000Subject(Sd3000Subject sd3000Subject,Client client,User user)
+        {
+
+            JObject jo = new JObject();
+            jo.Add("clientid", client.Id);
+            jo.Add("sn", sd3000Subject.Subcode);
+            jo.Add("label", sd3000Subject.Name);
+            jo.Add("fullname", sd3000Subject.Fullname);
+            jo.Add("debitcredit", (sd3000Subject.Dcflag == true ? "de" : "cr"));
+            jo.Add("isnew", 0);
+            jo.Add("createby", user.Id);
+            
+            string requestJson = jo.ToString();
+            string url = AppConfig.GetInstance().BaseUrl + "/client/subject/";
+            HttpClient httpClient = AppConfig.GetInstance().crateHttpClient();
+
+            HttpContent httpContent = new StringContent(requestJson);
+            httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            HttpResponseMessage response = httpClient.PostAsync(new Uri(url), httpContent).Result;
+            String result = response.Content.ReadAsStringAsync().Result;
+            httpClient.Dispose();
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+
+            }
+            else
+            {
+                throw new Exception("添加科目错误！" + response.RequestMessage.ToString());
+            }
+
+        }
+
+        public void clean(string clientid)
+        {
+            HttpClient httpClient = AppConfig.GetInstance().crateHttpClient();
+
+            String url = AppConfig.GetInstance().BaseUrl + "/client/subject/clean";
+
+            JObject jo = new JObject();
+            jo.Add("clientid", clientid);
+
+            string requestJson = jo.ToString();
+
+            HttpContent httpContent = new StringContent(requestJson);
+            httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            HttpResponseMessage response = httpClient.PostAsync(new Uri(url), httpContent).Result;
+            String result = response.Content.ReadAsStringAsync().Result;
+            httpClient.Dispose();
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+
+            }
+            else
+            {
+                throw new Exception("清理科目错误." + response.RequestMessage.ToString());
+            }
         }
     }
 }
