@@ -31,6 +31,15 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.导出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.IncomeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OutputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BankDealToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PayrollToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PaytaxreportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.LocalreporttaxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportSubjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.开始导出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.initSubjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.createbyTextBox = new System.Windows.Forms.TextBox();
@@ -57,14 +66,6 @@
             this.subjectPanel = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ClientSubjectDataGridView = new System.Windows.Forms.DataGridView();
-            this.exportSubjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.开始导出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.TestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.OutputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.BankDealToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.PayrollToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.PaytaxreportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.LocalreporttaxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -85,7 +86,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(1643, 44);
+            this.menuStrip1.Size = new System.Drawing.Size(1643, 41);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -99,15 +100,81 @@
             this.PaytaxreportToolStripMenuItem,
             this.LocalreporttaxToolStripMenuItem});
             this.导出ToolStripMenuItem.Name = "导出ToolStripMenuItem";
-            this.导出ToolStripMenuItem.Size = new System.Drawing.Size(122, 38);
+            this.导出ToolStripMenuItem.Size = new System.Drawing.Size(122, 35);
             this.导出ToolStripMenuItem.Text = "导出凭证";
             // 
             // IncomeToolStripMenuItem
             // 
             this.IncomeToolStripMenuItem.Name = "IncomeToolStripMenuItem";
-            this.IncomeToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
+            this.IncomeToolStripMenuItem.Size = new System.Drawing.Size(209, 38);
             this.IncomeToolStripMenuItem.Text = "进项";
             this.IncomeToolStripMenuItem.Click += new System.EventHandler(this.IncomeToolStripMenuItem_Click);
+            // 
+            // OutputToolStripMenuItem
+            // 
+            this.OutputToolStripMenuItem.Name = "OutputToolStripMenuItem";
+            this.OutputToolStripMenuItem.Size = new System.Drawing.Size(209, 38);
+            this.OutputToolStripMenuItem.Text = "销项";
+            this.OutputToolStripMenuItem.Click += new System.EventHandler(this.OutputToolStripMenuItem_Click);
+            // 
+            // BankDealToolStripMenuItem
+            // 
+            this.BankDealToolStripMenuItem.Name = "BankDealToolStripMenuItem";
+            this.BankDealToolStripMenuItem.Size = new System.Drawing.Size(209, 38);
+            this.BankDealToolStripMenuItem.Text = "银行回单";
+            this.BankDealToolStripMenuItem.Click += new System.EventHandler(this.BankDealToolStripMenuItem_Click);
+            // 
+            // PayrollToolStripMenuItem
+            // 
+            this.PayrollToolStripMenuItem.Name = "PayrollToolStripMenuItem";
+            this.PayrollToolStripMenuItem.Size = new System.Drawing.Size(209, 38);
+            this.PayrollToolStripMenuItem.Text = "工资表";
+            this.PayrollToolStripMenuItem.Click += new System.EventHandler(this.PayrollToolStripMenuItem_Click);
+            // 
+            // PaytaxreportToolStripMenuItem
+            // 
+            this.PaytaxreportToolStripMenuItem.Name = "PaytaxreportToolStripMenuItem";
+            this.PaytaxreportToolStripMenuItem.Size = new System.Drawing.Size(209, 38);
+            this.PaytaxreportToolStripMenuItem.Text = "国税";
+            this.PaytaxreportToolStripMenuItem.Click += new System.EventHandler(this.PaytaxreportToolStripMenuItem_Click);
+            // 
+            // LocalreporttaxToolStripMenuItem
+            // 
+            this.LocalreporttaxToolStripMenuItem.Name = "LocalreporttaxToolStripMenuItem";
+            this.LocalreporttaxToolStripMenuItem.Size = new System.Drawing.Size(209, 38);
+            this.LocalreporttaxToolStripMenuItem.Text = "地税";
+            this.LocalreporttaxToolStripMenuItem.Click += new System.EventHandler(this.LocalreporttaxToolStripMenuItem_Click);
+            // 
+            // exportSubjectToolStripMenuItem
+            // 
+            this.exportSubjectToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.开始导出ToolStripMenuItem,
+            this.TestToolStripMenuItem,
+            this.initSubjectToolStripMenuItem});
+            this.exportSubjectToolStripMenuItem.Name = "exportSubjectToolStripMenuItem";
+            this.exportSubjectToolStripMenuItem.Size = new System.Drawing.Size(122, 35);
+            this.exportSubjectToolStripMenuItem.Text = "科目设置";
+            // 
+            // 开始导出ToolStripMenuItem
+            // 
+            this.开始导出ToolStripMenuItem.Name = "开始导出ToolStripMenuItem";
+            this.开始导出ToolStripMenuItem.Size = new System.Drawing.Size(353, 38);
+            this.开始导出ToolStripMenuItem.Text = "新科目导出";
+            this.开始导出ToolStripMenuItem.Click += new System.EventHandler(this.开始导出ToolStripMenuItem_Click);
+            // 
+            // TestToolStripMenuItem
+            // 
+            this.TestToolStripMenuItem.Name = "TestToolStripMenuItem";
+            this.TestToolStripMenuItem.Size = new System.Drawing.Size(353, 38);
+            this.TestToolStripMenuItem.Text = "新科目设置为已经导入";
+            this.TestToolStripMenuItem.Click += new System.EventHandler(this.TestToolStripMenuItem_Click);
+            // 
+            // initSubjectToolStripMenuItem
+            // 
+            this.initSubjectToolStripMenuItem.Name = "initSubjectToolStripMenuItem";
+            this.initSubjectToolStripMenuItem.Size = new System.Drawing.Size(353, 38);
+            this.initSubjectToolStripMenuItem.Text = "从财务系统初始化科目";
+            this.initSubjectToolStripMenuItem.Click += new System.EventHandler(this.initSubjectToolStripMenuItem_Click);
             // 
             // groupBox1
             // 
@@ -230,7 +297,7 @@
             this.exportInfoPanel.Controls.Add(this.groupBox3);
             this.exportInfoPanel.Controls.Add(this.groupBox1);
             this.exportInfoPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.exportInfoPanel.Location = new System.Drawing.Point(0, 44);
+            this.exportInfoPanel.Location = new System.Drawing.Point(0, 41);
             this.exportInfoPanel.Margin = new System.Windows.Forms.Padding(0);
             this.exportInfoPanel.Name = "exportInfoPanel";
             this.exportInfoPanel.Padding = new System.Windows.Forms.Padding(10);
@@ -376,7 +443,7 @@
             // 
             this.subjectPanel.Controls.Add(this.groupBox2);
             this.subjectPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.subjectPanel.Location = new System.Drawing.Point(0, 686);
+            this.subjectPanel.Location = new System.Drawing.Point(0, 683);
             this.subjectPanel.Name = "subjectPanel";
             this.subjectPanel.Padding = new System.Windows.Forms.Padding(10);
             this.subjectPanel.Size = new System.Drawing.Size(1643, 551);
@@ -402,64 +469,6 @@
             this.ClientSubjectDataGridView.RowTemplate.Height = 37;
             this.ClientSubjectDataGridView.Size = new System.Drawing.Size(1617, 497);
             this.ClientSubjectDataGridView.TabIndex = 0;
-            // 
-            // exportSubjectToolStripMenuItem
-            // 
-            this.exportSubjectToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.开始导出ToolStripMenuItem,
-            this.TestToolStripMenuItem});
-            this.exportSubjectToolStripMenuItem.Name = "exportSubjectToolStripMenuItem";
-            this.exportSubjectToolStripMenuItem.Size = new System.Drawing.Size(122, 38);
-            this.exportSubjectToolStripMenuItem.Text = "科目设置";
-            // 
-            // 开始导出ToolStripMenuItem
-            // 
-            this.开始导出ToolStripMenuItem.Name = "开始导出ToolStripMenuItem";
-            this.开始导出ToolStripMenuItem.Size = new System.Drawing.Size(281, 38);
-            this.开始导出ToolStripMenuItem.Text = "科目导出";
-            this.开始导出ToolStripMenuItem.Click += new System.EventHandler(this.开始导出ToolStripMenuItem_Click);
-            // 
-            // TestToolStripMenuItem
-            // 
-            this.TestToolStripMenuItem.Name = "TestToolStripMenuItem";
-            this.TestToolStripMenuItem.Size = new System.Drawing.Size(281, 38);
-            this.TestToolStripMenuItem.Text = "设置为已经导入";
-            this.TestToolStripMenuItem.Click += new System.EventHandler(this.TestToolStripMenuItem_Click);
-            // 
-            // OutputToolStripMenuItem
-            // 
-            this.OutputToolStripMenuItem.Name = "OutputToolStripMenuItem";
-            this.OutputToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
-            this.OutputToolStripMenuItem.Text = "销项";
-            this.OutputToolStripMenuItem.Click += new System.EventHandler(this.OutputToolStripMenuItem_Click);
-            // 
-            // BankDealToolStripMenuItem
-            // 
-            this.BankDealToolStripMenuItem.Name = "BankDealToolStripMenuItem";
-            this.BankDealToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
-            this.BankDealToolStripMenuItem.Text = "银行回单";
-            this.BankDealToolStripMenuItem.Click += new System.EventHandler(this.BankDealToolStripMenuItem_Click);
-            // 
-            // PayrollToolStripMenuItem
-            // 
-            this.PayrollToolStripMenuItem.Name = "PayrollToolStripMenuItem";
-            this.PayrollToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
-            this.PayrollToolStripMenuItem.Text = "工资表";
-            this.PayrollToolStripMenuItem.Click += new System.EventHandler(this.PayrollToolStripMenuItem_Click);
-            // 
-            // PaytaxreportToolStripMenuItem
-            // 
-            this.PaytaxreportToolStripMenuItem.Name = "PaytaxreportToolStripMenuItem";
-            this.PaytaxreportToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
-            this.PaytaxreportToolStripMenuItem.Text = "国税";
-            this.PaytaxreportToolStripMenuItem.Click += new System.EventHandler(this.PaytaxreportToolStripMenuItem_Click);
-            // 
-            // LocalreporttaxToolStripMenuItem
-            // 
-            this.LocalreporttaxToolStripMenuItem.Name = "LocalreporttaxToolStripMenuItem";
-            this.LocalreporttaxToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
-            this.LocalreporttaxToolStripMenuItem.Text = "地税";
-            this.LocalreporttaxToolStripMenuItem.Click += new System.EventHandler(this.LocalreporttaxToolStripMenuItem_Click);
             // 
             // Sd3000Form
             // 
@@ -530,5 +539,6 @@
         private System.Windows.Forms.ToolStripMenuItem PayrollToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem PaytaxreportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem LocalreporttaxToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem initSubjectToolStripMenuItem;
     }
 }

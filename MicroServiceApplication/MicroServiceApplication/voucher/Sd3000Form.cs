@@ -379,5 +379,28 @@ namespace MicroServiceApplication.voucher
         {
             this.exports("localreporttax");
         }
+
+        private void initSubjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.accset == null)
+            {
+                MessageBox.Show("请先选择账套!");
+                return;
+            }
+
+            try
+            {
+                Sd3000Factory sdf = new Sd3000Factory();
+                sdf.initSubjectBySd3000(this.accset);
+                MessageBox.Show("初始化成功，请打开小微服查看!");
+
+            }
+            catch (Exception e1)
+            {
+                Console.WriteLine(e1.StackTrace);
+                MessageBox.Show(e1.Message);
+            }
+
+        }
     }
 }

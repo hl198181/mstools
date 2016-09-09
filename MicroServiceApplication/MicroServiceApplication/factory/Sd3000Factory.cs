@@ -826,7 +826,12 @@ namespace MicroServiceApplication.factory
         private string _fullname;
         private bool _dcflag;
         private bool _detailflag;
-
+        private bool _hscash;
+        private int _hswbflag;
+        private int _attrflag;
+        private string _helpcode;
+        private string _specialcode;
+        private int _relevantid;
 
         public int Subid
         {
@@ -916,6 +921,84 @@ namespace MicroServiceApplication.factory
             set
             {
                 _detailflag = value;
+            }
+        }
+
+        public bool Hscash
+        {
+            get
+            {
+                return _hscash;
+            }
+
+            set
+            {
+                _hscash = value;
+            }
+        }
+
+        public int Hswbflag
+        {
+            get
+            {
+                return _hswbflag;
+            }
+
+            set
+            {
+                _hswbflag = value;
+            }
+        }
+
+        public int Attrflag
+        {
+            get
+            {
+                return _attrflag;
+            }
+
+            set
+            {
+                _attrflag = value;
+            }
+        }
+
+        public string Helpcode
+        {
+            get
+            {
+                return _helpcode;
+            }
+
+            set
+            {
+                _helpcode = value;
+            }
+        }
+
+        public string Specialcode
+        {
+            get
+            {
+                return _specialcode;
+            }
+
+            set
+            {
+                _specialcode = value;
+            }
+        }
+
+        public int Relevantid
+        {
+            get
+            {
+                return _relevantid;
+            }
+
+            set
+            {
+                _relevantid = value;
             }
         }
     }
@@ -1306,6 +1389,17 @@ namespace MicroServiceApplication.factory
             }
         }
 
+        public void initSubjectBySd3000(Sd3000Accset accset)
+        {
+            List<Sd3000Subject> sdSubjectList= this.getSd3000Subject(accset);
+
+            if (sdSubjectList == null || sdSubjectList.Count <= 0)
+            {
+                throw new Exception("无法从速达读取科目信息！");
+            }
+
+
+        }
         public void exports(ExportBean exportBean,Sd3000Accset accset)
         {
 
@@ -1998,6 +2092,98 @@ namespace MicroServiceApplication.factory
 
             return subjectname;
         }
-        
+
+        private List<Sd3000Subject> getSd3000Subject(Sd3000Accset accset)
+        {
+            SqlConnection connection = this.createConnection(accset);
+
+            List<Sd3000Subject> sdsubjectlist = new List<Sd3000Subject>();
+
+            string sql = "select subid,subcode,moneyid,name,dcflag,detailflag,hswbflag,attrflag,helpcode,specialcode,relevantid,fullname from subject";
+
+            SqlDataAdapter myDataAdapter = new SqlDataAdapter(sql, connection);
+            DataSet myDataSet = new DataSet();      // 创建DataSet
+
+            try
+            {
+                myDataAdapter.Fill(myDataSet, "subject");
+                DataTable myTable = myDataSet.Tables["subject"];
+
+                if (myTable.Rows.Count > 0)
+                {
+                    foreach(DataRow row in myTable.Rows)
+                    {
+                        Sd3000Subject subject = new Sd3000Subject();
+
+                        if (row[myTable.Columns["subid"]] != null)
+                        {
+                            subject.Subid = int.Parse(row[myTable.Columns["subid"]].ToString());
+                        }
+
+                        if (row[myTable.Columns["subcode"]] != null)
+                        {
+                            subject.Subcode = row[myTable.Columns["subcode"]].ToString();
+                        }
+                        if (row[myTable.Columns["moneyid"]] != null)
+                        {
+                            subject.Moneyid = int.Parse(row[myTable.Columns["moneyid"]].ToString());
+                        }
+                        if (row[myTable.Columns["name"]] != null)
+                        {
+                            subject.Name = row[myTable.Columns["name"]].ToString();
+                        }
+                        if (row[myTable.Columns["dcflag"]] != null)
+                        {
+                            subject.Dcflag = row[myTable.Columns["dcflag"]].ToString() == "T" ? true :false;
+                        }
+                        if (row[myTable.Columns["detailflag"]] != null)
+                        {
+                            subject.Detailflag = row[myTable.Columns["detailflag"]].ToString() == "T" ? true : false;
+                        }
+                        if (row[myTable.Columns["hswbflag"]] != null)
+                        {
+                            subject.Hswbflag = int.Parse(row[myTable.Columns["hswbflag"]].ToString());
+                        }
+                        if (row[myTable.Columns["attrflag"]] != null)
+                        {
+                            subject.Attrflag = int.Parse(row[myTable.Columns["attrflag"]].ToString());
+                        }
+                        if (row[myTable.Columns["helpcode"]] != null)
+                        {
+                            subject.Helpcode = row[myTable.Columns["helpcode"]].ToString();
+                        }
+                        if (row[myTable.Columns["specialcode"]] != null)
+                        {
+                            subject.Specialcode = row[myTable.Columns["specialcode"]].ToString();
+                        }
+                        if (row[myTable.Columns["relevantid"]] != null)
+                        {
+                            string value = row[myTable.Columns["relevantid"]].ToString();
+                            try
+                            {
+                                subject.Relevantid = int.Parse(value);
+                            }catch(Exception e1)
+                            {
+                                Console.WriteLine("转换relevantid："+ value+",错误，跳过处理!");
+                            }
+                        }
+                        if (row[myTable.Columns["fullname"]] != null)
+                        {
+                            subject.Fullname = row[myTable.Columns["fullname"]].ToString();
+                        }
+                        sdsubjectlist.Add(subject);
+                    }
+                }
+
+                return sdsubjectlist;
+            }
+            finally
+            {
+                myDataSet.Dispose();
+                myDataAdapter.Dispose();
+                connection.Close();
+            }
+
+        }
     }
 }
