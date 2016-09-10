@@ -1616,7 +1616,7 @@ namespace MicroServiceApplication.factory
             SqlCommand creditemCmd = connection.CreateCommand();
             creditemCmd.Transaction = tr;
 
-            string credenceSql = "insert into creditem (credid,fenluno,rate,rawdebit,rawcredit,debit,credit,moneyid,subid,brief) values (@credid,@fenluno,@rate,@rawdebit,@rawcredit,@debit,@credit,@moneyid,@subid,@brief)";
+            string credenceSql = "insert into creditem (credid,fenluno,rate,rawdebit,rawcredit,debit,credit,moneyid,subid,brief,attrflag,readonly) values (@credid,@fenluno,@rate,@rawdebit,@rawcredit,@debit,@credit,@moneyid,@subid,@brief,@attrflag,@readonly)";
             creditemCmd.CommandText = credenceSql;
 
             creditemCmd.Parameters.Add("@credid", SqlDbType.VarChar);
@@ -1629,6 +1629,8 @@ namespace MicroServiceApplication.factory
             creditemCmd.Parameters.Add("@moneyid", SqlDbType.Int);
             creditemCmd.Parameters.Add("@subid", SqlDbType.Int);
             creditemCmd.Parameters.Add("@brief", SqlDbType.VarChar);
+            creditemCmd.Parameters.Add("@attrflag", SqlDbType.Int);
+            creditemCmd.Parameters.Add("@readonly", SqlDbType.VarChar);
 
             creditemCmd.Parameters["@credid"].Value = credid;
             creditemCmd.Parameters["@fenluno"].Value = voucherItem.Sort + 1; //需要从1开始
@@ -1640,6 +1642,8 @@ namespace MicroServiceApplication.factory
             creditemCmd.Parameters["@moneyid"].Value = currency.Moneyid;
             creditemCmd.Parameters["@subid"].Value = subject.Subid;
             creditemCmd.Parameters["@brief"].Value = voucherItem.Summary;
+            creditemCmd.Parameters["@attrflag"].Value = 0;
+            creditemCmd.Parameters["@readonly"].Value = "F";
 
             int result = creditemCmd.ExecuteNonQuery();
         }
