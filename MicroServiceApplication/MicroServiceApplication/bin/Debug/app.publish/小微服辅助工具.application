@@ -8,14 +8,14 @@
     <framework targetVersion="4.0" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="小微服辅助工具.exe.manifest" size="8852">
+    <dependentAssembly dependencyType="install" codebase="Application Files\小微服辅助工具_1_1_0_10\小微服辅助工具.exe.manifest" size="8852">
       <assemblyIdentity name="小微服辅助工具.exe" version="1.1.0.10" publicKeyToken="0000000000000000" language="zh-Hans" processorArchitecture="x86" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>3VFRQEDQSJb0ETdm54Yy9R965Ak=</dsig:DigestValue>
+        <dsig:DigestValue>Jz9RnADuqwUhybHOX7A7k352kgw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

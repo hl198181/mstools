@@ -28,7 +28,7 @@
     <ProductName>小微服辅助工具</ProductName>
     <PublisherName>顶聚科技</PublisherName>
     <SuiteName>小微服辅助工具</SuiteName>
-    <ApplicationRevision>9</ApplicationRevision>
+    <ApplicationRevision>11</ApplicationRevision>
     <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -115,6 +115,7 @@
     <Compile Include="Bean\AccountcycleClass.cs" />
     <Compile Include="Bean\AuthClass.cs" />
     <Compile Include="Bean\AppConfigClass.cs" />
+    <Compile Include="Bean\ClientSubjectLengthClass.cs" />
     <Compile Include="Bean\ClientSubjectClass.cs" />
     <Compile Include="Bean\ClientClass.cs" />
     <Compile Include="Bean\ExportBean.cs" />

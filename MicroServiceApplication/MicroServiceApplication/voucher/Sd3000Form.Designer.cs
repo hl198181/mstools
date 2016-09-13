@@ -86,7 +86,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(1643, 44);
+            this.menuStrip1.Size = new System.Drawing.Size(1643, 41);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -100,7 +100,7 @@
             this.PaytaxreportToolStripMenuItem,
             this.LocalreporttaxToolStripMenuItem});
             this.导出ToolStripMenuItem.Name = "导出ToolStripMenuItem";
-            this.导出ToolStripMenuItem.Size = new System.Drawing.Size(122, 38);
+            this.导出ToolStripMenuItem.Size = new System.Drawing.Size(122, 35);
             this.导出ToolStripMenuItem.Text = "导出凭证";
             // 
             // IncomeToolStripMenuItem
@@ -152,7 +152,7 @@
             this.TestToolStripMenuItem,
             this.initSubjectToolStripMenuItem});
             this.exportSubjectToolStripMenuItem.Name = "exportSubjectToolStripMenuItem";
-            this.exportSubjectToolStripMenuItem.Size = new System.Drawing.Size(122, 38);
+            this.exportSubjectToolStripMenuItem.Size = new System.Drawing.Size(122, 35);
             this.exportSubjectToolStripMenuItem.Text = "科目设置";
             // 
             // 开始导出ToolStripMenuItem
@@ -297,7 +297,7 @@
             this.exportInfoPanel.Controls.Add(this.groupBox3);
             this.exportInfoPanel.Controls.Add(this.groupBox1);
             this.exportInfoPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.exportInfoPanel.Location = new System.Drawing.Point(0, 44);
+            this.exportInfoPanel.Location = new System.Drawing.Point(0, 41);
             this.exportInfoPanel.Margin = new System.Windows.Forms.Padding(0);
             this.exportInfoPanel.Name = "exportInfoPanel";
             this.exportInfoPanel.Padding = new System.Windows.Forms.Padding(10);
@@ -443,7 +443,7 @@
             // 
             this.subjectPanel.Controls.Add(this.groupBox2);
             this.subjectPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.subjectPanel.Location = new System.Drawing.Point(0, 686);
+            this.subjectPanel.Location = new System.Drawing.Point(0, 683);
             this.subjectPanel.Name = "subjectPanel";
             this.subjectPanel.Padding = new System.Windows.Forms.Padding(10);
             this.subjectPanel.Size = new System.Drawing.Size(1643, 551);

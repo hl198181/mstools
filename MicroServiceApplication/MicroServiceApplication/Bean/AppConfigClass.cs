@@ -20,7 +20,7 @@ namespace MicroServiceApplication.Bean
         public HttpClient crateHttpClient()
         {
             HttpClient httpClient = new HttpClient();
-            httpClient.MaxResponseContentBufferSize = 256000;
+            httpClient.MaxResponseContentBufferSize = 25600000;
             httpClient.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)");
             httpClient.DefaultRequestHeaders.Add("Authorization", "Basic c2VydmljZTpjNUNVN0ZBNVZOczdNOXJUZVlHU3pXZGpETzBWZmY=");
             return httpClient;
@@ -42,7 +42,7 @@ namespace MicroServiceApplication.Bean
         }
 
         private string _baseUrl = "http://www.yun9.com/service";
-        //private string _baseUrl = "http://192.168.31.209:9080/service";
+        //private string _baseUrl = "http://192.168.1.209:9080/service";
 
         public string BaseUrl
         {

@@ -1183,7 +1183,7 @@ namespace MicroServiceApplication.factory
 
         private List<Sd3000Subject> _subjects;
 
-        private Dictionary<string, Accoptions> _accoptionsDict;
+        private Dictionary<string, Sd3000Accoptions> _accoptionsDict;
 
         private List<ClientSubject> _clientSubjects;
 
@@ -1217,7 +1217,7 @@ namespace MicroServiceApplication.factory
             }
         }
 
-        internal Dictionary<string, Accoptions> AccoptionsDict
+        internal Dictionary<string, Sd3000Accoptions> AccoptionsDict
         {
             get
             {
@@ -1270,7 +1270,7 @@ namespace MicroServiceApplication.factory
         }
     }
 
-    class Accoptions
+    class Sd3000Accoptions
     {
         private int _optionid;
         private string _optionname;
@@ -1399,7 +1399,12 @@ namespace MicroServiceApplication.factory
             if (accset == null)  throw new ArgumentException("请选择账套信息！");
             if (client.Id == null) throw new ArgumentException("客户信息必须输入！");
 
-
+            //查询客户账套科目长度配置，并同步
+            Dictionary<string, Sd3000Accoptions> accoptionsDict = this.queryAccoptions(accset);
+            ClientSubjectLengthFactory cslf = new ClientSubjectLengthFactory();
+            cslf.addBySd3000Accoptions(client.Id,user.Id,accoptionsDict);
+            
+            //查询客户账套科目
             List<Sd3000Subject> sdSubjectList= this.getSd3000Subject(accset);
 
             if (sdSubjectList == null || sdSubjectList.Count <= 0)
@@ -1416,6 +1421,8 @@ namespace MicroServiceApplication.factory
             {
                 csf.addBySd3000Subject(item, client, user);
             }
+
+          
         }
         public void exports(ExportBean exportBean,Sd3000Accset accset)
         {
@@ -1894,10 +1901,10 @@ namespace MicroServiceApplication.factory
             }
         }
 
-        private Dictionary<string,Accoptions> queryAccoptions(Sd3000Accset accset)
+        private Dictionary<string,Sd3000Accoptions> queryAccoptions(Sd3000Accset accset)
         {
             SqlConnection connection = this.createConnection(accset);
-            Dictionary<string, Accoptions> dict = new Dictionary<string, Accoptions>();
+            Dictionary<string, Sd3000Accoptions> dict = new Dictionary<string, Sd3000Accoptions>();
 
             string sql = "select optionid,optionname,optionvalue,optionlimit,memo,lcode from accoptions;";
 
@@ -1913,7 +1920,7 @@ namespace MicroServiceApplication.factory
                 {
                     foreach(DataRow row in myTable.Rows)
                     {
-                        Accoptions accoptions = new Accoptions();
+                        Sd3000Accoptions accoptions = new Sd3000Accoptions();
                         accoptions.Optionid = int.Parse(row[myTable.Columns["optionid"]].ToString());
                         accoptions.Optionname = row[myTable.Columns["optionname"]] == null ? null : row[myTable.Columns["optionname"]].ToString(); 
                         accoptions.Optionvalue = row[myTable.Columns["optionvalue"]] == null ? null : row[myTable.Columns["optionvalue"]].ToString();
