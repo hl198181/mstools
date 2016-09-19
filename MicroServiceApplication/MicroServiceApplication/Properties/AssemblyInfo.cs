@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MicroServiceApplication")]
+[assembly: AssemblyTitle("小微服辅助工具")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("MicroServiceApplication")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2016")]
+[assembly: AssemblyCompany("DJSoft")]
+[assembly: AssemblyProduct("小微服辅助工具")]
+[assembly: AssemblyCopyright("Copyright © DJSoft2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

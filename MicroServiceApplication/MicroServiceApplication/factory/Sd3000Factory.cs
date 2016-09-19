@@ -1606,13 +1606,15 @@ namespace MicroServiceApplication.factory
             int result = credenceCmd.ExecuteNonQuery();
 
             //凭证明细
+            int voucherItemSort = 0;
             foreach(Sd3000VoucherItem item in voucher.Items)
             {
-                this.buildCreditem(context, credid, item, connection, tr,accset);
+                voucherItemSort++;
+                this.buildCreditem(context, credid, item, connection, tr,accset, voucherItemSort);
             }
         }
 
-        private void buildCreditem(ExportSd3000Context context,string credid, Sd3000VoucherItem voucherItem, SqlConnection connection, SqlTransaction tr,Sd3000Accset accset)
+        private void buildCreditem(ExportSd3000Context context,string credid, Sd3000VoucherItem voucherItem, SqlConnection connection, SqlTransaction tr,Sd3000Accset accset,int sort)
         {
 
             //查找货币id
@@ -1640,7 +1642,7 @@ namespace MicroServiceApplication.factory
             creditemCmd.Parameters.Add("@readonly", SqlDbType.VarChar);
 
             creditemCmd.Parameters["@credid"].Value = credid;
-            creditemCmd.Parameters["@fenluno"].Value = voucherItem.Sort + 1; //需要从1开始
+            creditemCmd.Parameters["@fenluno"].Value = sort; //需要从1开始
             creditemCmd.Parameters["@rate"].Value = 1;
             creditemCmd.Parameters["@rawdebit"].Value = 0;
             creditemCmd.Parameters["@rawcredit"].Value = 0;

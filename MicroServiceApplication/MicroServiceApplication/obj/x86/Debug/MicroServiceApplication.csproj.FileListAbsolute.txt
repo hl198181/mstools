@@ -97,7 +97,9 @@ D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\
 D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\MicroServiceApplication.KisExportsForm.resources
 D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\MicroServiceApplication.Properties.Resources.resources
 D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\MicroServiceApplication.csproj.GenerateResource.Cache
+D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\小微服辅助工具.TrustInfo.xml
 D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\小微服辅助工具.exe.manifest
 D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\小微服辅助工具.application
 D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\小微服辅助工具.exe
 D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\小微服辅助工具.pdb
+D:\Source\Repos\MsTools\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\MicroServiceApplication.csprojResolveAssemblyReference.cache

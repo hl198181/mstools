@@ -86,7 +86,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(1643, 41);
+            this.menuStrip1.Size = new System.Drawing.Size(1643, 44);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -100,48 +100,48 @@
             this.PaytaxreportToolStripMenuItem,
             this.LocalreporttaxToolStripMenuItem});
             this.导出ToolStripMenuItem.Name = "导出ToolStripMenuItem";
-            this.导出ToolStripMenuItem.Size = new System.Drawing.Size(122, 35);
+            this.导出ToolStripMenuItem.Size = new System.Drawing.Size(122, 38);
             this.导出ToolStripMenuItem.Text = "导出凭证";
             // 
             // IncomeToolStripMenuItem
             // 
             this.IncomeToolStripMenuItem.Name = "IncomeToolStripMenuItem";
-            this.IncomeToolStripMenuItem.Size = new System.Drawing.Size(209, 38);
+            this.IncomeToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
             this.IncomeToolStripMenuItem.Text = "进项";
             this.IncomeToolStripMenuItem.Click += new System.EventHandler(this.IncomeToolStripMenuItem_Click);
             // 
             // OutputToolStripMenuItem
             // 
             this.OutputToolStripMenuItem.Name = "OutputToolStripMenuItem";
-            this.OutputToolStripMenuItem.Size = new System.Drawing.Size(209, 38);
+            this.OutputToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
             this.OutputToolStripMenuItem.Text = "销项";
             this.OutputToolStripMenuItem.Click += new System.EventHandler(this.OutputToolStripMenuItem_Click);
             // 
             // BankDealToolStripMenuItem
             // 
             this.BankDealToolStripMenuItem.Name = "BankDealToolStripMenuItem";
-            this.BankDealToolStripMenuItem.Size = new System.Drawing.Size(209, 38);
+            this.BankDealToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
             this.BankDealToolStripMenuItem.Text = "银行回单";
             this.BankDealToolStripMenuItem.Click += new System.EventHandler(this.BankDealToolStripMenuItem_Click);
             // 
             // PayrollToolStripMenuItem
             // 
             this.PayrollToolStripMenuItem.Name = "PayrollToolStripMenuItem";
-            this.PayrollToolStripMenuItem.Size = new System.Drawing.Size(209, 38);
+            this.PayrollToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
             this.PayrollToolStripMenuItem.Text = "工资表";
             this.PayrollToolStripMenuItem.Click += new System.EventHandler(this.PayrollToolStripMenuItem_Click);
             // 
             // PaytaxreportToolStripMenuItem
             // 
             this.PaytaxreportToolStripMenuItem.Name = "PaytaxreportToolStripMenuItem";
-            this.PaytaxreportToolStripMenuItem.Size = new System.Drawing.Size(209, 38);
+            this.PaytaxreportToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
             this.PaytaxreportToolStripMenuItem.Text = "国税";
             this.PaytaxreportToolStripMenuItem.Click += new System.EventHandler(this.PaytaxreportToolStripMenuItem_Click);
             // 
             // LocalreporttaxToolStripMenuItem
             // 
             this.LocalreporttaxToolStripMenuItem.Name = "LocalreporttaxToolStripMenuItem";
-            this.LocalreporttaxToolStripMenuItem.Size = new System.Drawing.Size(209, 38);
+            this.LocalreporttaxToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
             this.LocalreporttaxToolStripMenuItem.Text = "地税";
             this.LocalreporttaxToolStripMenuItem.Click += new System.EventHandler(this.LocalreporttaxToolStripMenuItem_Click);
             // 
@@ -152,7 +152,7 @@
             this.TestToolStripMenuItem,
             this.initSubjectToolStripMenuItem});
             this.exportSubjectToolStripMenuItem.Name = "exportSubjectToolStripMenuItem";
-            this.exportSubjectToolStripMenuItem.Size = new System.Drawing.Size(122, 35);
+            this.exportSubjectToolStripMenuItem.Size = new System.Drawing.Size(122, 38);
             this.exportSubjectToolStripMenuItem.Text = "科目设置";
             // 
             // 开始导出ToolStripMenuItem
@@ -167,6 +167,7 @@
             this.TestToolStripMenuItem.Name = "TestToolStripMenuItem";
             this.TestToolStripMenuItem.Size = new System.Drawing.Size(353, 38);
             this.TestToolStripMenuItem.Text = "新科目设置为已经导入";
+            this.TestToolStripMenuItem.Visible = false;
             this.TestToolStripMenuItem.Click += new System.EventHandler(this.TestToolStripMenuItem_Click);
             // 
             // initSubjectToolStripMenuItem
@@ -297,7 +298,7 @@
             this.exportInfoPanel.Controls.Add(this.groupBox3);
             this.exportInfoPanel.Controls.Add(this.groupBox1);
             this.exportInfoPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.exportInfoPanel.Location = new System.Drawing.Point(0, 41);
+            this.exportInfoPanel.Location = new System.Drawing.Point(0, 44);
             this.exportInfoPanel.Margin = new System.Windows.Forms.Padding(0);
             this.exportInfoPanel.Name = "exportInfoPanel";
             this.exportInfoPanel.Padding = new System.Windows.Forms.Padding(10);
@@ -443,7 +444,7 @@
             // 
             this.subjectPanel.Controls.Add(this.groupBox2);
             this.subjectPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.subjectPanel.Location = new System.Drawing.Point(0, 683);
+            this.subjectPanel.Location = new System.Drawing.Point(0, 686);
             this.subjectPanel.Name = "subjectPanel";
             this.subjectPanel.Padding = new System.Windows.Forms.Padding(10);
             this.subjectPanel.Size = new System.Drawing.Size(1643, 551);

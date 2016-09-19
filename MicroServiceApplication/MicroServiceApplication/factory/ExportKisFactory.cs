@@ -308,6 +308,7 @@ namespace MicroServiceApplication
             }
             catch(Exception e)
             {
+                Console.WriteLine(e.StackTrace);
                 MessageBox.Show("导出错误:"+e.Message);
             }
         }
