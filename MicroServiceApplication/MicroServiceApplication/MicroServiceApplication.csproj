@@ -148,6 +148,7 @@
       <DependentUpon>SelectClientForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Factory\ExportKisFactory.cs" />
+    <Compile Include="Factory\KisDbFileClass.cs" />
     <Compile Include="Factory\Sd3000Factory.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -167,6 +168,13 @@
     </Compile>
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DbUtil\AccessClass.cs" />
+    <Compile Include="voucher\KisFileForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="voucher\KisFileForm.Designer.cs">
+      <DependentUpon>KisFileForm.cs</DependentUpon>
     </Compile>
     <Compile Include="voucher\Sd3000Form.cs">
       <SubType>Form</SubType>
@@ -199,6 +207,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="voucher\KisFileForm.resx">
+      <DependentUpon>KisFileForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="voucher\Sd3000Form.resx">
       <DependentUpon>Sd3000Form.cs</DependentUpon>

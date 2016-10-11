@@ -241,8 +241,8 @@ namespace MicroServiceApplication
             foreach (JObject item in jaVoucherItems)
             {
                 KisVoucherInfo voucherItem = new KisVoucherInfo();
-                
-                DateTime bizDate = Util.GetTime(item["FDate"].ToString());
+               
+                DateTime bizDate = MicroServiceApplication.Common.Util.GetTime(item["FDate"].ToString());
 
                 voucherItem.FDate = bizDate;
                 voucherItem.FPeriod = item.GetValue("FPeriod").ToObject<int>();

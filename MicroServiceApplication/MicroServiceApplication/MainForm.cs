@@ -12,8 +12,10 @@ namespace MicroServiceApplication
 {
     public partial class MainForm : Form
     {
-        KisExportsForm kisExportsForm;
-        Sd3000Form sd3000Form ;
+        private KisExportsForm kisExportsForm;
+        private Sd3000Form sd3000Form ;
+        private KisFileForm kisFileForm;
+
         public MainForm()
         {
             InitializeComponent();
@@ -36,10 +38,12 @@ namespace MicroServiceApplication
                 kisExportsForm.Activate();
             }
             
+            
         }
 
         private void Sd300ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            
             if (sd3000Form == null || sd3000Form.IsDisposed)
             {
                 sd3000Form = new Sd3000Form();
@@ -52,6 +56,20 @@ namespace MicroServiceApplication
                 sd3000Form.Activate();
             }
             
+        }
+
+        private void KisFileToolStripMenuItem_Click(object sender,EventArgs e)
+        {
+            if (kisFileForm == null || kisFileForm.IsDisposed)
+            {
+                kisFileForm = new KisFileForm();
+                kisFileForm.MdiParent = this;
+                kisFileForm.WindowState = FormWindowState.Maximized;
+                kisFileForm.Show();
+            }else
+            {
+                kisFileForm.Activate();
+            }
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -69,6 +87,12 @@ namespace MicroServiceApplication
             kisMenuItem.Text = "金蝶标准凭证格式";
             kisMenuItem.Click += new EventHandler(KisToolStripMenuItem_Click);
             menuItem.DropDownItems.Add(kisMenuItem);
+
+            ToolStripMenuItem kisFileMenuItem = new ToolStripMenuItem();
+            kisFileMenuItem.Name = "KisFile";
+            kisFileMenuItem.Text = "金蝶KIS数据库文件导入";
+            kisFileMenuItem.Click += new EventHandler(KisFileToolStripMenuItem_Click);
+            menuItem.DropDownItems.Add(kisFileMenuItem);
 
             ToolStripMenuItem sd3000MenuItem = new ToolStripMenuItem();
             sd3000MenuItem.Name = "sd3000";

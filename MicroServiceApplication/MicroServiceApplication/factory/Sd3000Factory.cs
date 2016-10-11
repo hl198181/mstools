@@ -680,7 +680,7 @@ namespace MicroServiceApplication.factory
                 this.Bizid = jobject["bizid"] == null ? null : jobject["bizid"].ToString();
                 this.Biztype = jobject["biztype"] == null ? null : jobject["biztype"].ToString();
                 if (jobject["bizdate"] != null){
-                    this.Bizdate = Util.GetTime(jobject["bizdate"].ToString());
+                    this.Bizdate = MicroServiceApplication.Common.Util.GetTime(jobject["bizdate"].ToString());
                 }
                 this.Summary = jobject["summary"] == null ? null : jobject["summary"].ToString();
                 this.Descr = jobject["descr"] == null ? null : jobject["descr"].ToString();
@@ -719,7 +719,7 @@ namespace MicroServiceApplication.factory
                 }
                 if (jobject["createdate"] != null)
                 {
-                    this.Createdate = Util.GetTime(jobject["createdate"].ToString());
+                    this.Createdate = MicroServiceApplication.Common.Util.GetTime(jobject["createdate"].ToString());
                 }
                 this.Createby = jobject["createby"] == null ? null : jobject["createby"].ToString();
                 this.Biztype = jobject["biztype"] == null ? null : jobject["biztype"].ToString();

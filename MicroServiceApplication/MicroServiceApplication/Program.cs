@@ -34,7 +34,9 @@ namespace MicroServiceApplication
             }
 
             //打开主界面
-            Application.Run(new MainForm());
+            MainForm mf = new MainForm();
+                
+            Application.Run(mf);
 
             //Application.Run(new MainForm());
         }
