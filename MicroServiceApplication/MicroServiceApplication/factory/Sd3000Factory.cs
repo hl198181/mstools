@@ -1419,7 +1419,12 @@ namespace MicroServiceApplication.factory
             //写入科目
             foreach (Sd3000Subject item in sdSubjectList)
             {
-                csf.addBySd3000Subject(item, client, user);
+                ClientSubject subject = new ClientSubject();
+                subject.Sn = item.Subcode;
+                subject.Label = item.Name;
+                subject.Fullname = item.Fullname;
+                subject.Debitcredit = (item.Dcflag == true ? "de" : "cr");
+                csf.add(subject, client, user);
             }
 
           

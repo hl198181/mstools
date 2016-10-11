@@ -15,6 +15,7 @@ namespace MicroServiceApplication.Bean
         private string _clientid;
         private string _sn;
         private string _label;
+        private string _fullname;
         private string _debitcredit;
         private int _isnew;
 
@@ -93,6 +94,19 @@ namespace MicroServiceApplication.Bean
             set
             {
                 _isnew = value;
+            }
+        }
+
+        public string Fullname
+        {
+            get
+            {
+                return _fullname;
+            }
+
+            set
+            {
+                _fullname = value;
             }
         }
 
@@ -176,18 +190,19 @@ namespace MicroServiceApplication.Bean
         
         }
 
-        public void addBySd3000Subject(Sd3000Subject sd3000Subject,Client client,User user)
+        public void add(ClientSubject subject,Client client,User user)
         {
 
             JObject jo = new JObject();
+
             jo.Add("clientid", client.Id);
-            jo.Add("sn", sd3000Subject.Subcode);
-            jo.Add("label", sd3000Subject.Name);
-            jo.Add("fullname", sd3000Subject.Fullname);
-            jo.Add("debitcredit", (sd3000Subject.Dcflag == true ? "de" : "cr"));
+            jo.Add("sn", subject.Sn);
+            jo.Add("label", subject.Label);
+            jo.Add("fullname", subject.Fullname);
+            jo.Add("debitcredit", subject.Debitcredit;
             jo.Add("isnew", 0);
             jo.Add("createby", user.Id);
-            
+
             string requestJson = jo.ToString();
             string url = AppConfig.GetInstance().BaseUrl + "/client/subject/";
             HttpClient httpClient = AppConfig.GetInstance().crateHttpClient();

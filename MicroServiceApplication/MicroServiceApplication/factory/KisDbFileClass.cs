@@ -1,4 +1,5 @@
-﻿using MicroServiceApplication.Util;
+﻿using MicroServiceApplication.Bean;
+using MicroServiceApplication.Util;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -143,6 +144,22 @@ namespace MicroServiceApplication.Factory
             List<KisDbAcct> kisDbAcctList=kdbff.getGLAcct();
 
             //将数据发送到后台服务器
+
+            //清理现有科目
+            //ClientSubjectFactory csf = new ClientSubjectFactory();
+            //csf.clean(client.Id);
+
+            //写入科目
+            //foreach (KisDbAcct item in kisDbAcctList)
+            //{
+            //    ClientSubject subject = new ClientSubject();
+            //    subject.Sn = item.Subcode;
+            //    subject.Label = item.Name;
+            //    subject.Fullname = item.Fullname;
+            //    subject.Debitcredit = (item.Dcflag == true ? "de" : "cr");
+            //    csf.add(subject, client, user);
+            //}
+
 
         }
     }
