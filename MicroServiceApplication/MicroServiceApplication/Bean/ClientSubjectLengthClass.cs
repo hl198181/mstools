@@ -197,22 +197,24 @@ namespace MicroServiceApplication.Bean
 
     class ClientSubjectLengthFactory
     {
-        public void addBySd3000Accoptions(string clientid,string createby, Dictionary<string, Sd3000Accoptions> accoptions)
+        public void add(ClientSubjectLength csl)
         {
-            if (clientid == null || clientid == "") throw new ArgumentException("添加客户科目长度参数错误!");
-            if (createby == null || createby == "") throw new ArgumentException("添加客户科目长度参数错误!");
-            if (accoptions == null) throw new ArgumentException("添加客户科目长度参数错误!");
+            if (csl == null) throw new ArgumentException("添加客户科目长度参数错误!");
             
             JObject jo = new JObject();
-            jo.Add("clientid", clientid);
-            jo.Add("createby", createby);
-            for (int i = 1; i <= 10; i++)
-            {
-                string tempValue = accoptions["SC"+i+"LENGTH"].Optionvalue;
-                if (tempValue == null || tempValue == "") throw new Exception("无法获取财务账套的"+i+"级科目长度配置信息!");
-                jo.Add("subject"+i, int.Parse(tempValue));
-            }
-          
+            jo.Add("clientid", csl.Clientid);
+            jo.Add("createby", csl.Createby);
+            jo.Add("subject1", csl.Subject1);
+            jo.Add("subject2", csl.Subject2);
+            jo.Add("subject3", csl.Subject3);
+            jo.Add("subject4", csl.Subject4);
+            jo.Add("subject5", csl.Subject5);
+            jo.Add("subject6", csl.Subject6);
+            jo.Add("subject7", csl.Subject7);
+            jo.Add("subject8", csl.Subject8);
+            jo.Add("subject9", csl.Subject9);
+            jo.Add("subject10", csl.Subject10);
+
             string requestJson = jo.ToString();
             string url = AppConfig.GetInstance().BaseUrl + "/client/subject/length";
             HttpClient httpClient = AppConfig.GetInstance().crateHttpClient();

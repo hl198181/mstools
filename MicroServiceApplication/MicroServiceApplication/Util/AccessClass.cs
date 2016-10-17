@@ -118,21 +118,39 @@ namespace MicroServiceApplication.Util
             return adapter;
         }
 
+        public bool ExecuteSQLNonquery(String sql)
+        {
+            List<String> sqls = new List<string>();
+            sqls.Add(sql);
+            return ExecuteSQLNonquery(sqls);
+        }
         /**//// <summary>   
                     /// 执行SQL命令，不需要返回数据的修改，删除可以使用本函数   
                     /// </summary>   
                     /// <param name="SQL"></param>   
                     /// <returns></returns>   
-        public bool ExecuteSQLNonquery(string SQL)
+        public bool ExecuteSQLNonquery(List<String> sqls)
         {
-            OleDbCommand cmd = new OleDbCommand(SQL, Conn);
+            OleDbCommand cmd = new OleDbCommand();
+            OleDbTransaction tx = Conn.BeginTransaction();
+            cmd.Transaction = tx;
             try
             {
-                cmd.ExecuteNonQuery();
+                for (int n = 0; n < sqls.Count; n++)
+                {
+                    string strsql = sqls[n].ToString();
+                    if (strsql.Trim().Length > 1)
+                    {
+                        cmd.CommandText = strsql;
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                tx.Commit();
                 return true;
             }
             catch
             {
+                tx.Rollback();
                 return false;
             }
         }

@@ -1401,8 +1401,24 @@ namespace MicroServiceApplication.factory
 
             //查询客户账套科目长度配置，并同步
             Dictionary<string, Sd3000Accoptions> accoptionsDict = this.queryAccoptions(accset);
+
+            ClientSubjectLength csl = new ClientSubjectLength();
+
+            csl.Subject1 = int.Parse(accoptionsDict["SC1LENGTH"].Optionvalue == null ? "0" : accoptionsDict["SC1LENGTH"].Optionvalue);
+            csl.Subject2 = int.Parse(accoptionsDict["SC2LENGTH"].Optionvalue == null ? "0" : accoptionsDict["SC2LENGTH"].Optionvalue);
+            csl.Subject3 = int.Parse(accoptionsDict["SC3LENGTH"].Optionvalue == null ? "0" : accoptionsDict["SC3LENGTH"].Optionvalue);
+            csl.Subject4 = int.Parse(accoptionsDict["SC4LENGTH"].Optionvalue == null ? "0" : accoptionsDict["SC4LENGTH"].Optionvalue);
+            csl.Subject5 = int.Parse(accoptionsDict["SC5LENGTH"].Optionvalue == null ? "0" : accoptionsDict["SC5LENGTH"].Optionvalue);
+            csl.Subject6 = int.Parse(accoptionsDict["SC6LENGTH"].Optionvalue == null ? "0" : accoptionsDict["SC6LENGTH"].Optionvalue);
+            csl.Subject7 = int.Parse(accoptionsDict["SC7LENGTH"].Optionvalue == null ? "0" : accoptionsDict["SC7LENGTH"].Optionvalue);
+            csl.Subject8 = int.Parse(accoptionsDict["SC8LENGTH"].Optionvalue == null ? "0" : accoptionsDict["SC8LENGTH"].Optionvalue);
+            csl.Subject9 = int.Parse(accoptionsDict["SC9LENGTH"].Optionvalue == null ? "0" : accoptionsDict["SC9LENGTH"].Optionvalue);
+            csl.Subject10 = int.Parse(accoptionsDict["SC10LENGTH"].Optionvalue == null ? "0" : accoptionsDict["SC10LENGTH"].Optionvalue);
+            csl.Clientid = client.Id;
+            csl.Createby = user.Id;
+
             ClientSubjectLengthFactory cslf = new ClientSubjectLengthFactory();
-            cslf.addBySd3000Accoptions(client.Id,user.Id,accoptionsDict);
+            cslf.add(csl);
             
             //查询客户账套科目
             List<Sd3000Subject> sdSubjectList= this.getSd3000Subject(accset);

@@ -199,7 +199,7 @@ namespace MicroServiceApplication.Bean
             jo.Add("sn", subject.Sn);
             jo.Add("label", subject.Label);
             jo.Add("fullname", subject.Fullname);
-            jo.Add("debitcredit", subject.Debitcredit;
+            jo.Add("debitcredit", subject.Debitcredit);
             jo.Add("isnew", 0);
             jo.Add("createby", user.Id);
 
