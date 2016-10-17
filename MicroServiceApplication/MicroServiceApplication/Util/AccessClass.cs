@@ -132,6 +132,7 @@ namespace MicroServiceApplication.Util
         public bool ExecuteSQLNonquery(List<String> sqls)
         {
             OleDbCommand cmd = new OleDbCommand();
+            cmd.Connection = Conn;
             OleDbTransaction tx = Conn.BeginTransaction();
             cmd.Transaction = tx;
             try
@@ -148,10 +149,10 @@ namespace MicroServiceApplication.Util
                 tx.Commit();
                 return true;
             }
-            catch
+            catch(Exception e)
             {
                 tx.Rollback();
-                return false;
+                throw e;
             }
         }
         #endregion

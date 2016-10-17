@@ -620,10 +620,10 @@ namespace MicroServiceApplication.Factory
                 }
 
                 //组合插入SQL
-                String sql = "INSERT INTO　GLAcct(FAcctID,FAcctName,FGroup,FDC) VALUES ("+
-                    "'" + item.Sn + "'" +
-                    "'" + item.Label + "'" +
-                    "'" + level1Acct.Fgroup + "'" + //科目分组，需要根据上级象科目确认
+                String sql = "INSERT INTO GLAcct(FAcctID,FAcctName,FGroup,FDC) VALUES ("+
+                    "'" + item.Sn + "'," +
+                    "'" + item.Label + "'," +
+                    "'" + level1Acct.Fgroup + "'," + //科目分组，需要根据上级象科目确认
                     "'" + (item.Debitcredit == "de" ? "D"  : "C") + "'" +
                     ")";
                 sqls.Add(sql);
@@ -631,8 +631,18 @@ namespace MicroServiceApplication.Factory
 
             //插入数据库
             AccessDbClass access = new AccessDbClass(this.KdbParams.DbFilePath);
-
-            access.ExecuteSQLNonquery(sqls);
+            try
+            {
+                access.ExecuteSQLNonquery(sqls);
+            }
+            catch (Exception e1)
+            {
+                throw e1;
+            }
+            finally
+            {
+                access.Close();
+            }
         }
     }
 }
