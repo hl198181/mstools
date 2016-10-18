@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -14,7 +15,59 @@ namespace MicroServiceApplication.Bean
 
         private AppConfig()
         {
+            this.loadConfig();
+        }
 
+        private void loadConfig()
+        {
+            foreach(String key in ConfigurationManager.AppSettings)
+            {
+                if(key == "baseurl")
+                {
+                    this.BaseUrl = ConfigurationManager.AppSettings[key];
+                }
+                if (key == "loginurl")
+                {
+                    this.LoginUrl = ConfigurationManager.AppSettings[key];
+                }
+                if (key == "kissecurityfile")
+                {
+                    this.Kissecurityfile = ConfigurationManager.AppSettings[key];
+                }
+                Console.WriteLine(key);
+            }
+        }
+
+        public  void updateAppConfig(string newKey, string newValue)
+        {
+            bool isModified = false;
+            foreach (string key in ConfigurationManager.AppSettings)
+            {
+                if (key == newKey)
+                {
+                    isModified = true;
+                }
+            }
+
+            // Open App.Config of executable   
+            Configuration config =
+                ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            // You need to remove the old settings object before you can replace it   
+            if (isModified)
+            {
+                config.AppSettings.Settings.Remove(newKey);
+            }
+            // Add an Application Setting.   
+            config.AppSettings.Settings.Add(newKey, newValue);
+            // Save the changes in App.config file.   
+            config.Save(ConfigurationSaveMode.Modified);
+            // Force a reload of a changed section.   
+            ConfigurationManager.RefreshSection("appSettings");
+        }
+
+        public void reLoadConfig()
+        {
+            this.loadConfig();
         }
 
         public HttpClient crateHttpClient()
@@ -41,8 +94,12 @@ namespace MicroServiceApplication.Bean
             return instance;
         }
 
-        private string _baseUrl = "http://www.yun9.com/service";
-        //private string _baseUrl = "http://192.168.31.209:9080/service";
+        private string _baseUrl;
+
+        private string _loginUrl;
+
+
+        private String _kissecurityfile;
 
         public string BaseUrl
         {
@@ -70,8 +127,17 @@ namespace MicroServiceApplication.Bean
             }
         }
 
-        private string _loginUrl = "http://www.yun9.com/auth";
+        public string Kissecurityfile
+        {
+            get
+            {
+                return _kissecurityfile;
+            }
 
-
+            set
+            {
+                _kissecurityfile = value;
+            }
+        }
     }
 }

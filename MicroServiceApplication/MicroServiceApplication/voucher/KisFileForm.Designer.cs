@@ -44,28 +44,31 @@
             this.dbFilePathTextBox = new System.Windows.Forms.TextBox();
             this.testConnectButton = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.initSubjectButton = new System.Windows.Forms.Button();
             this.newSubjectGroupBox = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.ClientSubjectDataGridView = new System.Windows.Forms.DataGridView();
             this.subjectToKisButton = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SetupKisDirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.InitSubjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.dbFileGroupBox.SuspendLayout();
             this.dbFilePanel.SuspendLayout();
             this.dbFileTableLayoutPanel.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
             this.newSubjectGroupBox.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ClientSubjectDataGridView)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.panel1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Location = new System.Drawing.Point(0, 0);
+            this.groupBox1.Location = new System.Drawing.Point(0, 39);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(1430, 206);
             this.groupBox1.TabIndex = 1;
@@ -157,7 +160,7 @@
             // 
             this.dbFileGroupBox.Controls.Add(this.dbFilePanel);
             this.dbFileGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dbFileGroupBox.Location = new System.Drawing.Point(0, 206);
+            this.dbFileGroupBox.Location = new System.Drawing.Point(0, 245);
             this.dbFileGroupBox.Name = "dbFileGroupBox";
             this.dbFileGroupBox.Size = new System.Drawing.Size(1430, 208);
             this.dbFileGroupBox.TabIndex = 2;
@@ -237,29 +240,18 @@
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Controls.Add(this.initSubjectButton);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 414);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 453);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1430, 70);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1430, 40);
             this.flowLayoutPanel1.TabIndex = 3;
-            // 
-            // initSubjectButton
-            // 
-            this.initSubjectButton.Location = new System.Drawing.Point(1230, 3);
-            this.initSubjectButton.Name = "initSubjectButton";
-            this.initSubjectButton.Size = new System.Drawing.Size(197, 61);
-            this.initSubjectButton.TabIndex = 0;
-            this.initSubjectButton.Text = "初始化科目";
-            this.initSubjectButton.UseVisualStyleBackColor = true;
-            this.initSubjectButton.Click += new System.EventHandler(this.initSubjectButton_Click);
             // 
             // newSubjectGroupBox
             // 
             this.newSubjectGroupBox.Controls.Add(this.tableLayoutPanel2);
             this.newSubjectGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.newSubjectGroupBox.Location = new System.Drawing.Point(0, 484);
+            this.newSubjectGroupBox.Location = new System.Drawing.Point(0, 493);
             this.newSubjectGroupBox.Name = "newSubjectGroupBox";
             this.newSubjectGroupBox.Size = new System.Drawing.Size(1430, 424);
             this.newSubjectGroupBox.TabIndex = 4;
@@ -302,6 +294,40 @@
             this.subjectToKisButton.UseVisualStyleBackColor = true;
             this.subjectToKisButton.Click += new System.EventHandler(this.subjectToKisButton_Click);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.设置ToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1430, 39);
+            this.menuStrip1.TabIndex = 5;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // 设置ToolStripMenuItem
+            // 
+            this.设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SetupKisDirToolStripMenuItem,
+            this.InitSubjectToolStripMenuItem});
+            this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
+            this.设置ToolStripMenuItem.Size = new System.Drawing.Size(74, 35);
+            this.设置ToolStripMenuItem.Text = "设置";
+            // 
+            // SetupKisDirToolStripMenuItem
+            // 
+            this.SetupKisDirToolStripMenuItem.Name = "SetupKisDirToolStripMenuItem";
+            this.SetupKisDirToolStripMenuItem.Size = new System.Drawing.Size(389, 38);
+            this.SetupKisDirToolStripMenuItem.Text = "设置KIS安装目录";
+            this.SetupKisDirToolStripMenuItem.Click += new System.EventHandler(this.SetupKisDirToolStripMenuItem_Click);
+            // 
+            // InitSubjectToolStripMenuItem
+            // 
+            this.InitSubjectToolStripMenuItem.Name = "InitSubjectToolStripMenuItem";
+            this.InitSubjectToolStripMenuItem.Size = new System.Drawing.Size(389, 38);
+            this.InitSubjectToolStripMenuItem.Text = "根据KIS初始化小微服科目";
+            this.InitSubjectToolStripMenuItem.Click += new System.EventHandler(this.InitSubjectToolStripMenuItem_Click);
+            // 
             // KisFileForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
@@ -311,6 +337,8 @@
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.dbFileGroupBox);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "KisFileForm";
             this.Text = "金蝶KIS数据库文件导入";
             this.Load += new System.EventHandler(this.KisFileForm_Load);
@@ -322,11 +350,13 @@
             this.dbFilePanel.ResumeLayout(false);
             this.dbFileTableLayoutPanel.ResumeLayout(false);
             this.dbFileTableLayoutPanel.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
             this.newSubjectGroupBox.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ClientSubjectDataGridView)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -347,10 +377,13 @@
         private System.Windows.Forms.Button testConnectButton;
         private System.Windows.Forms.TextBox createbyTextBox;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button initSubjectButton;
         private System.Windows.Forms.GroupBox newSubjectGroupBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.DataGridView ClientSubjectDataGridView;
         private System.Windows.Forms.Button subjectToKisButton;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 设置ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SetupKisDirToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem InitSubjectToolStripMenuItem;
     }
 }

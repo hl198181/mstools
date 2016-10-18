@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MicroServiceApplication.Bean;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
@@ -25,8 +26,15 @@ namespace MicroServiceApplication.Util
         {
             String strDbUser = "morningstar";
             String strDBPass = "ypbwkfyjhyhgzj";
+            String securityPath = AppConfig.GetInstance().Kissecurityfile;
 
-            ConnString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + dbFilePath + ";User ID=" + strDbUser + ";Password=" + strDBPass + ";Jet OLEDB:Database Password=1;Jet OLEDB:System database=c:\\system.mda";
+
+            if (securityPath == null || securityPath== "")
+            {
+                throw new Exception("请先设置金蝶KIS安全文件路径!");
+            }
+
+            ConnString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + dbFilePath + ";User ID=" + strDbUser + ";Password=" + strDBPass + ";Jet OLEDB:Database Password=1;Jet OLEDB:System database="+ securityPath;
             Conn = new OleDbConnection(ConnString);
             Conn.Open();
         }

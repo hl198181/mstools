@@ -111,7 +111,7 @@ namespace MicroServiceApplication.voucher
 
         }
 
-        private void initSubjectButton_Click(object sender, EventArgs e)
+        private void initSubject()
         {
             if (this.client == null)
             {
@@ -131,14 +131,15 @@ namespace MicroServiceApplication.voucher
             {
                 kisDbFileFactory.initSubject(this.client, this.user);
                 MessageBox.Show("初始化科目完成，请登录小微服查看！");
-            }catch(Exception e1)
-            {
-                MessageBox.Show("初始化科目错误！"+e1.Message);
             }
-            
+            catch (Exception e1)
+            {
+                MessageBox.Show("初始化科目错误！" + e1.Message);
+            }
+
         }
 
-        private void subjectToKisButton_Click(object sender, EventArgs e)
+        private void subjectToKis()
         {
             if (this.clientSubjects == null || this.clientSubjects.Count <= 0)
             {
@@ -157,12 +158,50 @@ namespace MicroServiceApplication.voucher
             try
             {
                 kisDbFileFactory.exportSubject2Kis(this.clientSubjects);
+
+                ClientSubjectFactory csf = new ClientSubjectFactory();
+                csf.updateIsNew(this.clientSubjects, 0);
+                this.queryClientNewSubject(this.client.Id);
                 MessageBox.Show("导入新科目到KIS成功，请打开财务系统查看!");
             }
             catch (Exception e1)
             {
                 MessageBox.Show("导入新科目到KIS错误！" + e1.Message);
             }
+        }
+
+        private void setupKisPath()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = "c:\\";//注意这里写路径时要用c:\\而不是c:\
+            openFileDialog.Filter = "金蝶安全策略文件   (*.MDA)|*.MDA";
+            openFileDialog.RestoreDirectory = true;
+            openFileDialog.FilterIndex = 1;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                AppConfig.GetInstance().updateAppConfig("kissecurityfile", openFileDialog.FileName);
+                AppConfig.GetInstance().reLoadConfig();
+                MessageBox.Show("设置成功！");
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        private void subjectToKisButton_Click(object sender, EventArgs e)
+        {
+            this.subjectToKis();
+        }
+
+        private void InitSubjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.initSubject();
+        }
+
+        private void SetupKisDirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.setupKisPath();
         }
     }
 }
