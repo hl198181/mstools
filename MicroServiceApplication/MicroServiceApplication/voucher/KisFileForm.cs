@@ -15,6 +15,7 @@ namespace MicroServiceApplication.voucher
         private User user;
         private Inst inst;
         private List<ClientSubject> clientSubjects;
+        private Accountcycle accountcycle;
 
         public KisFileForm()
         {
@@ -75,6 +76,19 @@ namespace MicroServiceApplication.voucher
             this.user = Session.GetInstance().User;
             this.inst = Session.GetInstance().Inst;
             this.createbyTextBox.Text = this.user.Name;
+
+            this.initAccountcycle();
+        }
+
+        private void initAccountcycle()
+        {
+            AccountcycleFactory af = new AccountcycleFactory();
+            List<Accountcycle> accountcycleList = af.query(-1, -1);
+            if (accountcycleList != null && accountcycleList.Count > 0)
+            {
+                this.accountcycle = accountcycleList[0];
+                this.accountcycleTextBox.Text = this.accountcycle.Name;
+            }
         }
 
         private void queryClientNewSubject(string clientid)
@@ -189,6 +203,74 @@ namespace MicroServiceApplication.voucher
             }
         }
 
+        private void selectAccountcycle()
+        {
+            List<Accountcycle> accountcycleList = CommonManager.selectAccountcycle();
+            if (accountcycleList != null && accountcycleList.Count > 0)
+            {
+                this.accountcycle = accountcycleList[0];
+                this.accountcycleTextBox.Text = this.accountcycle.Name;
+            }
+        }
+
+        private void exports(string categoryname)
+        {
+            if (this.inst == null || this.inst.Id == null)
+            {
+                MessageBox.Show("无法获取当前机构信息！");
+                return;
+            }
+
+            if (this.user == null || this.user.Id == null)
+            {
+                MessageBox.Show("无法获取当前用户信息！");
+                return;
+            }
+
+            if (this.client == null || this.client.Id == null)
+            {
+                MessageBox.Show("请选择客户信息！");
+                return;
+            }
+
+            if (this.accountcycle == null || this.accountcycle.Sn == null)
+            {
+                MessageBox.Show("请选择月份！");
+                return;
+            }
+
+            if (this.kisDbFileParams == null  ||　kisDbFileParams.DbFilePath == null) 
+            {
+                MessageBox.Show("金蝶KIS数据库文件！");
+                return;
+            }
+
+            try
+            {
+                //检查当前财务系统的账套名称是否与当前客户名称一致
+                KisDbFileFactory kdff = new KisDbFileFactory(this.kisDbFileParams);
+                KisDbPref kisDbPref = kdff.getGLPref();
+                if (kisDbPref.Fcompany != this.client.Fullname && kisDbPref.Fcompany != this.client.Name)
+                {
+                    DialogResult dr = MessageBox.Show("选择的客户与账套名称不一致，是否继续导入?", "系统提示", MessageBoxButtons.OKCancel);
+
+                    if (dr != DialogResult.OK)
+                    {
+                        return;
+                    }
+                }
+                //执行导出凭证到KIS
+                kdff.exportVoucher(this.inst, this.client, this.accountcycle,this.user, categoryname);
+                MessageBox.Show("凭证导出成功！请登录财务系统查看结果!");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+                MessageBox.Show(e.Message);
+            }
+        }
+
+
         private void subjectToKisButton_Click(object sender, EventArgs e)
         {
             this.subjectToKis();
@@ -202,6 +284,41 @@ namespace MicroServiceApplication.voucher
         private void SetupKisDirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.setupKisPath();
+        }
+
+        private void selectAccountcycleButton_Click(object sender, EventArgs e)
+        {
+            this.selectAccountcycle();
+        }
+
+        private void exportIncomeButton_Click(object sender, EventArgs e)
+        {
+            this.exports("income");
+        }
+
+        private void exportOutputButton_Click(object sender, EventArgs e)
+        {
+            this.exports("output");
+        }
+
+        private void bankbillExportbutton_Click(object sender, EventArgs e)
+        {
+            this.exports("bankbill");
+        }
+
+        private void exportpayrollbutton_Click(object sender, EventArgs e)
+        {
+            this.exports("payroll");
+        }
+
+        private void paytaxreportbutton_Click(object sender, EventArgs e)
+        {
+            this.exports("paytaxreport");
+        }
+
+        private void localreporttaxbutton_Click(object sender, EventArgs e)
+        {
+            this.exports("localreporttax");
         }
     }
 }

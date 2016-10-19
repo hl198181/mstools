@@ -36,6 +36,9 @@
             this.clientNameTextBox = new System.Windows.Forms.TextBox();
             this.createbyLabel = new System.Windows.Forms.Label();
             this.createbyTextBox = new System.Windows.Forms.TextBox();
+            this.accountcycleLabel = new System.Windows.Forms.Label();
+            this.accountcycleTextBox = new System.Windows.Forms.TextBox();
+            this.selectAccountcycleButton = new System.Windows.Forms.Button();
             this.dbFileGroupBox = new System.Windows.Forms.GroupBox();
             this.dbFilePanel = new System.Windows.Forms.Panel();
             this.dbFileTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
@@ -52,6 +55,14 @@
             this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SetupKisDirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InitSubjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportActionGroupBox = new System.Windows.Forms.GroupBox();
+            this.exportActionflowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.exportIncomeButton = new System.Windows.Forms.Button();
+            this.exportOutputButton = new System.Windows.Forms.Button();
+            this.bankbillExportbutton = new System.Windows.Forms.Button();
+            this.exportpayrollbutton = new System.Windows.Forms.Button();
+            this.paytaxreportbutton = new System.Windows.Forms.Button();
+            this.localreporttaxbutton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -62,6 +73,8 @@
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ClientSubjectDataGridView)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            this.exportActionGroupBox.SuspendLayout();
+            this.exportActionflowLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -95,6 +108,9 @@
             this.tableLayoutPanel1.Controls.Add(this.clientNameTextBox, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.createbyLabel, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.createbyTextBox, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.accountcycleLabel, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.accountcycleTextBox, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.selectAccountcycleButton, 2, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -155,6 +171,37 @@
             this.createbyTextBox.ReadOnly = true;
             this.createbyTextBox.Size = new System.Drawing.Size(1058, 35);
             this.createbyTextBox.TabIndex = 3;
+            // 
+            // accountcycleLabel
+            // 
+            this.accountcycleLabel.AutoSize = true;
+            this.accountcycleLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.accountcycleLabel.Location = new System.Drawing.Point(3, 57);
+            this.accountcycleLabel.Name = "accountcycleLabel";
+            this.accountcycleLabel.Size = new System.Drawing.Size(174, 57);
+            this.accountcycleLabel.TabIndex = 4;
+            this.accountcycleLabel.Text = "月份：";
+            this.accountcycleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // accountcycleTextBox
+            // 
+            this.accountcycleTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.accountcycleTextBox.Location = new System.Drawing.Point(183, 60);
+            this.accountcycleTextBox.Name = "accountcycleTextBox";
+            this.accountcycleTextBox.ReadOnly = true;
+            this.accountcycleTextBox.Size = new System.Drawing.Size(1058, 35);
+            this.accountcycleTextBox.TabIndex = 5;
+            // 
+            // selectAccountcycleButton
+            // 
+            this.selectAccountcycleButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.selectAccountcycleButton.Location = new System.Drawing.Point(1247, 60);
+            this.selectAccountcycleButton.Name = "selectAccountcycleButton";
+            this.selectAccountcycleButton.Size = new System.Drawing.Size(174, 51);
+            this.selectAccountcycleButton.TabIndex = 6;
+            this.selectAccountcycleButton.Text = "选择月份";
+            this.selectAccountcycleButton.UseVisualStyleBackColor = true;
+            this.selectAccountcycleButton.Click += new System.EventHandler(this.selectAccountcycleButton_Click);
             // 
             // dbFileGroupBox
             // 
@@ -253,7 +300,7 @@
             this.newSubjectGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.newSubjectGroupBox.Location = new System.Drawing.Point(0, 493);
             this.newSubjectGroupBox.Name = "newSubjectGroupBox";
-            this.newSubjectGroupBox.Size = new System.Drawing.Size(1430, 424);
+            this.newSubjectGroupBox.Size = new System.Drawing.Size(1430, 306);
             this.newSubjectGroupBox.TabIndex = 4;
             this.newSubjectGroupBox.TabStop = false;
             this.newSubjectGroupBox.Text = "新科目列表：";
@@ -270,7 +317,7 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1424, 390);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1424, 272);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // ClientSubjectDataGridView
@@ -280,17 +327,17 @@
             this.ClientSubjectDataGridView.Location = new System.Drawing.Point(3, 3);
             this.ClientSubjectDataGridView.Name = "ClientSubjectDataGridView";
             this.ClientSubjectDataGridView.RowTemplate.Height = 37;
-            this.ClientSubjectDataGridView.Size = new System.Drawing.Size(1418, 304);
+            this.ClientSubjectDataGridView.Size = new System.Drawing.Size(1418, 186);
             this.ClientSubjectDataGridView.TabIndex = 0;
             // 
             // subjectToKisButton
             // 
             this.subjectToKisButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.subjectToKisButton.Location = new System.Drawing.Point(1212, 313);
+            this.subjectToKisButton.Location = new System.Drawing.Point(1212, 195);
             this.subjectToKisButton.Name = "subjectToKisButton";
             this.subjectToKisButton.Size = new System.Drawing.Size(209, 74);
             this.subjectToKisButton.TabIndex = 1;
-            this.subjectToKisButton.Text = "新科目导入KIS";
+            this.subjectToKisButton.Text = "新科目导出到KIS";
             this.subjectToKisButton.UseVisualStyleBackColor = true;
             this.subjectToKisButton.Click += new System.EventHandler(this.subjectToKisButton_Click);
             // 
@@ -318,7 +365,7 @@
             // 
             this.SetupKisDirToolStripMenuItem.Name = "SetupKisDirToolStripMenuItem";
             this.SetupKisDirToolStripMenuItem.Size = new System.Drawing.Size(389, 38);
-            this.SetupKisDirToolStripMenuItem.Text = "设置KIS安装目录";
+            this.SetupKisDirToolStripMenuItem.Text = "设置KIS安全策略文件";
             this.SetupKisDirToolStripMenuItem.Click += new System.EventHandler(this.SetupKisDirToolStripMenuItem_Click);
             // 
             // InitSubjectToolStripMenuItem
@@ -328,11 +375,97 @@
             this.InitSubjectToolStripMenuItem.Text = "根据KIS初始化小微服科目";
             this.InitSubjectToolStripMenuItem.Click += new System.EventHandler(this.InitSubjectToolStripMenuItem_Click);
             // 
+            // exportActionGroupBox
+            // 
+            this.exportActionGroupBox.Controls.Add(this.exportActionflowLayoutPanel);
+            this.exportActionGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.exportActionGroupBox.Location = new System.Drawing.Point(0, 799);
+            this.exportActionGroupBox.Name = "exportActionGroupBox";
+            this.exportActionGroupBox.Size = new System.Drawing.Size(1430, 120);
+            this.exportActionGroupBox.TabIndex = 6;
+            this.exportActionGroupBox.TabStop = false;
+            this.exportActionGroupBox.Text = "导出凭证到KIS";
+            // 
+            // exportActionflowLayoutPanel
+            // 
+            this.exportActionflowLayoutPanel.Controls.Add(this.exportIncomeButton);
+            this.exportActionflowLayoutPanel.Controls.Add(this.exportOutputButton);
+            this.exportActionflowLayoutPanel.Controls.Add(this.bankbillExportbutton);
+            this.exportActionflowLayoutPanel.Controls.Add(this.exportpayrollbutton);
+            this.exportActionflowLayoutPanel.Controls.Add(this.paytaxreportbutton);
+            this.exportActionflowLayoutPanel.Controls.Add(this.localreporttaxbutton);
+            this.exportActionflowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.exportActionflowLayoutPanel.Location = new System.Drawing.Point(3, 31);
+            this.exportActionflowLayoutPanel.Name = "exportActionflowLayoutPanel";
+            this.exportActionflowLayoutPanel.Size = new System.Drawing.Size(1424, 86);
+            this.exportActionflowLayoutPanel.TabIndex = 0;
+            // 
+            // exportIncomeButton
+            // 
+            this.exportIncomeButton.Location = new System.Drawing.Point(3, 3);
+            this.exportIncomeButton.Name = "exportIncomeButton";
+            this.exportIncomeButton.Size = new System.Drawing.Size(200, 69);
+            this.exportIncomeButton.TabIndex = 0;
+            this.exportIncomeButton.Text = "导出进项";
+            this.exportIncomeButton.UseVisualStyleBackColor = true;
+            this.exportIncomeButton.Click += new System.EventHandler(this.exportIncomeButton_Click);
+            // 
+            // exportOutputButton
+            // 
+            this.exportOutputButton.Location = new System.Drawing.Point(209, 3);
+            this.exportOutputButton.Name = "exportOutputButton";
+            this.exportOutputButton.Size = new System.Drawing.Size(200, 69);
+            this.exportOutputButton.TabIndex = 1;
+            this.exportOutputButton.Text = "导出销项";
+            this.exportOutputButton.UseVisualStyleBackColor = true;
+            this.exportOutputButton.Click += new System.EventHandler(this.exportOutputButton_Click);
+            // 
+            // bankbillExportbutton
+            // 
+            this.bankbillExportbutton.Location = new System.Drawing.Point(415, 3);
+            this.bankbillExportbutton.Name = "bankbillExportbutton";
+            this.bankbillExportbutton.Size = new System.Drawing.Size(200, 69);
+            this.bankbillExportbutton.TabIndex = 2;
+            this.bankbillExportbutton.Text = "导出银行回单";
+            this.bankbillExportbutton.UseVisualStyleBackColor = true;
+            this.bankbillExportbutton.Click += new System.EventHandler(this.bankbillExportbutton_Click);
+            // 
+            // exportpayrollbutton
+            // 
+            this.exportpayrollbutton.Location = new System.Drawing.Point(621, 3);
+            this.exportpayrollbutton.Name = "exportpayrollbutton";
+            this.exportpayrollbutton.Size = new System.Drawing.Size(229, 69);
+            this.exportpayrollbutton.TabIndex = 3;
+            this.exportpayrollbutton.Text = "导出工资表";
+            this.exportpayrollbutton.UseVisualStyleBackColor = true;
+            this.exportpayrollbutton.Click += new System.EventHandler(this.exportpayrollbutton_Click);
+            // 
+            // paytaxreportbutton
+            // 
+            this.paytaxreportbutton.Location = new System.Drawing.Point(856, 3);
+            this.paytaxreportbutton.Name = "paytaxreportbutton";
+            this.paytaxreportbutton.Size = new System.Drawing.Size(200, 69);
+            this.paytaxreportbutton.TabIndex = 4;
+            this.paytaxreportbutton.Text = "导出国税";
+            this.paytaxreportbutton.UseVisualStyleBackColor = true;
+            this.paytaxreportbutton.Click += new System.EventHandler(this.paytaxreportbutton_Click);
+            // 
+            // localreporttaxbutton
+            // 
+            this.localreporttaxbutton.Location = new System.Drawing.Point(1062, 3);
+            this.localreporttaxbutton.Name = "localreporttaxbutton";
+            this.localreporttaxbutton.Size = new System.Drawing.Size(200, 69);
+            this.localreporttaxbutton.TabIndex = 5;
+            this.localreporttaxbutton.Text = "导出地税";
+            this.localreporttaxbutton.UseVisualStyleBackColor = true;
+            this.localreporttaxbutton.Click += new System.EventHandler(this.localreporttaxbutton_Click);
+            // 
             // KisFileForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1430, 1047);
+            this.ClientSize = new System.Drawing.Size(1430, 1267);
+            this.Controls.Add(this.exportActionGroupBox);
             this.Controls.Add(this.newSubjectGroupBox);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.dbFileGroupBox);
@@ -355,6 +488,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ClientSubjectDataGridView)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.exportActionGroupBox.ResumeLayout(false);
+            this.exportActionflowLayoutPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -385,5 +520,16 @@
         private System.Windows.Forms.ToolStripMenuItem 设置ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SetupKisDirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem InitSubjectToolStripMenuItem;
+        private System.Windows.Forms.Label accountcycleLabel;
+        private System.Windows.Forms.TextBox accountcycleTextBox;
+        private System.Windows.Forms.Button selectAccountcycleButton;
+        private System.Windows.Forms.GroupBox exportActionGroupBox;
+        private System.Windows.Forms.FlowLayoutPanel exportActionflowLayoutPanel;
+        private System.Windows.Forms.Button exportIncomeButton;
+        private System.Windows.Forms.Button exportOutputButton;
+        private System.Windows.Forms.Button bankbillExportbutton;
+        private System.Windows.Forms.Button exportpayrollbutton;
+        private System.Windows.Forms.Button paytaxreportbutton;
+        private System.Windows.Forms.Button localreporttaxbutton;
     }
 }

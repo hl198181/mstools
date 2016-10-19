@@ -137,24 +137,24 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="小微服辅助工具.exe" size="123392">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="小微服辅助工具.exe" size="131072">
       <assemblyIdentity name="小微服辅助工具" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>b+qf/FqntTnpIuV2S+OZxZUUx0k=</dsig:DigestValue>
+        <dsig:DigestValue>/EbCOoZ5AZjYya7s6/EtdHGk15w=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="小微服辅助工具.exe.config" size="2311">
+  <file name="小微服辅助工具.exe.config" size="2386">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>jMIqDMVtrAtAtx2Bw8yTYf9x0Y4=</dsig:DigestValue>
+      <dsig:DigestValue>mBi1q8u4eYOGKE4fqA1FkhBLFxM=</dsig:DigestValue>
     </hash>
   </file>
   <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">

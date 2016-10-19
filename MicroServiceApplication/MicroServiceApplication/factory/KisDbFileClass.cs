@@ -523,7 +523,6 @@ namespace MicroServiceApplication.Factory
             }
         }
 
-
         public void testConnect()
         {
             AccessDbClass access = new AccessDbClass(this.KdbParams.DbFilePath);
@@ -591,6 +590,128 @@ namespace MicroServiceApplication.Factory
 
         }
 
+        private int getMaxFSerialNum()
+        {
+            AccessDbClass access = new AccessDbClass(this.KdbParams.DbFilePath);
+
+            String sql = "select FVchSerialNum from GLVchSerialNum";
+            try
+            {
+                DataTable dt  = access.SelectToDataTable(sql);
+                int FVchSerialNum = 0;              
+                if (dt.Rows.Count > 0)
+                {
+                    string maxnum = dt.Rows[0][dt.Columns[0]] == null ? "0" : dt.Rows[0][dt.Columns[0]].ToString();
+                    if (maxnum == "" || maxnum == null) maxnum = "1";
+                    FVchSerialNum = int.Parse(maxnum);
+                }
+                else
+                {
+                    FVchSerialNum = 1;
+                }
+
+                return FVchSerialNum;
+            }
+            catch (Exception e)
+            {
+                throw (new Exception("获取最大序列号错误:" + e.Message));
+            }
+            finally
+            {
+                access.Close();
+            }
+        }
+
+        private String getMaxFSerialNumUpdateSql(int currNum)
+        {
+            AccessDbClass access = new AccessDbClass(this.KdbParams.DbFilePath);
+
+            String sql = "select FVchSerialNum from GLVchSerialNum";
+            String updateSql = "";
+            try
+            {
+                DataTable dt = access.SelectToDataTable(sql);
+                if (dt.Rows.Count > 0)
+                {
+                    updateSql = "Update GLVchSerialNum set FVchSerialNum = " + (currNum);
+
+                }
+                else
+                {
+                    updateSql = "Insert into GLVchSerialNum(FVchSerialNum) values (" + (currNum) + ")";
+
+                }
+                return updateSql;
+            }
+            catch (Exception e)
+            {
+                throw (new Exception("获取最大序列号错误:" + e.Message));
+            }
+            finally
+            {
+                access.Close();
+            }
+
+        }
+
+        private int getMaxFNum(int accountcyclenum,String fgroup)
+        {
+            AccessDbClass access = new AccessDbClass(this.KdbParams.DbFilePath);
+            String sql = "select FPeriod,FGroup,FNum from GLVchMaxNum where FPeriod = " + accountcyclenum + " and FGroup='" +fgroup+"'";
+            try
+            {
+                DataTable dt = access.SelectToDataTable(sql);
+                int FMaxNum = 0;
+                if (dt.Rows.Count > 0)
+                {
+                    string maxnum = dt.Rows[0][dt.Columns[2]] == null ? "0" : dt.Rows[0][dt.Columns[2]].ToString();
+                    if (maxnum == "" || maxnum == null) maxnum = "1";
+                    FMaxNum = int.Parse(maxnum);
+                }
+                else
+                {
+                    FMaxNum = 1;
+                }
+                return FMaxNum;
+            }
+            catch (Exception e)
+            {
+                throw (new Exception("获取最大凭证号错误:" + e.Message));
+            }
+            finally
+            {
+                access.Close();
+            }
+        }
+
+        private String getMaxFNumUpdateSql(int accountcyclenum, String fgroup, int currNum)
+        {
+            AccessDbClass access = new AccessDbClass(this.KdbParams.DbFilePath);
+            String sql = "select FPeriod,FGroup,FNum from GLVchMaxNum where FPeriod = " + accountcyclenum + " and FGroup='" + fgroup + "'";
+            String updateSql = "";
+            try
+            {
+                DataTable dt = access.SelectToDataTable(sql);
+                if (dt.Rows.Count > 0)
+                {
+                    updateSql = "Update GLVchMaxNum set FNum = " + (currNum) + " where  FPeriod = " + accountcyclenum + " and FGroup='" + fgroup + "'";
+                }
+                else
+                {
+                    updateSql = "Insert into GLVchMaxNum(FPeriod,FGroup,FNum) values ("+ accountcyclenum +",'"+fgroup+"',"+(currNum)+ ")";
+                }
+                return updateSql;
+            }
+            catch (Exception e)
+            {
+                throw (new Exception("获取最大凭证号错误:" + e.Message));
+            }
+            finally
+            {
+                access.Close();
+            }
+        }
+
         public void exportSubject2Kis(List<ClientSubject> clientSubjects)
         {
             if (clientSubjects == null || clientSubjects.Count <= 0) return;
@@ -643,6 +764,100 @@ namespace MicroServiceApplication.Factory
             {
                 access.Close();
             }
+        }
+
+        private String buildItemSql(KisVoucherInfo item, int fSerialNum, int fNum)
+        {
+            if (item == null) return null;
+            if (fSerialNum < 0) throw new ArgumentException("无法获取凭证序列号");
+            if (fNum < 0) throw new ArgumentException("无法获取凭证号");
+
+            //检查当前科目是否存在
+            KisDbAcct kda = this.getGLAccById(item.FAcctID);
+
+            if (kda == null) throw new Exception("科目:"+item.FAcctID+",在财务系统中不存在！");
+
+            String sql = "INSERT INTO GLVch(FSerialNum,FDate,FPeriod,FGroup,FNum,FEntryID,FAcctID,FCyID,FExchRate,FFcyAmt,FDebit,FCredit,FPreparer,FExp) VALUES (" +
+                    "" + fSerialNum + "," +
+                    "'" + item.FDate + "'," +
+                    ""  + item.FPeriod + "," + 
+                    "'" + item.FGroup  + "'," +
+                    ""  + fNum + "," +
+                    ""  + item.FEntryID + "," +
+                    "'" + item.FAcctID + "'," +
+                    "'" + item.FCyID + "'," +
+                    ""  + item.FExchRate + "," +
+                    ""  + item.FFCyAmt + "," +
+                    ""  + item.FDebit + "," +
+                    ""  + item.FCredit + "," +
+                    "'" + item.FPrepare + "'," +
+                    "'" + item.FExp + "'" +
+                    ")";
+
+            return sql;
+        }
+
+        public void exportVoucher(Inst inst, Client client, Accountcycle accountcycle, User user, String categoryname)
+        {
+
+            if (inst == null) throw new ArgumentException("必须输入机构信息！");
+            if (client == null) throw new ArgumentException("必须输入客户信息！");
+            if (user == null) throw new ArgumentException("必须输入用户信息！");
+            if (accountcycle == null) throw new ArgumentException("必须输入月份信息！");
+            if (categoryname == null || categoryname == "") throw new ArgumentException("必须指定导出凭证类型!");
+
+            //获取凭证数据
+            KisVoucherFactory kvf = new KisVoucherFactory();
+            List<KisVoucherInfo> vouchers = kvf.getKisVoucher(inst.Id, client.Id, accountcycle.Sn, user.Id, categoryname);
+
+            if (vouchers == null || vouchers.Count <= 0) throw new Exception("没有查找到需要导出的凭证信息！");
+
+            //构建凭证SQL
+            List<String> sqls = new List<String>();
+            int maxFSerialNum = -1;
+            int maxFNum = -1;
+   
+            foreach (KisVoucherInfo kvi in vouchers){
+                if (kvi.FEntryID == 0)
+                {
+                    if (maxFSerialNum < 0)
+                    {
+                        maxFSerialNum = this.getMaxFSerialNum();
+                        maxFSerialNum++;
+                    }
+                    else
+                    {
+                        maxFSerialNum++;
+                    }
+
+                    if (maxFNum < 0)
+                    {
+                        maxFNum = this.getMaxFNum(kvi.FPeriod,kvi.FGroup);
+                        maxFNum++;
+                    }
+                    else
+                    {
+                        maxFNum++;
+                    }
+                }
+                String sql = this.buildItemSql(kvi, maxFSerialNum, maxFNum);
+                if (sql != null && sql != "") sqls.Add(sql);
+            }
+
+            //更新最大凭证序号SQL
+            String updateMaxFSerialNumSql  = this.getMaxFSerialNumUpdateSql(maxFSerialNum);
+            if (updateMaxFSerialNumSql == null || updateMaxFSerialNumSql == "") throw new Exception("无法更新当前最大凭证序号!");
+            sqls.Add(updateMaxFSerialNumSql);
+
+            //更新最大凭证号
+            String updateMaxFNum = this.getMaxFNumUpdateSql(vouchers[0].FPeriod, vouchers[0].FGroup, maxFNum);
+            if (updateMaxFNum == null || updateMaxFNum == "") throw new Exception("无法更新当前最大凭证号!");
+            sqls.Add(updateMaxFNum);
+
+
+            //执行SQL
+            AccessDbClass accessDb = new AccessDbClass(this.KdbParams.DbFilePath);
+            accessDb.ExecuteSQLNonquery(sqls);
         }
     }
 }

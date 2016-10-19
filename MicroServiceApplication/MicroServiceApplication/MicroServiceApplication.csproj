@@ -121,6 +121,7 @@
     <Compile Include="Bean\AccountcycleClass.cs" />
     <Compile Include="Bean\AuthClass.cs" />
     <Compile Include="Bean\AppConfigClass.cs" />
+    <Compile Include="Bean\KisVoucherClass.cs" />
     <Compile Include="Bean\ClientSubjectLengthClass.cs" />
     <Compile Include="Bean\ClientSubjectClass.cs" />
     <Compile Include="Bean\ClientClass.cs" />
