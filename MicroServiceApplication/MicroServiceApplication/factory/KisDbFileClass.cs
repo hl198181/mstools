@@ -171,6 +171,10 @@ namespace MicroServiceApplication.Factory
         private int _faclen4; //四级科目代码长度
         private int _faclen5; //五级科目代码长度
         private int _faclen6; //六级科目代码长度
+        private int _faclen7; //七级科目代码长
+        private int _faclen8; //八级科目代码长
+        private int _faclen9; //九级科目代码长
+        private int _faclen10; //十级科目代码长
 
         public string Fcompany
         {
@@ -379,6 +383,58 @@ namespace MicroServiceApplication.Factory
                 _faclen6 = value;
             }
         }
+
+        public int Faclen7
+        {
+            get
+            {
+                return _faclen7;
+            }
+
+            set
+            {
+                _faclen7 = value;
+            }
+        }
+
+        public int Faclen8
+        {
+            get
+            {
+                return _faclen8;
+            }
+
+            set
+            {
+                _faclen8 = value;
+            }
+        }
+
+        public int Faclen9
+        {
+            get
+            {
+                return _faclen9;
+            }
+
+            set
+            {
+                _faclen9 = value;
+            }
+        }
+
+        public int Faclen10
+        {
+            get
+            {
+                return _faclen10;
+            }
+
+            set
+            {
+                _faclen10 = value;
+            }
+        }
     }
 
     class KisDbFileFactory
@@ -500,7 +556,11 @@ namespace MicroServiceApplication.Factory
                         kisDbPref.Faclen4 = row["FAcLen4"] == null ? -1 : int.Parse(row["FAcLen4"].ToString());
                         kisDbPref.Faclen5 = row["FAcLen5"] == null ? -1 : int.Parse(row["FAcLen5"].ToString());
                         kisDbPref.Faclen6 = row["FAcLen6"] == null ? -1 : int.Parse(row["FAcLen6"].ToString());
-                        
+                        kisDbPref.Faclen7 = row["FAcLen7"] == null ? -1 : int.Parse(row["FAcLen7"].ToString());
+                        kisDbPref.Faclen8 = row["FAcLen8"] == null ? -1 : int.Parse(row["FAcLen8"].ToString());
+                        kisDbPref.Faclen9 = row["FAcLen9"] == null ? -1 : int.Parse(row["FAcLen9"].ToString());
+                        kisDbPref.Faclen10 = row["FAcLen10"] == null ? -1 : int.Parse(row["FAcLen10"].ToString());
+
                         kisDbPrefList.Add(kisDbPref);
                     }
                 }
@@ -579,12 +639,16 @@ namespace MicroServiceApplication.Factory
                 ClientSubjectLength csl = new ClientSubjectLength();
                 csl.Clientid = client.Id;
                 csl.Createby = user.Id;
-                csl.Subject1 = kisDbPref.Faclen1;
-                csl.Subject2 = kisDbPref.Faclen2;
-                csl.Subject3 = kisDbPref.Faclen3;
-                csl.Subject4 = kisDbPref.Faclen4;
-                csl.Subject5 = kisDbPref.Faclen5;
-                csl.Subject6 = kisDbPref.Faclen6;
+                csl.Subject1 = kisDbPref.Faclen1;//封装字段的Subject1取Faclen1
+                csl.Subject2 = kisDbPref.Faclen2 - kisDbPref.Faclen1;//封装字段的Subject2取Faclen2 
+                csl.Subject3 = kisDbPref.Faclen3 - kisDbPref.Faclen2;//封装字段的Subject3取Faclen3
+                csl.Subject4 = kisDbPref.Faclen4 - kisDbPref.Faclen3;//封装字段的Subject4取Faclen4
+                csl.Subject5 = kisDbPref.Faclen5 - kisDbPref.Faclen4;//封装字段的Subject5取Faclen5
+                csl.Subject6 = kisDbPref.Faclen6 - kisDbPref.Faclen5;//封装字段的Subject6取Faclen6
+                csl.Subject7 = kisDbPref.Faclen7 - kisDbPref.Faclen6;//封装字段的Subject7取Faclen7
+                csl.Subject8 = kisDbPref.Faclen8 - kisDbPref.Faclen7;//封装字段的Subject8取Faclen8
+                csl.Subject9 = kisDbPref.Faclen9 - kisDbPref.Faclen8;//封装字段的Subject9取Faclen9
+                csl.Subject10 = kisDbPref.Faclen10 - kisDbPref.Faclen9;//封装字段的Subject10取Faclen10
                 cslf.add(csl);
             }
 
@@ -594,7 +658,7 @@ namespace MicroServiceApplication.Factory
         {
             AccessDbClass access = new AccessDbClass(this.KdbParams.DbFilePath);
 
-            String sql = "select FVchSerialNum from GLVchSerialNum";
+            String sql = "select FSerialNum from GLVch order by FSerialNum desc ";
             try
             {
                 DataTable dt  = access.SelectToDataTable(sql);
@@ -602,12 +666,12 @@ namespace MicroServiceApplication.Factory
                 if (dt.Rows.Count > 0)
                 {
                     string maxnum = dt.Rows[0][dt.Columns[0]] == null ? "0" : dt.Rows[0][dt.Columns[0]].ToString();
-                    if (maxnum == "" || maxnum == null) maxnum = "1";
+                    if (maxnum == "" || maxnum == null) maxnum = "0";
                     FVchSerialNum = int.Parse(maxnum);
                 }
                 else
                 {
-                    FVchSerialNum = 1;
+                    FVchSerialNum = 0;
                 }
 
                 return FVchSerialNum;
@@ -657,7 +721,7 @@ namespace MicroServiceApplication.Factory
         private int getMaxFNum(int accountcyclenum,String fgroup)
         {
             AccessDbClass access = new AccessDbClass(this.KdbParams.DbFilePath);
-            String sql = "select FPeriod,FGroup,FNum from GLVchMaxNum where FPeriod = " + accountcyclenum + " and FGroup='" +fgroup+"'";
+            String sql = "select FPeriod,FGroup,FNum from GLVch where FPeriod = " + accountcyclenum + " and FGroup='" + fgroup + "' order by FNum desc"; //获取最大凭证号的sql
             try
             {
                 DataTable dt = access.SelectToDataTable(sql);
@@ -665,12 +729,12 @@ namespace MicroServiceApplication.Factory
                 if (dt.Rows.Count > 0)
                 {
                     string maxnum = dt.Rows[0][dt.Columns[2]] == null ? "0" : dt.Rows[0][dt.Columns[2]].ToString();
-                    if (maxnum == "" || maxnum == null) maxnum = "1";
+                    if (maxnum == "" || maxnum == null) maxnum = "0";
                     FMaxNum = int.Parse(maxnum);
                 }
                 else
                 {
-                    FMaxNum = 1;
+                    FMaxNum = 0;
                 }
                 return FMaxNum;
             }

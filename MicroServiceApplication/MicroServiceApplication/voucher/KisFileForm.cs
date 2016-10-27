@@ -4,6 +4,7 @@ using MicroServiceApplication.Factory;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace MicroServiceApplication.voucher
@@ -124,63 +125,90 @@ namespace MicroServiceApplication.voucher
             this.ClientSubjectDataGridView.Columns[2].Width = 500;
 
         }
-
         private void initSubject()
         {
             if (this.client == null)
             {
-                MessageBox.Show("请选择客户信息！");
+                MessageBox.Show("请先选择客户信息!");
                 return;
             }
 
-            if (this.kisDbFileParams == null || this.kisDbFileParams.DbFilePath == null)
+            if (this.kisDbFileParams == null)
             {
-                MessageBox.Show("请选择账套数据库文件！");
+                MessageBox.Show("请先选择数据库文件!");
                 return;
             }
 
             KisDbFileFactory kisDbFileFactory = new KisDbFileFactory(this.kisDbFileParams);
-
+            KisDbPref kisDbPref = kisDbFileFactory.getGLPref();
             try
             {
-                kisDbFileFactory.initSubject(this.client, this.user);
-                MessageBox.Show("初始化科目完成，请登录小微服查看！");
+                if (kisDbPref.Fcompany != this.client.Fullname && kisDbPref.Fcompany != this.client.Name)
+                {
+                    DialogResult dr = MessageBox.Show("选择的客户与账套名称不一致,是否继续初始化?", "系统提示", MessageBoxButtons.OKCancel);
+                    if (dr != DialogResult.OK)
+                    {
+                        return;
+                    }
+                }
+                this.InformationTextBox.Visible = true;//打开提示框
+                this.InformationTextBox.Text = "正在初始化会计科目!请稍等……";//提示文本
+                this.InformationTextBox.Font = new Font("宋体", 12);//提示字体
+
+                kisDbFileFactory.initSubject(this.client, this.user);//引用工厂里初始化科目的方法
+
+                this.InformationTextBox.Visible = false;//关闭提示框
+                MessageBox.Show("初始化科目完成,请登录小微服查看!");
             }
             catch (Exception e1)
             {
-                MessageBox.Show("初始化科目错误！" + e1.Message);
+                this.InformationTextBox.Visible = false;//关闭提示框
+                MessageBox.Show("初始化科目失败" + e1.Message);
             }
-
         }
 
         private void subjectToKis()
         {
-            if (this.clientSubjects == null || this.clientSubjects.Count <= 0)
+            if (this.client == null)
             {
-                MessageBox.Show("没有需要导入KIS的新科目！");
+                MessageBox.Show("请选择客户信息!");
                 return;
             }
 
             if (this.kisDbFileParams == null || this.kisDbFileParams.DbFilePath == null)
             {
-                MessageBox.Show("请先选择财务账套数据库文件!");
+                MessageBox.Show("请选择数据库文件!");
+                return;
+            }
+            if (this.clientSubjects == null || this.clientSubjects.Count <= 0)
+            {
+                MessageBox.Show("没有需要导入KIS的新科目");
                 return;
             }
 
-            KisDbFileFactory kisDbFileFactory = new KisDbFileFactory(this.kisDbFileParams);
 
+            KisDbFileFactory kisDbFileFactory = new KisDbFileFactory(this.kisDbFileParams);
+            KisDbPref kisDbPref = kisDbFileFactory.getGLPref();
             try
             {
-                kisDbFileFactory.exportSubject2Kis(this.clientSubjects);
-
+                //检查当前客户与账套信息是否一致
+                if (kisDbPref.Fcompany != this.client.Fullname && kisDbPref.Fcompany != this.client.Name)
+                {
+                    DialogResult dr = MessageBox.Show("选择的客户与账套名称不一致,是否继续导入?", "系统提示", MessageBoxButtons.OKCancel);
+                    if (dr != DialogResult.OK)
+                    {
+                        return;
+                    }
+                }
+                kisDbFileFactory.exportSubject2Kis(this.clientSubjects);//引用工厂里导入新科目的方法
                 ClientSubjectFactory csf = new ClientSubjectFactory();
-                csf.updateIsNew(this.clientSubjects, 0);
-                this.queryClientNewSubject(this.client.Id);
-                MessageBox.Show("导入新科目到KIS成功，请打开财务系统查看!");
+                csf.updateIsNew(this.clientSubjects, 0);//引用新科目导入数据库后更新sinew和audit的状态
+                this.queryClientNewSubject(this.client.Id);//显示当前客户新会计科目的方法
+                MessageBox.Show("导入新科目到KIS成功,请打开财务系统查看!");
             }
             catch (Exception e1)
             {
-                MessageBox.Show("导入新科目到KIS错误！" + e1.Message);
+                MessageBox.Show("导入新科目到KIS错误!" + e1.Message);
             }
         }
 
@@ -217,56 +245,61 @@ namespace MicroServiceApplication.voucher
         {
             if (this.inst == null || this.inst.Id == null)
             {
-                MessageBox.Show("无法获取当前机构信息！");
+                MessageBox.Show("无法获取当前机构信息!");
                 return;
             }
-
             if (this.user == null || this.user.Id == null)
             {
-                MessageBox.Show("无法获取当前用户信息！");
-                return;
+                MessageBox.Show("无法获取当前用户信息!");
             }
-
             if (this.client == null || this.client.Id == null)
             {
-                MessageBox.Show("请选择客户信息！");
+                MessageBox.Show("请先选择客户信息!");
                 return;
             }
-
-            if (this.accountcycle == null || this.accountcycle.Sn == null)
+            if (this.accountcycle == null || this.accountcycle.Id == null)
             {
-                MessageBox.Show("请选择月份！");
+                MessageBox.Show("请先选择月份!");
                 return;
             }
-
-            if (this.kisDbFileParams == null  ||　kisDbFileParams.DbFilePath == null) 
+            if (this.kisDbFileParams == null || this.kisDbFileParams.DbFilePath == null)
             {
-                MessageBox.Show("金蝶KIS数据库文件！");
+                MessageBox.Show("请先选择数据库文件!");
                 return;
             }
 
             try
             {
-                //检查当前财务系统的账套名称是否与当前客户名称一致
-                KisDbFileFactory kdff = new KisDbFileFactory(this.kisDbFileParams);
-                KisDbPref kisDbPref = kdff.getGLPref();
+                KisDbFileFactory kisDbFileFactory = new KisDbFileFactory(this.kisDbFileParams);
+                KisDbPref kisDbPref = kisDbFileFactory.getGLPref();
+
+                //检查当前客户与账套信息是否一致
                 if (kisDbPref.Fcompany != this.client.Fullname && kisDbPref.Fcompany != this.client.Name)
                 {
-                    DialogResult dr = MessageBox.Show("选择的客户与账套名称不一致，是否继续导入?", "系统提示", MessageBoxButtons.OKCancel);
-
+                    DialogResult dr = MessageBox.Show("选择的客户与账套名称不一致,是否继续导入?", "系统提示", MessageBoxButtons.OKCancel);
                     if (dr != DialogResult.OK)
                     {
                         return;
                     }
                 }
                 //执行导出凭证到KIS
-                kdff.exportVoucher(this.inst, this.client, this.accountcycle,this.user, categoryname);
-                MessageBox.Show("凭证导出成功！请登录财务系统查看结果!");
+                this.InformationTextBox.Visible = true;//打开提示框
+                this.InformationTextBox.Text = "正在初始化会计科目!请稍等……";//提示文本
+                this.InformationTextBox.Font = new Font("宋体", 12);//提示字体
+
+                kisDbFileFactory.exportVoucher(this.inst, this.client, this.accountcycle, this.user, categoryname);
+
+                this.InformationTextBox.Visible = false;//关闭提示框
+                MessageBox.Show("导出凭证成功!请登录财务系统查看结果");
+
             }
             catch (Exception e)
             {
+
                 Console.WriteLine(e.StackTrace);
+                this.InformationTextBox.Visible = false;//关闭提示框
                 MessageBox.Show(e.Message);
+
             }
         }
 
@@ -319,6 +352,22 @@ namespace MicroServiceApplication.voucher
         private void localreporttaxbutton_Click(object sender, EventArgs e)
         {
             this.exports("localreporttax");
+        }
+
+        private void refreshButton_Click(object sender, EventArgs e)
+        {
+            if (this.client == null)
+            {
+                MessageBox.Show("请选择客户信息!");
+            }
+            else
+            {
+                this.queryClientNewSubject(this.client.Id);//刷新新会计科目
+                if (this.clientSubjects.Count <= 0)
+                {
+                    MessageBox.Show("没有新会计科目!");
+                }
+            }
         }
     }
 }

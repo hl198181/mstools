@@ -66,6 +66,9 @@
             this.subjectPanel = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ClientSubjectDataGridView = new System.Windows.Forms.DataGridView();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.refreshButton = new System.Windows.Forms.Button();
+            this.InformationTextBox = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -75,6 +78,7 @@
             this.subjectPanel.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ClientSubjectDataGridView)).BeginInit();
+            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -85,8 +89,8 @@
             this.exportSubjectToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(1643, 44);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(685, 25);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -100,48 +104,48 @@
             this.PaytaxreportToolStripMenuItem,
             this.LocalreporttaxToolStripMenuItem});
             this.导出ToolStripMenuItem.Name = "导出ToolStripMenuItem";
-            this.导出ToolStripMenuItem.Size = new System.Drawing.Size(122, 38);
+            this.导出ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
             this.导出ToolStripMenuItem.Text = "导出凭证";
             // 
             // IncomeToolStripMenuItem
             // 
             this.IncomeToolStripMenuItem.Name = "IncomeToolStripMenuItem";
-            this.IncomeToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
+            this.IncomeToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.IncomeToolStripMenuItem.Text = "进项";
             this.IncomeToolStripMenuItem.Click += new System.EventHandler(this.IncomeToolStripMenuItem_Click);
             // 
             // OutputToolStripMenuItem
             // 
             this.OutputToolStripMenuItem.Name = "OutputToolStripMenuItem";
-            this.OutputToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
+            this.OutputToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.OutputToolStripMenuItem.Text = "销项";
             this.OutputToolStripMenuItem.Click += new System.EventHandler(this.OutputToolStripMenuItem_Click);
             // 
             // BankDealToolStripMenuItem
             // 
             this.BankDealToolStripMenuItem.Name = "BankDealToolStripMenuItem";
-            this.BankDealToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
+            this.BankDealToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.BankDealToolStripMenuItem.Text = "银行回单";
             this.BankDealToolStripMenuItem.Click += new System.EventHandler(this.BankDealToolStripMenuItem_Click);
             // 
             // PayrollToolStripMenuItem
             // 
             this.PayrollToolStripMenuItem.Name = "PayrollToolStripMenuItem";
-            this.PayrollToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
+            this.PayrollToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.PayrollToolStripMenuItem.Text = "工资表";
             this.PayrollToolStripMenuItem.Click += new System.EventHandler(this.PayrollToolStripMenuItem_Click);
             // 
             // PaytaxreportToolStripMenuItem
             // 
             this.PaytaxreportToolStripMenuItem.Name = "PaytaxreportToolStripMenuItem";
-            this.PaytaxreportToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
+            this.PaytaxreportToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.PaytaxreportToolStripMenuItem.Text = "国税";
             this.PaytaxreportToolStripMenuItem.Click += new System.EventHandler(this.PaytaxreportToolStripMenuItem_Click);
             // 
             // LocalreporttaxToolStripMenuItem
             // 
             this.LocalreporttaxToolStripMenuItem.Name = "LocalreporttaxToolStripMenuItem";
-            this.LocalreporttaxToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
+            this.LocalreporttaxToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.LocalreporttaxToolStripMenuItem.Text = "地税";
             this.LocalreporttaxToolStripMenuItem.Click += new System.EventHandler(this.LocalreporttaxToolStripMenuItem_Click);
             // 
@@ -152,20 +156,20 @@
             this.TestToolStripMenuItem,
             this.initSubjectToolStripMenuItem});
             this.exportSubjectToolStripMenuItem.Name = "exportSubjectToolStripMenuItem";
-            this.exportSubjectToolStripMenuItem.Size = new System.Drawing.Size(122, 38);
+            this.exportSubjectToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
             this.exportSubjectToolStripMenuItem.Text = "科目设置";
             // 
             // 开始导出ToolStripMenuItem
             // 
             this.开始导出ToolStripMenuItem.Name = "开始导出ToolStripMenuItem";
-            this.开始导出ToolStripMenuItem.Size = new System.Drawing.Size(353, 38);
+            this.开始导出ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.开始导出ToolStripMenuItem.Text = "新科目导出";
             this.开始导出ToolStripMenuItem.Click += new System.EventHandler(this.开始导出ToolStripMenuItem_Click);
             // 
             // TestToolStripMenuItem
             // 
             this.TestToolStripMenuItem.Name = "TestToolStripMenuItem";
-            this.TestToolStripMenuItem.Size = new System.Drawing.Size(353, 38);
+            this.TestToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.TestToolStripMenuItem.Text = "新科目设置为已经导入";
             this.TestToolStripMenuItem.Visible = false;
             this.TestToolStripMenuItem.Click += new System.EventHandler(this.TestToolStripMenuItem_Click);
@@ -173,7 +177,7 @@
             // initSubjectToolStripMenuItem
             // 
             this.initSubjectToolStripMenuItem.Name = "initSubjectToolStripMenuItem";
-            this.initSubjectToolStripMenuItem.Size = new System.Drawing.Size(353, 38);
+            this.initSubjectToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.initSubjectToolStripMenuItem.Text = "从财务系统初始化科目";
             this.initSubjectToolStripMenuItem.Click += new System.EventHandler(this.initSubjectToolStripMenuItem_Click);
             // 
@@ -181,10 +185,11 @@
             // 
             this.groupBox1.Controls.Add(this.tableLayoutPanel1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Location = new System.Drawing.Point(10, 10);
+            this.groupBox1.Location = new System.Drawing.Point(5, 5);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(20);
-            this.groupBox1.Size = new System.Drawing.Size(1623, 260);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(10);
+            this.groupBox1.Size = new System.Drawing.Size(675, 130);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "导出信息";
@@ -192,9 +197,9 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 128F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 64F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel1.Controls.Add(this.createbyTextBox, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
@@ -204,31 +209,34 @@
             this.tableLayoutPanel1.Controls.Add(this.button1, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.button2, 2, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(20, 48);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 24);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.11243F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.88757F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 52F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1583, 192);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(655, 96);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // createbyTextBox
             // 
             this.createbyTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.createbyTextBox.Location = new System.Drawing.Point(131, 142);
+            this.createbyTextBox.Location = new System.Drawing.Point(66, 71);
+            this.createbyTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.createbyTextBox.Name = "createbyTextBox";
             this.createbyTextBox.ReadOnly = true;
-            this.createbyTextBox.Size = new System.Drawing.Size(1289, 35);
+            this.createbyTextBox.Size = new System.Drawing.Size(507, 21);
             this.createbyTextBox.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Location = new System.Drawing.Point(2, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(122, 68);
+            this.label1.Size = new System.Drawing.Size(60, 34);
             this.label1.TabIndex = 0;
             this.label1.Text = "客户：";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -237,9 +245,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(3, 68);
+            this.label2.Location = new System.Drawing.Point(2, 34);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(122, 71);
+            this.label2.Size = new System.Drawing.Size(60, 35);
             this.label2.TabIndex = 1;
             this.label2.Text = "月份：";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -247,37 +256,41 @@
             // clientTextBox
             // 
             this.clientTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.clientTextBox.Location = new System.Drawing.Point(131, 3);
+            this.clientTextBox.Location = new System.Drawing.Point(66, 2);
+            this.clientTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.clientTextBox.Name = "clientTextBox";
             this.clientTextBox.ReadOnly = true;
-            this.clientTextBox.Size = new System.Drawing.Size(1289, 35);
+            this.clientTextBox.Size = new System.Drawing.Size(507, 21);
             this.clientTextBox.TabIndex = 2;
             // 
             // accountcycleTextBox
             // 
             this.accountcycleTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.accountcycleTextBox.Location = new System.Drawing.Point(131, 71);
+            this.accountcycleTextBox.Location = new System.Drawing.Point(66, 36);
+            this.accountcycleTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.accountcycleTextBox.Name = "accountcycleTextBox";
             this.accountcycleTextBox.ReadOnly = true;
-            this.accountcycleTextBox.Size = new System.Drawing.Size(1289, 35);
+            this.accountcycleTextBox.Size = new System.Drawing.Size(507, 21);
             this.accountcycleTextBox.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(3, 139);
+            this.label3.Location = new System.Drawing.Point(2, 69);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(122, 53);
+            this.label3.Size = new System.Drawing.Size(60, 27);
             this.label3.TabIndex = 4;
             this.label3.Text = "操作人：";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1426, 3);
+            this.button1.Location = new System.Drawing.Point(577, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(154, 56);
+            this.button1.Size = new System.Drawing.Size(76, 28);
             this.button1.TabIndex = 5;
             this.button1.Text = "选择客户";
             this.button1.UseVisualStyleBackColor = true;
@@ -285,9 +298,10 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(1426, 71);
+            this.button2.Location = new System.Drawing.Point(577, 36);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(154, 56);
+            this.button2.Size = new System.Drawing.Size(76, 28);
             this.button2.TabIndex = 6;
             this.button2.Text = "选择月份";
             this.button2.UseVisualStyleBackColor = true;
@@ -298,21 +312,22 @@
             this.exportInfoPanel.Controls.Add(this.groupBox3);
             this.exportInfoPanel.Controls.Add(this.groupBox1);
             this.exportInfoPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.exportInfoPanel.Location = new System.Drawing.Point(0, 44);
+            this.exportInfoPanel.Location = new System.Drawing.Point(0, 25);
             this.exportInfoPanel.Margin = new System.Windows.Forms.Padding(0);
             this.exportInfoPanel.Name = "exportInfoPanel";
-            this.exportInfoPanel.Padding = new System.Windows.Forms.Padding(10);
-            this.exportInfoPanel.Size = new System.Drawing.Size(1643, 642);
+            this.exportInfoPanel.Padding = new System.Windows.Forms.Padding(5);
+            this.exportInfoPanel.Size = new System.Drawing.Size(685, 321);
             this.exportInfoPanel.TabIndex = 2;
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.tableLayoutPanel2);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox3.Location = new System.Drawing.Point(10, 270);
+            this.groupBox3.Location = new System.Drawing.Point(5, 135);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(20);
-            this.groupBox3.Size = new System.Drawing.Size(1623, 368);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(10);
+            this.groupBox3.Size = new System.Drawing.Size(675, 184);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "账套信息";
@@ -320,7 +335,7 @@
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 172F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 86F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Controls.Add(this.dbIpTextBox, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.label4, 0, 0);
@@ -333,24 +348,26 @@
             this.tableLayoutPanel2.Controls.Add(this.button4, 1, 4);
             this.tableLayoutPanel2.Controls.Add(this.label5, 0, 3);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(20, 48);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(10, 24);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 6;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1583, 308);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(655, 154);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // dbIpTextBox
             // 
             this.dbIpTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dbIpTextBox.Location = new System.Drawing.Point(175, 3);
+            this.dbIpTextBox.Location = new System.Drawing.Point(88, 2);
+            this.dbIpTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.dbIpTextBox.Name = "dbIpTextBox";
-            this.dbIpTextBox.Size = new System.Drawing.Size(1405, 35);
+            this.dbIpTextBox.Size = new System.Drawing.Size(565, 21);
             this.dbIpTextBox.TabIndex = 4;
             this.dbIpTextBox.Text = "localhost";
             this.dbIpTextBox.TextChanged += new System.EventHandler(this.dbIpTextBox_TextChanged);
@@ -358,18 +375,20 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 0);
+            this.label4.Location = new System.Drawing.Point(2, 0);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(154, 24);
+            this.label4.Size = new System.Drawing.Size(77, 12);
             this.label4.TabIndex = 0;
             this.label4.Text = "服务器地址：";
             // 
             // dbUserTextBox
             // 
             this.dbUserTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dbUserTextBox.Location = new System.Drawing.Point(175, 53);
+            this.dbUserTextBox.Location = new System.Drawing.Point(88, 27);
+            this.dbUserTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.dbUserTextBox.Name = "dbUserTextBox";
-            this.dbUserTextBox.Size = new System.Drawing.Size(1405, 35);
+            this.dbUserTextBox.Size = new System.Drawing.Size(565, 21);
             this.dbUserTextBox.TabIndex = 6;
             this.dbUserTextBox.Text = "sa";
             this.dbUserTextBox.TextChanged += new System.EventHandler(this.dbUserTextBox_TextChanged);
@@ -377,36 +396,40 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 50);
+            this.label6.Location = new System.Drawing.Point(2, 25);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(106, 24);
+            this.label6.Size = new System.Drawing.Size(53, 12);
             this.label6.TabIndex = 2;
             this.label6.Text = "用户名：";
             // 
             // dbPasswordTextBox
             // 
             this.dbPasswordTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dbPasswordTextBox.Location = new System.Drawing.Point(175, 103);
+            this.dbPasswordTextBox.Location = new System.Drawing.Point(88, 52);
+            this.dbPasswordTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.dbPasswordTextBox.Name = "dbPasswordTextBox";
             this.dbPasswordTextBox.PasswordChar = '*';
-            this.dbPasswordTextBox.Size = new System.Drawing.Size(1405, 35);
+            this.dbPasswordTextBox.Size = new System.Drawing.Size(565, 21);
             this.dbPasswordTextBox.TabIndex = 7;
             this.dbPasswordTextBox.TextChanged += new System.EventHandler(this.dbPasswordTextBox_TextChanged);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 100);
+            this.label7.Location = new System.Drawing.Point(2, 50);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(82, 24);
+            this.label7.Size = new System.Drawing.Size(41, 12);
             this.label7.TabIndex = 3;
             this.label7.Text = "密码：";
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(175, 253);
+            this.button3.Location = new System.Drawing.Point(88, 127);
+            this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(205, 51);
+            this.button3.Size = new System.Drawing.Size(102, 25);
             this.button3.TabIndex = 8;
             this.button3.Text = "连接测试";
             this.button3.UseVisualStyleBackColor = true;
@@ -415,17 +438,19 @@
             // accsetNameTextBox
             // 
             this.accsetNameTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.accsetNameTextBox.Location = new System.Drawing.Point(175, 153);
+            this.accsetNameTextBox.Location = new System.Drawing.Point(88, 77);
+            this.accsetNameTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.accsetNameTextBox.Name = "accsetNameTextBox";
             this.accsetNameTextBox.ReadOnly = true;
-            this.accsetNameTextBox.Size = new System.Drawing.Size(1405, 35);
+            this.accsetNameTextBox.Size = new System.Drawing.Size(565, 21);
             this.accsetNameTextBox.TabIndex = 5;
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(175, 203);
+            this.button4.Location = new System.Drawing.Point(88, 102);
+            this.button4.Margin = new System.Windows.Forms.Padding(2);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(205, 44);
+            this.button4.Size = new System.Drawing.Size(102, 21);
             this.button4.TabIndex = 9;
             this.button4.Text = "选择账套";
             this.button4.UseVisualStyleBackColor = true;
@@ -434,9 +459,10 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 150);
+            this.label5.Location = new System.Drawing.Point(2, 75);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(82, 24);
+            this.label5.Size = new System.Drawing.Size(41, 12);
             this.label5.TabIndex = 1;
             this.label5.Text = "账套：";
             // 
@@ -444,19 +470,22 @@
             // 
             this.subjectPanel.Controls.Add(this.groupBox2);
             this.subjectPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.subjectPanel.Location = new System.Drawing.Point(0, 686);
+            this.subjectPanel.Location = new System.Drawing.Point(0, 346);
+            this.subjectPanel.Margin = new System.Windows.Forms.Padding(2);
             this.subjectPanel.Name = "subjectPanel";
-            this.subjectPanel.Padding = new System.Windows.Forms.Padding(10);
-            this.subjectPanel.Size = new System.Drawing.Size(1643, 551);
+            this.subjectPanel.Padding = new System.Windows.Forms.Padding(5);
+            this.subjectPanel.Size = new System.Drawing.Size(685, 225);
             this.subjectPanel.TabIndex = 4;
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.ClientSubjectDataGridView);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(10, 10);
+            this.groupBox2.Location = new System.Drawing.Point(5, 5);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1623, 531);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox2.Size = new System.Drawing.Size(675, 215);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "新科目列表";
@@ -465,22 +494,59 @@
             // 
             this.ClientSubjectDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ClientSubjectDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ClientSubjectDataGridView.Location = new System.Drawing.Point(3, 31);
+            this.ClientSubjectDataGridView.Location = new System.Drawing.Point(2, 16);
+            this.ClientSubjectDataGridView.Margin = new System.Windows.Forms.Padding(2);
             this.ClientSubjectDataGridView.Name = "ClientSubjectDataGridView";
             this.ClientSubjectDataGridView.RowTemplate.Height = 37;
-            this.ClientSubjectDataGridView.Size = new System.Drawing.Size(1617, 497);
+            this.ClientSubjectDataGridView.Size = new System.Drawing.Size(671, 197);
             this.ClientSubjectDataGridView.TabIndex = 0;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 1;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Controls.Add(this.refreshButton, 0, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 571);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(685, 35);
+            this.tableLayoutPanel3.TabIndex = 5;
+            // 
+            // refreshButton
+            // 
+            this.refreshButton.Location = new System.Drawing.Point(3, 3);
+            this.refreshButton.Name = "refreshButton";
+            this.refreshButton.Size = new System.Drawing.Size(91, 29);
+            this.refreshButton.TabIndex = 0;
+            this.refreshButton.Text = "刷新";
+            this.refreshButton.UseVisualStyleBackColor = true;
+            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
+            // 
+            // InformationTextBox
+            // 
+            this.InformationTextBox.BackColor = System.Drawing.SystemColors.Control;
+            this.InformationTextBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.InformationTextBox.Location = new System.Drawing.Point(0, 606);
+            this.InformationTextBox.Name = "InformationTextBox";
+            this.InformationTextBox.ReadOnly = true;
+            this.InformationTextBox.Size = new System.Drawing.Size(310, 21);
+            this.InformationTextBox.TabIndex = 7;
+            this.InformationTextBox.Visible = false;
             // 
             // Sd3000Form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1643, 1269);
+            this.ClientSize = new System.Drawing.Size(685, 742);
+            this.Controls.Add(this.InformationTextBox);
+            this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.subjectPanel);
             this.Controls.Add(this.exportInfoPanel);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Sd3000Form";
             this.Text = "速达3000凭证导出";
             this.Load += new System.EventHandler(this.Sd3000Form_Load);
@@ -496,6 +562,7 @@
             this.subjectPanel.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ClientSubjectDataGridView)).EndInit();
+            this.tableLayoutPanel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -541,5 +608,8 @@
         private System.Windows.Forms.ToolStripMenuItem PaytaxreportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem LocalreporttaxToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem initSubjectToolStripMenuItem;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Button refreshButton;
+        private System.Windows.Forms.TextBox InformationTextBox;
     }
 }

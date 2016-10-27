@@ -110,13 +110,21 @@ namespace MicroServiceApplication.voucher
             exportBean.Categoryname = categoryname;
             try
             {
+                this.InformationTextBox.Visible = true;//打开提示框
+                this.InformationTextBox.Text = "正在初始化会计科目!请稍等……";//提示文本
+                this.InformationTextBox.Font = new Font("宋体", 12);//提示字体
+
                 Sd3000Factory factory = new Sd3000Factory();
                 factory.exports(exportBean, this.accset);
+
+                this.InformationTextBox.Visible = false;//关闭提示框
+
                 MessageBox.Show("凭证导出成功！请登录财务系统查看结果!");
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.StackTrace);
+                this.InformationTextBox.Visible = false;//关闭提示框
                 MessageBox.Show(e.Message);
             }
         }
@@ -152,6 +160,12 @@ namespace MicroServiceApplication.voucher
             if (this.accset == null)
             {
                 MessageBox.Show("请选择账套！");
+                return;
+            }
+
+            if (this.clientSubjects == null || this.clientSubjects.Count <= 0)
+            {
+                MessageBox.Show("没有需要导入速达3000的新科目");
                 return;
             }
 
@@ -394,20 +408,54 @@ namespace MicroServiceApplication.voucher
                 MessageBox.Show("请先选择客户!");
                 return;
             }
+            if (this.accset.Corpname != this.client.Fullname)
+            {
+                DialogResult dr = MessageBox.Show("选择的客户与账套名称不一致，是否继续导入?", "系统提示", MessageBoxButtons.OKCancel);
+
+                if (dr != DialogResult.OK)
+                {
+                    return;
+                }
+            }
 
             try
             {
+                this.InformationTextBox.Visible = true;//打开提示框
+                this.InformationTextBox.Text = "正在初始化会计科目!请稍等……";//提示文本
+                this.InformationTextBox.Font = new Font("宋体", 12);//提示字体
+
                 Sd3000Factory sdf = new Sd3000Factory();
                 sdf.initSubjectBySd3000(this.accset,this.client,Session.GetInstance().User);
+
+                this.InformationTextBox.Visible = false;//关闭提示框
+
                 MessageBox.Show("初始化成功，请打开小微服查看!");
 
             }
             catch (Exception e1)
             {
                 Console.WriteLine(e1.StackTrace);
+                this.InformationTextBox.Visible = false;//关闭提示框
                 MessageBox.Show(e1.Message);
             }
 
+        }
+
+        private void refreshButton_Click(object sender, EventArgs e)
+        {
+
+            if (this.client == null)
+            {
+                MessageBox.Show("请选择客户信息!");
+            }
+            else
+            {
+                this.queryClientNewSubject(this.client.Id);//刷新新会计科目
+                if (this.clientSubjects.Count <= 0)
+                {
+                    MessageBox.Show("没有新会计科目!");
+                }
+            }
         }
     }
 }
