@@ -15,7 +15,7 @@ namespace MicroServiceApplication
         private KisExportsForm kisExportsForm;
         private Sd3000Form sd3000Form ;
         private KisFileForm kisFileForm;
-        private YYT3Form yYT3Form;
+
 
         public MainForm()
         {
@@ -73,20 +73,7 @@ namespace MicroServiceApplication
             }
         }
 
-        private void YYT3ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (yYT3Form == null || yYT3Form.IsDisposed)
-            {
-                yYT3Form = new YYT3Form();
-                yYT3Form.MdiParent = this;
-                yYT3Form.WindowState = FormWindowState.Maximized;
-                yYT3Form.Show();
-            }
-            else
-            {
-                yYT3Form.Activate();
-            }
-        }
+
 
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -116,11 +103,7 @@ namespace MicroServiceApplication
             sd3000MenuItem.Click += new EventHandler(Sd300ToolStripMenuItem_Click);
             menuItem.DropDownItems.Add(sd3000MenuItem);
 
-            ToolStripMenuItem YYT3MenuItem = new ToolStripMenuItem();
-            YYT3MenuItem.Name = "yYT3";
-            YYT3MenuItem.Text = "用友T3";
-            YYT3MenuItem.Click += new EventHandler(YYT3ToolStripMenuItem_Click);
-            menuItem.DropDownItems.Add(YYT3MenuItem);
+
         }
     }
 }

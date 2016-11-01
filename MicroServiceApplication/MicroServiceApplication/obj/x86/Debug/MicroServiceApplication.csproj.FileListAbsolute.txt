@@ -143,5 +143,3 @@ D:\Source\Repos1\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\M
 D:\Source\Repos1\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\小微服辅助工具.TrustInfo.xml
 D:\Source\Repos1\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\小微服辅助工具.exe.manifest
 D:\Source\Repos1\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\小微服辅助工具.application
-D:\Source\Repos1\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\MicroServiceApplication.voucher.YYT3Form.resources
-D:\Source\Repos1\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\MicroServiceApplication.Common.SelectT3AccsetForm.resources

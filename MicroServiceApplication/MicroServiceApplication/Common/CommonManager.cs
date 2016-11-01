@@ -54,22 +54,6 @@ namespace MicroServiceApplication.Common
                 return null;
             }
         }
-        //引用用友弹出账套选择界面的方法start
-        public static YYT3accset selectAccset(List<YYT3accset> accsetList)
-        {
-            SelectT3AccsetForm staf = new SelectT3AccsetForm();
-            staf.YYT3AccsetList = accsetList;
-            staf.ShowDialog();
-
-            if (staf.DialogResult == DialogResult.OK)
-            {
-                return staf.Accset;
-            }
-            else
-            {
-                return null;
-            }
-        }
-        //引用用友弹出账套选择界面的方法end
+        
     }
 }
