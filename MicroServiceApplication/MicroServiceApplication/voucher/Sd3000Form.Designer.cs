@@ -474,7 +474,7 @@
             this.subjectPanel.Margin = new System.Windows.Forms.Padding(2);
             this.subjectPanel.Name = "subjectPanel";
             this.subjectPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.subjectPanel.Size = new System.Drawing.Size(685, 225);
+            this.subjectPanel.Size = new System.Drawing.Size(685, 242);
             this.subjectPanel.TabIndex = 4;
             // 
             // groupBox2
@@ -485,7 +485,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(675, 215);
+            this.groupBox2.Size = new System.Drawing.Size(675, 232);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "新科目列表";
@@ -498,7 +498,7 @@
             this.ClientSubjectDataGridView.Margin = new System.Windows.Forms.Padding(2);
             this.ClientSubjectDataGridView.Name = "ClientSubjectDataGridView";
             this.ClientSubjectDataGridView.RowTemplate.Height = 37;
-            this.ClientSubjectDataGridView.Size = new System.Drawing.Size(671, 197);
+            this.ClientSubjectDataGridView.Size = new System.Drawing.Size(671, 214);
             this.ClientSubjectDataGridView.TabIndex = 0;
             // 
             // tableLayoutPanel3
@@ -507,11 +507,11 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.Controls.Add(this.refreshButton, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 571);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 588);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(685, 35);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(685, 38);
             this.tableLayoutPanel3.TabIndex = 5;
             // 
             // refreshButton
@@ -528,7 +528,7 @@
             // 
             this.InformationTextBox.BackColor = System.Drawing.SystemColors.Control;
             this.InformationTextBox.Dock = System.Windows.Forms.DockStyle.Left;
-            this.InformationTextBox.Location = new System.Drawing.Point(0, 606);
+            this.InformationTextBox.Location = new System.Drawing.Point(0, 626);
             this.InformationTextBox.Name = "InformationTextBox";
             this.InformationTextBox.ReadOnly = true;
             this.InformationTextBox.Size = new System.Drawing.Size(310, 21);

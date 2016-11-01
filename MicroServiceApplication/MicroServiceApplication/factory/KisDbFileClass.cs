@@ -556,10 +556,10 @@ namespace MicroServiceApplication.Factory
                         kisDbPref.Faclen4 = row["FAcLen4"] == null ? -1 : int.Parse(row["FAcLen4"].ToString());
                         kisDbPref.Faclen5 = row["FAcLen5"] == null ? -1 : int.Parse(row["FAcLen5"].ToString());
                         kisDbPref.Faclen6 = row["FAcLen6"] == null ? -1 : int.Parse(row["FAcLen6"].ToString());
-                        kisDbPref.Faclen7 = row["FAcLen7"] == null ? -1 : int.Parse(row["FAcLen7"].ToString());
-                        kisDbPref.Faclen8 = row["FAcLen8"] == null ? -1 : int.Parse(row["FAcLen8"].ToString());
-                        kisDbPref.Faclen9 = row["FAcLen9"] == null ? -1 : int.Parse(row["FAcLen9"].ToString());
-                        kisDbPref.Faclen10 = row["FAcLen10"] == null ? -1 : int.Parse(row["FAcLen10"].ToString());
+                        //kisDbPref.Faclen7 = row["FAcLen7"] == null ? -1 : int.Parse(row["FAcLen7"].ToString());
+                        //kisDbPref.Faclen8 = row["FAcLen8"] == null ? -1 : int.Parse(row["FAcLen8"].ToString());
+                        //kisDbPref.Faclen9 = row["FAcLen9"] == null ? -1 : int.Parse(row["FAcLen9"].ToString());
+                        //kisDbPref.Faclen10 = row["FAcLen10"] == null ? -1 : int.Parse(row["FAcLen10"].ToString());
 
                         kisDbPrefList.Add(kisDbPref);
                     }
@@ -645,10 +645,10 @@ namespace MicroServiceApplication.Factory
                 csl.Subject4 = kisDbPref.Faclen4 - kisDbPref.Faclen3;//封装字段的Subject4取Faclen4
                 csl.Subject5 = kisDbPref.Faclen5 - kisDbPref.Faclen4;//封装字段的Subject5取Faclen5
                 csl.Subject6 = kisDbPref.Faclen6 - kisDbPref.Faclen5;//封装字段的Subject6取Faclen6
-                csl.Subject7 = kisDbPref.Faclen7 - kisDbPref.Faclen6;//封装字段的Subject7取Faclen7
-                csl.Subject8 = kisDbPref.Faclen8 - kisDbPref.Faclen7;//封装字段的Subject8取Faclen8
-                csl.Subject9 = kisDbPref.Faclen9 - kisDbPref.Faclen8;//封装字段的Subject9取Faclen9
-                csl.Subject10 = kisDbPref.Faclen10 - kisDbPref.Faclen9;//封装字段的Subject10取Faclen10
+                //csl.Subject7 = kisDbPref.Faclen7 - kisDbPref.Faclen6;//封装字段的Subject7取Faclen7
+                //csl.Subject8 = kisDbPref.Faclen8 - kisDbPref.Faclen7;//封装字段的Subject8取Faclen8
+                //csl.Subject9 = kisDbPref.Faclen9 - kisDbPref.Faclen8;//封装字段的Subject9取Faclen9
+                //csl.Subject10 = kisDbPref.Faclen10 - kisDbPref.Faclen9;//封装字段的Subject10取Faclen10
                 cslf.add(csl);
             }
 

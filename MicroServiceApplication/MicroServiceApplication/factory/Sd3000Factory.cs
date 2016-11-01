@@ -1876,8 +1876,8 @@ namespace MicroServiceApplication.factory
             }
 
         }
-
-        public List<Sd3000Accset> queryAccset(string dbuser,string dbpassword,string dbip,string dbprefix)
+        //选择账套
+        public List<Sd3000Accset> queryAccset(string dbuser, string dbpassword, string dbip, string dbprefix)
         {
             //
             if (dbuser == null || dbip == null || dbuser == "" || dbip == "") return null;
@@ -1887,8 +1887,8 @@ namespace MicroServiceApplication.factory
             string connecturl = "Data Source=" + dbip + ";Initial Catalog=master;Persist Security Info=True;User ID=" + dbuser + ";Password=" + dbpassword;
             SqlConnection connection = new SqlConnection(connecturl);
 
-            string tableName = dbprefix+"SDAccset..ACCSET";
-            string sql = "select accsetid,accsetname,corpname from "+tableName+" where DELFLAG = 'F'";
+            string tableName = dbprefix + "SDAccset..ACCSET";
+            string sql = "select accsetid,accsetname,corpname from " + tableName + " where DELFLAG = 'F'";
 
             SqlDataAdapter myDataAdapter = new SqlDataAdapter(sql, connection);
             DataSet myDataSet = new DataSet();      // 创建DataSet
@@ -1900,7 +1900,7 @@ namespace MicroServiceApplication.factory
 
                 if (myTable.Rows.Count > 0)
                 {
-                    foreach(DataRow row in myTable.Rows)
+                    foreach (DataRow row in myTable.Rows)
                     {
                         Sd3000Accset accset = new Sd3000Accset();
 

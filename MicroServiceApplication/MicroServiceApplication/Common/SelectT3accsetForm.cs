@@ -10,31 +10,37 @@ using System.Windows.Forms;
 
 namespace MicroServiceApplication.Common
 {
-    public partial class SelectAccsetForm : Form
+    //
+    //弹出账套选择的界面方法与设置start
+    //
+    public partial class SelectT3AccsetForm : Form
     {
-        private List<Sd3000Accset> _sd3000AccsetList;
-        private Sd3000Accset _accset;
+        //
+        //选择账套的封装字段start
+        //
+        private List<YYT3accset> _yYT3AccsetList;
+        private YYT3accset _accset;
 
         DataTable accsetDt;
-        public SelectAccsetForm()
+        public SelectT3AccsetForm()
         {
             InitializeComponent();
         }
 
-        internal List<Sd3000Accset> Sd3000AccsetList
+        internal List<YYT3accset> YYT3AccsetList
         {
             get
             {
-                return _sd3000AccsetList;
+                return _yYT3AccsetList;
             }
 
             set
             {
-                _sd3000AccsetList = value;
+                _yYT3AccsetList = value;
             }
         }
 
-        internal Sd3000Accset Accset
+        internal YYT3accset Accset
         {
             get
             {
@@ -46,20 +52,24 @@ namespace MicroServiceApplication.Common
                 _accset = value;
             }
         }
-
+        //
+        //选择账套的封装字段end
+        //
+        //显示账套列表的方法start
+        //
         private void SelectAccsetForm_Load(object sender, EventArgs e)
         {
             accsetDt = new DataTable();
 
-            accsetDt.Columns.Add("accsetid", Type.GetType("System.String"));
+            accsetDt.Columns.Add("Id", Type.GetType("System.String"));
             accsetDt.Columns.Add("账套名称", Type.GetType("System.String"));
 
-            foreach (Sd3000Accset item in this.Sd3000AccsetList)
+            foreach (YYT3accset item in this.YYT3AccsetList)
             {
                 DataRow datarow = accsetDt.NewRow();
 
-                datarow[0] = item.Accsetid;
-                datarow[1] = item.Corpname;
+                datarow[0] = item.CAcc_Id;
+                datarow[1] = item.CAcc_Name;
                 accsetDt.Rows.Add(datarow);
             }
 
@@ -71,11 +81,14 @@ namespace MicroServiceApplication.Common
             this.accsetDataGridView.RowTemplate.Height = 20;
             this.accsetDataGridView.EditMode = DataGridViewEditMode.EditProgrammatically;
             this.accsetDataGridView.DataSource = accsetDt;
-            this.accsetDataGridView.Columns["accsetid"].Visible = false;
+            this.accsetDataGridView.Columns["Id"].Visible = false;
+            //this.accsetDataGridView.Columns["Id"].Width = 50;
             this.accsetDataGridView.Columns["账套名称"].Width = 500;
+            
         }
-
-
+        //
+        //显示账套列表的方法end
+        
         private void select()
         {
 
@@ -85,7 +98,7 @@ namespace MicroServiceApplication.Common
                 return;
             }
 
-            Sd3000Accset accset = this.findAccset(this.accsetDataGridView.CurrentRow.Cells[0].Value.ToString());
+            YYT3accset accset = this.findAccset(this.accsetDataGridView.CurrentRow.Cells[0].Value.ToString());
 
             if (accset != null)
             {
@@ -100,27 +113,31 @@ namespace MicroServiceApplication.Common
 
             this.Close();
         }
-
-        private Sd3000Accset findAccset(string id)
+        private YYT3accset findAccset(string id)
         {
-            foreach (Sd3000Accset item in this.Sd3000AccsetList)
+            foreach (YYT3accset item in this.YYT3AccsetList)
             {
-                if (item.Accsetid == id) return item;
+                if (item.CAcc_Id == id) return item;
             }
             return null;
         }
-
-
-        private void button1_Click(object sender, EventArgs e)
+        //
+        //选择账套按钮start
+        //
+        private void button1_Click_1(object sender, EventArgs e)
         {
             this.select();
         }
-
+        //
+        //选择账套按钮end
+        //
         private void accsetDataGridView_DoubleClick(object sender, EventArgs e)
         {
             this.select();
         }
-
+        //
+        //搜索账套start
+        //
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             if (this.accsetNametextBox.Text == "" || this.accsetNametextBox.Text == null)
@@ -131,7 +148,12 @@ namespace MicroServiceApplication.Common
             {
                 this.accsetDt.DefaultView.RowFilter = "账套名称 like '%" + this.accsetNametextBox.Text + "%'";
             }
-
         }
+        //
+        //搜索账套end
+        //
     }
+    //
+    //弹出账套选择的界面方法与设置end
+    //
 }

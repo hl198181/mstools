@@ -212,27 +212,31 @@ namespace MicroServiceApplication.voucher
                 MessageBox.Show("未选择!");
             }
         }
-
+        //
+        //直接显示月份和操作人start
+        //
         private void Sd3000Form_Load(object sender, EventArgs e)
         {
-            this.inst = Session.GetInstance().Inst;
-            this.user = Session.GetInstance().User;
+            this.inst = Session.GetInstance().Inst;//赋值机构
+            this.user = Session.GetInstance().User;//赋值用户名
 
-            this.createbyTextBox.Text = this.user.Name;
-            this.initAccountcycle();
+            this.createbyTextBox.Text = this.user.Name;//操作人显示栏显示用户名
+            this.initAccountcycle();//引用显示月份方法显示月份
         }
 
         private void initAccountcycle()
         {
-            AccountcycleFactory af = new AccountcycleFactory();
-            List<Accountcycle> accountcycleList = af.query(-1, -1);
+            AccountcycleFactory af = new AccountcycleFactory();//new月份工厂
+            List<Accountcycle> accountcycleList = af.query(-1, -1);//引用显示月份方法
             if (accountcycleList != null && accountcycleList.Count > 0)
             {
                 this.accountcycle = accountcycleList[0];
-                this.accountcycleTextBox.Text = this.accountcycle.Name;
+                this.accountcycleTextBox.Text = this.accountcycle.Name;//月份显示栏显示月份
             }
         }
-
+        //
+        //直接显示月份和操作人end
+        //
         private void queryClientNewSubject(string clientid)
         {
             ClientSubjectFactory csf = new ClientSubjectFactory();
@@ -299,13 +303,13 @@ namespace MicroServiceApplication.voucher
             if (this.dbIpTextBox.Text == "" || this.dbIpTextBox.Text == null)
             {
                 MessageBox.Show("请输入账套服务器地址!");
-                return ;
+                return;
             }
-            
+
             if (this.dbUserTextBox.Text == "" || this.dbUserTextBox.Text == null)
             {
                 MessageBox.Show("请输入账套数据库用户名!");
-                return ;
+                return;
             }
             if (this.dbPasswordTextBox.Text == null)
             {
@@ -322,12 +326,12 @@ namespace MicroServiceApplication.voucher
                     this.accsetNameTextBox.Text = this.accset.Corpname + "[" + this.accset.DbName + "]";
                 }
             }
-            catch(Exception e1)
+            catch (Exception e1)
             {
                 Console.WriteLine(e1.StackTrace);
                 MessageBox.Show(e1.Message);
             }
-            
+
         }
 
         private void dbIpTextBox_TextChanged(object sender, EventArgs e)
@@ -457,5 +461,6 @@ namespace MicroServiceApplication.voucher
                 }
             }
         }
+
     }
 }
