@@ -170,9 +170,102 @@ namespace MicroServiceApplication.voucher
                 this.accountcycleTextBox.Text = this.accountcycle.Name;//月份显示栏显示月份
             }
         }
-
         //
         //直接显示月份和操作人end
-        //      
+        //
+        //刷新新科目按钮start
+        //  
+        private void refreshButton_Click(object sender, EventArgs e)
+        {
+            if(this.client == null)
+            {
+                MessageBox.Show("请先选择客户信息");
+            }
+            else
+            {
+                this.queryClientNewSubject(this.client.Id);
+                if(this.clientSubjects.Count<=0)
+                {
+                    MessageBox.Show("没有新会计科目");
+                }
+            }
+        }
+        //
+        //刷新新科目按钮end
+        //
+        //新科目导出start
+        //
+        private void newSubject2T3button_Click(object sender, EventArgs e)
+        {
+            this.exportSubject();
+        }
+        private void exportSubject()
+        {
+            ExportBean exporBean = new ExportBean();
+            if (this.inst == null || this.inst.Id == null)
+            {
+                MessageBox.Show("无法获取当前机构信息！");
+                return;
+            }
+
+            if (this.user == null || this.user.Id == null)
+            {
+                MessageBox.Show("无法获取当前用户信息！");
+                return;
+            }
+
+            if (this.client == null || this.client.Id == null)
+            {
+                MessageBox.Show("请选择客户信息！");
+                return;
+            }
+
+            if (this.accountcycle == null || this.accountcycle.Sn == null)
+            {
+                MessageBox.Show("请选择月份！");
+                return;
+            }
+
+            if (this.accset == null)
+            {
+                MessageBox.Show("请选择账套！");
+                return;
+            }
+
+            if (this.clientSubjects == null || this.clientSubjects.Count <= 0)
+            {
+                MessageBox.Show("没有需要导入用友T3的新科目");
+                return;
+            }
+
+            if (this.accset.CAcc_Name != this.client.Fullname && this.accset.CAcc_Name != this.client.Name)
+            {
+                DialogResult dr = MessageBox.Show("选择的客户与账套名称不一致，是否继续导入?", "系统提示", MessageBoxButtons.OKCancel);
+
+                if (dr != DialogResult.OK)
+                {
+                    return;
+                }
+            }
+                exporBean.Instid = this.inst.Id;
+                exporBean.Clientid = this.client.Id;
+                exporBean.Accountcyclesn = this.accountcycle.Sn;
+                exporBean.Createby = this.user.Id;
+            try
+            {
+                YYT3Factory yYT3Factory = new YYT3Factory();
+                yYT3Factory.S(exporBean, this.accset);
+
+                ClientSubjectFactory csf = new ClientSubjectFactory();
+                csf.updateIsNew(this.clientSubjects, 0);
+                this.queryClientNewSubject(this.client.Id);
+
+                MessageBox.Show("新科目导出成功!请登录财务系统查看结果!");
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
     }
 }

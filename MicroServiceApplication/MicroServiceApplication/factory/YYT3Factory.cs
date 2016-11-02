@@ -134,6 +134,22 @@ namespace MicroServiceApplication.factory
     //
     //账套配置的封装字段end
     //
+    //
+    //
+    class T3ExportSd3000Context
+    {
+        private ExportBean _exportBean;
+
+        //private List<Sd3000Subject> _subjects;
+
+        //private Dictionary<string, Sd3000Accoptions> _accoptionsDict;
+
+        private List<ClientSubject> _clientSubjects;
+
+        private int _maxSubid;
+
+        private List<string> _sqls = new List<string>();
+    }
     class YYT3Factory
     {
         //
@@ -222,5 +238,25 @@ namespace MicroServiceApplication.factory
         //
         //测试连接的方法end
         //
+        //
+        //
+        public void exportSubject(ExportBean exportBean,YYT3accset accset)
+        {
+            T3ExportSd3000Context context = new T3ExportSd3000Context();
+            //context.ExportBean = exportBean;
+
+            //try
+            //{
+            //    ClientSubjectFactory csf = new ClientSubjectFactory();
+            //    context.ClientSubjects = csf.query(exportBean.Clientid,1,1);
+
+            //}
+            //catch(Exception e)
+            //{
+            //    Console.WriteLine(e.StackTrace);
+            //    throw e;
+            //}
+               
+        }
     }
 }

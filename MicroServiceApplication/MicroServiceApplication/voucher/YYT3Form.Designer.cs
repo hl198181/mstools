@@ -445,6 +445,7 @@
             this.refreshButton.TabIndex = 0;
             this.refreshButton.Text = "刷新";
             this.refreshButton.UseVisualStyleBackColor = true;
+            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
             // 
             // newSubject2T3button
             // 
@@ -454,6 +455,7 @@
             this.newSubject2T3button.TabIndex = 1;
             this.newSubject2T3button.Text = "新科目导出";
             this.newSubject2T3button.UseVisualStyleBackColor = true;
+            this.newSubject2T3button.Click += new System.EventHandler(this.newSubject2T3button_Click);
             // 
             // flowLayoutPanel1
             // 
