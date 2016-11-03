@@ -138,15 +138,15 @@ namespace MicroServiceApplication.factory
     //
     class T3ExportSd3000Context
     {
-        private ExportBean _exportBean;
+        //private ExportBean _exportBean;
 
         //private List<Sd3000Subject> _subjects;
 
         //private Dictionary<string, Sd3000Accoptions> _accoptionsDict;
 
-        private List<ClientSubject> _clientSubjects;
+        //private List<ClientSubject> _clientSubjects;
 
-        private int _maxSubid;
+        //private int _maxSubid;
 
         private List<string> _sqls = new List<string>();
     }

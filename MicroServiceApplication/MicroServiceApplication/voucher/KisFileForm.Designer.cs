@@ -56,6 +56,7 @@
             this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SetupKisDirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InitSubjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.修复KIS账套科目长度ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportActionGroupBox = new System.Windows.Forms.GroupBox();
             this.exportActionflowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.exportIncomeButton = new System.Windows.Forms.Button();
@@ -398,7 +399,8 @@
             // 
             this.设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.SetupKisDirToolStripMenuItem,
-            this.InitSubjectToolStripMenuItem});
+            this.InitSubjectToolStripMenuItem,
+            this.修复KIS账套科目长度ToolStripMenuItem});
             this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
             this.设置ToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
             this.设置ToolStripMenuItem.Text = "设置";
@@ -416,6 +418,13 @@
             this.InitSubjectToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
             this.InitSubjectToolStripMenuItem.Text = "根据KIS初始化小微服科目";
             this.InitSubjectToolStripMenuItem.Click += new System.EventHandler(this.InitSubjectToolStripMenuItem_Click);
+            // 
+            // 修复KIS账套科目长度ToolStripMenuItem
+            // 
+            this.修复KIS账套科目长度ToolStripMenuItem.Name = "修复KIS账套科目长度ToolStripMenuItem";
+            this.修复KIS账套科目长度ToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
+            this.修复KIS账套科目长度ToolStripMenuItem.Text = "修复KIS账套科目长度";
+            this.修复KIS账套科目长度ToolStripMenuItem.Click += new System.EventHandler(this.修复KIS账套科目长度ToolStripMenuItem_Click);
             // 
             // exportActionGroupBox
             // 
@@ -598,5 +607,6 @@
         private System.Windows.Forms.Button localreporttaxbutton;
         private System.Windows.Forms.Button subjectToKisButton;
         private System.Windows.Forms.TextBox InformationTextBox;
+        private System.Windows.Forms.ToolStripMenuItem 修复KIS账套科目长度ToolStripMenuItem;
     }
 }

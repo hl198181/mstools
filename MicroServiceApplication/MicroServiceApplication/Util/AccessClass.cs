@@ -33,7 +33,7 @@ namespace MicroServiceApplication.Util
             {
                 throw new Exception("请先设置金蝶KIS安全文件路径!");
             }
-
+            
             ConnString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + dbFilePath + ";User ID=" + strDbUser + ";Password=" + strDBPass + ";Jet OLEDB:Database Password=1;Jet OLEDB:System database="+ securityPath;
             Conn = new OleDbConnection(ConnString);
             Conn.Open();
@@ -128,9 +128,29 @@ namespace MicroServiceApplication.Util
 
         public bool ExecuteSQLNonquery(String sql)
         {
-            List<String> sqls = new List<string>();
-            sqls.Add(sql);
-            return ExecuteSQLNonquery(sqls);
+            OleDbCommand cmd = new OleDbCommand();
+            cmd.Connection = Conn;
+            OleDbTransaction tx = Conn.BeginTransaction();
+            cmd.Transaction = tx;
+            try
+            {
+                string strsql = sql.ToString();
+                if (strsql.Trim().Length > 1)
+                {
+                    cmd.CommandText = strsql;
+                    cmd.ExecuteNonQuery();
+                }
+                tx.Commit();
+                return true;
+            }
+            catch (Exception e)
+            {
+                tx.Rollback();
+                throw e;
+            }
+
+            //List<String> sqls = new List<string>();
+            //sqls.Add(sql);
         }
         /**//// <summary>   
                     /// 执行SQL命令，不需要返回数据的修改，删除可以使用本函数   

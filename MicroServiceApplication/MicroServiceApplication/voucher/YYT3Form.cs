@@ -254,7 +254,7 @@ namespace MicroServiceApplication.voucher
             try
             {
                 YYT3Factory yYT3Factory = new YYT3Factory();
-                yYT3Factory.S(exporBean, this.accset);
+                yYT3Factory.exportSubject(exporBean, this.accset);
 
                 ClientSubjectFactory csf = new ClientSubjectFactory();
                 csf.updateIsNew(this.clientSubjects, 0);

@@ -923,5 +923,76 @@ namespace MicroServiceApplication.Factory
             AccessDbClass accessDb = new AccessDbClass(this.KdbParams.DbFilePath);
             accessDb.ExecuteSQLNonquery(sqls);
         }
+        //
+        //修复账套科目长度start
+        //
+        public void SubjectLength()
+        {
+           
+            KisDbPref kisDbPref = this.getGLPref();
+            string sql = "select FAcctID from GLAcct";
+            List<String> sqls = new List<String>();
+
+            AccessDbClass access = new AccessDbClass(this.KdbParams.DbFilePath);
+            DataTable dt = access.SelectToDataTable(sql);
+            if (kisDbPref.Faclen2 >= 8 || dt.Rows.Count < 0 )
+                {
+                throw new Exception("科目无需修复");
+                }
+            if (kisDbPref.Faclen2 == 6 && dt.Rows.Count > 0)
+            {
+                sqls.Add("update GLAcct set FAcctID = Left(FAcctID,4)+'00'+Right(FAcctID,len(FAcctID)-4) where len(FAcctID) > 4 ");
+                sqls.Add("update GLPref set FAcLen2 = '8'");
+                sqls.Add("update GLPref set FAcLen3 = FAcLen3 + 2 where FAcLen3 <>null ");
+                sqls.Add("update GLPref set FAcLen4 = FAcLen4 + 2 where FAcLen4 <>null ");
+                sqls.Add("update GLPref set FAcLen5 = FAcLen5 + 2 where FAcLen5 <>null ");
+                sqls.Add("update GLPref set FAcLen6 = FAcLen6 + 2 where FAcLen6 <>null ");
+                sqls.Add("update GLPref set FAcLen7 = FAcLen7 + 2 where FAcLen7 <>null ");
+                sqls.Add("update GLPref set FAcLen8 = FAcLen8 + 2 where FAcLen8 <>null ");
+                sqls.Add("update GLPref set FAcLen9 = FAcLen9 + 2 where FAcLen9 <>null ");
+                sqls.Add("update GLPref set FAcLen10 = FAcLen10 + 2 where FAcLen10 <>null ");
+
+                try
+                {
+                    access.ExecuteSQLNonquery(sqls);
+                }
+                catch (Exception e1)
+                {
+                    throw e1;
+                }
+                finally
+                {
+                    access.Close();
+                }
+            }
+            if (kisDbPref.Faclen2 == 7 && dt.Rows.Count > 0)
+            {
+                sqls.Add("update GLAcct set FAcctID = Left(FAcctID,4)+'0'+Right(FAcctID,len(FAcctID)-4) where len(FAcctID) > 4 ");
+                sqls.Add("update GLPref set FAcLen2 = '8'");
+                sqls.Add("update GLPref set FAcLen3 = FAcLen3 + 1 where FAcLen3 <>null ");
+                sqls.Add("update GLPref set FAcLen4 = FAcLen4 + 1 where FAcLen4 <>null ");
+                sqls.Add("update GLPref set FAcLen5 = FAcLen5 + 1 where FAcLen5 <>null ");
+                sqls.Add("update GLPref set FAcLen6 = FAcLen6 + 1 where FAcLen6 <>null ");
+                sqls.Add("update GLPref set FAcLen7 = FAcLen7 + 1 where FAcLen7 <>null ");
+                sqls.Add("update GLPref set FAcLen8 = FAcLen8 + 1 where FAcLen8 <>null ");
+                sqls.Add("update GLPref set FAcLen9 = FAcLen9 + 1 where FAcLen9 <>null ");
+                sqls.Add("update GLPref set FAcLen10 = FAcLen10 + 1 where FAcLen10 <>null ");
+                try
+                {
+                    access.ExecuteSQLNonquery(sqls);
+                }
+                catch (Exception e1)
+                {
+                    throw e1;
+                }
+                finally
+                {
+                    access.Close();
+                }
+            }
+        }
+        //
+        //修复账套科目长度end
+        //
     }
 }

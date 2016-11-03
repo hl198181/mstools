@@ -264,7 +264,7 @@ namespace MicroServiceApplication.voucher
             }
             if (this.kisDbFileParams == null || this.kisDbFileParams.DbFilePath == null)
             {
-                MessageBox.Show("请先选择数据库文件!");
+                MessageBox.Show("请先选择KIS账套文件!");
                 return;
             }
 
@@ -369,5 +369,44 @@ namespace MicroServiceApplication.voucher
                 }
             }
         }
+
+        private void 修复KIS账套科目长度ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.SubjectLength();
+        }
+        //
+        //修复账套科目长度start
+        //
+        private void SubjectLength()
+        {
+            
+            if (this.kisDbFileParams == null || this.kisDbFileParams.DbFilePath == null)
+            {
+                MessageBox.Show("请先选择KIS账套文件");
+            }
+            else
+            {
+                DialogResult dr = MessageBox.Show("KIS账套科目长度将会被修复,是否继续?", "系统警告", MessageBoxButtons.OKCancel);
+                if (dr != DialogResult.OK)
+                {
+                    return;
+                }
+            }
+            try
+            {
+                KisDbFileFactory kisDbFileFactory = new KisDbFileFactory(this.kisDbFileParams);
+                
+                kisDbFileFactory.SubjectLength();//引用工厂里修复账套科目长度的方法
+                MessageBox.Show("科目长度修复成功!");
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+                MessageBox.Show(e.Message);
+            }
+        }
+        //
+        //修复账套科目长度end
+        //
     }
 }
