@@ -241,7 +241,7 @@ namespace MicroServiceApplication.voucher
             }
         }
 
-        private void exports(string categoryname)
+        private void exports(string categoryname ,string vouchernumber)
         {
             if (this.inst == null || this.inst.Id == null)
             {
@@ -282,12 +282,26 @@ namespace MicroServiceApplication.voucher
                         return;
                     }
                 }
+                if (categoryname == "output")
+                {
+                    DialogResult dr = MessageBox.Show("是否把3张凭证合为一张凭证?", "系统提示", MessageBoxButtons.YesNoCancel);
+                    if (dr == DialogResult.Yes)
+
+                        vouchernumber = "yes";
+
+                    else if (dr == DialogResult.No)
+
+                        vouchernumber = "no";
+
+                    else if (dr == DialogResult.Cancel)
+                        return;
+                }
                 //执行导出凭证到KIS
                 this.InformationTextBox.Visible = true;//打开提示框
                 this.InformationTextBox.Text = "正在初始化会计科目!请稍等……";//提示文本
                 this.InformationTextBox.Font = new Font("宋体", 12);//提示字体
 
-                kisDbFileFactory.exportVoucher(this.inst, this.client, this.accountcycle, this.user, categoryname);
+                kisDbFileFactory.exportVoucher(vouchernumber, this.inst, this.client, this.accountcycle, this.user, categoryname);
 
                 this.InformationTextBox.Visible = false;//关闭提示框
                 MessageBox.Show("导出凭证成功!请登录财务系统查看结果");
@@ -326,32 +340,32 @@ namespace MicroServiceApplication.voucher
 
         private void exportIncomeButton_Click(object sender, EventArgs e)
         {
-            this.exports("income");
+            this.exports("income", "no");
         }
 
         private void exportOutputButton_Click(object sender, EventArgs e)
         {
-            this.exports("output");
+            this.exports("output", "choose");
         }
 
         private void bankbillExportbutton_Click(object sender, EventArgs e)
         {
-            this.exports("bankbill");
+            this.exports("bankbill", "no");
         }
 
         private void exportpayrollbutton_Click(object sender, EventArgs e)
         {
-            this.exports("payroll");
+            this.exports("payroll", "no");
         }
 
         private void paytaxreportbutton_Click(object sender, EventArgs e)
         {
-            this.exports("paytaxreport");
+            this.exports("paytaxreport", "no");
         }
 
         private void localreporttaxbutton_Click(object sender, EventArgs e)
         {
-            this.exports("localreporttax");
+            this.exports("localreporttax", "no");
         }
 
         private void refreshButton_Click(object sender, EventArgs e)
