@@ -282,9 +282,9 @@ namespace MicroServiceApplication.voucher
                         return;
                     }
                 }
-                if (this.inst.Id == "653279009C4211E6A731B9323D2BF7D6")
+                if (this.inst.Id == "653279009C4211E6A731B9323D2BF7D6" || this.inst.Id == "10000001463017")
                 {
-                    if (categoryname == "income")
+                    if (categoryname == "output")
                     {
                         DialogResult dr = MessageBox.Show("是否把3张凭证合为一张凭证?", "系统提示", MessageBoxButtons.YesNoCancel);
                         if (dr == DialogResult.Yes)
@@ -300,11 +300,16 @@ namespace MicroServiceApplication.voucher
                     }
                     if (categoryname == "bankbill")
                     {
-
+                        Choose choose = new Choose();
+                        choose.StartPosition = FormStartPosition.CenterParent;
+                        choose.TopMost = true;
+                        choose.ShowDialog();
+                        vouchernumber = choose.vouchernumber;   
                     }
                 }
-                    //执行导出凭证到KIS
-                    this.InformationTextBox.Visible = true;//打开提示框
+               
+                //执行导出凭证到KIS
+                this.InformationTextBox.Visible = true;//打开提示框
                 this.InformationTextBox.Text = "正在初始化会计科目!请稍等……";//提示文本
                 this.InformationTextBox.Font = new Font("宋体", 12);//提示字体
 
@@ -352,7 +357,7 @@ namespace MicroServiceApplication.voucher
 
         private void exportOutputButton_Click(object sender, EventArgs e)
         {
-            this.exports("output", "choose");
+            this.exports("output", "no");
         }
 
         private void bankbillExportbutton_Click(object sender, EventArgs e)

@@ -1096,7 +1096,7 @@ namespace MicroServiceApplication.Factory
             //
             //销项3张凭证合为一张start
             //
-            else
+            if (vouchernumber == "yes")
             {
                 int number = -1;
                 List<KisVouchersInfo> kisVouchersInfoList = new List<KisVouchersInfo>();
@@ -1750,7 +1750,7 @@ namespace MicroServiceApplication.Factory
             //
             //银行3张凭证合为一张凭证start
             //
-            if (vouchernumber == "no")
+            if (vouchernumber == "three")
             {
                 List<KisVouchersInfo> kisVouchersInfoList = new List<KisVouchersInfo>();
                 int number = -1;
@@ -2139,7 +2139,7 @@ namespace MicroServiceApplication.Factory
             //
             //银行2张凭证合为一张凭证start
             //
-            if (vouchernumber == "no")
+            if (vouchernumber == "two")
             {
                 List<KisVouchersInfo> kisVouchersInfoList = new List<KisVouchersInfo>();
                 int number = -1;
