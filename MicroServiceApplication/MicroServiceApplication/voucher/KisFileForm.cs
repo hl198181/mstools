@@ -282,22 +282,29 @@ namespace MicroServiceApplication.voucher
                         return;
                     }
                 }
-                if (categoryname == "output")
+                if (this.inst.Id == "653279009C4211E6A731B9323D2BF7D6")
                 {
-                    DialogResult dr = MessageBox.Show("是否把3张凭证合为一张凭证?", "系统提示", MessageBoxButtons.YesNoCancel);
-                    if (dr == DialogResult.Yes)
+                    if (categoryname == "income")
+                    {
+                        DialogResult dr = MessageBox.Show("是否把3张凭证合为一张凭证?", "系统提示", MessageBoxButtons.YesNoCancel);
+                        if (dr == DialogResult.Yes)
 
-                        vouchernumber = "yes";
+                            vouchernumber = "yes";
 
-                    else if (dr == DialogResult.No)
+                        else if (dr == DialogResult.No)
 
-                        vouchernumber = "no";
+                            vouchernumber = "no";
 
-                    else if (dr == DialogResult.Cancel)
-                        return;
+                        else if (dr == DialogResult.Cancel)
+                            return;
+                    }
+                    if (categoryname == "bankbill")
+                    {
+
+                    }
                 }
-                //执行导出凭证到KIS
-                this.InformationTextBox.Visible = true;//打开提示框
+                    //执行导出凭证到KIS
+                    this.InformationTextBox.Visible = true;//打开提示框
                 this.InformationTextBox.Text = "正在初始化会计科目!请稍等……";//提示文本
                 this.InformationTextBox.Font = new Font("宋体", 12);//提示字体
 

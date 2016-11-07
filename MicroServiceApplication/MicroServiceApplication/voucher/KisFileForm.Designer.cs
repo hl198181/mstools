@@ -88,7 +88,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(685, 103);
+            this.groupBox1.Size = new System.Drawing.Size(744, 103);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "导出信息";
@@ -100,7 +100,7 @@
             this.panel1.Location = new System.Drawing.Point(2, 16);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(681, 85);
+            this.panel1.Size = new System.Drawing.Size(740, 85);
             this.panel1.TabIndex = 0;
             // 
             // tableLayoutPanel1
@@ -125,13 +125,13 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(681, 85);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(740, 85);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // selectClientButton
             // 
             this.selectClientButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.selectClientButton.Location = new System.Drawing.Point(593, 2);
+            this.selectClientButton.Location = new System.Drawing.Point(652, 2);
             this.selectClientButton.Margin = new System.Windows.Forms.Padding(2);
             this.selectClientButton.Name = "selectClientButton";
             this.selectClientButton.Size = new System.Drawing.Size(86, 24);
@@ -159,7 +159,7 @@
             this.clientNameTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.clientNameTextBox.Name = "clientNameTextBox";
             this.clientNameTextBox.ReadOnly = true;
-            this.clientNameTextBox.Size = new System.Drawing.Size(497, 21);
+            this.clientNameTextBox.Size = new System.Drawing.Size(556, 21);
             this.clientNameTextBox.TabIndex = 1;
             // 
             // createbyLabel
@@ -181,7 +181,7 @@
             this.createbyTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.createbyTextBox.Name = "createbyTextBox";
             this.createbyTextBox.ReadOnly = true;
-            this.createbyTextBox.Size = new System.Drawing.Size(497, 21);
+            this.createbyTextBox.Size = new System.Drawing.Size(556, 21);
             this.createbyTextBox.TabIndex = 3;
             // 
             // accountcycleLabel
@@ -203,13 +203,13 @@
             this.accountcycleTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.accountcycleTextBox.Name = "accountcycleTextBox";
             this.accountcycleTextBox.ReadOnly = true;
-            this.accountcycleTextBox.Size = new System.Drawing.Size(497, 21);
+            this.accountcycleTextBox.Size = new System.Drawing.Size(556, 21);
             this.accountcycleTextBox.TabIndex = 5;
             // 
             // selectAccountcycleButton
             // 
             this.selectAccountcycleButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.selectAccountcycleButton.Location = new System.Drawing.Point(593, 30);
+            this.selectAccountcycleButton.Location = new System.Drawing.Point(652, 30);
             this.selectAccountcycleButton.Margin = new System.Windows.Forms.Padding(2);
             this.selectAccountcycleButton.Name = "selectAccountcycleButton";
             this.selectAccountcycleButton.Size = new System.Drawing.Size(86, 24);
@@ -226,7 +226,7 @@
             this.dbFileGroupBox.Margin = new System.Windows.Forms.Padding(2);
             this.dbFileGroupBox.Name = "dbFileGroupBox";
             this.dbFileGroupBox.Padding = new System.Windows.Forms.Padding(2);
-            this.dbFileGroupBox.Size = new System.Drawing.Size(685, 104);
+            this.dbFileGroupBox.Size = new System.Drawing.Size(744, 104);
             this.dbFileGroupBox.TabIndex = 2;
             this.dbFileGroupBox.TabStop = false;
             this.dbFileGroupBox.Text = "账套信息";
@@ -238,7 +238,7 @@
             this.dbFilePanel.Location = new System.Drawing.Point(2, 16);
             this.dbFilePanel.Margin = new System.Windows.Forms.Padding(2);
             this.dbFilePanel.Name = "dbFilePanel";
-            this.dbFilePanel.Size = new System.Drawing.Size(681, 86);
+            this.dbFilePanel.Size = new System.Drawing.Size(740, 86);
             this.dbFilePanel.TabIndex = 0;
             // 
             // dbFileTableLayoutPanel
@@ -259,7 +259,7 @@
             this.dbFileTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.dbFileTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.dbFileTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.dbFileTableLayoutPanel.Size = new System.Drawing.Size(681, 86);
+            this.dbFileTableLayoutPanel.Size = new System.Drawing.Size(740, 86);
             this.dbFileTableLayoutPanel.TabIndex = 0;
             // 
             // selectDbFilelabel
@@ -277,7 +277,7 @@
             // selectDbFileButton
             // 
             this.selectDbFileButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.selectDbFileButton.Location = new System.Drawing.Point(593, 2);
+            this.selectDbFileButton.Location = new System.Drawing.Point(652, 2);
             this.selectDbFileButton.Margin = new System.Windows.Forms.Padding(2);
             this.selectDbFileButton.Name = "selectDbFileButton";
             this.selectDbFileButton.Size = new System.Drawing.Size(86, 24);
@@ -293,13 +293,13 @@
             this.dbFilePathTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.dbFilePathTextBox.Name = "dbFilePathTextBox";
             this.dbFilePathTextBox.ReadOnly = true;
-            this.dbFilePathTextBox.Size = new System.Drawing.Size(497, 21);
+            this.dbFilePathTextBox.Size = new System.Drawing.Size(556, 21);
             this.dbFilePathTextBox.TabIndex = 2;
             // 
             // testConnectButton
             // 
             this.testConnectButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.testConnectButton.Location = new System.Drawing.Point(593, 30);
+            this.testConnectButton.Location = new System.Drawing.Point(652, 30);
             this.testConnectButton.Margin = new System.Windows.Forms.Padding(2);
             this.testConnectButton.Name = "testConnectButton";
             this.testConnectButton.Size = new System.Drawing.Size(86, 24);
@@ -315,7 +315,7 @@
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(685, 20);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(744, 20);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // newSubjectGroupBox
@@ -326,7 +326,7 @@
             this.newSubjectGroupBox.Margin = new System.Windows.Forms.Padding(2);
             this.newSubjectGroupBox.Name = "newSubjectGroupBox";
             this.newSubjectGroupBox.Padding = new System.Windows.Forms.Padding(2);
-            this.newSubjectGroupBox.Size = new System.Drawing.Size(685, 280);
+            this.newSubjectGroupBox.Size = new System.Drawing.Size(744, 280);
             this.newSubjectGroupBox.TabIndex = 4;
             this.newSubjectGroupBox.TabStop = false;
             this.newSubjectGroupBox.Text = "新科目列表：";
@@ -346,7 +346,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(681, 262);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(740, 262);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // ClientSubjectDataGridView
@@ -357,13 +357,13 @@
             this.ClientSubjectDataGridView.Margin = new System.Windows.Forms.Padding(2);
             this.ClientSubjectDataGridView.Name = "ClientSubjectDataGridView";
             this.ClientSubjectDataGridView.RowTemplate.Height = 37;
-            this.ClientSubjectDataGridView.Size = new System.Drawing.Size(677, 184);
+            this.ClientSubjectDataGridView.Size = new System.Drawing.Size(736, 184);
             this.ClientSubjectDataGridView.TabIndex = 0;
             // 
             // refreshButton
             // 
             this.refreshButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.refreshButton.Location = new System.Drawing.Point(575, 190);
+            this.refreshButton.Location = new System.Drawing.Point(634, 190);
             this.refreshButton.Margin = new System.Windows.Forms.Padding(2);
             this.refreshButton.Name = "refreshButton";
             this.refreshButton.Size = new System.Drawing.Size(104, 33);
@@ -375,7 +375,7 @@
             // subjectToKisButton
             // 
             this.subjectToKisButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.subjectToKisButton.Location = new System.Drawing.Point(575, 228);
+            this.subjectToKisButton.Location = new System.Drawing.Point(634, 228);
             this.subjectToKisButton.Name = "subjectToKisButton";
             this.subjectToKisButton.Size = new System.Drawing.Size(103, 31);
             this.subjectToKisButton.TabIndex = 2;
@@ -391,7 +391,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);
-            this.menuStrip1.Size = new System.Drawing.Size(685, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(744, 24);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -434,7 +434,7 @@
             this.exportActionGroupBox.Margin = new System.Windows.Forms.Padding(2);
             this.exportActionGroupBox.Name = "exportActionGroupBox";
             this.exportActionGroupBox.Padding = new System.Windows.Forms.Padding(2);
-            this.exportActionGroupBox.Size = new System.Drawing.Size(685, 55);
+            this.exportActionGroupBox.Size = new System.Drawing.Size(744, 55);
             this.exportActionGroupBox.TabIndex = 6;
             this.exportActionGroupBox.TabStop = false;
             this.exportActionGroupBox.Text = "导出凭证到KIS";
@@ -451,7 +451,7 @@
             this.exportActionflowLayoutPanel.Location = new System.Drawing.Point(2, 16);
             this.exportActionflowLayoutPanel.Margin = new System.Windows.Forms.Padding(2);
             this.exportActionflowLayoutPanel.Name = "exportActionflowLayoutPanel";
-            this.exportActionflowLayoutPanel.Size = new System.Drawing.Size(681, 37);
+            this.exportActionflowLayoutPanel.Size = new System.Drawing.Size(740, 37);
             this.exportActionflowLayoutPanel.TabIndex = 0;
             // 
             // exportIncomeButton
@@ -536,7 +536,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(685, 620);
+            this.ClientSize = new System.Drawing.Size(744, 645);
             this.Controls.Add(this.InformationTextBox);
             this.Controls.Add(this.exportActionGroupBox);
             this.Controls.Add(this.newSubjectGroupBox);
