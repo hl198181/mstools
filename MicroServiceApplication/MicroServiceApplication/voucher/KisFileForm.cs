@@ -25,8 +25,9 @@ namespace MicroServiceApplication.voucher
 
         private void selectClientButton_Click(object sender, EventArgs e)
         {
-            List<Client> clientList =  CommonManager.selectClient();
-            if (clientList != null && clientList.Count >0){
+            List<Client> clientList = CommonManager.selectClient();
+            if (clientList != null && clientList.Count > 0)
+            {
                 this.client = clientList[0];
                 this.clientNameTextBox.Text = this.client.Fullname;
                 this.queryClientNewSubject(this.client.Id);
@@ -55,7 +56,7 @@ namespace MicroServiceApplication.voucher
         }
         private void testConnectButton_Click(object sender, EventArgs e)
         {
-            if (this.kisDbFileParams == null ||  this.kisDbFileParams.DbFilePath == null || this.kisDbFileParams.DbFilePath == "")
+            if (this.kisDbFileParams == null || this.kisDbFileParams.DbFilePath == null || this.kisDbFileParams.DbFilePath == "")
             {
                 MessageBox.Show("请选择数据库文件!");
                 return;
@@ -66,9 +67,10 @@ namespace MicroServiceApplication.voucher
             {
                 kisDbFileFactory.testConnect();
                 MessageBox.Show("连接数据库成功！");
-            }catch(Exception e1)
+            }
+            catch (Exception e1)
             {
-                MessageBox.Show("连接数据库错误！"+e1.Message);
+                MessageBox.Show("连接数据库错误！" + e1.Message);
             }
         }
 
@@ -241,7 +243,7 @@ namespace MicroServiceApplication.voucher
             }
         }
 
-        private void exports(string categoryname ,string vouchernumber)
+        private void exports(string categoryname, string vouchernumber)
         {
             if (this.inst == null || this.inst.Id == null)
             {
@@ -304,13 +306,13 @@ namespace MicroServiceApplication.voucher
                         choose.StartPosition = FormStartPosition.CenterParent;
                         choose.TopMost = true;
                         choose.ShowDialog();
-                        vouchernumber = choose.vouchernumber;   
+                        vouchernumber = choose.vouchernumber;
                     }
                 }
-               
+
                 //执行导出凭证到KIS
                 this.InformationTextBox.Visible = true;//打开提示框
-                this.InformationTextBox.Text = "正在初始化会计科目!请稍等……";//提示文本
+                this.InformationTextBox.Text = "正在导出凭证!请稍等……";//提示文本
                 this.InformationTextBox.Font = new Font("宋体", 12);//提示字体
 
                 kisDbFileFactory.exportVoucher(vouchernumber, this.inst, this.client, this.accountcycle, this.user, categoryname);
@@ -405,7 +407,7 @@ namespace MicroServiceApplication.voucher
         //
         private void SubjectLength()
         {
-            
+
             if (this.kisDbFileParams == null || this.kisDbFileParams.DbFilePath == null)
             {
                 MessageBox.Show("请先选择KIS账套文件");
@@ -421,11 +423,11 @@ namespace MicroServiceApplication.voucher
             try
             {
                 KisDbFileFactory kisDbFileFactory = new KisDbFileFactory(this.kisDbFileParams);
-                
+
                 kisDbFileFactory.SubjectLength();//引用工厂里修复账套科目长度的方法
                 MessageBox.Show("科目长度修复成功!");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.StackTrace);
                 MessageBox.Show(e.Message);
