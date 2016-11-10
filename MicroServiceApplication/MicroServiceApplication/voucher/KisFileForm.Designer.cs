@@ -483,7 +483,7 @@
             this.bankbillExportbutton.Name = "bankbillExportbutton";
             this.bankbillExportbutton.Size = new System.Drawing.Size(100, 34);
             this.bankbillExportbutton.TabIndex = 2;
-            this.bankbillExportbutton.Text = "导出银行回单";
+            this.bankbillExportbutton.Text = "导出银行对账单";
             this.bankbillExportbutton.UseVisualStyleBackColor = true;
             this.bankbillExportbutton.Click += new System.EventHandler(this.bankbillExportbutton_Click);
             // 

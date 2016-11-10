@@ -659,11 +659,10 @@ namespace MicroServiceApplication.Factory
                     DataRow row = acctdt.Rows[0];
                     kisDbAcctItem = new KisDbAcct();
 
-                    kisDbAcctItem.Fcctid = row[0] == null ? null : row[0].ToString();
-                    kisDbAcctItem.Facctname = row[1] == null ? null : row[1].ToString();
-                    kisDbAcctItem.Fhelpercode = row[2] == null ? null : row[2].ToString();
-                    kisDbAcctItem.Fgroup = row[3] == null ? null : row[3].ToString();
-                    kisDbAcctItem.Fdc = row[4] == null ? null : row[4].ToString();
+                    kisDbAcctItem.Fcctid = row["FAcctID"] == null ? null : row["FAcctID"].ToString();
+                    kisDbAcctItem.Facctname = row["FAcctName"] == null ? null : row["FAcctName"].ToString();
+                    kisDbAcctItem.Fgroup = row["FGroup"] == null ? null : row["FGroup"].ToString();
+                    kisDbAcctItem.Fdc = row["FDC"] == null ? null : row["FDC"].ToString();
                 }
                 return kisDbAcctItem;
             }
@@ -957,11 +956,12 @@ namespace MicroServiceApplication.Factory
                 }
 
                 //组合插入SQL
-                String sql = "INSERT INTO GLAcct(FAcctID,FAcctName,FGroup,FDC) VALUES (" +
+                String sql = "INSERT INTO GLAcct(FAcctID,FAcctName,FGroup,FDC,FUnit) VALUES (" +
                     "'" + item.Sn + "'," +
                     "'" + item.Label + "'," +
                     "'" + level1Acct.Fgroup + "'," + //科目分组，需要根据上级象科目确认
-                    "'" + (item.Debitcredit == "de" ? "D" : "C") + "'" +
+                    "'" + (item.Debitcredit == "de" ? "D" : "C") + "'," +
+                    "'" + item.Unit + "'" +
                     ")";
                 sqls.Add(sql);
 
@@ -1024,7 +1024,7 @@ namespace MicroServiceApplication.Factory
 
             if (kda == null) throw new Exception("科目:" + item.FAcctID + ",在财务系统中不存在！");
 
-            String sql = "INSERT INTO GLVch(FSerialNum,FDate,FPeriod,FGroup,FNum,FEntryID,FAcctID,FCyID,FExchRate,FFcyAmt,FDebit,FCredit,FPreparer,FExp) VALUES (" +
+            String sql = "INSERT INTO GLVch(FSerialNum,FDate,FPeriod,FGroup,FNum,FEntryID,FAcctID,FCyID,FExchRate,FFcyAmt,FDebit,FCredit,FPreparer,FExp,FPrice,FQty) VALUES (" +
                     "" + fSerialNum + "," +
                     "'" + item.FDate + "'," +
                     "" + item.FPeriod + "," +
@@ -1038,7 +1038,9 @@ namespace MicroServiceApplication.Factory
                     "" + item.FDebit + "," +
                     "" + item.FCredit + "," +
                     "'" + item.FPrepare + "'," +
-                    "'" + item.FExp + "'" +
+                    "'" + item.FExp + "'," +
+                    "'" + item.FPrice + "'," +
+                    "'" + item.FQty + "'" +
                     ")";
 
             return sql;
@@ -1055,6 +1057,70 @@ namespace MicroServiceApplication.Factory
             //获取凭证数据
             KisVoucherFactory kvf = new KisVoucherFactory();
             List<KisVoucherInfo> vouchers = kvf.getKisVoucher(inst.Id, client.Id, accountcycle.Sn, user.Id, categoryname);
+            //
+            //凭证只显示一行摘要start
+            //
+
+            List<KisVouchersInfo> newvouchers = new List<KisVouchersInfo>();
+            if (categoryname == "output")
+            {
+                foreach (KisVoucherInfo kvi in vouchers)
+                {
+                    if (kvi.FEntryID == 0)
+                    {
+                        KisVouchersInfo kisVouchersInfo = new KisVouchersInfo();
+                        kisVouchersInfo.FAcctID = kvi.FAcctID;
+                        kisVouchersInfo.FAttchment = kvi.FAttchment;
+                        kisVouchersInfo.FCredit = kvi.FCredit;
+                        kisVouchersInfo.FCyID = kvi.FCyID;
+                        kisVouchersInfo.FDate = kvi.FDate;
+                        kisVouchersInfo.FDC = kvi.FDC;
+                        kisVouchersInfo.FDebit = kvi.FDebit;
+                        kisVouchersInfo.FDeleted = kvi.FDeleted;
+                        kisVouchersInfo.FEntryID = kvi.FEntryID;
+                        kisVouchersInfo.FExchRate = kvi.FExchRate;
+                        kisVouchersInfo.FExp = "销售收入";
+                        kisVouchersInfo.FFCyAmt = kvi.FFCyAmt;
+                        kisVouchersInfo.FGroup = kvi.FGroup;
+                        kisVouchersInfo.FNum = kvi.FNum;
+                        kisVouchersInfo.FPeriod = kvi.FPeriod;
+                        kisVouchersInfo.FPosted = kvi.FPosted;
+                        kisVouchersInfo.FPrepare = kvi.FPrepare;
+                        kisVouchersInfo.FPrice = kvi.FPrice;
+                        kisVouchersInfo.FQty = kvi.FQty;
+                        kisVouchersInfo.FSerialNo = kvi.FSerialNo;
+                        newvouchers.Add(kisVouchersInfo);
+                    }
+                    else
+                    {
+                        KisVouchersInfo kisVouchersInfo = new KisVouchersInfo();
+                        kisVouchersInfo.FAcctID = kvi.FAcctID;
+                        kisVouchersInfo.FAttchment = kvi.FAttchment;
+                        kisVouchersInfo.FCredit = kvi.FCredit;
+                        kisVouchersInfo.FCyID = kvi.FCyID;
+                        kisVouchersInfo.FDate = kvi.FDate;
+                        kisVouchersInfo.FDC = kvi.FDC;
+                        kisVouchersInfo.FDebit = kvi.FDebit;
+                        kisVouchersInfo.FDeleted = kvi.FDeleted;
+                        kisVouchersInfo.FEntryID = kvi.FEntryID;
+                        kisVouchersInfo.FExchRate = kvi.FExchRate;
+                        kisVouchersInfo.FExp = null;
+                        kisVouchersInfo.FFCyAmt = kvi.FFCyAmt;
+                        kisVouchersInfo.FGroup = kvi.FGroup;
+                        kisVouchersInfo.FNum = kvi.FNum;
+                        kisVouchersInfo.FPeriod = kvi.FPeriod;
+                        kisVouchersInfo.FPosted = kvi.FPosted;
+                        kisVouchersInfo.FPrepare = kvi.FPrepare;
+                        kisVouchersInfo.FPrice = kvi.FPrice;
+                        kisVouchersInfo.FQty = kvi.FQty;
+                        kisVouchersInfo.FSerialNo = kvi.FSerialNo;
+                        newvouchers.Add(kisVouchersInfo);
+                    }
+                }
+            }
+            //
+            //凭证只显示一行摘要end
+            //
 
             if (vouchers == null || vouchers.Count <= 0) throw new Exception("没有查找到需要导出的凭证信息！");
 
@@ -1063,7 +1129,7 @@ namespace MicroServiceApplication.Factory
             List<String> sqls = new List<String>();
             int maxFSerialNum = -1;
             int maxFNum = -1;
-            if(inst.Id != "653279009C4211E6A731B9323D2BF7D6" && inst.Id != "10000001463017")
+            if(inst.Id != "653279009C4211E6A731B9323D2BF7D6" && inst.Id != "10000001463017" && inst.Id != "F6A4E6B0A65211E6BD311D06DD4D005D" && inst.Id != "37166870A68711E6BD311D06DD4D005D")
                 {
                 if (vouchernumber == "no")
                 {
@@ -1097,66 +1163,41 @@ namespace MicroServiceApplication.Factory
                     }
                 }
             }
-            //
-            //只显示一行摘要start
-            //
-            List<KisVouchersInfo> newvouchers = new List<KisVouchersInfo>();
-            foreach(KisVoucherInfo kvi in vouchers)
+            if (inst.Id == "F6A4E6B0A65211E6BD311D06DD4D005D" || inst.Id == "37166870A68711E6BD311D06DD4D005D")
             {
-                if (kvi.FEntryID == 0)
+                if (vouchernumber == "no")
                 {
-                    KisVouchersInfo kisVouchersInfo = new KisVouchersInfo();
-                    kisVouchersInfo.FAcctID = kvi.FAcctID;
-                    kisVouchersInfo.FAttchment = kvi.FAttchment;
-                    kisVouchersInfo.FCredit = kvi.FCredit;
-                    kisVouchersInfo.FCyID = kvi.FCyID;
-                    kisVouchersInfo.FDate = kvi.FDate;
-                    kisVouchersInfo.FDC = kvi.FDC;
-                    kisVouchersInfo.FDebit = kvi.FDebit;
-                    kisVouchersInfo.FDeleted = kvi.FDeleted;
-                    kisVouchersInfo.FEntryID = kvi.FEntryID;
-                    kisVouchersInfo.FExchRate = kvi.FExchRate;
-                    kisVouchersInfo.FExp = kvi.FExp;
-                    kisVouchersInfo.FFCyAmt = kvi.FFCyAmt;
-                    kisVouchersInfo.FGroup = kvi.FGroup;
-                    kisVouchersInfo.FNum = kvi.FNum;
-                    kisVouchersInfo.FPeriod = kvi.FPeriod;
-                    kisVouchersInfo.FPosted = kvi.FPosted;
-                    kisVouchersInfo.FPrepare = kvi.FPrepare;
-                    kisVouchersInfo.FPrice = kvi.FPrice;
-                    kisVouchersInfo.FQty = kvi.FQty;
-                    kisVouchersInfo.FSerialNo = kvi.FSerialNo;
-                    newvouchers.Add(kisVouchersInfo);
-                }
-                else
-                {
-                    KisVouchersInfo kisVouchersInfo = new KisVouchersInfo();
-                    kisVouchersInfo.FAcctID = kvi.FAcctID;
-                    kisVouchersInfo.FAttchment = kvi.FAttchment;
-                    kisVouchersInfo.FCredit = kvi.FCredit;
-                    kisVouchersInfo.FCyID = kvi.FCyID;
-                    kisVouchersInfo.FDate = kvi.FDate;
-                    kisVouchersInfo.FDC = kvi.FDC;
-                    kisVouchersInfo.FDebit = kvi.FDebit;
-                    kisVouchersInfo.FDeleted = kvi.FDeleted;
-                    kisVouchersInfo.FEntryID = kvi.FEntryID;
-                    kisVouchersInfo.FExchRate = kvi.FExchRate;
-                    kisVouchersInfo.FExp = null;
-                    kisVouchersInfo.FFCyAmt = kvi.FFCyAmt;
-                    kisVouchersInfo.FGroup = kvi.FGroup;
-                    kisVouchersInfo.FNum = kvi.FNum;
-                    kisVouchersInfo.FPeriod = kvi.FPeriod;
-                    kisVouchersInfo.FPosted = kvi.FPosted;
-                    kisVouchersInfo.FPrepare = kvi.FPrepare;
-                    kisVouchersInfo.FPrice = kvi.FPrice;
-                    kisVouchersInfo.FQty = kvi.FQty;
-                    kisVouchersInfo.FSerialNo = kvi.FSerialNo;
-                    newvouchers.Add(kisVouchersInfo);
+                    foreach (KisVouchersInfo kvi in newvouchers)
+                    {
+                        if (kvi.FEntryID == 0)
+                        {
+                            if (maxFSerialNum < 0)
+                            {
+                                maxFSerialNum = this.getMaxFSerialNum();
+                                maxFSerialNum++;
+                            }
+                            else
+                            {
+                                maxFSerialNum++;
+                            }
+
+                            if (maxFNum < 0)
+                            {
+                                maxFNum = this.getMaxFNum(kvi.FPeriod, kvi.FGroup);
+                                maxFNum++;
+                            }
+                            else
+                            {
+                                maxFNum++;
+                            }
+                        }
+                        String sql = this.build3ItemSql(kvi, maxFSerialNum, maxFNum);
+                        if (sql != null && sql != "") sqls.Add(sql);
+
+                    }
                 }
             }
-            //
-            //只显示一行摘要end
-            //
+            
             if (inst.Id == "653279009C4211E6A731B9323D2BF7D6" || inst.Id == "10000001463017")
             {
                 //
@@ -2550,59 +2591,62 @@ namespace MicroServiceApplication.Factory
 
             AccessDbClass access = new AccessDbClass(this.KdbParams.DbFilePath);
             DataTable dt = access.SelectToDataTable(sql);
-            if (kisDbPref.Faclen2 >= 8 || dt.Rows.Count < 0)
+            if (kisDbPref.Faclen2 - kisDbPref.Faclen1 >= 4 || dt.Rows.Count < 0)
             {
                 throw new Exception("科目无需修复");
             }
-            if (kisDbPref.Faclen2 == 6 && dt.Rows.Count > 0)
+            else
             {
-                sqls.Add("update GLAcct set FAcctID = Left(FAcctID,4)+'00'+Right(FAcctID,len(FAcctID)-4) where len(FAcctID) > 4 ");
-                sqls.Add("update GLPref set FAcLen2 = '8'");
-                sqls.Add("update GLPref set FAcLen3 = FAcLen3 + 2 where FAcLen3 <>null ");
-                sqls.Add("update GLPref set FAcLen4 = FAcLen4 + 2 where FAcLen4 <>null ");
-                sqls.Add("update GLPref set FAcLen5 = FAcLen5 + 2 where FAcLen5 <>null ");
-                sqls.Add("update GLPref set FAcLen6 = FAcLen6 + 2 where FAcLen6 <>null ");
-                sqls.Add("update GLPref set FAcLen7 = FAcLen7 + 2 where FAcLen7 <>null ");
-                sqls.Add("update GLPref set FAcLen8 = FAcLen8 + 2 where FAcLen8 <>null ");
-                sqls.Add("update GLPref set FAcLen9 = FAcLen9 + 2 where FAcLen9 <>null ");
-                sqls.Add("update GLPref set FAcLen10 = FAcLen10 + 2 where FAcLen10 <>null ");
+                if (kisDbPref.Faclen2 - kisDbPref.Faclen1 == 2 && dt.Rows.Count > 0)
+                {
+                    sqls.Add("update GLAcct set FAcctID = Left(FAcctID,4)+'00'+Right(FAcctID,len(FAcctID)-4) where len(FAcctID) > 4 ");
+                    sqls.Add("update GLPref set FAcLen2 = FAcLen2 + 2 where FAcLen3 <>null");
+                    sqls.Add("update GLPref set FAcLen3 = FAcLen3 + 2 where FAcLen3 <>null ");
+                    sqls.Add("update GLPref set FAcLen4 = FAcLen4 + 2 where FAcLen4 <>null ");
+                    sqls.Add("update GLPref set FAcLen5 = FAcLen5 + 2 where FAcLen5 <>null ");
+                    sqls.Add("update GLPref set FAcLen6 = FAcLen6 + 2 where FAcLen6 <>null ");
+                    sqls.Add("update GLPref set FAcLen7 = FAcLen7 + 2 where FAcLen7 <>null ");
+                    sqls.Add("update GLPref set FAcLen8 = FAcLen8 + 2 where FAcLen8 <>null ");
+                    sqls.Add("update GLPref set FAcLen9 = FAcLen9 + 2 where FAcLen9 <>null ");
+                    sqls.Add("update GLPref set FAcLen10 = FAcLen10 + 2 where FAcLen10 <>null ");
 
-                try
-                {
-                    access.ExecuteSQLNonquery(sqls);
+                    try
+                    {
+                        access.ExecuteSQLNonquery(sqls);
+                    }
+                    catch (Exception e1)
+                    {
+                        throw e1;
+                    }
+                    finally
+                    {
+                        access.Close();
+                    }
                 }
-                catch (Exception e1)
+                if (kisDbPref.Faclen2 - kisDbPref.Faclen1 == 3 && dt.Rows.Count > 0)
                 {
-                    throw e1;
-                }
-                finally
-                {
-                    access.Close();
-                }
-            }
-            if (kisDbPref.Faclen2 == 7 && dt.Rows.Count > 0)
-            {
-                sqls.Add("update GLAcct set FAcctID = Left(FAcctID,4)+'0'+Right(FAcctID,len(FAcctID)-4) where len(FAcctID) > 4 ");
-                sqls.Add("update GLPref set FAcLen2 = '8'");
-                sqls.Add("update GLPref set FAcLen3 = FAcLen3 + 1 where FAcLen3 <>null ");
-                sqls.Add("update GLPref set FAcLen4 = FAcLen4 + 1 where FAcLen4 <>null ");
-                sqls.Add("update GLPref set FAcLen5 = FAcLen5 + 1 where FAcLen5 <>null ");
-                sqls.Add("update GLPref set FAcLen6 = FAcLen6 + 1 where FAcLen6 <>null ");
-                sqls.Add("update GLPref set FAcLen7 = FAcLen7 + 1 where FAcLen7 <>null ");
-                sqls.Add("update GLPref set FAcLen8 = FAcLen8 + 1 where FAcLen8 <>null ");
-                sqls.Add("update GLPref set FAcLen9 = FAcLen9 + 1 where FAcLen9 <>null ");
-                sqls.Add("update GLPref set FAcLen10 = FAcLen10 + 1 where FAcLen10 <>null ");
-                try
-                {
-                    access.ExecuteSQLNonquery(sqls);
-                }
-                catch (Exception e1)
-                {
-                    throw e1;
-                }
-                finally
-                {
-                    access.Close();
+                    sqls.Add("update GLAcct set FAcctID = Left(FAcctID,4)+'0'+Right(FAcctID,len(FAcctID)-4) where len(FAcctID) > 4 ");
+                    sqls.Add("update GLPref set FAcLen2 = FAcLen2 + 1 where FAcLen3 <>null");
+                    sqls.Add("update GLPref set FAcLen3 = FAcLen3 + 1 where FAcLen3 <>null ");
+                    sqls.Add("update GLPref set FAcLen4 = FAcLen4 + 1 where FAcLen4 <>null ");
+                    sqls.Add("update GLPref set FAcLen5 = FAcLen5 + 1 where FAcLen5 <>null ");
+                    sqls.Add("update GLPref set FAcLen6 = FAcLen6 + 1 where FAcLen6 <>null ");
+                    sqls.Add("update GLPref set FAcLen7 = FAcLen7 + 1 where FAcLen7 <>null ");
+                    sqls.Add("update GLPref set FAcLen8 = FAcLen8 + 1 where FAcLen8 <>null ");
+                    sqls.Add("update GLPref set FAcLen9 = FAcLen9 + 1 where FAcLen9 <>null ");
+                    sqls.Add("update GLPref set FAcLen10 = FAcLen10 + 1 where FAcLen10 <>null ");
+                    try
+                    {
+                        access.ExecuteSQLNonquery(sqls);
+                    }
+                    catch (Exception e1)
+                    {
+                        throw e1;
+                    }
+                    finally
+                    {
+                        access.Close();
+                    }
                 }
             }
         }
