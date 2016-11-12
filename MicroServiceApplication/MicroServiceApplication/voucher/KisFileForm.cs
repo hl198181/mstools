@@ -309,6 +309,21 @@ namespace MicroServiceApplication.voucher
                         vouchernumber = choose.vouchernumber;
                     }
                 }
+                if (this.inst.Id == "37166870A68711E6BD311D06DD4D005D")
+                {
+                    if (categoryname == "bankbill")
+                    {
+                        Choose choose = new Choose();
+                        choose.StartPosition = FormStartPosition.CenterParent;
+                        choose.TopMost = true;
+                        choose.ShowDialog();
+                        vouchernumber = choose.vouchernumber;
+                        if(vouchernumber == null ||vouchernumber == "")
+                        {
+                            return;
+                        }
+                    }
+                }
 
                 //执行导出凭证到KIS
                 this.InformationTextBox.Visible = true;//打开提示框

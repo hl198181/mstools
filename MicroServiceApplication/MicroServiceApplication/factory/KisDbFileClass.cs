@@ -960,7 +960,7 @@ namespace MicroServiceApplication.Factory
                     "'" + item.Sn + "'," +
                     "'" + item.Label + "'," +
                     "'" + level1Acct.Fgroup + "'," + //科目分组，需要根据上级象科目确认
-                    "'" + (item.Debitcredit == "de" ? "D" : "C") + "'," +
+                    "'" + level1Acct.Fdc + "'," +
                     "'" + item.Unit + "'" +
                     ")";
                 sqls.Add(sql);
@@ -1062,7 +1062,8 @@ namespace MicroServiceApplication.Factory
             //
 
             List<KisVouchersInfo> newvouchers = new List<KisVouchersInfo>();
-            if (categoryname == "output")
+            //如果不等于一鸣机构
+            if (inst.Id != "F6A4E6B0A65211E6BD311D06DD4D005D")
             {
                 foreach (KisVoucherInfo kvi in vouchers)
                 {
@@ -1079,13 +1080,13 @@ namespace MicroServiceApplication.Factory
                         kisVouchersInfo.FDeleted = kvi.FDeleted;
                         kisVouchersInfo.FEntryID = kvi.FEntryID;
                         kisVouchersInfo.FExchRate = kvi.FExchRate;
-                        kisVouchersInfo.FExp = "销售收入";
+                        kisVouchersInfo.FExp = kvi.FExp;
                         kisVouchersInfo.FFCyAmt = kvi.FFCyAmt;
                         kisVouchersInfo.FGroup = kvi.FGroup;
                         kisVouchersInfo.FNum = kvi.FNum;
                         kisVouchersInfo.FPeriod = kvi.FPeriod;
                         kisVouchersInfo.FPosted = kvi.FPosted;
-                        kisVouchersInfo.FPrepare = kvi.FPrepare;
+                        kisVouchersInfo.FPrepare = "Manager";
                         kisVouchersInfo.FPrice = kvi.FPrice;
                         kisVouchersInfo.FQty = kvi.FQty;
                         kisVouchersInfo.FSerialNo = kvi.FSerialNo;
@@ -1110,7 +1111,64 @@ namespace MicroServiceApplication.Factory
                         kisVouchersInfo.FNum = kvi.FNum;
                         kisVouchersInfo.FPeriod = kvi.FPeriod;
                         kisVouchersInfo.FPosted = kvi.FPosted;
-                        kisVouchersInfo.FPrepare = kvi.FPrepare;
+                        kisVouchersInfo.FPrepare = "Manager";
+                        kisVouchersInfo.FPrice = kvi.FPrice;
+                        kisVouchersInfo.FQty = kvi.FQty;
+                        kisVouchersInfo.FSerialNo = kvi.FSerialNo;
+                        newvouchers.Add(kisVouchersInfo);
+                    }
+                }
+            }
+            //如果等于一鸣机构
+            if (inst.Id == "F6A4E6B0A65211E6BD311D06DD4D005D")
+            {
+                foreach (KisVoucherInfo kvi in vouchers)
+                {
+                    if (kvi.FEntryID == 0)
+                    {
+                        KisVouchersInfo kisVouchersInfo = new KisVouchersInfo();
+                        kisVouchersInfo.FAcctID = kvi.FAcctID;
+                        kisVouchersInfo.FAttchment = kvi.FAttchment;
+                        kisVouchersInfo.FCredit = kvi.FCredit;
+                        kisVouchersInfo.FCyID = kvi.FCyID;
+                        kisVouchersInfo.FDate = kvi.FDate;
+                        kisVouchersInfo.FDC = kvi.FDC;
+                        kisVouchersInfo.FDebit = kvi.FDebit;
+                        kisVouchersInfo.FDeleted = kvi.FDeleted;
+                        kisVouchersInfo.FEntryID = kvi.FEntryID;
+                        kisVouchersInfo.FExchRate = kvi.FExchRate;
+                        kisVouchersInfo.FExp = kvi.FExp;
+                        kisVouchersInfo.FFCyAmt = kvi.FFCyAmt;
+                        kisVouchersInfo.FGroup = "";//凭证字为空
+                        kisVouchersInfo.FNum = kvi.FNum;
+                        kisVouchersInfo.FPeriod = kvi.FPeriod;
+                        kisVouchersInfo.FPosted = kvi.FPosted;
+                        kisVouchersInfo.FPrepare = "Manager";
+                        kisVouchersInfo.FPrice = kvi.FPrice;
+                        kisVouchersInfo.FQty = kvi.FQty;
+                        kisVouchersInfo.FSerialNo = kvi.FSerialNo;
+                        newvouchers.Add(kisVouchersInfo);
+                    }
+                    else
+                    {
+                        KisVouchersInfo kisVouchersInfo = new KisVouchersInfo();
+                        kisVouchersInfo.FAcctID = kvi.FAcctID;
+                        kisVouchersInfo.FAttchment = kvi.FAttchment;
+                        kisVouchersInfo.FCredit = kvi.FCredit;
+                        kisVouchersInfo.FCyID = kvi.FCyID;
+                        kisVouchersInfo.FDate = kvi.FDate;
+                        kisVouchersInfo.FDC = kvi.FDC;
+                        kisVouchersInfo.FDebit = kvi.FDebit;
+                        kisVouchersInfo.FDeleted = kvi.FDeleted;
+                        kisVouchersInfo.FEntryID = kvi.FEntryID;
+                        kisVouchersInfo.FExchRate = kvi.FExchRate;
+                        kisVouchersInfo.FExp = null;
+                        kisVouchersInfo.FFCyAmt = kvi.FFCyAmt;
+                        kisVouchersInfo.FGroup = "";//凭证字为空
+                        kisVouchersInfo.FNum = kvi.FNum;
+                        kisVouchersInfo.FPeriod = kvi.FPeriod;
+                        kisVouchersInfo.FPosted = kvi.FPosted;
+                        kisVouchersInfo.FPrepare = "Manager";
                         kisVouchersInfo.FPrice = kvi.FPrice;
                         kisVouchersInfo.FQty = kvi.FQty;
                         kisVouchersInfo.FSerialNo = kvi.FSerialNo;
@@ -1129,8 +1187,9 @@ namespace MicroServiceApplication.Factory
             List<String> sqls = new List<String>();
             int maxFSerialNum = -1;
             int maxFNum = -1;
-            if(inst.Id != "653279009C4211E6A731B9323D2BF7D6" && inst.Id != "10000001463017" && inst.Id != "F6A4E6B0A65211E6BD311D06DD4D005D" && inst.Id != "37166870A68711E6BD311D06DD4D005D")
-                {
+            //如果机构不是佰佳、顶聚、一鸣、宝通、百科
+            if (inst.Id != "653279009C4211E6A731B9323D2BF7D6" && inst.Id != "10000001463017" && inst.Id != "F6A4E6B0A65211E6BD311D06DD4D005D" && inst.Id != "37166870A68711E6BD311D06DD4D005D" && inst.Id != "F19DCFD06A7811E684D4AFECE5B384A4")
+            {
                 if (vouchernumber == "no")
                 {
                     foreach (KisVoucherInfo kvi in vouchers)
@@ -1163,8 +1222,12 @@ namespace MicroServiceApplication.Factory
                     }
                 }
             }
+            //如果机构是一鸣、宝通
             if (inst.Id == "F6A4E6B0A65211E6BD311D06DD4D005D" || inst.Id == "37166870A68711E6BD311D06DD4D005D")
             {
+                //
+                //不合并导入start
+                //
                 if (vouchernumber == "no")
                 {
                     foreach (KisVouchersInfo kvi in newvouchers)
@@ -1193,12 +1256,670 @@ namespace MicroServiceApplication.Factory
                         }
                         String sql = this.build3ItemSql(kvi, maxFSerialNum, maxFNum);
                         if (sql != null && sql != "") sqls.Add(sql);
-
                     }
                 }
-            }
-            
-            if (inst.Id == "653279009C4211E6A731B9323D2BF7D6" || inst.Id == "10000001463017")
+                //
+                //不合并导入end
+                //
+                //银行3张凭证合为一张凭证start
+                //
+                if (vouchernumber == "three")
+                {
+                    List<KisVouchersInfo> kisVouchersInfoList = new List<KisVouchersInfo>();
+                    int number = -1;
+
+                    for (int i = 0; i < vouchers.Count; i++)
+                    {
+
+                        if (vouchers[i].FEntryID == 0)
+                        {
+                            number++;
+                            if (number == 3)
+                            {
+                                number = 0;
+                            }
+                        }
+                        KisVouchersInfo kisVouchersInfo1 = new KisVouchersInfo();
+                        KisVouchersInfo kisVouchersInfo2 = new KisVouchersInfo();
+                        KisVouchersInfo kisVouchersInfo3 = new KisVouchersInfo();
+                        if (vouchers[i].FEntryID == 0 && number == 0)
+                        {
+
+                            if (vouchers[i].FEntryID == 0)
+                            {
+
+                                KisVouchersInfo kisVouchersInfo = new KisVouchersInfo();
+                                kisVouchersInfo.FAcctID = vouchers[i].FAcctID;
+                                kisVouchersInfo.FAttchment = vouchers[i].FAttchment;
+                                kisVouchersInfo.FCredit = vouchers[i].FCredit;
+                                kisVouchersInfo.FCyID = vouchers[i].FCyID;
+                                kisVouchersInfo.FDate = vouchers[i].FDate;
+                                kisVouchersInfo.FDC = vouchers[i].FDC;
+                                kisVouchersInfo.FDebit = vouchers[i].FDebit;
+                                kisVouchersInfo.FDeleted = vouchers[i].FDeleted;
+                                kisVouchersInfo.FEntryID = 0;
+                                kisVouchersInfo.FExchRate = vouchers[i].FExchRate;
+                                kisVouchersInfo.FExp = vouchers[i].FExp;
+                                kisVouchersInfo.FFCyAmt = vouchers[i].FFCyAmt;
+                                kisVouchersInfo.FGroup = vouchers[i].FGroup;
+                                kisVouchersInfo.FNum = vouchers[i].FNum;
+                                kisVouchersInfo.FPeriod = vouchers[i].FPeriod;
+                                kisVouchersInfo.FPosted = vouchers[i].FPosted;
+                                kisVouchersInfo.FPrepare = "Manager";
+                                kisVouchersInfo.FPrice = vouchers[i].FPrice;
+                                kisVouchersInfo.FQty = vouchers[i].FQty;
+                                kisVouchersInfo.FSerialNo = vouchers[i].FSerialNo;
+                                kisVouchersInfoList.Add(kisVouchersInfo);
+                            }
+
+                            if (vouchers[i + 1].FEntryID == 1)
+                            {
+                                kisVouchersInfo1.FAcctID = vouchers[i + 1].FAcctID;
+                                kisVouchersInfo1.FAttchment = vouchers[i + 1].FAttchment;
+                                kisVouchersInfo1.FCredit = vouchers[i + 1].FCredit;
+                                kisVouchersInfo1.FCyID = vouchers[i + 1].FCyID;
+                                kisVouchersInfo1.FDate = vouchers[i + 1].FDate;
+                                kisVouchersInfo1.FDC = vouchers[i + 1].FDC;
+                                kisVouchersInfo1.FDebit = vouchers[i + 1].FDebit;
+                                kisVouchersInfo1.FDeleted = vouchers[i + 1].FDeleted;
+                                kisVouchersInfo1.FEntryID = 1;
+                                kisVouchersInfo1.FExchRate = vouchers[i + 1].FExchRate;
+                                kisVouchersInfo1.FExp = null;
+                                kisVouchersInfo1.FFCyAmt = vouchers[i + 1].FFCyAmt;
+                                kisVouchersInfo1.FGroup = vouchers[i + 1].FGroup;
+                                kisVouchersInfo1.FNum = vouchers[i + 1].FNum;
+                                kisVouchersInfo1.FPeriod = vouchers[i + 1].FPeriod;
+                                kisVouchersInfo1.FPosted = vouchers[i + 1].FPosted;
+                                kisVouchersInfo1.FPrepare = "Manager";
+                                kisVouchersInfo1.FPrice = vouchers[i + 1].FPrice;
+                                kisVouchersInfo1.FQty = vouchers[i + 1].FQty;
+                                kisVouchersInfo1.FSerialNo = vouchers[i + 1].FSerialNo;
+                                kisVouchersInfoList.Add(kisVouchersInfo1);
+                            }
+
+                            if (i + 3 <= vouchers.Count)
+                            {
+                                if (vouchers[i + 2].FEntryID == 2)
+                                {
+                                    kisVouchersInfo2.FAcctID = vouchers[i + 2].FAcctID;
+                                    kisVouchersInfo2.FAttchment = vouchers[i + 2].FAttchment;
+                                    kisVouchersInfo2.FCredit = vouchers[i + 2].FCredit;
+                                    kisVouchersInfo2.FCyID = vouchers[i + 2].FCyID;
+                                    kisVouchersInfo2.FDate = vouchers[i + 2].FDate;
+                                    kisVouchersInfo2.FDC = vouchers[i + 2].FDC;
+                                    kisVouchersInfo2.FDebit = vouchers[i + 2].FDebit;
+                                    kisVouchersInfo2.FDeleted = vouchers[i + 2].FDeleted;
+                                    kisVouchersInfo2.FEntryID = 2;
+                                    kisVouchersInfo2.FExchRate = vouchers[i + 2].FExchRate;
+                                    kisVouchersInfo2.FExp = null;
+                                    kisVouchersInfo2.FFCyAmt = vouchers[i + 2].FFCyAmt;
+                                    kisVouchersInfo2.FGroup = vouchers[i + 2].FGroup;
+                                    kisVouchersInfo2.FNum = vouchers[i + 2].FNum;
+                                    kisVouchersInfo2.FPeriod = vouchers[i + 2].FPeriod;
+                                    kisVouchersInfo2.FPosted = vouchers[i + 2].FPosted;
+                                    kisVouchersInfo2.FPrepare = "Manager";
+                                    kisVouchersInfo2.FPrice = vouchers[i + 2].FPrice;
+                                    kisVouchersInfo2.FQty = vouchers[i + 2].FQty;
+                                    kisVouchersInfo2.FSerialNo = vouchers[i + 2].FSerialNo;
+                                    kisVouchersInfoList.Add(kisVouchersInfo2);
+                                }
+                            }
+
+                            if (i + 4 <= vouchers.Count)
+                            {
+                                if (vouchers[i + 3].FEntryID == 3)
+                                {
+                                    kisVouchersInfo3.FAcctID = vouchers[i + 3].FAcctID;
+                                    kisVouchersInfo3.FAttchment = vouchers[i + 3].FAttchment;
+                                    kisVouchersInfo3.FCredit = vouchers[i + 3].FCredit;
+                                    kisVouchersInfo3.FCyID = vouchers[i + 3].FCyID;
+                                    kisVouchersInfo3.FDate = vouchers[i + 3].FDate;
+                                    kisVouchersInfo3.FDC = vouchers[i + 3].FDC;
+                                    kisVouchersInfo3.FDebit = vouchers[i + 3].FDebit;
+                                    kisVouchersInfo3.FDeleted = vouchers[i + 3].FDeleted;
+                                    kisVouchersInfo3.FEntryID = 3;
+                                    kisVouchersInfo3.FExchRate = vouchers[i + 3].FExchRate;
+                                    kisVouchersInfo3.FExp = null;
+                                    kisVouchersInfo3.FFCyAmt = vouchers[i + 3].FFCyAmt;
+                                    kisVouchersInfo3.FGroup = vouchers[i + 3].FGroup;
+                                    kisVouchersInfo3.FNum = vouchers[i + 3].FNum;
+                                    kisVouchersInfo3.FPeriod = vouchers[i + 3].FPeriod;
+                                    kisVouchersInfo3.FPosted = vouchers[i + 3].FPosted;
+                                    kisVouchersInfo3.FPrepare = "Manager";
+                                    kisVouchersInfo3.FPrice = vouchers[i + 3].FPrice;
+                                    kisVouchersInfo3.FQty = vouchers[i + 3].FQty;
+                                    kisVouchersInfo3.FSerialNo = vouchers[i + 3].FSerialNo;
+                                    kisVouchersInfoList.Add(kisVouchersInfo3);
+                                }
+                            }
+                        }
+                        if (vouchers[i].FEntryID == 0 && number == 1)
+                        {
+
+                            if (vouchers[i].FEntryID == 0)
+                            {
+
+                                KisVouchersInfo kisVouchersInfo = new KisVouchersInfo();
+                                kisVouchersInfo.FAcctID = vouchers[i].FAcctID;
+                                kisVouchersInfo.FAttchment = vouchers[i].FAttchment;
+                                kisVouchersInfo.FCredit = vouchers[i].FCredit;
+                                kisVouchersInfo.FCyID = vouchers[i].FCyID;
+                                kisVouchersInfo.FDate = vouchers[i].FDate;
+                                kisVouchersInfo.FDC = vouchers[i].FDC;
+                                kisVouchersInfo.FDebit = vouchers[i].FDebit;
+                                kisVouchersInfo.FDeleted = vouchers[i].FDeleted;
+                                kisVouchersInfo.FEntryID = vouchers[i - 1].FEntryID + 1;
+                                kisVouchersInfo.FExchRate = vouchers[i].FExchRate;
+                                kisVouchersInfo.FExp = vouchers[i].FExp;
+                                kisVouchersInfo.FFCyAmt = vouchers[i].FFCyAmt;
+                                kisVouchersInfo.FGroup = vouchers[i].FGroup;
+                                kisVouchersInfo.FNum = vouchers[i].FNum;
+                                kisVouchersInfo.FPeriod = vouchers[i].FPeriod;
+                                kisVouchersInfo.FPosted = vouchers[i].FPosted;
+                                kisVouchersInfo.FPrepare = "Manager";
+                                kisVouchersInfo.FPrice = vouchers[i].FPrice;
+                                kisVouchersInfo.FQty = vouchers[i].FQty;
+                                kisVouchersInfo.FSerialNo = vouchers[i].FSerialNo;
+                                kisVouchersInfoList.Add(kisVouchersInfo);
+                            }
+
+                            if (vouchers[i + 1].FEntryID == 1)
+                            {
+                                kisVouchersInfo1.FAcctID = vouchers[i + 1].FAcctID;
+                                kisVouchersInfo1.FAttchment = vouchers[i + 1].FAttchment;
+                                kisVouchersInfo1.FCredit = vouchers[i + 1].FCredit;
+                                kisVouchersInfo1.FCyID = vouchers[i + 1].FCyID;
+                                kisVouchersInfo1.FDate = vouchers[i + 1].FDate;
+                                kisVouchersInfo1.FDC = vouchers[i + 1].FDC;
+                                kisVouchersInfo1.FDebit = vouchers[i + 1].FDebit;
+                                kisVouchersInfo1.FDeleted = vouchers[i + 1].FDeleted;
+                                kisVouchersInfo1.FEntryID = vouchers[i - 1].FEntryID + 2;
+                                kisVouchersInfo1.FExchRate = vouchers[i + 1].FExchRate;
+                                kisVouchersInfo1.FExp = null;
+                                kisVouchersInfo1.FFCyAmt = vouchers[i + 1].FFCyAmt;
+                                kisVouchersInfo1.FGroup = vouchers[i + 1].FGroup;
+                                kisVouchersInfo1.FNum = vouchers[i + 1].FNum;
+                                kisVouchersInfo1.FPeriod = vouchers[i + 1].FPeriod;
+                                kisVouchersInfo1.FPosted = vouchers[i + 1].FPosted;
+                                kisVouchersInfo1.FPrepare = "Manager";
+                                kisVouchersInfo1.FPrice = vouchers[i + 1].FPrice;
+                                kisVouchersInfo1.FQty = vouchers[i + 1].FQty;
+                                kisVouchersInfo1.FSerialNo = vouchers[i + 1].FSerialNo;
+                                kisVouchersInfoList.Add(kisVouchersInfo1);
+                            }
+                            if (i + 3 <= vouchers.Count)
+                            {
+                                if (vouchers[i + 2].FEntryID == 2)
+                                {
+                                    kisVouchersInfo2.FAcctID = vouchers[i + 2].FAcctID;
+                                    kisVouchersInfo2.FAttchment = vouchers[i + 2].FAttchment;
+                                    kisVouchersInfo2.FCredit = vouchers[i + 2].FCredit;
+                                    kisVouchersInfo2.FCyID = vouchers[i + 2].FCyID;
+                                    kisVouchersInfo2.FDate = vouchers[i + 2].FDate;
+                                    kisVouchersInfo2.FDC = vouchers[i + 2].FDC;
+                                    kisVouchersInfo2.FDebit = vouchers[i + 2].FDebit;
+                                    kisVouchersInfo2.FDeleted = vouchers[i + 2].FDeleted;
+                                    kisVouchersInfo2.FEntryID = vouchers[i - 1].FEntryID + 3;
+                                    kisVouchersInfo2.FExchRate = vouchers[i + 2].FExchRate;
+                                    kisVouchersInfo2.FExp = null;
+                                    kisVouchersInfo2.FFCyAmt = vouchers[i + 2].FFCyAmt;
+                                    kisVouchersInfo2.FGroup = vouchers[i + 2].FGroup;
+                                    kisVouchersInfo2.FNum = vouchers[i + 2].FNum;
+                                    kisVouchersInfo2.FPeriod = vouchers[i + 2].FPeriod;
+                                    kisVouchersInfo2.FPosted = vouchers[i + 2].FPosted;
+                                    kisVouchersInfo2.FPrepare = "Manager";
+                                    kisVouchersInfo2.FPrice = vouchers[i + 2].FPrice;
+                                    kisVouchersInfo2.FQty = vouchers[i + 2].FQty;
+                                    kisVouchersInfo2.FSerialNo = vouchers[i + 2].FSerialNo;
+                                    kisVouchersInfoList.Add(kisVouchersInfo2);
+                                }
+                            }
+
+                            if (i + 4 <= vouchers.Count)
+                            {
+                                if (vouchers[i + 3].FEntryID == 3)
+                                {
+                                    kisVouchersInfo3.FAcctID = vouchers[i + 3].FAcctID;
+                                    kisVouchersInfo3.FAttchment = vouchers[i + 3].FAttchment;
+                                    kisVouchersInfo3.FCredit = vouchers[i + 3].FCredit;
+                                    kisVouchersInfo3.FCyID = vouchers[i + 3].FCyID;
+                                    kisVouchersInfo3.FDate = vouchers[i + 3].FDate;
+                                    kisVouchersInfo3.FDC = vouchers[i + 3].FDC;
+                                    kisVouchersInfo3.FDebit = vouchers[i + 3].FDebit;
+                                    kisVouchersInfo3.FDeleted = vouchers[i + 3].FDeleted;
+                                    kisVouchersInfo3.FEntryID = vouchers[i - 1].FEntryID + 4;
+                                    kisVouchersInfo3.FExchRate = vouchers[i + 3].FExchRate;
+                                    kisVouchersInfo3.FExp = null;
+                                    kisVouchersInfo3.FFCyAmt = vouchers[i + 3].FFCyAmt;
+                                    kisVouchersInfo3.FGroup = vouchers[i + 3].FGroup;
+                                    kisVouchersInfo3.FNum = vouchers[i + 3].FNum;
+                                    kisVouchersInfo3.FPeriod = vouchers[i + 3].FPeriod;
+                                    kisVouchersInfo3.FPosted = vouchers[i + 3].FPosted;
+                                    kisVouchersInfo3.FPrepare = "Manager";
+                                    kisVouchersInfo3.FPrice = vouchers[i + 3].FPrice;
+                                    kisVouchersInfo3.FQty = vouchers[i + 3].FQty;
+                                    kisVouchersInfo3.FSerialNo = vouchers[i + 3].FSerialNo;
+                                    kisVouchersInfoList.Add(kisVouchersInfo3);
+                                }
+                            }
+                        }
+                        if (vouchers[i].FEntryID == 0 && number == 2)
+                        {
+
+                            if (vouchers[i].FEntryID == 0)
+                            {
+
+                                KisVouchersInfo kisVouchersInfo = new KisVouchersInfo();
+                                kisVouchersInfo.FAcctID = vouchers[i].FAcctID;
+                                kisVouchersInfo.FAttchment = vouchers[i].FAttchment;
+                                kisVouchersInfo.FCredit = vouchers[i].FCredit;
+                                kisVouchersInfo.FCyID = vouchers[i].FCyID;
+                                kisVouchersInfo.FDate = vouchers[i].FDate;
+                                kisVouchersInfo.FDC = vouchers[i].FDC;
+                                kisVouchersInfo.FDebit = vouchers[i].FDebit;
+                                kisVouchersInfo.FDeleted = vouchers[i].FDeleted;
+                                kisVouchersInfo.FEntryID = vouchers[i - 1].FEntryID + vouchers[i - vouchers[i - 1].FEntryID - 2].FEntryID + 2;
+                                kisVouchersInfo.FExchRate = vouchers[i].FExchRate;
+                                kisVouchersInfo.FExp = vouchers[i].FExp;
+                                kisVouchersInfo.FFCyAmt = vouchers[i].FFCyAmt;
+                                kisVouchersInfo.FGroup = vouchers[i].FGroup;
+                                kisVouchersInfo.FNum = vouchers[i].FNum;
+                                kisVouchersInfo.FPeriod = vouchers[i].FPeriod;
+                                kisVouchersInfo.FPosted = vouchers[i].FPosted;
+                                kisVouchersInfo.FPrepare = "Manager";
+                                kisVouchersInfo.FPrice = vouchers[i].FPrice;
+                                kisVouchersInfo.FQty = vouchers[i].FQty;
+                                kisVouchersInfo.FSerialNo = vouchers[i].FSerialNo;
+                                kisVouchersInfoList.Add(kisVouchersInfo);
+                            }
+
+                            if (vouchers[i + 1].FEntryID == 1)
+                            {
+                                kisVouchersInfo1.FAcctID = vouchers[i + 1].FAcctID;
+                                kisVouchersInfo1.FAttchment = vouchers[i + 1].FAttchment;
+                                kisVouchersInfo1.FCredit = vouchers[i + 1].FCredit;
+                                kisVouchersInfo1.FCyID = vouchers[i + 1].FCyID;
+                                kisVouchersInfo1.FDate = vouchers[i + 1].FDate;
+                                kisVouchersInfo1.FDC = vouchers[i + 1].FDC;
+                                kisVouchersInfo1.FDebit = vouchers[i + 1].FDebit;
+                                kisVouchersInfo1.FDeleted = vouchers[i + 1].FDeleted;
+                                kisVouchersInfo1.FEntryID = vouchers[i - 1].FEntryID + vouchers[i - vouchers[i - 1].FEntryID - 2].FEntryID + 3;
+                                kisVouchersInfo1.FExchRate = vouchers[i + 1].FExchRate;
+                                kisVouchersInfo1.FExp = null;
+                                kisVouchersInfo1.FFCyAmt = vouchers[i + 1].FFCyAmt;
+                                kisVouchersInfo1.FGroup = vouchers[i + 1].FGroup;
+                                kisVouchersInfo1.FNum = vouchers[i + 1].FNum;
+                                kisVouchersInfo1.FPeriod = vouchers[i + 1].FPeriod;
+                                kisVouchersInfo1.FPosted = vouchers[i + 1].FPosted;
+                                kisVouchersInfo1.FPrepare = "Manager";
+                                kisVouchersInfo1.FPrice = vouchers[i + 1].FPrice;
+                                kisVouchersInfo1.FQty = vouchers[i + 1].FQty;
+                                kisVouchersInfo1.FSerialNo = vouchers[i + 1].FSerialNo;
+                                kisVouchersInfoList.Add(kisVouchersInfo1);
+                            }
+                            if (i + 3 <= vouchers.Count)
+                            {
+                                if (vouchers[i + 2].FEntryID == 2)
+                                {
+                                    kisVouchersInfo2.FAcctID = vouchers[i + 2].FAcctID;
+                                    kisVouchersInfo2.FAttchment = vouchers[i + 2].FAttchment;
+                                    kisVouchersInfo2.FCredit = vouchers[i + 2].FCredit;
+                                    kisVouchersInfo2.FCyID = vouchers[i + 2].FCyID;
+                                    kisVouchersInfo2.FDate = vouchers[i + 2].FDate;
+                                    kisVouchersInfo2.FDC = vouchers[i + 2].FDC;
+                                    kisVouchersInfo2.FDebit = vouchers[i + 2].FDebit;
+                                    kisVouchersInfo2.FDeleted = vouchers[i + 2].FDeleted;
+                                    kisVouchersInfo2.FEntryID = vouchers[i - 1].FEntryID + vouchers[i - vouchers[i - 1].FEntryID - 2].FEntryID + 4;
+                                    kisVouchersInfo2.FExchRate = vouchers[i + 2].FExchRate;
+                                    kisVouchersInfo2.FExp = null;
+                                    kisVouchersInfo2.FFCyAmt = vouchers[i + 2].FFCyAmt;
+                                    kisVouchersInfo2.FGroup = vouchers[i + 2].FGroup;
+                                    kisVouchersInfo2.FNum = vouchers[i + 2].FNum;
+                                    kisVouchersInfo2.FPeriod = vouchers[i + 2].FPeriod;
+                                    kisVouchersInfo2.FPosted = vouchers[i + 2].FPosted;
+                                    kisVouchersInfo2.FPrepare = "Manager";
+                                    kisVouchersInfo2.FPrice = vouchers[i + 2].FPrice;
+                                    kisVouchersInfo2.FQty = vouchers[i + 2].FQty;
+                                    kisVouchersInfo2.FSerialNo = vouchers[i + 2].FSerialNo;
+                                    kisVouchersInfoList.Add(kisVouchersInfo2);
+                                }
+                            }
+
+                            if (i + 3 <= vouchers.Count)
+                            {
+                                if (vouchers[i + 3].FEntryID == 3)
+                                {
+                                    kisVouchersInfo3.FAcctID = vouchers[i + 3].FAcctID;
+                                    kisVouchersInfo3.FAttchment = vouchers[i + 3].FAttchment;
+                                    kisVouchersInfo3.FCredit = vouchers[i + 3].FCredit;
+                                    kisVouchersInfo3.FCyID = vouchers[i + 3].FCyID;
+                                    kisVouchersInfo3.FDate = vouchers[i + 3].FDate;
+                                    kisVouchersInfo3.FDC = vouchers[i + 3].FDC;
+                                    kisVouchersInfo3.FDebit = vouchers[i + 3].FDebit;
+                                    kisVouchersInfo3.FDeleted = vouchers[i + 3].FDeleted;
+                                    kisVouchersInfo3.FEntryID = vouchers[i - 1].FEntryID + vouchers[i - vouchers[i - 1].FEntryID - 2].FEntryID + 5;
+                                    kisVouchersInfo3.FExchRate = vouchers[i + 3].FExchRate;
+                                    kisVouchersInfo3.FExp = null;
+                                    kisVouchersInfo3.FFCyAmt = vouchers[i + 3].FFCyAmt;
+                                    kisVouchersInfo3.FGroup = vouchers[i + 3].FGroup;
+                                    kisVouchersInfo3.FNum = vouchers[i + 3].FNum;
+                                    kisVouchersInfo3.FPeriod = vouchers[i + 3].FPeriod;
+                                    kisVouchersInfo3.FPosted = vouchers[i + 3].FPosted;
+                                    kisVouchersInfo3.FPrepare = "Manager";
+                                    kisVouchersInfo3.FPrice = vouchers[i + 3].FPrice;
+                                    kisVouchersInfo3.FQty = vouchers[i + 3].FQty;
+                                    kisVouchersInfo3.FSerialNo = vouchers[i + 3].FSerialNo;
+                                    kisVouchersInfoList.Add(kisVouchersInfo3);
+                                }
+                            }
+                        }
+                    }
+                    foreach (KisVouchersInfo kvi in kisVouchersInfoList)
+                    {
+                        if (kvi.FEntryID == 0)
+                        {
+                            if (maxFSerialNum < 0)
+                            {
+                                maxFSerialNum = this.getMaxFSerialNum();
+                                maxFSerialNum++;
+                            }
+                            else
+                            {
+                                maxFSerialNum++;
+                            }
+
+                            if (maxFNum < 0)
+                            {
+                                maxFNum = this.getMaxFNum(kvi.FPeriod, kvi.FGroup);
+                                maxFNum++;
+                            }
+                            else
+                            {
+                                maxFNum++;
+                            }
+                        }
+                        String sql = this.build3ItemSql(kvi, maxFSerialNum, maxFNum);
+                        if (sql != null && sql != "") sqls.Add(sql);
+                    }
+                }
+                //
+                //银行2张凭证合为一张凭证start
+                //
+                if (vouchernumber == "two")
+                {
+                    List<KisVouchersInfo> kisVouchersInfoList = new List<KisVouchersInfo>();
+                    int number = -1;
+
+                    for (int i = 0; i < vouchers.Count; i++)
+                    {
+
+                        if (vouchers[i].FEntryID == 0)
+                        {
+                            number++;
+                            if (number == 2)
+                            {
+                                number = 0;
+                            }
+                        }
+                        KisVouchersInfo kisVouchersInfo1 = new KisVouchersInfo();
+                        KisVouchersInfo kisVouchersInfo2 = new KisVouchersInfo();
+                        KisVouchersInfo kisVouchersInfo3 = new KisVouchersInfo();
+                        if (vouchers[i].FEntryID == 0 && number == 0)
+                        {
+
+                            if (vouchers[i].FEntryID == 0)
+                            {
+
+                                KisVouchersInfo kisVouchersInfo = new KisVouchersInfo();
+                                kisVouchersInfo.FAcctID = vouchers[i].FAcctID;
+                                kisVouchersInfo.FAttchment = vouchers[i].FAttchment;
+                                kisVouchersInfo.FCredit = vouchers[i].FCredit;
+                                kisVouchersInfo.FCyID = vouchers[i].FCyID;
+                                kisVouchersInfo.FDate = vouchers[i].FDate;
+                                kisVouchersInfo.FDC = vouchers[i].FDC;
+                                kisVouchersInfo.FDebit = vouchers[i].FDebit;
+                                kisVouchersInfo.FDeleted = vouchers[i].FDeleted;
+                                kisVouchersInfo.FEntryID = 0;
+                                kisVouchersInfo.FExchRate = vouchers[i].FExchRate;
+                                kisVouchersInfo.FExp = vouchers[i].FExp;
+                                kisVouchersInfo.FFCyAmt = vouchers[i].FFCyAmt;
+                                kisVouchersInfo.FGroup = vouchers[i].FGroup;
+                                kisVouchersInfo.FNum = vouchers[i].FNum;
+                                kisVouchersInfo.FPeriod = vouchers[i].FPeriod;
+                                kisVouchersInfo.FPosted = vouchers[i].FPosted;
+                                kisVouchersInfo.FPrepare = "Manager";
+                                kisVouchersInfo.FPrice = vouchers[i].FPrice;
+                                kisVouchersInfo.FQty = vouchers[i].FQty;
+                                kisVouchersInfo.FSerialNo = vouchers[i].FSerialNo;
+                                kisVouchersInfoList.Add(kisVouchersInfo);
+                            }
+
+                            if (vouchers[i + 1].FEntryID == 1)
+                            {
+                                kisVouchersInfo1.FAcctID = vouchers[i + 1].FAcctID;
+                                kisVouchersInfo1.FAttchment = vouchers[i + 1].FAttchment;
+                                kisVouchersInfo1.FCredit = vouchers[i + 1].FCredit;
+                                kisVouchersInfo1.FCyID = vouchers[i + 1].FCyID;
+                                kisVouchersInfo1.FDate = vouchers[i + 1].FDate;
+                                kisVouchersInfo1.FDC = vouchers[i + 1].FDC;
+                                kisVouchersInfo1.FDebit = vouchers[i + 1].FDebit;
+                                kisVouchersInfo1.FDeleted = vouchers[i + 1].FDeleted;
+                                kisVouchersInfo1.FEntryID = 1;
+                                kisVouchersInfo1.FExchRate = vouchers[i + 1].FExchRate;
+                                kisVouchersInfo1.FExp = null;
+                                kisVouchersInfo1.FFCyAmt = vouchers[i + 1].FFCyAmt;
+                                kisVouchersInfo1.FGroup = vouchers[i + 1].FGroup;
+                                kisVouchersInfo1.FNum = vouchers[i + 1].FNum;
+                                kisVouchersInfo1.FPeriod = vouchers[i + 1].FPeriod;
+                                kisVouchersInfo1.FPosted = vouchers[i + 1].FPosted;
+                                kisVouchersInfo1.FPrepare = "Manager";
+                                kisVouchersInfo1.FPrice = vouchers[i + 1].FPrice;
+                                kisVouchersInfo1.FQty = vouchers[i + 1].FQty;
+                                kisVouchersInfo1.FSerialNo = vouchers[i + 1].FSerialNo;
+                                kisVouchersInfoList.Add(kisVouchersInfo1);
+                            }
+
+                            if (i + 3 <= vouchers.Count)
+                            {
+                                if (vouchers[i + 2].FEntryID == 2)
+                                {
+                                    kisVouchersInfo2.FAcctID = vouchers[i + 2].FAcctID;
+                                    kisVouchersInfo2.FAttchment = vouchers[i + 2].FAttchment;
+                                    kisVouchersInfo2.FCredit = vouchers[i + 2].FCredit;
+                                    kisVouchersInfo2.FCyID = vouchers[i + 2].FCyID;
+                                    kisVouchersInfo2.FDate = vouchers[i + 2].FDate;
+                                    kisVouchersInfo2.FDC = vouchers[i + 2].FDC;
+                                    kisVouchersInfo2.FDebit = vouchers[i + 2].FDebit;
+                                    kisVouchersInfo2.FDeleted = vouchers[i + 2].FDeleted;
+                                    kisVouchersInfo2.FEntryID = 2;
+                                    kisVouchersInfo2.FExchRate = vouchers[i + 2].FExchRate;
+                                    kisVouchersInfo2.FExp = null;
+                                    kisVouchersInfo2.FFCyAmt = vouchers[i + 2].FFCyAmt;
+                                    kisVouchersInfo2.FGroup = vouchers[i + 2].FGroup;
+                                    kisVouchersInfo2.FNum = vouchers[i + 2].FNum;
+                                    kisVouchersInfo2.FPeriod = vouchers[i + 2].FPeriod;
+                                    kisVouchersInfo2.FPosted = vouchers[i + 2].FPosted;
+                                    kisVouchersInfo2.FPrepare = "Manager";
+                                    kisVouchersInfo2.FPrice = vouchers[i + 2].FPrice;
+                                    kisVouchersInfo2.FQty = vouchers[i + 2].FQty;
+                                    kisVouchersInfo2.FSerialNo = vouchers[i + 2].FSerialNo;
+                                    kisVouchersInfoList.Add(kisVouchersInfo2);
+                                }
+                            }
+
+                            if (i + 4 <= vouchers.Count)
+                            {
+                                if (vouchers[i + 3].FEntryID == 3)
+                                {
+                                    kisVouchersInfo3.FAcctID = vouchers[i + 3].FAcctID;
+                                    kisVouchersInfo3.FAttchment = vouchers[i + 3].FAttchment;
+                                    kisVouchersInfo3.FCredit = vouchers[i + 3].FCredit;
+                                    kisVouchersInfo3.FCyID = vouchers[i + 3].FCyID;
+                                    kisVouchersInfo3.FDate = vouchers[i + 3].FDate;
+                                    kisVouchersInfo3.FDC = vouchers[i + 3].FDC;
+                                    kisVouchersInfo3.FDebit = vouchers[i + 3].FDebit;
+                                    kisVouchersInfo3.FDeleted = vouchers[i + 3].FDeleted;
+                                    kisVouchersInfo3.FEntryID = 3;
+                                    kisVouchersInfo3.FExchRate = vouchers[i + 3].FExchRate;
+                                    kisVouchersInfo3.FExp = null;
+                                    kisVouchersInfo3.FFCyAmt = vouchers[i + 3].FFCyAmt;
+                                    kisVouchersInfo3.FGroup = vouchers[i + 3].FGroup;
+                                    kisVouchersInfo3.FNum = vouchers[i + 3].FNum;
+                                    kisVouchersInfo3.FPeriod = vouchers[i + 3].FPeriod;
+                                    kisVouchersInfo3.FPosted = vouchers[i + 3].FPosted;
+                                    kisVouchersInfo3.FPrepare = "Manager";
+                                    kisVouchersInfo3.FPrice = vouchers[i + 3].FPrice;
+                                    kisVouchersInfo3.FQty = vouchers[i + 3].FQty;
+                                    kisVouchersInfo3.FSerialNo = vouchers[i + 3].FSerialNo;
+                                    kisVouchersInfoList.Add(kisVouchersInfo3);
+                                }
+                            }
+                        }
+                        if (vouchers[i].FEntryID == 0 && number == 1)
+                        {
+
+                            if (vouchers[i].FEntryID == 0)
+                            {
+
+                                KisVouchersInfo kisVouchersInfo = new KisVouchersInfo();
+                                kisVouchersInfo.FAcctID = vouchers[i].FAcctID;
+                                kisVouchersInfo.FAttchment = vouchers[i].FAttchment;
+                                kisVouchersInfo.FCredit = vouchers[i].FCredit;
+                                kisVouchersInfo.FCyID = vouchers[i].FCyID;
+                                kisVouchersInfo.FDate = vouchers[i].FDate;
+                                kisVouchersInfo.FDC = vouchers[i].FDC;
+                                kisVouchersInfo.FDebit = vouchers[i].FDebit;
+                                kisVouchersInfo.FDeleted = vouchers[i].FDeleted;
+                                kisVouchersInfo.FEntryID = vouchers[i - 1].FEntryID + 1;
+                                kisVouchersInfo.FExchRate = vouchers[i].FExchRate;
+                                kisVouchersInfo.FExp = vouchers[i].FExp;
+                                kisVouchersInfo.FFCyAmt = vouchers[i].FFCyAmt;
+                                kisVouchersInfo.FGroup = vouchers[i].FGroup;
+                                kisVouchersInfo.FNum = vouchers[i].FNum;
+                                kisVouchersInfo.FPeriod = vouchers[i].FPeriod;
+                                kisVouchersInfo.FPosted = vouchers[i].FPosted;
+                                kisVouchersInfo.FPrepare = "Manager";
+                                kisVouchersInfo.FPrice = vouchers[i].FPrice;
+                                kisVouchersInfo.FQty = vouchers[i].FQty;
+                                kisVouchersInfo.FSerialNo = vouchers[i].FSerialNo;
+                                kisVouchersInfoList.Add(kisVouchersInfo);
+                            }
+
+                            if (vouchers[i + 1].FEntryID == 1)
+                            {
+                                kisVouchersInfo1.FAcctID = vouchers[i + 1].FAcctID;
+                                kisVouchersInfo1.FAttchment = vouchers[i + 1].FAttchment;
+                                kisVouchersInfo1.FCredit = vouchers[i + 1].FCredit;
+                                kisVouchersInfo1.FCyID = vouchers[i + 1].FCyID;
+                                kisVouchersInfo1.FDate = vouchers[i + 1].FDate;
+                                kisVouchersInfo1.FDC = vouchers[i + 1].FDC;
+                                kisVouchersInfo1.FDebit = vouchers[i + 1].FDebit;
+                                kisVouchersInfo1.FDeleted = vouchers[i + 1].FDeleted;
+                                kisVouchersInfo1.FEntryID = vouchers[i - 1].FEntryID + 2;
+                                kisVouchersInfo1.FExchRate = vouchers[i + 1].FExchRate;
+                                kisVouchersInfo1.FExp = null;
+                                kisVouchersInfo1.FFCyAmt = vouchers[i + 1].FFCyAmt;
+                                kisVouchersInfo1.FGroup = vouchers[i + 1].FGroup;
+                                kisVouchersInfo1.FNum = vouchers[i + 1].FNum;
+                                kisVouchersInfo1.FPeriod = vouchers[i + 1].FPeriod;
+                                kisVouchersInfo1.FPosted = vouchers[i + 1].FPosted;
+                                kisVouchersInfo1.FPrepare = "Manager";
+                                kisVouchersInfo1.FPrice = vouchers[i + 1].FPrice;
+                                kisVouchersInfo1.FQty = vouchers[i + 1].FQty;
+                                kisVouchersInfo1.FSerialNo = vouchers[i + 1].FSerialNo;
+                                kisVouchersInfoList.Add(kisVouchersInfo1);
+                            }
+                            if (i + 3 <= vouchers.Count)
+                            {
+                                if (vouchers[i + 2].FEntryID == 2)
+                                {
+                                    kisVouchersInfo2.FAcctID = vouchers[i + 2].FAcctID;
+                                    kisVouchersInfo2.FAttchment = vouchers[i + 2].FAttchment;
+                                    kisVouchersInfo2.FCredit = vouchers[i + 2].FCredit;
+                                    kisVouchersInfo2.FCyID = vouchers[i + 2].FCyID;
+                                    kisVouchersInfo2.FDate = vouchers[i + 2].FDate;
+                                    kisVouchersInfo2.FDC = vouchers[i + 2].FDC;
+                                    kisVouchersInfo2.FDebit = vouchers[i + 2].FDebit;
+                                    kisVouchersInfo2.FDeleted = vouchers[i + 2].FDeleted;
+                                    kisVouchersInfo2.FEntryID = vouchers[i - 1].FEntryID + 3;
+                                    kisVouchersInfo2.FExchRate = vouchers[i + 2].FExchRate;
+                                    kisVouchersInfo2.FExp = null;
+                                    kisVouchersInfo2.FFCyAmt = vouchers[i + 2].FFCyAmt;
+                                    kisVouchersInfo2.FGroup = vouchers[i + 2].FGroup;
+                                    kisVouchersInfo2.FNum = vouchers[i + 2].FNum;
+                                    kisVouchersInfo2.FPeriod = vouchers[i + 2].FPeriod;
+                                    kisVouchersInfo2.FPosted = vouchers[i + 2].FPosted;
+                                    kisVouchersInfo2.FPrepare = "Manager";
+                                    kisVouchersInfo2.FPrice = vouchers[i + 2].FPrice;
+                                    kisVouchersInfo2.FQty = vouchers[i + 2].FQty;
+                                    kisVouchersInfo2.FSerialNo = vouchers[i + 2].FSerialNo;
+                                    kisVouchersInfoList.Add(kisVouchersInfo2);
+                                }
+                            }
+
+                            if (i + 4 <= vouchers.Count)
+                            {
+                                if (vouchers[i + 3].FEntryID == 3)
+                                {
+                                    kisVouchersInfo3.FAcctID = vouchers[i + 3].FAcctID;
+                                    kisVouchersInfo3.FAttchment = vouchers[i + 3].FAttchment;
+                                    kisVouchersInfo3.FCredit = vouchers[i + 3].FCredit;
+                                    kisVouchersInfo3.FCyID = vouchers[i + 3].FCyID;
+                                    kisVouchersInfo3.FDate = vouchers[i + 3].FDate;
+                                    kisVouchersInfo3.FDC = vouchers[i + 3].FDC;
+                                    kisVouchersInfo3.FDebit = vouchers[i + 3].FDebit;
+                                    kisVouchersInfo3.FDeleted = vouchers[i + 3].FDeleted;
+                                    kisVouchersInfo3.FEntryID = vouchers[i - 1].FEntryID + 4;
+                                    kisVouchersInfo3.FExchRate = vouchers[i + 3].FExchRate;
+                                    kisVouchersInfo3.FExp = null;
+                                    kisVouchersInfo3.FFCyAmt = vouchers[i + 3].FFCyAmt;
+                                    kisVouchersInfo3.FGroup = vouchers[i + 3].FGroup;
+                                    kisVouchersInfo3.FNum = vouchers[i + 3].FNum;
+                                    kisVouchersInfo3.FPeriod = vouchers[i + 3].FPeriod;
+                                    kisVouchersInfo3.FPosted = vouchers[i + 3].FPosted;
+                                    kisVouchersInfo3.FPrepare = "Manager";
+                                    kisVouchersInfo3.FPrice = vouchers[i + 3].FPrice;
+                                    kisVouchersInfo3.FQty = vouchers[i + 3].FQty;
+                                    kisVouchersInfo3.FSerialNo = vouchers[i + 3].FSerialNo;
+                                    kisVouchersInfoList.Add(kisVouchersInfo3);
+                                }
+                            }
+                        }
+                    }
+                    foreach (KisVouchersInfo kvi in kisVouchersInfoList)
+                    {
+                        if (kvi.FEntryID == 0)
+                        {
+                            if (maxFSerialNum < 0)
+                            {
+                                maxFSerialNum = this.getMaxFSerialNum();
+                                maxFSerialNum++;
+                            }
+                            else
+                            {
+                                maxFSerialNum++;
+                            }
+
+                            if (maxFNum < 0)
+                            {
+                                maxFNum = this.getMaxFNum(kvi.FPeriod, kvi.FGroup);
+                                maxFNum++;
+                            }
+                            else
+                            {
+                                maxFNum++;
+                            }
+                        }
+                        String sql = this.build3ItemSql(kvi, maxFSerialNum, maxFNum);
+                        if (sql != null && sql != "") sqls.Add(sql);
+                    }
+                }
+            }      
+            //
+            //银行2张凭证合为一张凭证end
+            //
+            //如果机构是佰佳、顶聚、百科
+            if (inst.Id == "653279009C4211E6A731B9323D2BF7D6" || inst.Id == "10000001463017" || inst.Id == "F19DCFD06A7811E684D4AFECE5B384A4")
             {
                 //
                 //佰佳导入不合并start
@@ -1295,13 +2016,13 @@ namespace MicroServiceApplication.Factory
                                     kisVouchersInfo.FDeleted = vouchers[i].FDeleted;
                                     kisVouchersInfo.FEntryID = 0;
                                     kisVouchersInfo.FExchRate = vouchers[i].FExchRate;
-                                    kisVouchersInfo.FExp = "销售收入";
+                                    kisVouchersInfo.FExp = vouchers[i].FExp;
                                     kisVouchersInfo.FFCyAmt = vouchers[i].FFCyAmt;
                                     kisVouchersInfo.FGroup = vouchers[i].FGroup;
                                     kisVouchersInfo.FNum = vouchers[i].FNum;
                                     kisVouchersInfo.FPeriod = vouchers[i].FPeriod;
                                     kisVouchersInfo.FPosted = vouchers[i].FPosted;
-                                    kisVouchersInfo.FPrepare = vouchers[i].FPrepare;
+                                    kisVouchersInfo.FPrepare = "Manager";
                                     kisVouchersInfo.FPrice = vouchers[i].FPrice;
                                     kisVouchersInfo.FQty = vouchers[i].FQty;
                                     kisVouchersInfo.FSerialNo = vouchers[i].FSerialNo;
@@ -1327,7 +2048,7 @@ namespace MicroServiceApplication.Factory
                                         kisVouchersInfo1.FNum = vouchers[i + 1].FNum;
                                         kisVouchersInfo1.FPeriod = vouchers[i + 1].FPeriod;
                                         kisVouchersInfo1.FPosted = vouchers[i + 1].FPosted;
-                                        kisVouchersInfo1.FPrepare = vouchers[i + 1].FPrepare;
+                                        kisVouchersInfo1.FPrepare = "Manager";
                                         kisVouchersInfo1.FPrice = vouchers[i + 1].FPrice;
                                         kisVouchersInfo1.FQty = vouchers[i + 1].FQty;
                                         kisVouchersInfo1.FSerialNo = vouchers[i + 1].FSerialNo;
@@ -1350,7 +2071,7 @@ namespace MicroServiceApplication.Factory
                                         kisVouchersInfo7.FNum = vouchers[i + 1].FNum;
                                         kisVouchersInfo7.FPeriod = vouchers[i + 1].FPeriod;
                                         kisVouchersInfo7.FPosted = vouchers[i + 1].FPosted;
-                                        kisVouchersInfo7.FPrepare = vouchers[i + 1].FPrepare;
+                                        kisVouchersInfo7.FPrepare = "Manager";
                                         kisVouchersInfo7.FPrice = vouchers[i + 1].FPrice;
                                         kisVouchersInfo7.FQty = vouchers[i + 1].FQty;
                                         kisVouchersInfo7.FSerialNo = vouchers[i + 1].FSerialNo;
@@ -1381,7 +2102,7 @@ namespace MicroServiceApplication.Factory
                                             kisVouchersInfo2.FNum = vouchers[i + 2].FNum;
                                             kisVouchersInfo2.FPeriod = vouchers[i + 2].FPeriod;
                                             kisVouchersInfo2.FPosted = vouchers[i + 2].FPosted;
-                                            kisVouchersInfo2.FPrepare = vouchers[i + 2].FPrepare;
+                                            kisVouchersInfo2.FPrepare = "Manager";
                                             kisVouchersInfo2.FPrice = vouchers[i + 2].FPrice;
                                             kisVouchersInfo2.FQty = vouchers[i + 2].FQty;
                                             kisVouchersInfo2.FSerialNo = vouchers[i + 2].FSerialNo;
@@ -1404,7 +2125,7 @@ namespace MicroServiceApplication.Factory
                                             kisVouchersInfo8.FNum = vouchers[i + 2].FNum;
                                             kisVouchersInfo8.FPeriod = vouchers[i + 2].FPeriod;
                                             kisVouchersInfo8.FPosted = vouchers[i + 2].FPosted;
-                                            kisVouchersInfo8.FPrepare = vouchers[i + 2].FPrepare;
+                                            kisVouchersInfo8.FPrepare = "Manager";
                                             kisVouchersInfo8.FPrice = vouchers[i + 2].FPrice;
                                             kisVouchersInfo8.FQty = vouchers[i + 2].FQty;
                                             kisVouchersInfo8.FSerialNo = vouchers[i + 2].FSerialNo;
@@ -1431,13 +2152,13 @@ namespace MicroServiceApplication.Factory
                                     kisVouchersInfo.FDeleted = vouchers[i].FDeleted;
                                     kisVouchersInfo.FEntryID = 1;
                                     kisVouchersInfo.FExchRate = vouchers[i].FExchRate;
-                                    kisVouchersInfo.FExp = "销售收入";
+                                    kisVouchersInfo.FExp = vouchers[i].FExp;
                                     kisVouchersInfo.FFCyAmt = vouchers[i].FFCyAmt;
                                     kisVouchersInfo.FGroup = vouchers[i].FGroup;
                                     kisVouchersInfo.FNum = vouchers[i].FNum;
                                     kisVouchersInfo.FPeriod = vouchers[i].FPeriod;
                                     kisVouchersInfo.FPosted = vouchers[i].FPosted;
-                                    kisVouchersInfo.FPrepare = vouchers[i].FPrepare;
+                                    kisVouchersInfo.FPrepare = "Manager";
                                     kisVouchersInfo.FPrice = vouchers[i].FPrice;
                                     kisVouchersInfo.FQty = vouchers[i].FQty;
                                     kisVouchersInfo.FSerialNo = vouchers[i].FSerialNo;
@@ -1463,7 +2184,7 @@ namespace MicroServiceApplication.Factory
                                         kisVouchersInfo3.FNum = vouchers[i + 1].FNum;
                                         kisVouchersInfo3.FPeriod = vouchers[i + 1].FPeriod;
                                         kisVouchersInfo3.FPosted = vouchers[i + 1].FPosted;
-                                        kisVouchersInfo3.FPrepare = vouchers[i + 1].FPrepare;
+                                        kisVouchersInfo3.FPrepare = "Manager";
                                         kisVouchersInfo3.FPrice = vouchers[i + 1].FPrice;
                                         kisVouchersInfo3.FQty = vouchers[i + 1].FQty;
                                         kisVouchersInfo3.FSerialNo = vouchers[i + 1].FSerialNo;
@@ -1486,7 +2207,7 @@ namespace MicroServiceApplication.Factory
                                         kisVouchersInfo9.FNum = kisVouchersInfo1.FNum;
                                         kisVouchersInfo9.FPeriod = kisVouchersInfo1.FPeriod;
                                         kisVouchersInfo9.FPosted = kisVouchersInfo1.FPosted;
-                                        kisVouchersInfo9.FPrepare = kisVouchersInfo1.FPrepare;
+                                        kisVouchersInfo9.FPrepare = "Manager";
                                         kisVouchersInfo9.FPrice = kisVouchersInfo1.FPrice;
                                         kisVouchersInfo9.FQty = kisVouchersInfo1.FQty;
                                         kisVouchersInfo9.FSerialNo = kisVouchersInfo1.FSerialNo;
@@ -1515,7 +2236,7 @@ namespace MicroServiceApplication.Factory
                                             kisVouchersInfo4.FNum = vouchers[i + 2].FNum;
                                             kisVouchersInfo4.FPeriod = vouchers[i + 2].FPeriod;
                                             kisVouchersInfo4.FPosted = vouchers[i + 2].FPosted;
-                                            kisVouchersInfo4.FPrepare = vouchers[i + 2].FPrepare;
+                                            kisVouchersInfo4.FPrepare = "Manager";
                                             kisVouchersInfo4.FPrice = vouchers[i + 2].FPrice;
                                             kisVouchersInfo4.FQty = vouchers[i + 2].FQty;
                                             kisVouchersInfo4.FSerialNo = vouchers[i + 2].FSerialNo;
@@ -1538,7 +2259,7 @@ namespace MicroServiceApplication.Factory
                                             kisVouchersInfo10.FNum = kisVouchersInfo2.FNum;
                                             kisVouchersInfo10.FPeriod = kisVouchersInfo2.FPeriod;
                                             kisVouchersInfo10.FPosted = kisVouchersInfo2.FPosted;
-                                            kisVouchersInfo10.FPrepare = kisVouchersInfo2.FPrepare;
+                                            kisVouchersInfo10.FPrepare = "Manager";
                                             kisVouchersInfo10.FPrice = kisVouchersInfo2.FPrice;
                                             kisVouchersInfo10.FQty = kisVouchersInfo2.FQty;
                                             kisVouchersInfo10.FSerialNo = kisVouchersInfo2.FSerialNo;
@@ -1564,7 +2285,7 @@ namespace MicroServiceApplication.Factory
                                     kisVouchersInfo10.FNum = kisVouchersInfo2.FNum;
                                     kisVouchersInfo10.FPeriod = kisVouchersInfo2.FPeriod;
                                     kisVouchersInfo10.FPosted = kisVouchersInfo2.FPosted;
-                                    kisVouchersInfo10.FPrepare = kisVouchersInfo2.FPrepare;
+                                    kisVouchersInfo10.FPrepare = "Manager";
                                     kisVouchersInfo10.FPrice = kisVouchersInfo2.FPrice;
                                     kisVouchersInfo10.FQty = kisVouchersInfo2.FQty;
                                     kisVouchersInfo10.FSerialNo = kisVouchersInfo2.FSerialNo;
@@ -1587,13 +2308,13 @@ namespace MicroServiceApplication.Factory
                                     kisVouchersInfo.FDeleted = vouchers[i].FDeleted;
                                     kisVouchersInfo.FEntryID = 2;
                                     kisVouchersInfo.FExchRate = vouchers[i].FExchRate;
-                                    kisVouchersInfo.FExp = "销售收入";
+                                    kisVouchersInfo.FExp = vouchers[i].FExp;
                                     kisVouchersInfo.FFCyAmt = vouchers[i].FFCyAmt;
                                     kisVouchersInfo.FGroup = vouchers[i].FGroup;
                                     kisVouchersInfo.FNum = vouchers[i].FNum;
                                     kisVouchersInfo.FPeriod = vouchers[i].FPeriod;
                                     kisVouchersInfo.FPosted = vouchers[i].FPosted;
-                                    kisVouchersInfo.FPrepare = vouchers[i].FPrepare;
+                                    kisVouchersInfo.FPrepare = "Manager";
                                     kisVouchersInfo.FPrice = vouchers[i].FPrice;
                                     kisVouchersInfo.FQty = vouchers[i].FQty;
                                     kisVouchersInfo.FSerialNo = vouchers[i].FSerialNo;
@@ -1619,7 +2340,7 @@ namespace MicroServiceApplication.Factory
                                         kisVouchersInfo5.FNum = kisVouchersInfo1.FNum;
                                         kisVouchersInfo5.FPeriod = kisVouchersInfo1.FPeriod;
                                         kisVouchersInfo5.FPosted = kisVouchersInfo1.FPosted;
-                                        kisVouchersInfo5.FPrepare = kisVouchersInfo1.FPrepare;
+                                        kisVouchersInfo5.FPrepare = "Manager";
                                         kisVouchersInfo5.FPrice = kisVouchersInfo1.FPrice;
                                         kisVouchersInfo5.FQty = kisVouchersInfo1.FQty;
                                         kisVouchersInfo5.FSerialNo = kisVouchersInfo1.FSerialNo;
@@ -1643,7 +2364,7 @@ namespace MicroServiceApplication.Factory
                                         kisVouchersInfo11.FNum = kisVouchersInfo3.FNum;
                                         kisVouchersInfo11.FPeriod = kisVouchersInfo3.FPeriod;
                                         kisVouchersInfo11.FPosted = kisVouchersInfo3.FPosted;
-                                        kisVouchersInfo11.FPrepare = kisVouchersInfo3.FPrepare;
+                                        kisVouchersInfo11.FPrepare = "Manager";
                                         kisVouchersInfo11.FPrice = kisVouchersInfo3.FPrice;
                                         kisVouchersInfo11.FQty = kisVouchersInfo3.FQty;
                                         kisVouchersInfo11.FSerialNo = kisVouchersInfo3.FSerialNo;
@@ -1670,7 +2391,7 @@ namespace MicroServiceApplication.Factory
                                         kisVouchersInfo12.FNum = kisVouchersInfo1.FNum;
                                         kisVouchersInfo12.FPeriod = kisVouchersInfo1.FPeriod;
                                         kisVouchersInfo12.FPosted = kisVouchersInfo1.FPosted;
-                                        kisVouchersInfo12.FPrepare = kisVouchersInfo1.FPrepare;
+                                        kisVouchersInfo12.FPrepare = "Manager";
                                         kisVouchersInfo12.FPrice = kisVouchersInfo1.FPrice;
                                         kisVouchersInfo12.FQty = kisVouchersInfo1.FQty;
                                         kisVouchersInfo12.FSerialNo = kisVouchersInfo1.FSerialNo;
@@ -1694,7 +2415,7 @@ namespace MicroServiceApplication.Factory
                                         kisVouchersInfo13.FNum = kisVouchersInfo3.FNum;
                                         kisVouchersInfo13.FPeriod = kisVouchersInfo3.FPeriod;
                                         kisVouchersInfo13.FPosted = kisVouchersInfo3.FPosted;
-                                        kisVouchersInfo13.FPrepare = kisVouchersInfo3.FPrepare;
+                                        kisVouchersInfo13.FPrepare = "Manager";
                                         kisVouchersInfo13.FPrice = kisVouchersInfo3.FPrice;
                                         kisVouchersInfo13.FQty = kisVouchersInfo3.FQty;
                                         kisVouchersInfo13.FSerialNo = kisVouchersInfo3.FSerialNo;
@@ -1724,7 +2445,7 @@ namespace MicroServiceApplication.Factory
                                             kisVouchersInfo6.FNum = kisVouchersInfo2.FNum;
                                             kisVouchersInfo6.FPeriod = kisVouchersInfo2.FPeriod;
                                             kisVouchersInfo6.FPosted = kisVouchersInfo2.FPosted;
-                                            kisVouchersInfo6.FPrepare = kisVouchersInfo2.FPrepare;
+                                            kisVouchersInfo6.FPrepare = "Manager"; ;
                                             kisVouchersInfo6.FPrice = kisVouchersInfo2.FPrice;
                                             kisVouchersInfo6.FQty = kisVouchersInfo2.FQty;
                                             kisVouchersInfo6.FSerialNo = kisVouchersInfo2.FSerialNo;
@@ -1748,7 +2469,7 @@ namespace MicroServiceApplication.Factory
                                             kisVouchersInfo14.FNum = kisVouchersInfo4.FNum;
                                             kisVouchersInfo14.FPeriod = kisVouchersInfo4.FPeriod;
                                             kisVouchersInfo14.FPosted = kisVouchersInfo4.FPosted;
-                                            kisVouchersInfo14.FPrepare = kisVouchersInfo4.FPrepare;
+                                            kisVouchersInfo14.FPrepare = "Manager"; ;
                                             kisVouchersInfo14.FPrice = kisVouchersInfo4.FPrice;
                                             kisVouchersInfo14.FQty = kisVouchersInfo4.FQty;
                                             kisVouchersInfo14.FSerialNo = kisVouchersInfo4.FSerialNo;
@@ -1775,7 +2496,7 @@ namespace MicroServiceApplication.Factory
                                             kisVouchersInfo15.FNum = kisVouchersInfo2.FNum;
                                             kisVouchersInfo15.FPeriod = kisVouchersInfo2.FPeriod;
                                             kisVouchersInfo15.FPosted = kisVouchersInfo2.FPosted;
-                                            kisVouchersInfo15.FPrepare = kisVouchersInfo2.FPrepare;
+                                            kisVouchersInfo15.FPrepare = "Manager"; ;
                                             kisVouchersInfo15.FPrice = kisVouchersInfo2.FPrice;
                                             kisVouchersInfo15.FQty = kisVouchersInfo2.FQty;
                                             kisVouchersInfo15.FSerialNo = kisVouchersInfo2.FSerialNo;
@@ -1799,7 +2520,7 @@ namespace MicroServiceApplication.Factory
                                             kisVouchersInfo16.FNum = kisVouchersInfo4.FNum;
                                             kisVouchersInfo16.FPeriod = kisVouchersInfo4.FPeriod;
                                             kisVouchersInfo16.FPosted = kisVouchersInfo4.FPosted;
-                                            kisVouchersInfo16.FPrepare = kisVouchersInfo4.FPrepare;
+                                            kisVouchersInfo16.FPrepare = "Manager";
                                             kisVouchersInfo16.FPrice = kisVouchersInfo4.FPrice;
                                             kisVouchersInfo16.FQty = kisVouchersInfo4.FQty;
                                             kisVouchersInfo16.FSerialNo = kisVouchersInfo4.FSerialNo;
@@ -1827,7 +2548,7 @@ namespace MicroServiceApplication.Factory
                                         kisVouchersInfo15.FNum = kisVouchersInfo2.FNum;
                                         kisVouchersInfo15.FPeriod = kisVouchersInfo2.FPeriod;
                                         kisVouchersInfo15.FPosted = kisVouchersInfo2.FPosted;
-                                        kisVouchersInfo15.FPrepare = kisVouchersInfo2.FPrepare;
+                                        kisVouchersInfo15.FPrepare = "Manager";
                                         kisVouchersInfo15.FPrice = kisVouchersInfo2.FPrice;
                                         kisVouchersInfo15.FQty = kisVouchersInfo2.FQty;
                                         kisVouchersInfo15.FSerialNo = kisVouchersInfo2.FSerialNo;
@@ -1851,7 +2572,7 @@ namespace MicroServiceApplication.Factory
                                         kisVouchersInfo16.FNum = kisVouchersInfo4.FNum;
                                         kisVouchersInfo16.FPeriod = kisVouchersInfo4.FPeriod;
                                         kisVouchersInfo16.FPosted = kisVouchersInfo4.FPosted;
-                                        kisVouchersInfo16.FPrepare = kisVouchersInfo4.FPrepare;
+                                        kisVouchersInfo16.FPrepare = "Manager";
                                         kisVouchersInfo16.FPrice = kisVouchersInfo4.FPrice;
                                         kisVouchersInfo16.FQty = kisVouchersInfo4.FQty;
                                         kisVouchersInfo16.FSerialNo = kisVouchersInfo4.FSerialNo;
@@ -1937,7 +2658,7 @@ namespace MicroServiceApplication.Factory
                                 kisVouchersInfo.FNum = vouchers[i].FNum;
                                 kisVouchersInfo.FPeriod = vouchers[i].FPeriod;
                                 kisVouchersInfo.FPosted = vouchers[i].FPosted;
-                                kisVouchersInfo.FPrepare = vouchers[i].FPrepare;
+                                kisVouchersInfo.FPrepare = "Manager";
                                 kisVouchersInfo.FPrice = vouchers[i].FPrice;
                                 kisVouchersInfo.FQty = vouchers[i].FQty;
                                 kisVouchersInfo.FSerialNo = vouchers[i].FSerialNo;
@@ -1963,7 +2684,7 @@ namespace MicroServiceApplication.Factory
                                 kisVouchersInfo1.FNum = vouchers[i + 1].FNum;
                                 kisVouchersInfo1.FPeriod = vouchers[i + 1].FPeriod;
                                 kisVouchersInfo1.FPosted = vouchers[i + 1].FPosted;
-                                kisVouchersInfo1.FPrepare = vouchers[i + 1].FPrepare;
+                                kisVouchersInfo1.FPrepare = "Manager";
                                 kisVouchersInfo1.FPrice = vouchers[i + 1].FPrice;
                                 kisVouchersInfo1.FQty = vouchers[i + 1].FQty;
                                 kisVouchersInfo1.FSerialNo = vouchers[i + 1].FSerialNo;
@@ -1991,7 +2712,7 @@ namespace MicroServiceApplication.Factory
                                     kisVouchersInfo2.FNum = vouchers[i + 2].FNum;
                                     kisVouchersInfo2.FPeriod = vouchers[i + 2].FPeriod;
                                     kisVouchersInfo2.FPosted = vouchers[i + 2].FPosted;
-                                    kisVouchersInfo2.FPrepare = vouchers[i + 2].FPrepare;
+                                    kisVouchersInfo2.FPrepare = "Manager";
                                     kisVouchersInfo2.FPrice = vouchers[i + 2].FPrice;
                                     kisVouchersInfo2.FQty = vouchers[i + 2].FQty;
                                     kisVouchersInfo2.FSerialNo = vouchers[i + 2].FSerialNo;
@@ -2019,7 +2740,7 @@ namespace MicroServiceApplication.Factory
                                     kisVouchersInfo3.FNum = vouchers[i + 3].FNum;
                                     kisVouchersInfo3.FPeriod = vouchers[i + 3].FPeriod;
                                     kisVouchersInfo3.FPosted = vouchers[i + 3].FPosted;
-                                    kisVouchersInfo3.FPrepare = vouchers[i + 3].FPrepare;
+                                    kisVouchersInfo3.FPrepare = "Manager";
                                     kisVouchersInfo3.FPrice = vouchers[i + 3].FPrice;
                                     kisVouchersInfo3.FQty = vouchers[i + 3].FQty;
                                     kisVouchersInfo3.FSerialNo = vouchers[i + 3].FSerialNo;
@@ -2050,7 +2771,7 @@ namespace MicroServiceApplication.Factory
                                 kisVouchersInfo.FNum = vouchers[i].FNum;
                                 kisVouchersInfo.FPeriod = vouchers[i].FPeriod;
                                 kisVouchersInfo.FPosted = vouchers[i].FPosted;
-                                kisVouchersInfo.FPrepare = vouchers[i].FPrepare;
+                                kisVouchersInfo.FPrepare = "Manager";
                                 kisVouchersInfo.FPrice = vouchers[i].FPrice;
                                 kisVouchersInfo.FQty = vouchers[i].FQty;
                                 kisVouchersInfo.FSerialNo = vouchers[i].FSerialNo;
@@ -2076,7 +2797,7 @@ namespace MicroServiceApplication.Factory
                                 kisVouchersInfo1.FNum = vouchers[i + 1].FNum;
                                 kisVouchersInfo1.FPeriod = vouchers[i + 1].FPeriod;
                                 kisVouchersInfo1.FPosted = vouchers[i + 1].FPosted;
-                                kisVouchersInfo1.FPrepare = vouchers[i + 1].FPrepare;
+                                kisVouchersInfo1.FPrepare = "Manager";
                                 kisVouchersInfo1.FPrice = vouchers[i + 1].FPrice;
                                 kisVouchersInfo1.FQty = vouchers[i + 1].FQty;
                                 kisVouchersInfo1.FSerialNo = vouchers[i + 1].FSerialNo;
@@ -2103,7 +2824,7 @@ namespace MicroServiceApplication.Factory
                                     kisVouchersInfo2.FNum = vouchers[i + 2].FNum;
                                     kisVouchersInfo2.FPeriod = vouchers[i + 2].FPeriod;
                                     kisVouchersInfo2.FPosted = vouchers[i + 2].FPosted;
-                                    kisVouchersInfo2.FPrepare = vouchers[i + 2].FPrepare;
+                                    kisVouchersInfo2.FPrepare = "Manager";
                                     kisVouchersInfo2.FPrice = vouchers[i + 2].FPrice;
                                     kisVouchersInfo2.FQty = vouchers[i + 2].FQty;
                                     kisVouchersInfo2.FSerialNo = vouchers[i + 2].FSerialNo;
@@ -2131,7 +2852,7 @@ namespace MicroServiceApplication.Factory
                                     kisVouchersInfo3.FNum = vouchers[i + 3].FNum;
                                     kisVouchersInfo3.FPeriod = vouchers[i + 3].FPeriod;
                                     kisVouchersInfo3.FPosted = vouchers[i + 3].FPosted;
-                                    kisVouchersInfo3.FPrepare = vouchers[i + 3].FPrepare;
+                                    kisVouchersInfo3.FPrepare = "Manager";
                                     kisVouchersInfo3.FPrice = vouchers[i + 3].FPrice;
                                     kisVouchersInfo3.FQty = vouchers[i + 3].FQty;
                                     kisVouchersInfo3.FSerialNo = vouchers[i + 3].FSerialNo;
@@ -2162,7 +2883,7 @@ namespace MicroServiceApplication.Factory
                                 kisVouchersInfo.FNum = vouchers[i].FNum;
                                 kisVouchersInfo.FPeriod = vouchers[i].FPeriod;
                                 kisVouchersInfo.FPosted = vouchers[i].FPosted;
-                                kisVouchersInfo.FPrepare = vouchers[i].FPrepare;
+                                kisVouchersInfo.FPrepare = "Manager";
                                 kisVouchersInfo.FPrice = vouchers[i].FPrice;
                                 kisVouchersInfo.FQty = vouchers[i].FQty;
                                 kisVouchersInfo.FSerialNo = vouchers[i].FSerialNo;
@@ -2188,7 +2909,7 @@ namespace MicroServiceApplication.Factory
                                 kisVouchersInfo1.FNum = vouchers[i + 1].FNum;
                                 kisVouchersInfo1.FPeriod = vouchers[i + 1].FPeriod;
                                 kisVouchersInfo1.FPosted = vouchers[i + 1].FPosted;
-                                kisVouchersInfo1.FPrepare = vouchers[i + 1].FPrepare;
+                                kisVouchersInfo1.FPrepare = "Manager";
                                 kisVouchersInfo1.FPrice = vouchers[i + 1].FPrice;
                                 kisVouchersInfo1.FQty = vouchers[i + 1].FQty;
                                 kisVouchersInfo1.FSerialNo = vouchers[i + 1].FSerialNo;
@@ -2215,7 +2936,7 @@ namespace MicroServiceApplication.Factory
                                     kisVouchersInfo2.FNum = vouchers[i + 2].FNum;
                                     kisVouchersInfo2.FPeriod = vouchers[i + 2].FPeriod;
                                     kisVouchersInfo2.FPosted = vouchers[i + 2].FPosted;
-                                    kisVouchersInfo2.FPrepare = vouchers[i + 2].FPrepare;
+                                    kisVouchersInfo2.FPrepare = "Manager";
                                     kisVouchersInfo2.FPrice = vouchers[i + 2].FPrice;
                                     kisVouchersInfo2.FQty = vouchers[i + 2].FQty;
                                     kisVouchersInfo2.FSerialNo = vouchers[i + 2].FSerialNo;
@@ -2243,7 +2964,7 @@ namespace MicroServiceApplication.Factory
                                     kisVouchersInfo3.FNum = vouchers[i + 3].FNum;
                                     kisVouchersInfo3.FPeriod = vouchers[i + 3].FPeriod;
                                     kisVouchersInfo3.FPosted = vouchers[i + 3].FPosted;
-                                    kisVouchersInfo3.FPrepare = vouchers[i + 3].FPrepare;
+                                    kisVouchersInfo3.FPrepare = "Manager";
                                     kisVouchersInfo3.FPrice = vouchers[i + 3].FPrice;
                                     kisVouchersInfo3.FQty = vouchers[i + 3].FQty;
                                     kisVouchersInfo3.FSerialNo = vouchers[i + 3].FSerialNo;
@@ -2326,7 +3047,7 @@ namespace MicroServiceApplication.Factory
                                 kisVouchersInfo.FNum = vouchers[i].FNum;
                                 kisVouchersInfo.FPeriod = vouchers[i].FPeriod;
                                 kisVouchersInfo.FPosted = vouchers[i].FPosted;
-                                kisVouchersInfo.FPrepare = vouchers[i].FPrepare;
+                                kisVouchersInfo.FPrepare = "Manager";
                                 kisVouchersInfo.FPrice = vouchers[i].FPrice;
                                 kisVouchersInfo.FQty = vouchers[i].FQty;
                                 kisVouchersInfo.FSerialNo = vouchers[i].FSerialNo;
@@ -2352,7 +3073,7 @@ namespace MicroServiceApplication.Factory
                                 kisVouchersInfo1.FNum = vouchers[i + 1].FNum;
                                 kisVouchersInfo1.FPeriod = vouchers[i + 1].FPeriod;
                                 kisVouchersInfo1.FPosted = vouchers[i + 1].FPosted;
-                                kisVouchersInfo1.FPrepare = vouchers[i + 1].FPrepare;
+                                kisVouchersInfo1.FPrepare = "Manager";
                                 kisVouchersInfo1.FPrice = vouchers[i + 1].FPrice;
                                 kisVouchersInfo1.FQty = vouchers[i + 1].FQty;
                                 kisVouchersInfo1.FSerialNo = vouchers[i + 1].FSerialNo;
@@ -2380,7 +3101,7 @@ namespace MicroServiceApplication.Factory
                                     kisVouchersInfo2.FNum = vouchers[i + 2].FNum;
                                     kisVouchersInfo2.FPeriod = vouchers[i + 2].FPeriod;
                                     kisVouchersInfo2.FPosted = vouchers[i + 2].FPosted;
-                                    kisVouchersInfo2.FPrepare = vouchers[i + 2].FPrepare;
+                                    kisVouchersInfo2.FPrepare = "Manager";
                                     kisVouchersInfo2.FPrice = vouchers[i + 2].FPrice;
                                     kisVouchersInfo2.FQty = vouchers[i + 2].FQty;
                                     kisVouchersInfo2.FSerialNo = vouchers[i + 2].FSerialNo;
@@ -2408,7 +3129,7 @@ namespace MicroServiceApplication.Factory
                                     kisVouchersInfo3.FNum = vouchers[i + 3].FNum;
                                     kisVouchersInfo3.FPeriod = vouchers[i + 3].FPeriod;
                                     kisVouchersInfo3.FPosted = vouchers[i + 3].FPosted;
-                                    kisVouchersInfo3.FPrepare = vouchers[i + 3].FPrepare;
+                                    kisVouchersInfo3.FPrepare = "Manager";
                                     kisVouchersInfo3.FPrice = vouchers[i + 3].FPrice;
                                     kisVouchersInfo3.FQty = vouchers[i + 3].FQty;
                                     kisVouchersInfo3.FSerialNo = vouchers[i + 3].FSerialNo;
@@ -2439,7 +3160,7 @@ namespace MicroServiceApplication.Factory
                                 kisVouchersInfo.FNum = vouchers[i].FNum;
                                 kisVouchersInfo.FPeriod = vouchers[i].FPeriod;
                                 kisVouchersInfo.FPosted = vouchers[i].FPosted;
-                                kisVouchersInfo.FPrepare = vouchers[i].FPrepare;
+                                kisVouchersInfo.FPrepare = "Manager";
                                 kisVouchersInfo.FPrice = vouchers[i].FPrice;
                                 kisVouchersInfo.FQty = vouchers[i].FQty;
                                 kisVouchersInfo.FSerialNo = vouchers[i].FSerialNo;
@@ -2465,7 +3186,7 @@ namespace MicroServiceApplication.Factory
                                 kisVouchersInfo1.FNum = vouchers[i + 1].FNum;
                                 kisVouchersInfo1.FPeriod = vouchers[i + 1].FPeriod;
                                 kisVouchersInfo1.FPosted = vouchers[i + 1].FPosted;
-                                kisVouchersInfo1.FPrepare = vouchers[i + 1].FPrepare;
+                                kisVouchersInfo1.FPrepare = "Manager";
                                 kisVouchersInfo1.FPrice = vouchers[i + 1].FPrice;
                                 kisVouchersInfo1.FQty = vouchers[i + 1].FQty;
                                 kisVouchersInfo1.FSerialNo = vouchers[i + 1].FSerialNo;
@@ -2492,7 +3213,7 @@ namespace MicroServiceApplication.Factory
                                     kisVouchersInfo2.FNum = vouchers[i + 2].FNum;
                                     kisVouchersInfo2.FPeriod = vouchers[i + 2].FPeriod;
                                     kisVouchersInfo2.FPosted = vouchers[i + 2].FPosted;
-                                    kisVouchersInfo2.FPrepare = vouchers[i + 2].FPrepare;
+                                    kisVouchersInfo2.FPrepare = "Manager";
                                     kisVouchersInfo2.FPrice = vouchers[i + 2].FPrice;
                                     kisVouchersInfo2.FQty = vouchers[i + 2].FQty;
                                     kisVouchersInfo2.FSerialNo = vouchers[i + 2].FSerialNo;
@@ -2520,7 +3241,7 @@ namespace MicroServiceApplication.Factory
                                     kisVouchersInfo3.FNum = vouchers[i + 3].FNum;
                                     kisVouchersInfo3.FPeriod = vouchers[i + 3].FPeriod;
                                     kisVouchersInfo3.FPosted = vouchers[i + 3].FPosted;
-                                    kisVouchersInfo3.FPrepare = vouchers[i + 3].FPrepare;
+                                    kisVouchersInfo3.FPrepare = "Manager";
                                     kisVouchersInfo3.FPrice = vouchers[i + 3].FPrice;
                                     kisVouchersInfo3.FQty = vouchers[i + 3].FQty;
                                     kisVouchersInfo3.FSerialNo = vouchers[i + 3].FSerialNo;
@@ -2588,18 +3309,22 @@ namespace MicroServiceApplication.Factory
             KisDbPref kisDbPref = this.getGLPref();
             string sql = "select FAcctID from GLAcct";
             List<String> sqls = new List<String>();
-
+            int F1number = kisDbPref.Faclen1;
             AccessDbClass access = new AccessDbClass(this.KdbParams.DbFilePath);
             DataTable dt = access.SelectToDataTable(sql);
             if (kisDbPref.Faclen2 - kisDbPref.Faclen1 >= 4 || dt.Rows.Count < 0)
             {
-                throw new Exception("科目无需修复");
+                throw new Exception("科目长度无需修复");
             }
             else
             {
                 if (kisDbPref.Faclen2 - kisDbPref.Faclen1 == 2 && dt.Rows.Count > 0)
                 {
-                    sqls.Add("update GLAcct set FAcctID = Left(FAcctID,4)+'00'+Right(FAcctID,len(FAcctID)-4) where len(FAcctID) > 4 ");
+                    sqls.Add("update GLAcct set FAcctID = Left(FAcctID," + F1number + ")+'00'+Right(FAcctID,len(FAcctID)-" + F1number + ") where len(FAcctID) > " + F1number + " ");//修改科目长度
+                    //修改固定资产表
+                    sqls.Add("update FACard set FAssetAcID = Left(FAssetAcID," + F1number + ")+'00'+Right(FAssetAcID,len(FAssetAcID)-" + F1number + ")where len(FAssetAcID) > " + F1number + " ");
+                    sqls.Add("update FACard set FDeprAcID = Left(FDeprAcID," + F1number + ")+'00'+Right(FDeprAcID,len(FDeprAcID)-" + F1number + ")where len(FDeprAcID) > " + F1number + " ");
+                    //更新配置表
                     sqls.Add("update GLPref set FAcLen2 = FAcLen2 + 2 where FAcLen3 <>null");
                     sqls.Add("update GLPref set FAcLen3 = FAcLen3 + 2 where FAcLen3 <>null ");
                     sqls.Add("update GLPref set FAcLen4 = FAcLen4 + 2 where FAcLen4 <>null ");
@@ -2612,7 +3337,7 @@ namespace MicroServiceApplication.Factory
 
                     try
                     {
-                        access.ExecuteSQLNonquery(sqls);
+                        access.ExecuteSQLNonquery(sqls);//执行sql
                     }
                     catch (Exception e1)
                     {
@@ -2625,7 +3350,11 @@ namespace MicroServiceApplication.Factory
                 }
                 if (kisDbPref.Faclen2 - kisDbPref.Faclen1 == 3 && dt.Rows.Count > 0)
                 {
-                    sqls.Add("update GLAcct set FAcctID = Left(FAcctID,4)+'0'+Right(FAcctID,len(FAcctID)-4) where len(FAcctID) > 4 ");
+                    sqls.Add("update GLAcct set FAcctID = Left(FAcctID,"+F1number+ ")+'0'+Right(FAcctID,len(FAcctID)-" + F1number + ") where len(FAcctID) > " + F1number + " ");//修改科目长度
+                    //修改固定资产表
+                    sqls.Add("update FACard set FAssetAcID = Left(FAssetAcID," + F1number + ")+'0'+Right(FAssetAcID,len(FAssetAcID)-" + F1number + ")where len(FAssetAcID) > " + F1number + " ");
+                    sqls.Add("update FACard set FDeprAcID = Left(FDeprAcID," + F1number + ")+'0'+Right(FDeprAcID,len(FDeprAcID)-" + F1number + ")where len(FDeprAcID) > " + F1number + " ");
+                    //更新配置表
                     sqls.Add("update GLPref set FAcLen2 = FAcLen2 + 1 where FAcLen3 <>null");
                     sqls.Add("update GLPref set FAcLen3 = FAcLen3 + 1 where FAcLen3 <>null ");
                     sqls.Add("update GLPref set FAcLen4 = FAcLen4 + 1 where FAcLen4 <>null ");

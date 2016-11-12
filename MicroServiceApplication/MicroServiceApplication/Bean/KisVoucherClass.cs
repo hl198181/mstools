@@ -191,6 +191,7 @@ namespace MicroServiceApplication.Bean
                 voucherItem.FCredit = item.GetValue("FCredit").ToObject<decimal>();
                 voucherItem.FPrepare = item.GetValue("FPrepare").ToString();
                 voucherItem.FSerialNo = item.GetValue("FSerialNo").ToObject<int>();
+                voucherItem.FPrice = item.GetValue("FPrice").ToObject<int>();
                 vouchers.Add(voucherItem);
             }
             return vouchers;
