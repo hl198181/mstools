@@ -448,6 +448,38 @@ namespace MicroServiceApplication.voucher
                 MessageBox.Show(e.Message);
             }
         }
+
+        private void 修复KIS明细科目名称ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.SubjectName();
+        }
+        private void SubjectName()
+        {
+
+            if (this.kisDbFileParams == null || this.kisDbFileParams.DbFilePath == null)
+            {
+                MessageBox.Show("请先选择KIS账套文件");
+            }
+            else
+            {
+                DialogResult dr = MessageBox.Show("KIS账套科目名称将会被修复,是否继续?", "系统警告", MessageBoxButtons.OKCancel);
+                if (dr != DialogResult.OK)
+                {
+                    return;
+                }
+            }
+            try
+            {
+                KisDbFileFactory kisDbFileFactory = new KisDbFileFactory(this.kisDbFileParams);
+                kisDbFileFactory.SubjectName();//调用工厂里修复明细科目方法
+                MessageBox.Show("账套明细科目修复成功");
+            }
+            catch(Exception e)
+            {
+                Console.Write(e.StackTrace);
+                MessageBox.Show(e.Message);
+            }
+        }
         //
         //修复账套科目长度end
         //

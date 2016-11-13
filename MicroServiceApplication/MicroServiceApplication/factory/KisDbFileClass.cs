@@ -303,7 +303,37 @@ namespace MicroServiceApplication.Factory
             }
         }
     }
+    class GLAcct
+    {
+        private string _FAcctID;
+        private string _FAcctName;
 
+        public string FAcctID
+        {
+            get
+            {
+                return _FAcctID;
+            }
+
+            set
+            {
+                _FAcctID = value;
+            }
+        }
+
+        public string FAcctName
+        {
+            get
+            {
+                return _FAcctName;
+            }
+
+            set
+            {
+                _FAcctName = value;
+            }
+        }
+    }
     class KisDbPref
     {
         private String _fcompany;
@@ -326,6 +356,7 @@ namespace MicroServiceApplication.Factory
         private int _faclen8; //八级科目代码长
         private int _faclen9; //九级科目代码长
         private int _faclen10; //十级科目代码长
+        private string _fPHone;//电话号码
 
         public string Fcompany
         {
@@ -584,6 +615,19 @@ namespace MicroServiceApplication.Factory
             set
             {
                 _faclen10 = value;
+            }
+        }
+
+        public string FPHone
+        {
+            get
+            {
+                return _fPHone;
+            }
+
+            set
+            {
+                _fPHone = value;
             }
         }
     }
@@ -3381,6 +3425,302 @@ namespace MicroServiceApplication.Factory
         }
         //
         //修复账套科目长度end
+        //
+        //修复账套明细科目名称start
+        //
+        public void SubjectName()
+        {
+            KisDbPref kisDbPref = this.getGLPref();//读取配置表
+            List<String> sqls = new List<String>();
+            AccessDbClass access = new AccessDbClass(this.KdbParams.DbFilePath);//打开数据库
+            string sql = "select * from GLAcct ";//科目表
+            string sql15 = "select FPhone from GLPref ";//配置表
+            DataTable dt = access.SelectToDataTable(sql);
+            DataTable dt1 = access.SelectToDataTable(sql15);
+            KisDbPref kisGLPref = new KisDbPref();
+            if (dt1.Rows.Count > 0)
+            {
+                foreach (DataRow row in dt1.Rows)
+                {
+                    kisGLPref.FPHone = row[0] == null ? null : row[0].ToString();//读取标记字段
+                }
+            }
+            //检查有无会计科目
+            if (dt.Rows.Count <= 0)
+            {
+                throw new Exception("没有需要修复的科目");
+            }
+            //检查是否已经修复过
+            if (kisGLPref.FPHone == "1")
+            {
+                throw new Exception("请勿重复修复科目名称");
+            }
+            //读取应收应付科目代码start
+            List<GLAcct> gLAcct = new List<GLAcct>();
+            string sql1 = "SELECT FAcctID,FAcctName FROM GLAcct where (FAcctName = '应收账款' or FAcctName = '应收帐款' or FAcctName = '应付账款' or FAcctName = '应付帐款')";
+            DataTable acctdt = access.SelectToDataTable(sql1);
+            if (acctdt.Rows.Count > 0)
+            {
+                foreach (DataRow row in acctdt.Rows)
+                {
+                    GLAcct gLAcctItem = new GLAcct();
+                    gLAcctItem.FAcctID = row[0] == null ? null : row[0].ToString();
+                    gLAcctItem.FAcctName = row[1] == null ? null : row[1].ToString();
+                    gLAcct.Add(gLAcctItem);
+                }
+            }
+            else
+            {
+                throw new Exception("无法获取应收应付科目!");
+            }
+            //读取应收应付科目代码end
+            string sql2 = "select FAcctID,FAcctName from GLAcct where FAcctID like '" + gLAcct[0].FAcctID + "%' and LEN(FAcctID) =" + kisDbPref.Faclen3 + " and FAcctID not in(select left(FAcctID," + kisDbPref.Faclen3 + ") as FAcctID from GLAcct where FAcctID like '" + gLAcct[0].FAcctID + "%' and  LEN(FAcctID) = " + kisDbPref.Faclen4 + ")";
+            string sql3 = "select FAcctID,FAcctName from GLAcct where FAcctID like '" + gLAcct[1].FAcctID + "%' and LEN(FAcctID) =" + kisDbPref.Faclen3 + " and FAcctID not in(select left(FAcctID," + kisDbPref.Faclen3 + ") as FAcctID from GLAcct where FAcctID like '" + gLAcct[1].FAcctID + "%' and  LEN(FAcctID) = " + kisDbPref.Faclen4 + ")";
+            string sql4 = "select FAcctID,FAcctName from GLAcct where FAcctID like '" + gLAcct[0].FAcctID + "%' and LEN(FAcctID) =" + kisDbPref.Faclen4 + " and FAcctID not in(select left(FAcctID," + kisDbPref.Faclen4 + ") as FAcctID from GLAcct where FAcctID like '" + gLAcct[0].FAcctID + "%' and  LEN(FAcctID) = " + kisDbPref.Faclen5 + ")";
+            string sql5 = "select FAcctID,FAcctName from GLAcct where FAcctID like '" + gLAcct[1].FAcctID + "%' and LEN(FAcctID) =" + kisDbPref.Faclen4 + " and FAcctID not in(select left(FAcctID," + kisDbPref.Faclen4 + ") as FAcctID from GLAcct where FAcctID like '" + gLAcct[1].FAcctID + "%' and  LEN(FAcctID) = " + kisDbPref.Faclen5 + ")";
+            string sql6 = "select FAcctID,FAcctName from GLAcct where FAcctID like '" + gLAcct[0].FAcctID + "%' and LEN(FAcctID) =" + kisDbPref.Faclen5 + " and FAcctID not in(select left(FAcctID," + kisDbPref.Faclen5 + ") as FAcctID from GLAcct where FAcctID like '" + gLAcct[0].FAcctID + "%' and  LEN(FAcctID) = " + kisDbPref.Faclen6 + ")";
+            string sql7 = "select FAcctID,FAcctName from GLAcct where FAcctID like '" + gLAcct[1].FAcctID + "%' and LEN(FAcctID) =" + kisDbPref.Faclen5 + " and FAcctID not in(select left(FAcctID," + kisDbPref.Faclen5 + ") as FAcctID from GLAcct where FAcctID like '" + gLAcct[1].FAcctID + "%' and  LEN(FAcctID) = " + kisDbPref.Faclen6 + ")";
+            //
+            //修复应收三级会计科目名称start
+            //
+            DataTable acctdt1 = access.SelectToDataTable(sql2);
+            List<GLAcct> gLAcct1 = new List<GLAcct>();
+            if (acctdt1.Rows.Count > 0)
+                {
+                
+                foreach (DataRow row in acctdt1.Rows)
+                    {
+                        GLAcct gLAcctItem = new GLAcct();
+                        gLAcctItem.FAcctID = row[0] == null ? null : row[0].ToString();
+                        gLAcctItem.FAcctName = row[1] == null ? null : row[1].ToString();
+
+                    gLAcct1.Add(gLAcctItem);
+                    }
+                foreach (GLAcct item in gLAcct1)
+                {
+
+                    //获取一级科目
+                    String leve1Subject = item.FAcctID.Substring(0, kisDbPref.Faclen2);
+
+                    KisDbAcct level1Acct = this.getGLAccById(leve1Subject);
+
+                    if (level1Acct == null)
+                    {
+                        throw new Exception("无法获取科目:" + item.FAcctID + "的上级科目信息！");
+                    }
+
+                    //组合插入SQL
+                    String sql8 = "update GLAcct set FAcctName = '" + level1Acct.Facctname + "'&'" + item.FAcctName + "'  where FAcctName = '" + item.FAcctName + "'";
+
+                    sqls.Add(sql8);
+                }
+            }
+            //
+            //修复应收三级会计科目名称end
+            //
+            //修复应付三级会计科目名称start
+            //
+            DataTable acctdt2 = access.SelectToDataTable(sql3);
+            List<GLAcct> gLAcct2 = new List<GLAcct>();
+            if (acctdt2.Rows.Count > 0)
+            {
+                foreach (DataRow row in acctdt2.Rows)
+                {
+                    GLAcct gLAcctItem = new GLAcct();
+                    gLAcctItem.FAcctID = row[0] == null ? null : row[0].ToString();
+                    gLAcctItem.FAcctName = row[1] == null ? null : row[1].ToString();
+
+                    gLAcct2.Add(gLAcctItem);
+                }
+                foreach (GLAcct item in gLAcct2)
+                {
+
+                    //获取一级科目
+                    String leve1Subject = item.FAcctID.Substring(0, kisDbPref.Faclen2);
+
+                    KisDbAcct level1Acct = this.getGLAccById(leve1Subject);
+
+                    if (level1Acct == null)
+                    {
+                        throw new Exception("无法获取科目:" + item.FAcctID + "的上级科目信息！");
+                    }
+
+                    //组合插入SQL
+                    String sql9 = "update GLAcct set FAcctName = '" + level1Acct.Facctname + "'&'" + item.FAcctName + "' where FAcctName = '" + item.FAcctName + "'";
+                    sqls.Add(sql9);
+                }
+            }
+            //
+            //修复应付三级会计科目名称end
+            //
+            //修复应收四级会计科目名称start
+            //
+            DataTable acctdt3 = access.SelectToDataTable(sql4);
+            List<GLAcct> gLAcct3 = new List<GLAcct>();
+            if (acctdt3.Rows.Count > 0)
+            {
+                foreach (DataRow row in acctdt3.Rows)
+                {
+                    GLAcct gLAcctItem = new GLAcct();
+                    gLAcctItem.FAcctID = row[0] == null ? null : row[0].ToString();
+                    gLAcctItem.FAcctName = row[1] == null ? null : row[1].ToString();
+
+                    gLAcct3.Add(gLAcctItem);
+                }
+                foreach (GLAcct item in gLAcct3)
+                {
+
+                    //获取一级科目
+                    String leve1Subject = item.FAcctID.Substring(0, kisDbPref.Faclen3);
+
+                    KisDbAcct level1Acct = this.getGLAccById(leve1Subject);
+
+                    if (level1Acct == null)
+                    {
+                        throw new Exception("无法获取科目:" + item.FAcctID + "的上级科目信息！");
+                    }
+
+                    //组合插入SQL
+                    String sql10 = "update GLAcct set FAcctName = '" + level1Acct.Facctname + "'&'" + item.FAcctName + "' where FAcctName = '" + item.FAcctName + "'";
+
+                    sqls.Add(sql10);
+                }
+            }
+            //
+            //修复应收四级会计科目名称end
+            //
+            //修复应付四级会计科目名称start
+            //
+            DataTable acctdt4 = access.SelectToDataTable(sql5);
+            List<GLAcct> gLAcct4 = new List<GLAcct>();
+            if (acctdt4.Rows.Count > 0)
+            {
+                foreach (DataRow row in acctdt4.Rows)
+                {
+                    GLAcct gLAcctItem = new GLAcct();
+                    gLAcctItem.FAcctID = row[0] == null ? null : row[0].ToString();
+                    gLAcctItem.FAcctName = row[1] == null ? null : row[1].ToString();
+
+                    gLAcct4.Add(gLAcctItem);
+                }
+                foreach (GLAcct item in gLAcct4)
+                {
+
+                    //获取一级科目
+                    String leve1Subject = item.FAcctID.Substring(0, kisDbPref.Faclen3);
+
+                    KisDbAcct level1Acct = this.getGLAccById(leve1Subject);
+
+                    if (level1Acct == null)
+                    {
+                        throw new Exception("无法获取科目:" + item.FAcctID + "的上级科目信息！");
+                    }
+
+                    //组合插入SQL
+                    String sql11 = "update GLAcct set FAcctName = '" + level1Acct.Facctname + "'&'" + item.FAcctName + "' where FAcctName = '" + item.FAcctName + "'";
+                    sqls.Add(sql11);
+                }
+            }
+            //
+            //修复应付四级会计科目名称end
+            //
+            //修复应收五级会计科目名称start
+            //
+            DataTable acctdt5 = access.SelectToDataTable(sql6);
+            List<GLAcct> gLAcct5 = new List<GLAcct>();
+            if (acctdt5.Rows.Count > 0)
+            {
+                foreach (DataRow row in acctdt5.Rows)
+                {
+                    GLAcct gLAcctItem = new GLAcct();
+                    gLAcctItem.FAcctID = row[0] == null ? null : row[0].ToString();
+                    gLAcctItem.FAcctName = row[1] == null ? null : row[1].ToString();
+
+                    gLAcct5.Add(gLAcctItem);
+                }
+                foreach (GLAcct item in gLAcct5)
+                {
+                    //获取一级科目
+                    String leve1Subject = item.FAcctID.Substring(0, kisDbPref.Faclen4);
+
+                    KisDbAcct level1Acct = this.getGLAccById(leve1Subject);
+
+                    if (level1Acct == null)
+                    {
+                        throw new Exception("无法获取科目:" + item.FAcctID + "的上级科目信息！");
+                    }
+
+                    //组合插入SQL
+                    String sql12 = "update GLAcct set FAcctName = '" + level1Acct.Facctname + "'&'" + item.FAcctName + "' where FAcctName = '" + item.FAcctName + "'";
+
+                    sqls.Add(sql12);
+                }
+            }
+            //
+            //修复应收五级会计科目名称end
+            //
+            //修复应付五级会计科目名称start
+            //
+            DataTable acctdt6 = access.SelectToDataTable(sql7);
+            List<GLAcct> gLAcct6 = new List<GLAcct>();
+            if (acctdt6.Rows.Count > 0)
+            {
+                foreach (DataRow row in acctdt6.Rows)
+                {
+                    GLAcct gLAcctItem = new GLAcct();
+                    gLAcctItem.FAcctID = row[0] == null ? null : row[0].ToString();
+                    gLAcctItem.FAcctName = row[1] == null ? null : row[1].ToString();
+
+                    gLAcct6.Add(gLAcctItem);
+                }
+                foreach (GLAcct item in gLAcct6)
+                {
+
+                    //获取一级科目
+                    String leve1Subject = item.FAcctID.Substring(0, kisDbPref.Faclen4);
+
+                    KisDbAcct level1Acct = this.getGLAccById(leve1Subject);
+
+                    if (level1Acct == null)
+                    {
+                        throw new Exception("无法获取科目:" + item.FAcctID + "的上级科目信息！");
+                    }
+
+                    //组合插入SQL
+                    String sql13 = "update GLAcct set FAcctName = '" + level1Acct.Facctname + "'&'" + item.FAcctName + "' where FAcctName = '" + item.FAcctName + "'";
+                    sqls.Add(sql13);
+                }
+            }
+            //
+            //修复应付五级会计科目名称end
+            //
+            //执行sql
+            //
+            if (sqls.Count > 0)
+            {
+                //添加已修复标记字段
+                String sql14 = "update GLPref set FPhone = '1'";
+                sqls.Add(sql14);
+                try
+                {
+                    access.ExecuteSQLNonquery(sqls);
+                }
+                catch (Exception e1)
+                {
+                    throw e1;
+                }
+                finally
+                {
+                    access.Close();
+                }
+            }
+            else
+            {
+                throw new Exception("没有需要修复的科目");
+            }
+        }
+        //
+        //修复账套明细科目名称end
         //
     }
 }

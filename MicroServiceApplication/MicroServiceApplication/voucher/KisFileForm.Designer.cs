@@ -66,6 +66,7 @@
             this.paytaxreportbutton = new System.Windows.Forms.Button();
             this.localreporttaxbutton = new System.Windows.Forms.Button();
             this.InformationTextBox = new System.Windows.Forms.TextBox();
+            this.修复KIS明细科目名称ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -400,7 +401,8 @@
             this.设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.SetupKisDirToolStripMenuItem,
             this.InitSubjectToolStripMenuItem,
-            this.修复KIS账套科目长度ToolStripMenuItem});
+            this.修复KIS账套科目长度ToolStripMenuItem,
+            this.修复KIS明细科目名称ToolStripMenuItem});
             this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
             this.设置ToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
             this.设置ToolStripMenuItem.Text = "设置";
@@ -532,6 +534,13 @@
             this.InformationTextBox.TabIndex = 8;
             this.InformationTextBox.Visible = false;
             // 
+            // 修复KIS明细科目名称ToolStripMenuItem
+            // 
+            this.修复KIS明细科目名称ToolStripMenuItem.Name = "修复KIS明细科目名称ToolStripMenuItem";
+            this.修复KIS明细科目名称ToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
+            this.修复KIS明细科目名称ToolStripMenuItem.Text = "修复KIS明细科目名称";
+            this.修复KIS明细科目名称ToolStripMenuItem.Click += new System.EventHandler(this.修复KIS明细科目名称ToolStripMenuItem_Click);
+            // 
             // KisFileForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -608,5 +617,6 @@
         private System.Windows.Forms.Button subjectToKisButton;
         private System.Windows.Forms.TextBox InformationTextBox;
         private System.Windows.Forms.ToolStripMenuItem 修复KIS账套科目长度ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 修复KIS明细科目名称ToolStripMenuItem;
     }
 }
