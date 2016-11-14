@@ -3499,7 +3499,7 @@ namespace MicroServiceApplication.Factory
                 foreach (GLAcct item in gLAcct1)
                 {
 
-                    //获取一级科目
+                    //获取上级科目
                     String leve1Subject = item.FAcctID.Substring(0, kisDbPref.Faclen2);
 
                     KisDbAcct level1Acct = this.getGLAccById(leve1Subject);
@@ -3535,7 +3535,7 @@ namespace MicroServiceApplication.Factory
                 foreach (GLAcct item in gLAcct2)
                 {
 
-                    //获取一级科目
+                    //获取上级科目
                     String leve1Subject = item.FAcctID.Substring(0, kisDbPref.Faclen2);
 
                     KisDbAcct level1Acct = this.getGLAccById(leve1Subject);
@@ -3570,7 +3570,7 @@ namespace MicroServiceApplication.Factory
                 foreach (GLAcct item in gLAcct3)
                 {
 
-                    //获取一级科目
+                    //获取上级科目
                     String leve1Subject = item.FAcctID.Substring(0, kisDbPref.Faclen3);
 
                     KisDbAcct level1Acct = this.getGLAccById(leve1Subject);
@@ -3606,7 +3606,7 @@ namespace MicroServiceApplication.Factory
                 foreach (GLAcct item in gLAcct4)
                 {
 
-                    //获取一级科目
+                    //获取上级科目
                     String leve1Subject = item.FAcctID.Substring(0, kisDbPref.Faclen3);
 
                     KisDbAcct level1Acct = this.getGLAccById(leve1Subject);
@@ -3640,7 +3640,7 @@ namespace MicroServiceApplication.Factory
                 }
                 foreach (GLAcct item in gLAcct5)
                 {
-                    //获取一级科目
+                    //获取上级科目
                     String leve1Subject = item.FAcctID.Substring(0, kisDbPref.Faclen4);
 
                     KisDbAcct level1Acct = this.getGLAccById(leve1Subject);
@@ -3676,7 +3676,7 @@ namespace MicroServiceApplication.Factory
                 foreach (GLAcct item in gLAcct6)
                 {
 
-                    //获取一级科目
+                    //获取上级科目
                     String leve1Subject = item.FAcctID.Substring(0, kisDbPref.Faclen4);
 
                     KisDbAcct level1Acct = this.getGLAccById(leve1Subject);
