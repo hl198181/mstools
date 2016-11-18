@@ -334,6 +334,39 @@ namespace MicroServiceApplication.Factory
             }
         }
     }
+    class FACard
+    {
+        private string _fAssetAcID;
+        private string _fDeprAcID;
+
+        public string FAssetAcID
+        {
+            get
+            {
+                return _fAssetAcID;
+            }
+
+            set
+            {
+                _fAssetAcID = value;
+            }
+        }
+
+        public string FDeprAcID
+        {
+            get
+            {
+                return _fDeprAcID;
+            }
+
+            set
+            {
+                _fDeprAcID = value;
+            }
+        }
+    }
+   
+
     class KisDbPref
     {
         private String _fcompany;
@@ -3351,25 +3384,80 @@ namespace MicroServiceApplication.Factory
         {
 
             KisDbPref kisDbPref = this.getGLPref();
-            string sql = "select FAcctID from GLAcct";
+
             List<String> sqls = new List<String>();
             int F1number = kisDbPref.Faclen1;
             AccessDbClass access = new AccessDbClass(this.KdbParams.DbFilePath);
+            string sql = "select FAcctID from GLAcct";
             DataTable dt = access.SelectToDataTable(sql);
-            if (kisDbPref.Faclen2 - kisDbPref.Faclen1 >= 4 || dt.Rows.Count < 0)
+            //查询科目代码
+            string sql1 = "select FAcctID from GLAcct where len(FAcctID) > "+ F1number + " order by FAcctID";
+            DataTable dt1 = access.SelectToDataTable(sql1);
+            List<GLAcct> gLAcctList = new List<GLAcct>();
+            if (dt1.Rows.Count > 0)
+            {
+                foreach (DataRow row in dt1.Rows)
+                {
+                    GLAcct gLAcct = new GLAcct();
+                    gLAcct.FAcctID = row[0] == null ? null : row[0].ToString();
+                    gLAcctList.Add(gLAcct);
+                }
+            }
+            //查询固定资产科目
+            string sql2 = "select FAssetAcID from FACard where LEN(FAssetAcID) > " + F1number + " order by  FAssetAcID";
+            DataTable dt2 = access.SelectToDataTable(sql2);
+            List<FACard> fACardList = new List<FACard>();
+            if (dt2.Rows.Count > 0)
+            {
+                foreach (DataRow row in dt1.Rows)
+                {
+                    FACard fACard = new FACard();
+                    fACard.FAssetAcID = row[0] == null ? null : row[0].ToString();
+                    fACardList.Add(fACard);
+                }
+            }
+            //查询折旧科目
+            string sql3 = "select FDeprAcID from FACard where LEN(FDeprAcID) > " + F1number + " order by  FAssetAcID";
+            DataTable dt3 = access.SelectToDataTable(sql2);
+            List<FACard> fACardList1 = new List<FACard>();
+            if (dt2.Rows.Count > 0)
+            {
+                foreach (DataRow row in dt1.Rows)
+                {
+                    FACard fACard = new FACard();
+                    fACard.FDeprAcID = row[0] == null ? null : row[0].ToString();
+                    fACardList1.Add(fACard);
+                }
+            }
+            //不需要修复
+            if (kisDbPref.Faclen2 - kisDbPref.Faclen1 >= 4 || dt.Rows.Count<= 0 )
             {
                 throw new Exception("科目长度无需修复");
             }
             else
             {
-                if (kisDbPref.Faclen2 - kisDbPref.Faclen1 == 2 && dt.Rows.Count > 0)
+                //修复多两个0
+                if (kisDbPref.Faclen2 - kisDbPref.Faclen1 == 2 )
                 {
-                    sqls.Add("update GLAcct set FAcctID = Left(FAcctID," + F1number + ")+'00'+Right(FAcctID,len(FAcctID)-" + F1number + ") where len(FAcctID) > " + F1number + " ");//修改科目长度
+                    //科目修复
+                    for (int i = 0; i < gLAcctList.Count; i++)
+                    {
+                        string FAcctID = gLAcctList[i].FAcctID;
+                        sqls.Add("update GLAcct set FAcctID = Left('" + FAcctID + "'," + F1number + ")+'00'+Right('" + FAcctID + "',len('" + FAcctID + "')-" + F1number + ") where FAcctID = '" + FAcctID + "'");//修改科目长度
+                    }
                     //修改固定资产表
-                    sqls.Add("update FACard set FAssetAcID = Left(FAssetAcID," + F1number + ")+'00'+Right(FAssetAcID,len(FAssetAcID)-" + F1number + ")where len(FAssetAcID) > " + F1number + " ");
-                    sqls.Add("update FACard set FDeprAcID = Left(FDeprAcID," + F1number + ")+'00'+Right(FDeprAcID,len(FDeprAcID)-" + F1number + ")where len(FDeprAcID) > " + F1number + " ");
+                    for (int i = 0; i < fACardList.Count; i++)
+                    {
+                        string FAssetAcID = fACardList[i].FAssetAcID;                  
+                        sqls.Add("update FACard set FAssetAcID = Left('" + FAssetAcID + "'," + F1number + ")+'00'+Right('" + FAssetAcID + "',LEN('" + FAssetAcID + "')-" + F1number + ")where FAssetAcID ='" + FAssetAcID + "' ");                       
+                    }
+                    for (int i = 0; i < fACardList1.Count; i++)
+                    {
+                        string FDeprAcID = fACardList1[i].FDeprAcID;
+                        sqls.Add("update FACard set FDeprAcID = Left('" + FDeprAcID + "'," + F1number + ")+'00'+Right('" + FDeprAcID + "',LEN('" + FDeprAcID + "')-" + F1number + ")where FDeprAcID = '" + FDeprAcID + "' ");
+                    }
                     //更新配置表
-                    sqls.Add("update GLPref set FAcLen2 = FAcLen2 + 2 where FAcLen3 <>null");
+                    sqls.Add("update GLPref set FAcLen2 = FAcLen2 + 2 where FAcLen2 <>null");
                     sqls.Add("update GLPref set FAcLen3 = FAcLen3 + 2 where FAcLen3 <>null ");
                     sqls.Add("update GLPref set FAcLen4 = FAcLen4 + 2 where FAcLen4 <>null ");
                     sqls.Add("update GLPref set FAcLen5 = FAcLen5 + 2 where FAcLen5 <>null ");
@@ -3379,27 +3467,30 @@ namespace MicroServiceApplication.Factory
                     sqls.Add("update GLPref set FAcLen9 = FAcLen9 + 2 where FAcLen9 <>null ");
                     sqls.Add("update GLPref set FAcLen10 = FAcLen10 + 2 where FAcLen10 <>null ");
 
-                    try
-                    {
-                        access.ExecuteSQLNonquery(sqls);//执行sql
-                    }
-                    catch (Exception e1)
-                    {
-                        throw e1;
-                    }
-                    finally
-                    {
-                        access.Close();
-                    }
+
                 }
-                if (kisDbPref.Faclen2 - kisDbPref.Faclen1 == 3 && dt.Rows.Count > 0)
+                //修复多一个0
+                if (kisDbPref.Faclen2 - kisDbPref.Faclen1 == 3 )
                 {
-                    sqls.Add("update GLAcct set FAcctID = Left(FAcctID,"+F1number+ ")+'0'+Right(FAcctID,len(FAcctID)-" + F1number + ") where len(FAcctID) > " + F1number + " ");//修改科目长度
+                    //科目修复
+                    for (int i = 0; i < gLAcctList.Count; i++)
+                    {
+                        string FAcctID = gLAcctList[i].FAcctID;
+                        sqls.Add("update GLAcct set FAcctID = Left('" + FAcctID + "'," + F1number + ")+'0'+Right('" + FAcctID + "',len('" + FAcctID + "')-" + F1number + ") where FAcctID = '" + FAcctID + "'");//修改科目长度
+                    }
                     //修改固定资产表
-                    sqls.Add("update FACard set FAssetAcID = Left(FAssetAcID," + F1number + ")+'0'+Right(FAssetAcID,len(FAssetAcID)-" + F1number + ")where len(FAssetAcID) > " + F1number + " ");
-                    sqls.Add("update FACard set FDeprAcID = Left(FDeprAcID," + F1number + ")+'0'+Right(FDeprAcID,len(FDeprAcID)-" + F1number + ")where len(FDeprAcID) > " + F1number + " ");
+                    for (int i = 0; i < fACardList.Count; i++)
+                    {
+                        string FAssetAcID = fACardList[i].FAssetAcID;
+                        sqls.Add("update FACard set FAssetAcID = Left('" + FAssetAcID + "'," + F1number + ")+'0'+Right('" + FAssetAcID + "',LEN('" + FAssetAcID + "')-" + F1number + ")where FAssetAcID ='" + FAssetAcID + "' ");
+                    }
+                    for (int i = 0; i < fACardList1.Count; i++)
+                    {
+                        string FDeprAcID = fACardList1[i].FDeprAcID;
+                        sqls.Add("update FACard set FDeprAcID = Left('" + FDeprAcID + "'," + F1number + ")+'0'+Right('" + FDeprAcID + "',LEN('" + FDeprAcID + "')-" + F1number + ")where FDeprAcID = '" + FDeprAcID + "' ");
+                    }
                     //更新配置表
-                    sqls.Add("update GLPref set FAcLen2 = FAcLen2 + 1 where FAcLen3 <>null");
+                    sqls.Add("update GLPref set FAcLen2 = FAcLen2 + 1 where FAcLen2 <>null");
                     sqls.Add("update GLPref set FAcLen3 = FAcLen3 + 1 where FAcLen3 <>null ");
                     sqls.Add("update GLPref set FAcLen4 = FAcLen4 + 1 where FAcLen4 <>null ");
                     sqls.Add("update GLPref set FAcLen5 = FAcLen5 + 1 where FAcLen5 <>null ");
@@ -3408,19 +3499,19 @@ namespace MicroServiceApplication.Factory
                     sqls.Add("update GLPref set FAcLen8 = FAcLen8 + 1 where FAcLen8 <>null ");
                     sqls.Add("update GLPref set FAcLen9 = FAcLen9 + 1 where FAcLen9 <>null ");
                     sqls.Add("update GLPref set FAcLen10 = FAcLen10 + 1 where FAcLen10 <>null ");
-                    try
-                    {
-                        access.ExecuteSQLNonquery(sqls);
-                    }
-                    catch (Exception e1)
-                    {
-                        throw e1;
-                    }
-                    finally
-                    {
-                        access.Close();
-                    }
                 }
+            }
+            try
+            {
+                access.ExecuteSQLNonquery(sqls);//执行sql
+            }
+            catch (Exception e1)
+            {
+                throw e1;
+            }
+            finally
+            {
+                access.Close();
             }
         }
         //

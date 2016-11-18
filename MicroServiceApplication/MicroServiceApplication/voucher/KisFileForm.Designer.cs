@@ -57,6 +57,7 @@
             this.SetupKisDirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InitSubjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.修复KIS账套科目长度ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.修复KIS明细科目名称ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportActionGroupBox = new System.Windows.Forms.GroupBox();
             this.exportActionflowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.exportIncomeButton = new System.Windows.Forms.Button();
@@ -66,7 +67,6 @@
             this.paytaxreportbutton = new System.Windows.Forms.Button();
             this.localreporttaxbutton = new System.Windows.Forms.Button();
             this.InformationTextBox = new System.Windows.Forms.TextBox();
-            this.修复KIS明细科目名称ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -428,6 +428,13 @@
             this.修复KIS账套科目长度ToolStripMenuItem.Text = "修复KIS账套科目长度";
             this.修复KIS账套科目长度ToolStripMenuItem.Click += new System.EventHandler(this.修复KIS账套科目长度ToolStripMenuItem_Click);
             // 
+            // 修复KIS明细科目名称ToolStripMenuItem
+            // 
+            this.修复KIS明细科目名称ToolStripMenuItem.Name = "修复KIS明细科目名称ToolStripMenuItem";
+            this.修复KIS明细科目名称ToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
+            this.修复KIS明细科目名称ToolStripMenuItem.Text = "修复KIS明细科目名称";
+            this.修复KIS明细科目名称ToolStripMenuItem.Click += new System.EventHandler(this.修复KIS明细科目名称ToolStripMenuItem_Click);
+            // 
             // exportActionGroupBox
             // 
             this.exportActionGroupBox.Controls.Add(this.exportActionflowLayoutPanel);
@@ -533,13 +540,6 @@
             this.InformationTextBox.Size = new System.Drawing.Size(310, 26);
             this.InformationTextBox.TabIndex = 8;
             this.InformationTextBox.Visible = false;
-            // 
-            // 修复KIS明细科目名称ToolStripMenuItem
-            // 
-            this.修复KIS明细科目名称ToolStripMenuItem.Name = "修复KIS明细科目名称ToolStripMenuItem";
-            this.修复KIS明细科目名称ToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
-            this.修复KIS明细科目名称ToolStripMenuItem.Text = "修复KIS明细科目名称";
-            this.修复KIS明细科目名称ToolStripMenuItem.Click += new System.EventHandler(this.修复KIS明细科目名称ToolStripMenuItem_Click);
             // 
             // KisFileForm
             // 

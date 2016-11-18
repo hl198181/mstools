@@ -79,6 +79,10 @@ namespace MicroServiceApplication.voucher
             this.user = Session.GetInstance().User;
             this.inst = Session.GetInstance().Inst;
             this.createbyTextBox.Text = this.user.Name;
+            if (this.inst.Id != "653279009C4211E6A731B9323D2BF7D6")
+            {
+                this.修复KIS明细科目名称ToolStripMenuItem.Visible = false;
+            }
 
             this.initAccountcycle();
         }
@@ -437,8 +441,7 @@ namespace MicroServiceApplication.voucher
             }
             try
             {
-                KisDbFileFactory kisDbFileFactory = new KisDbFileFactory(this.kisDbFileParams);
-
+                KisDbFileFactory kisDbFileFactory = new KisDbFileFactory(this.kisDbFileParams);             
                 kisDbFileFactory.SubjectLength();//引用工厂里修复账套科目长度的方法
                 MessageBox.Show("科目长度修复成功!");
             }
