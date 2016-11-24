@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace MicroServiceApplication.voucher
 {
-    public partial class YYT3Form: Form
+    public partial class YYT3Form : Form
     {
         public YYT3Form()
         {
@@ -30,7 +30,7 @@ namespace MicroServiceApplication.voucher
         private void selectClientButton_Click(object sender, EventArgs e)
         {
             List<Client> clientList = CommonManager.selectClient(); //弹出选择客户列表
-            if(clientList != null && clientList.Count>0)
+            if (clientList != null && clientList.Count > 0)
             {
                 this.client = clientList[0];//选择客户
                 this.clientTextBox.Text = this.client.Fullname;//客户名称显示栏显示选择的客户名称
@@ -49,10 +49,10 @@ namespace MicroServiceApplication.voucher
             DataTable clientSubjectDT = new DataTable();//创建一个新表格
             //表格的设置有三列
             clientSubjectDT.Columns.Add("ID", Type.GetType("System.String"));
-            clientSubjectDT.Columns.Add("科目代码",Type.GetType("System.String"));
+            clientSubjectDT.Columns.Add("科目代码", Type.GetType("System.String"));
             clientSubjectDT.Columns.Add("科目名称", Type.GetType("System.String"));
             //把clientSubjects变量里取到的新科目循环取值放在row里
-            foreach(ClientSubject item in this.clientSubjects)
+            foreach (ClientSubject item in this.clientSubjects)
             {
                 DataRow datarow = clientSubjectDT.NewRow();//创建新row
 
@@ -78,7 +78,7 @@ namespace MicroServiceApplication.voucher
         private void selectAccountcycleButton_Click(object sender, EventArgs e)
         {
             List<Accountcycle> accountcycleList = CommonManager.selectAccountcycle();//弹出月份表
-            if(accountcycleList != null && accountcycleList.Count > 0)
+            if (accountcycleList != null && accountcycleList.Count > 0)
             {
                 this.accountcycle = accountcycleList[0];//选择月份
                 this.accountcycleTextBox.Text = this.accountcycle.Name;//月份显示栏里显示选择的月份
@@ -91,15 +91,15 @@ namespace MicroServiceApplication.voucher
         //
         private void selectAccessButton_Click(object sender, EventArgs e)
         {
-            if(this.dbIpTextBox.Text == "" || this.dbIpTextBox.Text == null)
+            if (this.dbIpTextBox.Text == "" || this.dbIpTextBox.Text == null)
             {
                 MessageBox.Show("请输入账套服务器地址!");
             }
-            if(this.dbUserTextBox.Text =="" || this.dbUserTextBox.Text == null)
+            if (this.dbUserTextBox.Text == "" || this.dbUserTextBox.Text == null)
             {
                 MessageBox.Show("请输入账套数据库用户名!");
             }
-            if(this.dbPasswordTextBox.Text == null)
+            if (this.dbPasswordTextBox.Text == null)
             {
                 this.dbPasswordTextBox.Text = "";
             }
@@ -115,7 +115,7 @@ namespace MicroServiceApplication.voucher
                     this.accsetNameTextBox.Text = this.accset.CAcc_Name + "[" + this.accset.DbName + "]";//账套显示栏赋值
                 }
             }
-            catch(Exception e1)
+            catch (Exception e1)
             {
                 Console.WriteLine(e1.StackTrace);
                 MessageBox.Show(e1.Message);
@@ -133,7 +133,7 @@ namespace MicroServiceApplication.voucher
         //创建连接测试
         private void connectText()
         {
-            if(this.accset == null)
+            if (this.accset == null)
             {
                 MessageBox.Show("请先选择账套!");
             }
@@ -143,7 +143,7 @@ namespace MicroServiceApplication.voucher
                 yYT3Factory.connectTest(this.accset);//引用Factory工厂里测试连接的方法
                 MessageBox.Show("连接成功");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 MessageBox.Show(e.Message);
             }
@@ -164,7 +164,7 @@ namespace MicroServiceApplication.voucher
         {
             AccountcycleFactory af = new AccountcycleFactory();//new月份工厂
             List<Accountcycle> accountcycleList = af.query(-1, -1);//引用显示月份方法
-            if (accountcycleList != null && accountcycleList.Count >0)
+            if (accountcycleList != null && accountcycleList.Count > 0)
             {
                 this.accountcycle = accountcycleList[0];
                 this.accountcycleTextBox.Text = this.accountcycle.Name;//月份显示栏显示月份
@@ -177,14 +177,14 @@ namespace MicroServiceApplication.voucher
         //  
         private void refreshButton_Click(object sender, EventArgs e)
         {
-            if(this.client == null)
+            if (this.client == null)
             {
                 MessageBox.Show("请先选择客户信息");
             }
             else
             {
                 this.queryClientNewSubject(this.client.Id);
-                if(this.clientSubjects.Count<=0)
+                if (this.clientSubjects.Count <= 0)
                 {
                     MessageBox.Show("没有新会计科目");
                 }
@@ -247,10 +247,10 @@ namespace MicroServiceApplication.voucher
                     return;
                 }
             }
-                exporBean.Instid = this.inst.Id;
-                exporBean.Clientid = this.client.Id;
-                exporBean.Accountcyclesn = this.accountcycle.Sn;
-                exporBean.Createby = this.user.Id;
+            exporBean.Instid = this.inst.Id;
+            exporBean.Clientid = this.client.Id;
+            exporBean.Accountcyclesn = this.accountcycle.Sn;
+            exporBean.Createby = this.user.Id;
             try
             {
                 YYT3Factory yYT3Factory = new YYT3Factory();
@@ -262,7 +262,7 @@ namespace MicroServiceApplication.voucher
 
                 MessageBox.Show("新科目导出成功!请登录财务系统查看结果!");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 MessageBox.Show(e.Message);
             }
@@ -296,6 +296,55 @@ namespace MicroServiceApplication.voucher
         private void exportpayrollbutton_Click(object sender, EventArgs e)
         {
             this.exports("payroll");
+        }
+        private void exports(string categoryname)
+        {
+            ExportBean exportBean = new ExportBean();
+            if (this.inst == null || this.inst.Id == null)
+            {
+                MessageBox.Show("无法获取当前机构信息");
+            }
+            if (this.client == null || this.client.Id == null)
+            {
+                MessageBox.Show("无法获取当前客户信息");
+            }
+            if (this.accountcycle == null || this.accountcycle.Id == null)
+            {
+                MessageBox.Show("无法获取当前月份信息");
+            }
+            if (this.user == null || this.user.Id == null)
+            {
+                MessageBox.Show("无法获取当前用户信息");
+            }
+            if (this.accset == null)
+            {
+                MessageBox.Show("请选择账套信息");
+            }
+            if (accset.CAcc_Name != client.Name && accset.CAcc_Name != client.Fullname)
+            {
+                DialogResult dr = MessageBox.Show("选择的客户与账套名称不一致，是否继续导入?", "系统提示", MessageBoxButtons.OKCancel);
+                if (dr != DialogResult.OK)
+                {
+                    return;
+                }
+            }
+            exportBean.Instid = this.inst.Id;
+            exportBean.Clientid = this.client.Id;
+            exportBean.Categoryname = categoryname;
+            exportBean.Createby = "Demo";
+            exportBean.Accountcyclesn = this.accountcycle.Sn;
+
+
+            try
+            {
+
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+                MessageBox.Show(e.Message);
+
+            }
         }
     }
 }
