@@ -479,6 +479,7 @@
             this.exportIncomeButton.TabIndex = 0;
             this.exportIncomeButton.Text = "导出进项";
             this.exportIncomeButton.UseVisualStyleBackColor = true;
+            this.exportIncomeButton.Click += new System.EventHandler(this.exportIncomeButton_Click);
             // 
             // exportOutputButton
             // 
@@ -489,6 +490,7 @@
             this.exportOutputButton.TabIndex = 1;
             this.exportOutputButton.Text = "导出销项";
             this.exportOutputButton.UseVisualStyleBackColor = true;
+            this.exportOutputButton.Click += new System.EventHandler(this.exportOutputButton_Click);
             // 
             // bankbillExportbutton
             // 
@@ -499,6 +501,7 @@
             this.bankbillExportbutton.TabIndex = 2;
             this.bankbillExportbutton.Text = "导出银行回单";
             this.bankbillExportbutton.UseVisualStyleBackColor = true;
+            this.bankbillExportbutton.Click += new System.EventHandler(this.bankbillExportbutton_Click);
             // 
             // paytaxreportbutton
             // 
@@ -509,6 +512,7 @@
             this.paytaxreportbutton.TabIndex = 4;
             this.paytaxreportbutton.Text = "导出国税";
             this.paytaxreportbutton.UseVisualStyleBackColor = true;
+            this.paytaxreportbutton.Click += new System.EventHandler(this.paytaxreportbutton_Click);
             // 
             // localreporttaxbutton
             // 
@@ -519,6 +523,7 @@
             this.localreporttaxbutton.TabIndex = 5;
             this.localreporttaxbutton.Text = "导出地税";
             this.localreporttaxbutton.UseVisualStyleBackColor = true;
+            this.localreporttaxbutton.Click += new System.EventHandler(this.localreporttaxbutton_Click);
             // 
             // exportpayrollbutton
             // 
@@ -529,6 +534,7 @@
             this.exportpayrollbutton.TabIndex = 3;
             this.exportpayrollbutton.Text = "导出工资表";
             this.exportpayrollbutton.UseVisualStyleBackColor = true;
+            this.exportpayrollbutton.Click += new System.EventHandler(this.exportpayrollbutton_Click);
             // 
             // InformationTextBox
             // 

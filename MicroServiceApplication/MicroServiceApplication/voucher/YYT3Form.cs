@@ -267,5 +267,35 @@ namespace MicroServiceApplication.voucher
                 MessageBox.Show(e.Message);
             }
         }
+
+        private void exportIncomeButton_Click(object sender, EventArgs e)
+        {
+            this.exports("income");
+        }
+
+        private void exportOutputButton_Click(object sender, EventArgs e)
+        {
+            this.exports("output");
+        }
+
+        private void bankbillExportbutton_Click(object sender, EventArgs e)
+        {
+            this.exports("bankbill");
+        }
+
+        private void paytaxreportbutton_Click(object sender, EventArgs e)
+        {
+            this.exports("paytaxreport");
+        }
+
+        private void localreporttaxbutton_Click(object sender, EventArgs e)
+        {
+            this.exports("localreporttax");
+        }
+
+        private void exportpayrollbutton_Click(object sender, EventArgs e)
+        {
+            this.exports("payroll");
+        }
     }
 }
