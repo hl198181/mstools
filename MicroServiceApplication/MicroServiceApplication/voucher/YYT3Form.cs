@@ -359,5 +359,14 @@ namespace MicroServiceApplication.voucher
         //
         //凭证导出end
         //
+        //客户初始化start
+        //
+        private void initSubjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+        //
+        //客户初始化end
+        //
     }
 }

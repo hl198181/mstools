@@ -857,12 +857,11 @@ namespace MicroServiceApplication.factory
         {
             T3ExportSd3000Context context = new T3ExportSd3000Context();
             context.ExportBean = exportBean;
-
             try
             {
                 ClientSubjectFactory csf = new ClientSubjectFactory();
                 context.ClientSubjects = csf.query(exportBean.Clientid, 1, 1);
-
+                //context.AccoptionsDict = this.queryAccoptions(accset);
             }
             catch (Exception e)
             {
@@ -873,6 +872,8 @@ namespace MicroServiceApplication.factory
         }
         //
         //科目表导入新科目end
+        //
+        //
         //
     }
 }

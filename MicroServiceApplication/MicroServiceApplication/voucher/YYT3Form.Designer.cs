@@ -106,6 +106,7 @@
             this.initSubjectToolStripMenuItem.Name = "initSubjectToolStripMenuItem";
             this.initSubjectToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.initSubjectToolStripMenuItem.Text = "从财务系统初始化科目";
+            this.initSubjectToolStripMenuItem.Click += new System.EventHandler(this.initSubjectToolStripMenuItem_Click);
             // 
             // exportInfoPanel
             // 
