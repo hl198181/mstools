@@ -267,7 +267,11 @@ namespace MicroServiceApplication.voucher
                 MessageBox.Show(e.Message);
             }
         }
-
+        //
+        //新科目导出end
+        //
+        //凭证导出start
+        //
         private void exportIncomeButton_Click(object sender, EventArgs e)
         {
             this.exports("income");
@@ -333,18 +337,27 @@ namespace MicroServiceApplication.voucher
             exportBean.Categoryname = categoryname;
             exportBean.Createby = "Demo";
             exportBean.Accountcyclesn = this.accountcycle.Sn;
-
-
             try
             {
-
+                this.InformationTextBox.Text = "正在导出凭证,请稍等……";
+                this.InformationTextBox.Visible = true;
+                this.InformationTextBox.Font = new Font("宋体", 12);
+                if (this.InformationTextBox.Visible == true)
+                {
+                    YYT3Factory yYT3Factory = new YYT3Factory();
+                    //yYT3Factory.exports(exportBean, this.accset);
+                }
+                this.InformationTextBox.Visible = false;
+                MessageBox.Show("凭证导出成功!请登录财务系统查看结果!");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.StackTrace);
                 MessageBox.Show(e.Message);
-
             }
         }
+        //
+        //凭证导出end
+        //
     }
 }

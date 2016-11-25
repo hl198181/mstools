@@ -110,42 +110,42 @@
             // IncomeToolStripMenuItem
             // 
             this.IncomeToolStripMenuItem.Name = "IncomeToolStripMenuItem";
-            this.IncomeToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.IncomeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.IncomeToolStripMenuItem.Text = "进项";
             this.IncomeToolStripMenuItem.Click += new System.EventHandler(this.IncomeToolStripMenuItem_Click);
             // 
             // OutputToolStripMenuItem
             // 
             this.OutputToolStripMenuItem.Name = "OutputToolStripMenuItem";
-            this.OutputToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.OutputToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.OutputToolStripMenuItem.Text = "销项";
             this.OutputToolStripMenuItem.Click += new System.EventHandler(this.OutputToolStripMenuItem_Click);
             // 
             // BankDealToolStripMenuItem
             // 
             this.BankDealToolStripMenuItem.Name = "BankDealToolStripMenuItem";
-            this.BankDealToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.BankDealToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.BankDealToolStripMenuItem.Text = "银行回单";
             this.BankDealToolStripMenuItem.Click += new System.EventHandler(this.BankDealToolStripMenuItem_Click);
             // 
             // PayrollToolStripMenuItem
             // 
             this.PayrollToolStripMenuItem.Name = "PayrollToolStripMenuItem";
-            this.PayrollToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.PayrollToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.PayrollToolStripMenuItem.Text = "工资表";
             this.PayrollToolStripMenuItem.Click += new System.EventHandler(this.PayrollToolStripMenuItem_Click);
             // 
             // PaytaxreportToolStripMenuItem
             // 
             this.PaytaxreportToolStripMenuItem.Name = "PaytaxreportToolStripMenuItem";
-            this.PaytaxreportToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.PaytaxreportToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.PaytaxreportToolStripMenuItem.Text = "国税";
             this.PaytaxreportToolStripMenuItem.Click += new System.EventHandler(this.PaytaxreportToolStripMenuItem_Click);
             // 
             // LocalreporttaxToolStripMenuItem
             // 
             this.LocalreporttaxToolStripMenuItem.Name = "LocalreporttaxToolStripMenuItem";
-            this.LocalreporttaxToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.LocalreporttaxToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.LocalreporttaxToolStripMenuItem.Text = "地税";
             this.LocalreporttaxToolStripMenuItem.Click += new System.EventHandler(this.LocalreporttaxToolStripMenuItem_Click);
             // 

@@ -111,7 +111,7 @@ namespace MicroServiceApplication.voucher
             try
             {
                 this.InformationTextBox.Visible = true;//打开提示框
-                this.InformationTextBox.Text = "正在初始化会计科目!请稍等……";//提示文本
+                this.InformationTextBox.Text = "正在导出凭证!请稍等……";//提示文本
                 this.InformationTextBox.Font = new Font("宋体", 12);//提示字体
 
                 Sd3000Factory factory = new Sd3000Factory();

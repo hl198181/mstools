@@ -134,22 +134,635 @@ namespace MicroServiceApplication.factory
     //
     //账套配置的封装字段end
     //
+    //科目表start
     //
+    class YYT3code
+    {
+        //SET SET IDENTITY_INSERT[dbo].[code]   ON    //开启插入功能
+        //SET SET IDENTITY_INSERT[dbo].[code]   OFF   //关闭插入功能
+        private int _i_id;//id
+        private string _cclass;//取上级，资产、负债、损益
+        private string _cclass_engl;//取上级，（资产、负债、损益）的简称
+        private string _ccode;//科目代码
+        private string _ccode_name;//科目名称
+        private string _ccode_engl;//科目名称eng
+        private int _igrade;//去科目长度表，科目级别
+        private int _bproperty;//取上级，借贷方向（1是借，0是贷）
+        private string _cbook_type;//金额式，数量金额式，外币金额式
+        private string _cbook_type_engl;//JES,SLJES,WBJES
+        private int _bend;//1
+        private int _bd_c;//1
+
+        public int I_id
+        {
+            get
+            {
+                return _i_id;
+            }
+
+            set
+            {
+                _i_id = value;
+            }
+        }
+
+        public string Cclass
+        {
+            get
+            {
+                return _cclass;
+            }
+
+            set
+            {
+                _cclass = value;
+            }
+        }
+
+        public string Cclass_engl
+        {
+            get
+            {
+                return _cclass_engl;
+            }
+
+            set
+            {
+                _cclass_engl = value;
+            }
+        }
+
+        public string Ccode
+        {
+            get
+            {
+                return _ccode;
+            }
+
+            set
+            {
+                _ccode = value;
+            }
+        }
+
+        public string Ccode_name
+        {
+            get
+            {
+                return _ccode_name;
+            }
+
+            set
+            {
+                _ccode_name = value;
+            }
+        }
+
+        public string Ccode_engl
+        {
+            get
+            {
+                return _ccode_engl;
+            }
+
+            set
+            {
+                _ccode_engl = value;
+            }
+        }
+
+        public int Igrade
+        {
+            get
+            {
+                return _igrade;
+            }
+
+            set
+            {
+                _igrade = value;
+            }
+        }
+
+        public int Bproperty
+        {
+            get
+            {
+                return _bproperty;
+            }
+
+            set
+            {
+                _bproperty = value;
+            }
+        }
+
+        public string Cbook_type
+        {
+            get
+            {
+                return _cbook_type;
+            }
+
+            set
+            {
+                _cbook_type = value;
+            }
+        }
+
+        public string Cbook_type_engl
+        {
+            get
+            {
+                return _cbook_type_engl;
+            }
+
+            set
+            {
+                _cbook_type_engl = value;
+            }
+        }
+
+        public int Bend
+        {
+            get
+            {
+                return _bend;
+            }
+
+            set
+            {
+                _bend = value;
+            }
+        }
+
+        public int Bd_c
+        {
+            get
+            {
+                return _bd_c;
+            }
+
+            set
+            {
+                _bd_c = value;
+            }
+        }
+    }
+    //
+    //科目表end
+    //
+    //核算客户表start
+    //
+    class YYT3Customer
+    {
+        private int _cCusCode;//id
+        private string _cCusName;//客户名称
+        private string _cCusAbbName;//客户名称
+        private string _cCCCode;//01
+        private DateTime _dCusDevDate;//创建日期
+        private string _cCusHeadCode;//id
+        private int _iCostGrade;//-1
+        public string CCusName
+        {
+            get
+            {
+                return _cCusName;
+            }
+
+            set
+            {
+                _cCusName = value;
+            }
+        }
+
+        public string CCusAbbName
+        {
+            get
+            {
+                return _cCusAbbName;
+            }
+
+            set
+            {
+                _cCusAbbName = value;
+            }
+        }
+
+        public string CCCCode
+        {
+            get
+            {
+                return _cCCCode;
+            }
+
+            set
+            {
+                _cCCCode = value;
+            }
+        }
+
+        public DateTime DCusDevDate
+        {
+            get
+            {
+                return _dCusDevDate;
+            }
+
+            set
+            {
+                _dCusDevDate = value;
+            }
+        }
+
+        public string CCusHeadCode
+        {
+            get
+            {
+                return _cCusHeadCode;
+            }
+
+            set
+            {
+                _cCusHeadCode = value;
+            }
+        }
+
+        public int ICostGrade
+        {
+            get
+            {
+                return _iCostGrade;
+            }
+
+            set
+            {
+                _iCostGrade = value;
+            }
+        }
+
+        public int CCusCode
+        {
+            get
+            {
+                return _cCusCode;
+            }
+
+            set
+            {
+                _cCusCode = value;
+            }
+        }
+    }
+    //
+    //核算客户表end
+    //
+    //核算供应商表start
+    //
+    class YYT3Vendor
+    {
+        private int _cVenCode;//id
+        private string _cVenName;//供应商名称
+        private string _cVenAbbName;//供应商名称
+        private string _cVCCode;//01
+        private DateTime _dVenDevDate;//创建时间
+        private string _cVenHeadCode;//id
+        private int _bVenTax;//1
+        private int _bisFeeVen;//0
+
+        public int CVenCode
+        {
+            get
+            {
+                return _cVenCode;
+            }
+
+            set
+            {
+                _cVenCode = value;
+            }
+        }
+
+        public string CVenName
+        {
+            get
+            {
+                return _cVenName;
+            }
+
+            set
+            {
+                _cVenName = value;
+            }
+        }
+
+        public string CVenAbbName
+        {
+            get
+            {
+                return _cVenAbbName;
+            }
+
+            set
+            {
+                _cVenAbbName = value;
+            }
+        }
+
+        public string CVCCode
+        {
+            get
+            {
+                return _cVCCode;
+            }
+
+            set
+            {
+                _cVCCode = value;
+            }
+        }
+
+        public DateTime DVenDevDate
+        {
+            get
+            {
+                return _dVenDevDate;
+            }
+
+            set
+            {
+                _dVenDevDate = value;
+            }
+        }
+
+        public string CVenHeadCode
+        {
+            get
+            {
+                return _cVenHeadCode;
+            }
+
+            set
+            {
+                _cVenHeadCode = value;
+            }
+        }
+
+        public int BVenTax
+        {
+            get
+            {
+                return _bVenTax;
+            }
+
+            set
+            {
+                _bVenTax = value;
+            }
+        }
+
+        public int BisFeeVen
+        {
+            get
+            {
+                return _bisFeeVen;
+            }
+
+            set
+            {
+                _bisFeeVen = value;
+            }
+        }
+    }
+    //
+    //核算供应商表end
+    //
+    //科目编码级次表start
+    //
+    class YYT3AccInformation
+    {
+        private string _cSysID;//AA
+        private string _cID;//08
+        private string _cName;//cGradeLevel
+        private string _cCaption;//科目编码级次
+        private string _cType;//Text
+        private string _cValue;//4，2，2，2，2
+        private string _cDefault;//4，2，2，2，
+        private int _bVisible;//0
+        private int _bEnable;//0
+
+        public string CSysID
+        {
+            get
+            {
+                return _cSysID;
+            }
+
+            set
+            {
+                _cSysID = value;
+            }
+        }
+
+        public string CID
+        {
+            get
+            {
+                return _cID;
+            }
+
+            set
+            {
+                _cID = value;
+            }
+        }
+
+        public string CName
+        {
+            get
+            {
+                return _cName;
+            }
+
+            set
+            {
+                _cName = value;
+            }
+        }
+
+        public string CCaption
+        {
+            get
+            {
+                return _cCaption;
+            }
+
+            set
+            {
+                _cCaption = value;
+            }
+        }
+
+        public string CType
+        {
+            get
+            {
+                return _cType;
+            }
+
+            set
+            {
+                _cType = value;
+            }
+        }
+
+        public string CValue
+        {
+            get
+            {
+                return _cValue;
+            }
+
+            set
+            {
+                _cValue = value;
+            }
+        }
+
+        public string CDefault
+        {
+            get
+            {
+                return _cDefault;
+            }
+
+            set
+            {
+                _cDefault = value;
+            }
+        }
+
+        public int BVisible
+        {
+            get
+            {
+                return _bVisible;
+            }
+
+            set
+            {
+                _bVisible = value;
+            }
+        }
+
+        public int BEnable
+        {
+            get
+            {
+                return _bEnable;
+            }
+
+            set
+            {
+                _bEnable = value;
+            }
+        }
+    }
+    //
+    //科目编码级次表end
     //
     class T3ExportSd3000Context
     {
-        //private ExportBean _exportBean;
+        private ExportBean _exportBean;
 
-        //private List<Sd3000Subject> _subjects;
+        private List<YYT3code> _subjects;//科目表
 
-        //private Dictionary<string, Sd3000Accoptions> _accoptionsDict;
+        private Dictionary<string, YYT3AccInformation> _accoptionsDict;//科目长度级次表
 
-        //private List<ClientSubject> _clientSubjects;
+        private List<ClientSubject> _clientSubjects;//小微服数据库的科目表
 
-        //private int _maxSubid;
+        private int _maxSubid;
 
         private List<string> _sqls = new List<string>();
-    }
+
+        internal ExportBean ExportBean
+        {
+            get
+            {
+                return _exportBean;
+            }
+
+            set
+            {
+                _exportBean = value;
+            }
+        }
+
+        internal List<YYT3code> Subjects
+        {
+            get
+            {
+                return _subjects;
+            }
+
+            set
+            {
+                _subjects = value;
+            }
+        }
+
+        internal Dictionary<string, YYT3AccInformation> AccoptionsDict
+        {
+            get
+            {
+                return _accoptionsDict;
+            }
+
+            set
+            {
+                _accoptionsDict = value;
+            }
+        }
+
+        internal List<ClientSubject> ClientSubjects
+        {
+            get
+            {
+                return _clientSubjects;
+            }
+
+            set
+            {
+                _clientSubjects = value;
+            }
+        }
+
+        public int MaxSubid
+        {
+            get
+            {
+                return _maxSubid;
+            }
+
+            set
+            {
+                _maxSubid = value;
+            }
+        }
+
+        public List<string> Sqls
+        {
+            get
+            {
+                return _sqls;
+            }
+
+            set
+            {
+                _sqls = value;
+            }
+        }
+    } 
     class YYT3Factory
     {
         //
@@ -238,25 +851,28 @@ namespace MicroServiceApplication.factory
         //
         //测试连接的方法end
         //
-        //
+        //科目表导入新科目start
         //
         public void exportSubject(ExportBean exportBean,YYT3accset accset)
         {
             T3ExportSd3000Context context = new T3ExportSd3000Context();
-            //context.ExportBean = exportBean;
+            context.ExportBean = exportBean;
 
-            //try
-            //{
-            //    ClientSubjectFactory csf = new ClientSubjectFactory();
-            //    context.ClientSubjects = csf.query(exportBean.Clientid,1,1);
+            try
+            {
+                ClientSubjectFactory csf = new ClientSubjectFactory();
+                context.ClientSubjects = csf.query(exportBean.Clientid, 1, 1);
 
-            //}
-            //catch(Exception e)
-            //{
-            //    Console.WriteLine(e.StackTrace);
-            //    throw e;
-            //}
-               
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+                throw e;
+            }
+
         }
+        //
+        //科目表导入新科目end
+        //
     }
 }
