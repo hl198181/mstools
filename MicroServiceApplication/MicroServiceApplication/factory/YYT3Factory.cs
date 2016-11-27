@@ -763,8 +763,42 @@ namespace MicroServiceApplication.factory
             }
         }
     } 
+
     class YYT3Factory
     {
+        //
+        //获取帐套信息表start
+        //
+        public void getaccst(YYT3accset accset)
+        {
+            SqlConnection connection = this.createConnection(accset);
+            string sql = "select * from accst";
+            SqlDataAdapter myDataAdapter = new SqlDataAdapter(sql, connection);
+            DataSet myDataSet = new DataSet();      // 创建DataSet
+            List<YYT3accset> yYT3accsetList = new List<YYT3accset>();
+            try
+            {
+                myDataAdapter.Fill(myDataSet, "accst");
+                DataTable myTable = myDataSet.Tables["accst"];
+
+                if (myTable.Rows.Count > 0)
+                {
+                    foreach (DataRow row in myTable.Rows)
+                    {
+                        YYT3accset yYT3accset = new YYT3accset();
+
+                    }    
+                }
+            }
+            finally
+            {
+                myDataSet.Dispose();
+                myDataAdapter.Dispose();
+                connection.Close();
+            }
+        }
+        //
+        //获取帐套信息表end
         //
         //创建一个打开数据库的连接start
         //

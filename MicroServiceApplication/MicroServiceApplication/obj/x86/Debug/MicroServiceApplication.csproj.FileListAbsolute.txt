@@ -145,3 +145,6 @@ D:\Source\Repos1\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\�
 D:\Source\Repos1\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\小微服辅助工具.application
 D:\Source\Repos1\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\MicroServiceApplication.voucher.YYT3Form.resources
 D:\Source\Repos1\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\MicroServiceApplication.Common.SelectT3AccsetForm.resources
+C:\Users\Administrator.USER-20160710FE\Source\Repos\mstools\MicroServiceApplication\MicroServiceApplication\bin\Debug\小微服辅助工具.exe.config
+C:\Users\Administrator.USER-20160710FE\Source\Repos\mstools\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\小微服辅助工具.exe
+C:\Users\Administrator.USER-20160710FE\Source\Repos\mstools\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\小微服辅助工具.pdb
