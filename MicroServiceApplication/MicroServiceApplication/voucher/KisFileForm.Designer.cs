@@ -58,6 +58,8 @@
             this.InitSubjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.修复KIS账套科目长度ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.修复KIS明细科目名称ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.调账ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.调整科目余额ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportActionGroupBox = new System.Windows.Forms.GroupBox();
             this.exportActionflowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.exportIncomeButton = new System.Windows.Forms.Button();
@@ -388,7 +390,8 @@
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.设置ToolStripMenuItem});
+            this.设置ToolStripMenuItem,
+            this.调账ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);
@@ -434,6 +437,21 @@
             this.修复KIS明细科目名称ToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
             this.修复KIS明细科目名称ToolStripMenuItem.Text = "修复KIS明细科目名称";
             this.修复KIS明细科目名称ToolStripMenuItem.Click += new System.EventHandler(this.修复KIS明细科目名称ToolStripMenuItem_Click);
+            // 
+            // 调账ToolStripMenuItem
+            // 
+            this.调账ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.调整科目余额ToolStripMenuItem});
+            this.调账ToolStripMenuItem.Name = "调账ToolStripMenuItem";
+            this.调账ToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
+            this.调账ToolStripMenuItem.Text = "调账";
+            // 
+            // 调整科目余额ToolStripMenuItem
+            // 
+            this.调整科目余额ToolStripMenuItem.Name = "调整科目余额ToolStripMenuItem";
+            this.调整科目余额ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.调整科目余额ToolStripMenuItem.Text = "调整科目余额";
+            this.调整科目余额ToolStripMenuItem.Click += new System.EventHandler(this.调整科目余额ToolStripMenuItem_Click);
             // 
             // exportActionGroupBox
             // 
@@ -618,5 +636,7 @@
         private System.Windows.Forms.TextBox InformationTextBox;
         private System.Windows.Forms.ToolStripMenuItem 修复KIS账套科目长度ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 修复KIS明细科目名称ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 调账ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 调整科目余额ToolStripMenuItem;
     }
 }

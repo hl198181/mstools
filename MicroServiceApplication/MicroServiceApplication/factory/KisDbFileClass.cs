@@ -42,7 +42,7 @@ namespace MicroServiceApplication.Factory
         }
     }
     //
-    //
+    //凭证start
     //
     class KisVouchersInfo
     {
@@ -191,7 +191,7 @@ namespace MicroServiceApplication.Factory
         }
     }
     //
-    //
+    //凭证end
     //
     class KisDbFileExportContext
     {
@@ -303,6 +303,9 @@ namespace MicroServiceApplication.Factory
             }
         }
     }
+    //
+    //科目表start
+    //
     class GLAcct
     {
         private string _FAcctID;
@@ -334,6 +337,11 @@ namespace MicroServiceApplication.Factory
             }
         }
     }
+    //
+    //科目表end
+    //
+    //固定资产表statr
+    //
     class FACard
     {
         private string _fAssetAcID;
@@ -365,8 +373,11 @@ namespace MicroServiceApplication.Factory
             }
         }
     }
-   
-
+    //
+    //固定资产表end
+    //
+    //科目配置表start
+    //
     class KisDbPref
     {
         private String _fcompany;
@@ -664,7 +675,185 @@ namespace MicroServiceApplication.Factory
             }
         }
     }
+    //
+    //科目配置表end
+    //
+    //科目余额表start
+    //
+    class GLBal
+    {
+        private int _fPeriod;
+        private string _fAcctID;
+        private int _fClsID;
+        private string _fObjID;
+        private string _fCyID;
+        private bool _fBase;
+        private decimal _fDebit;
+        private decimal _fCredit;
+        private decimal _fYtdDebit;
+        private decimal _fYtdCredit;
+        private decimal _fEndBal;
+        private decimal _fBegBal;
 
+        public int FPeriod
+        {
+            get
+            {
+                return _fPeriod;
+            }
+
+            set
+            {
+                _fPeriod = value;
+            }
+        }
+
+        public string FAcctID
+        {
+            get
+            {
+                return _fAcctID;
+            }
+
+            set
+            {
+                _fAcctID = value;
+            }
+        }
+
+        public int FClsID
+        {
+            get
+            {
+                return _fClsID;
+            }
+
+            set
+            {
+                _fClsID = value;
+            }
+        }
+
+        public string FObjID
+        {
+            get
+            {
+                return _fObjID;
+            }
+
+            set
+            {
+                _fObjID = value;
+            }
+        }
+
+        public string FCyID
+        {
+            get
+            {
+                return _fCyID;
+            }
+
+            set
+            {
+                _fCyID = value;
+            }
+        }
+
+        public bool FBase
+        {
+            get
+            {
+                return _fBase;
+            }
+
+            set
+            {
+                _fBase = value;
+            }
+        }
+
+        public decimal FDebit
+        {
+            get
+            {
+                return _fDebit;
+            }
+
+            set
+            {
+                _fDebit = value;
+            }
+        }
+
+        public decimal FCredit
+        {
+            get
+            {
+                return _fCredit;
+            }
+
+            set
+            {
+                _fCredit = value;
+            }
+        }
+
+        public decimal FYtdDebit
+        {
+            get
+            {
+                return _fYtdDebit;
+            }
+
+            set
+            {
+                _fYtdDebit = value;
+            }
+        }
+
+        public decimal FYtdCredit
+        {
+            get
+            {
+                return _fYtdCredit;
+            }
+
+            set
+            {
+                _fYtdCredit = value;
+            }
+        }
+
+        public decimal FEndBal
+        {
+            get
+            {
+                return _fEndBal;
+            }
+
+            set
+            {
+                _fEndBal = value;
+            }
+        }
+
+        public decimal FBegBal
+        {
+            get
+            {
+                return _fBegBal;
+            }
+
+            set
+            {
+                _fBegBal = value;
+            }
+        }
+    }
+    //
+    //科目余额表end
+    //
     class KisDbFileFactory
     {
 
@@ -1269,7 +1458,7 @@ namespace MicroServiceApplication.Factory
             {
                 if (vouchernumber == "no")
                 {
-                    foreach (KisVoucherInfo kvi in vouchers)
+                    foreach (KisVouchersInfo kvi in newvouchers)
                     {
                         if (kvi.FEntryID == 0)
                         {
@@ -1293,7 +1482,7 @@ namespace MicroServiceApplication.Factory
                                 maxFNum++;
                             }
                         }
-                        String sql = this.buildItemSql(kvi, maxFSerialNum, maxFNum);
+                        String sql = this.build3ItemSql(kvi, maxFSerialNum, maxFNum);
                         if (sql != null && sql != "") sqls.Add(sql);
 
                     }
@@ -1991,7 +2180,7 @@ namespace MicroServiceApplication.Factory
                         if (sql != null && sql != "") sqls.Add(sql);
                     }
                 }
-            }      
+            }
             //
             //银行2张凭证合为一张凭证end
             //
@@ -2043,15 +2232,14 @@ namespace MicroServiceApplication.Factory
                 {
                     int number = -1;
                     List<KisVouchersInfo> kisVouchersInfoList = new List<KisVouchersInfo>();
+                    KisVouchersInfo kisVouchersInfo1 = new KisVouchersInfo();
+                    KisVouchersInfo kisVouchersInfo2 = new KisVouchersInfo();
+                    KisVouchersInfo kisVouchersInfo3 = new KisVouchersInfo();
+                    KisVouchersInfo kisVouchersInfo4 = new KisVouchersInfo();
                     if (number <= 0)
-                    {
-                        KisVouchersInfo kisVouchersInfo1 = new KisVouchersInfo();
-                        KisVouchersInfo kisVouchersInfo2 = new KisVouchersInfo();
-                        KisVouchersInfo kisVouchersInfo3 = new KisVouchersInfo();
-                        KisVouchersInfo kisVouchersInfo4 = new KisVouchersInfo();
-
+                    {                       
                         for (int i = 0; i < vouchers.Count; i++)
-                        {
+                        {                           
                             if (vouchers[i].FEntryID == 0)
                             {
                                 number++;
@@ -2060,7 +2248,13 @@ namespace MicroServiceApplication.Factory
                                     number = 0;
                                 }
                             }
-
+                            if (vouchers[i].FEntryID == 0 && number == 0)
+                            {
+                                 kisVouchersInfo1 = new KisVouchersInfo();
+                                 kisVouchersInfo2 = new KisVouchersInfo();
+                                 kisVouchersInfo3 = new KisVouchersInfo();
+                                 kisVouchersInfo4 = new KisVouchersInfo();
+                            }
                             KisVouchersInfo kisVouchersInfo5 = new KisVouchersInfo();
                             KisVouchersInfo kisVouchersInfo6 = new KisVouchersInfo();
                             KisVouchersInfo kisVouchersInfo7 = new KisVouchersInfo();
@@ -2266,7 +2460,7 @@ namespace MicroServiceApplication.Factory
                                         kisVouchersInfo3.FQty = vouchers[i + 1].FQty;
                                         kisVouchersInfo3.FSerialNo = vouchers[i + 1].FSerialNo;
                                     }
-                                    else
+                                    else if(kisVouchersInfo1.FAcctID != null)
                                     {
                                         kisVouchersInfo9.FAcctID = kisVouchersInfo1.FAcctID;
                                         kisVouchersInfo9.FAttchment = kisVouchersInfo1.FAttchment;
@@ -2318,7 +2512,7 @@ namespace MicroServiceApplication.Factory
                                             kisVouchersInfo4.FQty = vouchers[i + 2].FQty;
                                             kisVouchersInfo4.FSerialNo = vouchers[i + 2].FSerialNo;
                                         }
-                                        else
+                                        else if(kisVouchersInfo2.FAcctID != null)
                                         {
                                             kisVouchersInfo10.FAcctID = kisVouchersInfo2.FAcctID;
                                             kisVouchersInfo10.FAttchment = kisVouchersInfo2.FAttchment;
@@ -2344,7 +2538,7 @@ namespace MicroServiceApplication.Factory
                                         }
                                     }
                                 }
-                                else
+                                else if (kisVouchersInfo2.FAcctID != null)
                                 {
                                     kisVouchersInfo10.FAcctID = kisVouchersInfo2.FAcctID;
                                     kisVouchersInfo10.FAttchment = kisVouchersInfo2.FAttchment;
@@ -2399,7 +2593,7 @@ namespace MicroServiceApplication.Factory
                                 }
                                 if (vouchers[i + 1].FEntryID == 1)
                                 {
-                                    if (kisVouchersInfo1.FAcctID != null)
+                                    if (kisVouchersInfo1.FAcctID != null )
                                     {
                                         kisVouchersInfo5.FAcctID = kisVouchersInfo1.FAcctID;
                                         kisVouchersInfo5.FAttchment = kisVouchersInfo1.FAttchment;
@@ -2423,7 +2617,7 @@ namespace MicroServiceApplication.Factory
                                         kisVouchersInfo5.FSerialNo = kisVouchersInfo1.FSerialNo;
                                         kisVouchersInfoList.Add(kisVouchersInfo5);
                                     }
-                                    else
+                                    else if (kisVouchersInfo3.FAcctID != null)
                                     {
                                         kisVouchersInfo11.FAcctID = kisVouchersInfo3.FAcctID;
                                         kisVouchersInfo11.FAttchment = kisVouchersInfo3.FAttchment;
@@ -2474,7 +2668,7 @@ namespace MicroServiceApplication.Factory
                                         kisVouchersInfo12.FSerialNo = kisVouchersInfo1.FSerialNo;
                                         kisVouchersInfoList.Add(kisVouchersInfo12);
                                     }
-                                    else
+                                    else if(kisVouchersInfo3.FAcctID != null)
                                     {
                                         kisVouchersInfo13.FAcctID = kisVouchersInfo3.FAcctID;
                                         kisVouchersInfo13.FAttchment = kisVouchersInfo3.FAttchment;
@@ -2528,7 +2722,7 @@ namespace MicroServiceApplication.Factory
                                             kisVouchersInfo6.FSerialNo = kisVouchersInfo2.FSerialNo;
                                             kisVouchersInfoList.Add(kisVouchersInfo6);
                                         }
-                                        else
+                                        else if(kisVouchersInfo4.FAcctID != null)
                                         {
                                             kisVouchersInfo14.FAcctID = kisVouchersInfo4.FAcctID;
                                             kisVouchersInfo14.FAttchment = kisVouchersInfo4.FAttchment;
@@ -2579,7 +2773,7 @@ namespace MicroServiceApplication.Factory
                                             kisVouchersInfo15.FSerialNo = kisVouchersInfo2.FSerialNo;
                                             kisVouchersInfoList.Add(kisVouchersInfo15);
                                         }
-                                        else
+                                        else if(kisVouchersInfo4.FAcctID != null)
                                         {
                                             kisVouchersInfo16.FAcctID = kisVouchersInfo4.FAcctID;
                                             kisVouchersInfo16.FAttchment = kisVouchersInfo4.FAttchment;
@@ -2631,7 +2825,7 @@ namespace MicroServiceApplication.Factory
                                         kisVouchersInfo15.FSerialNo = kisVouchersInfo2.FSerialNo;
                                         kisVouchersInfoList.Add(kisVouchersInfo15);
                                     }
-                                    else
+                                    else if(kisVouchersInfo4.FAcctID != null)
                                     {
                                         kisVouchersInfo16.FAcctID = kisVouchersInfo4.FAcctID;
                                         kisVouchersInfo16.FAttchment = kisVouchersInfo4.FAttchment;
@@ -3391,7 +3585,7 @@ namespace MicroServiceApplication.Factory
             string sql = "select FAcctID from GLAcct";
             DataTable dt = access.SelectToDataTable(sql);
             //查询科目代码
-            string sql1 = "select FAcctID from GLAcct where len(FAcctID) > "+ F1number + " order by FAcctID";
+            string sql1 = "select FAcctID from GLAcct where len(FAcctID) > " + F1number + " order by FAcctID";
             DataTable dt1 = access.SelectToDataTable(sql1);
             List<GLAcct> gLAcctList = new List<GLAcct>();
             if (dt1.Rows.Count > 0)
@@ -3430,14 +3624,14 @@ namespace MicroServiceApplication.Factory
                 }
             }
             //不需要修复
-            if (kisDbPref.Faclen2 - kisDbPref.Faclen1 >= 4 || dt.Rows.Count<= 0 )
+            if (kisDbPref.Faclen2 - kisDbPref.Faclen1 >= 4 || dt.Rows.Count <= 0)
             {
                 throw new Exception("科目长度无需修复");
             }
             else
             {
                 //修复多两个0
-                if (kisDbPref.Faclen2 - kisDbPref.Faclen1 == 2 )
+                if (kisDbPref.Faclen2 - kisDbPref.Faclen1 == 2)
                 {
                     //科目修复
                     for (int i = 0; i < gLAcctList.Count; i++)
@@ -3448,8 +3642,8 @@ namespace MicroServiceApplication.Factory
                     //修改固定资产表
                     for (int i = 0; i < fACardList.Count; i++)
                     {
-                        string FAssetAcID = fACardList[i].FAssetAcID;                  
-                        sqls.Add("update FACard set FAssetAcID = Left('" + FAssetAcID + "'," + F1number + ")+'00'+Right('" + FAssetAcID + "',LEN('" + FAssetAcID + "')-" + F1number + ")where FAssetAcID ='" + FAssetAcID + "' ");                       
+                        string FAssetAcID = fACardList[i].FAssetAcID;
+                        sqls.Add("update FACard set FAssetAcID = Left('" + FAssetAcID + "'," + F1number + ")+'00'+Right('" + FAssetAcID + "',LEN('" + FAssetAcID + "')-" + F1number + ")where FAssetAcID ='" + FAssetAcID + "' ");
                     }
                     for (int i = 0; i < fACardList1.Count; i++)
                     {
@@ -3470,7 +3664,7 @@ namespace MicroServiceApplication.Factory
 
                 }
                 //修复多一个0
-                if (kisDbPref.Faclen2 - kisDbPref.Faclen1 == 3 )
+                if (kisDbPref.Faclen2 - kisDbPref.Faclen1 == 3)
                 {
                     //科目修复
                     for (int i = 0; i < gLAcctList.Count; i++)
@@ -3577,16 +3771,16 @@ namespace MicroServiceApplication.Factory
             DataTable acctdt1 = access.SelectToDataTable(sql2);
             List<GLAcct> gLAcct1 = new List<GLAcct>();
             if (acctdt1.Rows.Count > 0)
-                {
-                
+            {
+
                 foreach (DataRow row in acctdt1.Rows)
-                    {
-                        GLAcct gLAcctItem = new GLAcct();
-                        gLAcctItem.FAcctID = row[0] == null ? null : row[0].ToString();
-                        gLAcctItem.FAcctName = row[1] == null ? null : row[1].ToString();
+                {
+                    GLAcct gLAcctItem = new GLAcct();
+                    gLAcctItem.FAcctID = row[0] == null ? null : row[0].ToString();
+                    gLAcctItem.FAcctName = row[1] == null ? null : row[1].ToString();
 
                     gLAcct1.Add(gLAcctItem);
-                    }
+                }
                 foreach (GLAcct item in gLAcct1)
                 {
 
@@ -3812,6 +4006,91 @@ namespace MicroServiceApplication.Factory
         }
         //
         //修复账套明细科目名称end
+        //
+        //获取科目余额表工厂start
+        //
+        public void initGLBal(Client client,User user)
+        {
+            if(client == null || client.Id == "")
+            {
+                throw new Exception("无法获取客户信息!");
+            }
+            if(user == null || user.Id == "")
+            {
+                throw new Exception("无法用户信息!");
+            }
+            //获取科目余额表信息
+            List<GLBal> gLBalList = this.getGLBal();
+            if (gLBalList.Count <= 0 || gLBalList == null) throw new Exception("账套文件中没有找到科目余额表信息!");
+            //清理客户科目余额表信息
+            ClientGLBalClass cgc = new ClientGLBalClass();
+
+            //写入客户科目余额表信息
+            foreach(GLBal item in gLBalList)
+            {
+                ClientGLBal clientGLBal = new ClientGLBal();
+                clientGLBal.Clientid = client.Id;
+                clientGLBal.FAcctID = item.FAcctID;
+                clientGLBal.FBase = item.FBase;
+                clientGLBal.FBegBal = item.FBegBal;
+                clientGLBal.FClsID = item.FClsID;
+                clientGLBal.FCredit = item.FCredit;
+                clientGLBal.FCyID = item.FCyID;
+                clientGLBal.FDebit = item.FDebit;
+                clientGLBal.FEndBal = item.FEndBal;
+                clientGLBal.FObjID = item.FObjID;
+                clientGLBal.FPeriod = item.FPeriod;
+                clientGLBal.FYtdCredit = item.FYtdCredit;
+                clientGLBal.FYtdDebit = item.FYtdDebit;
+                
+
+            }
+
+        }
+        //
+        //获取科目余额表方法start
+        //
+        public List<GLBal> getGLBal()
+        {
+            AccessDbClass access = new AccessDbClass(this.KdbParams.DbFilePath);
+            string sql = "select * from GLBal order by FPeriod,FAcctID";
+            List<GLBal> gLBalList = new List<GLBal>();
+            try
+            {
+                DataTable dt = access.SelectToDataTable(sql);
+                if (dt.Rows.Count > 0)
+                {
+                    foreach (DataRow item in dt.Rows)
+                    {
+                        GLBal gLBal = new GLBal();
+                        gLBal.FPeriod = item["FPeriod"] == null ? 0 : int.Parse(item["FPeriod"].ToString());
+                        gLBal.FAcctID = item["FAcctID"] == null ? null : item["FAcctID"].ToString();
+                        gLBal.FClsID = item["FClsID"] == null ? 0 : int.Parse(item["FClsID"].ToString());
+                        gLBal.FObjID = item["FObjID"] == null ? null : item["FObjID"].ToString();
+                        gLBal.FCyID = item["FCyID"] == null ? null : item["FCyID"].ToString();
+                        gLBal.FBase = bool.Parse(item["FBase"].ToString() == "False" ? "False" : "Ture");
+                        gLBal.FBegBal = item["FBegBal"] == null ? 0 : decimal.Parse(item["FBegBal"].ToString());
+                        gLBal.FDebit = item["FDebit"] == null ? 0 : decimal.Parse(item["FDebit"].ToString());
+                        gLBal.FCredit = item["FCredit"] == null ? 0 : decimal.Parse(item["FCredit"].ToString());
+                        gLBal.FYtdDebit = item["FYtdDebit"] == null ? 0 : decimal.Parse(item["FYtdDebit"].ToString());
+                        gLBal.FYtdCredit = item["FYtdCredit"] == null ? 0 : decimal.Parse(item["FYtdCredit"].ToString());
+                        gLBal.FEndBal = item["FEndBal"] == null ? 0 : decimal.Parse(item["FEndBal"].ToString());
+                        gLBalList.Add(gLBal);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw (new Exception("获取科目余额错误"+e.Message));
+            }
+            finally
+            {
+                access.Close();
+            }
+            return gLBalList;
+        }
+        //
+        //获取科目余额表方法end
         //
     }
 }

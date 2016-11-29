@@ -14,7 +14,7 @@
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>D:\djxwfgj\</PublishUrl>
+    <PublishUrl>D:\DJKJ\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -121,6 +121,7 @@
     <Compile Include="Bean\AccountcycleClass.cs" />
     <Compile Include="Bean\AuthClass.cs" />
     <Compile Include="Bean\AppConfigClass.cs" />
+    <Compile Include="Bean\ClientGLBalClass.cs" />
     <Compile Include="Bean\KisVoucherClass.cs" />
     <Compile Include="Bean\ClientSubjectLengthClass.cs" />
     <Compile Include="Bean\ClientSubjectClass.cs" />
@@ -237,6 +238,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">

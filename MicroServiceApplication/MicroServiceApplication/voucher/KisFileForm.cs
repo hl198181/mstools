@@ -333,9 +333,10 @@ namespace MicroServiceApplication.voucher
                 this.InformationTextBox.Visible = true;//打开提示框
                 this.InformationTextBox.Text = "正在导出凭证!请稍等……";//提示文本
                 this.InformationTextBox.Font = new Font("宋体", 12);//提示字体
-
-                kisDbFileFactory.exportVoucher(vouchernumber, this.inst, this.client, this.accountcycle, this.user, categoryname);
-
+                if (this.InformationTextBox.Text != null || this.InformationTextBox.Text != "")
+                {
+                    kisDbFileFactory.exportVoucher(vouchernumber, this.inst, this.client, this.accountcycle, this.user, categoryname);
+                }
                 this.InformationTextBox.Visible = false;//关闭提示框
                 MessageBox.Show("导出凭证成功!请登录财务系统查看结果");
 
@@ -486,5 +487,56 @@ namespace MicroServiceApplication.voucher
         //
         //修复账套科目长度end
         //
+        //调整科目余额start
+        //
+        private void 调整科目余额ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.adjustGLBal();
+        }
+        private void adjustGLBal()
+        {
+            if (this.client == null)
+            {
+                MessageBox.Show("请选择客户信息!");
+                return;
+            }
+
+            if (this.kisDbFileParams == null || this.kisDbFileParams.DbFilePath == null)
+            {
+                MessageBox.Show("请选择数据库文件!");
+                return;
+            }
+            KisDbFileFactory kisDbFileFactory = new KisDbFileFactory(this.kisDbFileParams);
+            KisDbPref kisDbPref = kisDbFileFactory.getGLPref();
+            try
+            {
+                if (this.client.Name != kisDbPref.Fcompany && this.client.Fullname != kisDbPref.Fcompany)
+                {
+                    DialogResult dr =  MessageBox.Show("选择的客户与账套名称不一致,是否继续初始化?", "系统提示", MessageBoxButtons.OKCancel);
+                    if(dr != DialogResult.OK)
+                    {
+                        return;
+                    }
+                }
+                this.InformationTextBox.Text = "正在初始化会计科目余额";
+                this.InformationTextBox.Visible = true;
+                this.InformationTextBox.Font = new Font("宋体",12);
+                if (this.InformationTextBox.Text != null || this.InformationTextBox.Text != "")
+                {
+                    kisDbFileFactory.initGLBal(this.client, this.user);
+                }
+                this.InformationTextBox.Visible = false;//关闭提示框
+                MessageBox.Show("初始化科目完成,请登录小微服查看!");
+            }
+            catch(Exception e1)
+            {
+                this.InformationTextBox.Visible = false;
+                MessageBox.Show("初始化科目余额表错误"+e1.Message);
+            }
+        }
+        //
+        //调整科目余额end
+        //
+
     }
 }
