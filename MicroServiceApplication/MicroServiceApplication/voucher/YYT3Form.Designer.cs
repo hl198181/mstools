@@ -89,7 +89,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1070, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(683, 25);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -117,7 +117,7 @@
             this.exportInfoPanel.Margin = new System.Windows.Forms.Padding(0);
             this.exportInfoPanel.Name = "exportInfoPanel";
             this.exportInfoPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.exportInfoPanel.Size = new System.Drawing.Size(1070, 321);
+            this.exportInfoPanel.Size = new System.Drawing.Size(683, 321);
             this.exportInfoPanel.TabIndex = 3;
             // 
             // groupBox3
@@ -128,7 +128,7 @@
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox3.Size = new System.Drawing.Size(1060, 184);
+            this.groupBox3.Size = new System.Drawing.Size(673, 184);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "账套信息";
@@ -159,7 +159,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1040, 154);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(653, 154);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // dbIpTextBox
@@ -168,7 +168,7 @@
             this.dbIpTextBox.Location = new System.Drawing.Point(88, 2);
             this.dbIpTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.dbIpTextBox.Name = "dbIpTextBox";
-            this.dbIpTextBox.Size = new System.Drawing.Size(950, 21);
+            this.dbIpTextBox.Size = new System.Drawing.Size(563, 21);
             this.dbIpTextBox.TabIndex = 4;
             this.dbIpTextBox.Text = "localhost";
             // 
@@ -188,7 +188,7 @@
             this.dbUserTextBox.Location = new System.Drawing.Point(88, 27);
             this.dbUserTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.dbUserTextBox.Name = "dbUserTextBox";
-            this.dbUserTextBox.Size = new System.Drawing.Size(950, 21);
+            this.dbUserTextBox.Size = new System.Drawing.Size(563, 21);
             this.dbUserTextBox.TabIndex = 6;
             this.dbUserTextBox.Text = "sa";
             // 
@@ -209,7 +209,7 @@
             this.dbPasswordTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.dbPasswordTextBox.Name = "dbPasswordTextBox";
             this.dbPasswordTextBox.PasswordChar = '*';
-            this.dbPasswordTextBox.Size = new System.Drawing.Size(950, 21);
+            this.dbPasswordTextBox.Size = new System.Drawing.Size(563, 21);
             this.dbPasswordTextBox.TabIndex = 7;
             // 
             // label7
@@ -240,7 +240,7 @@
             this.accsetNameTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.accsetNameTextBox.Name = "accsetNameTextBox";
             this.accsetNameTextBox.ReadOnly = true;
-            this.accsetNameTextBox.Size = new System.Drawing.Size(950, 21);
+            this.accsetNameTextBox.Size = new System.Drawing.Size(563, 21);
             this.accsetNameTextBox.TabIndex = 5;
             // 
             // selectAccessButton
@@ -272,7 +272,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox1.Size = new System.Drawing.Size(1060, 130);
+            this.groupBox1.Size = new System.Drawing.Size(673, 130);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "导出信息";
@@ -299,7 +299,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.11243F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.88757F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1040, 96);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(653, 96);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // createbyTextBox
@@ -309,7 +309,7 @@
             this.createbyTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.createbyTextBox.Name = "createbyTextBox";
             this.createbyTextBox.ReadOnly = true;
-            this.createbyTextBox.Size = new System.Drawing.Size(892, 21);
+            this.createbyTextBox.Size = new System.Drawing.Size(505, 21);
             this.createbyTextBox.TabIndex = 2;
             // 
             // label1
@@ -343,7 +343,7 @@
             this.clientTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.clientTextBox.Name = "clientTextBox";
             this.clientTextBox.ReadOnly = true;
-            this.clientTextBox.Size = new System.Drawing.Size(892, 21);
+            this.clientTextBox.Size = new System.Drawing.Size(505, 21);
             this.clientTextBox.TabIndex = 2;
             // 
             // accountcycleTextBox
@@ -353,7 +353,7 @@
             this.accountcycleTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.accountcycleTextBox.Name = "accountcycleTextBox";
             this.accountcycleTextBox.ReadOnly = true;
-            this.accountcycleTextBox.Size = new System.Drawing.Size(892, 21);
+            this.accountcycleTextBox.Size = new System.Drawing.Size(505, 21);
             this.accountcycleTextBox.TabIndex = 3;
             // 
             // label3
@@ -370,7 +370,7 @@
             // 
             // selectClientButton
             // 
-            this.selectClientButton.Location = new System.Drawing.Point(962, 2);
+            this.selectClientButton.Location = new System.Drawing.Point(575, 2);
             this.selectClientButton.Margin = new System.Windows.Forms.Padding(2);
             this.selectClientButton.Name = "selectClientButton";
             this.selectClientButton.Size = new System.Drawing.Size(76, 28);
@@ -381,7 +381,7 @@
             // 
             // selectAccountcycleButton
             // 
-            this.selectAccountcycleButton.Location = new System.Drawing.Point(962, 36);
+            this.selectAccountcycleButton.Location = new System.Drawing.Point(575, 36);
             this.selectAccountcycleButton.Margin = new System.Windows.Forms.Padding(2);
             this.selectAccountcycleButton.Name = "selectAccountcycleButton";
             this.selectAccountcycleButton.Size = new System.Drawing.Size(76, 28);
@@ -398,7 +398,7 @@
             this.subjectPanel.Margin = new System.Windows.Forms.Padding(2);
             this.subjectPanel.Name = "subjectPanel";
             this.subjectPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.subjectPanel.Size = new System.Drawing.Size(1070, 203);
+            this.subjectPanel.Size = new System.Drawing.Size(683, 203);
             this.subjectPanel.TabIndex = 5;
             // 
             // groupBox2
@@ -409,7 +409,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(1060, 193);
+            this.groupBox2.Size = new System.Drawing.Size(673, 193);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "新科目列表";
@@ -422,7 +422,7 @@
             this.ClientSubjectDataGridView.Margin = new System.Windows.Forms.Padding(2);
             this.ClientSubjectDataGridView.Name = "ClientSubjectDataGridView";
             this.ClientSubjectDataGridView.RowTemplate.Height = 37;
-            this.ClientSubjectDataGridView.Size = new System.Drawing.Size(1056, 175);
+            this.ClientSubjectDataGridView.Size = new System.Drawing.Size(669, 175);
             this.ClientSubjectDataGridView.TabIndex = 0;
             // 
             // paytaxreportbutton
@@ -528,7 +528,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 549);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1070, 201);
+            this.panel1.Size = new System.Drawing.Size(683, 193);
             this.panel1.TabIndex = 12;
             // 
             // groupBox4
@@ -545,7 +545,7 @@
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Location = new System.Drawing.Point(0, 0);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(1070, 201);
+            this.groupBox4.Size = new System.Drawing.Size(683, 193);
             this.groupBox4.TabIndex = 12;
             this.groupBox4.TabStop = false;
             // 
@@ -553,7 +553,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1070, 750);
+            this.ClientSize = new System.Drawing.Size(683, 742);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.subjectPanel);
             this.Controls.Add(this.exportInfoPanel);
