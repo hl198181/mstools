@@ -184,3 +184,6 @@ D:\Source\Repos2\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\M
 D:\Source\Repos2\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\小微服辅助工具.TrustInfo.xml
 D:\Source\Repos2\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\小微服辅助工具.exe.manifest
 D:\Source\Repos2\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\小微服辅助工具.application
+D:\Source\Repos3\MicroServiceApplication\MicroServiceApplication\bin\Debug\小微服辅助工具.exe.config
+D:\Source\Repos3\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\小微服辅助工具.exe
+D:\Source\Repos3\MicroServiceApplication\MicroServiceApplication\obj\x86\Debug\小微服辅助工具.pdb
