@@ -414,7 +414,7 @@ namespace MicroServiceApplication.voucher
             }
             if (this.accset.Corpname != this.client.Fullname)
             {
-                DialogResult dr = MessageBox.Show("选择的客户与账套名称不一致，是否继续导入?", "系统提示", MessageBoxButtons.OKCancel);
+                DialogResult dr = MessageBox.Show("选择的客户与账套名称不一致，是否继续初始化?", "系统提示", MessageBoxButtons.OKCancel);
 
                 if (dr != DialogResult.OK)
                 {

@@ -57,17 +57,17 @@
             this.subjectPanel = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ClientSubjectDataGridView = new System.Windows.Forms.DataGridView();
-            this.exportActionflowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.refreshButton = new System.Windows.Forms.Button();
-            this.newSubject2T3button = new System.Windows.Forms.Button();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.exportIncomeButton = new System.Windows.Forms.Button();
-            this.exportOutputButton = new System.Windows.Forms.Button();
-            this.bankbillExportbutton = new System.Windows.Forms.Button();
             this.paytaxreportbutton = new System.Windows.Forms.Button();
-            this.localreporttaxbutton = new System.Windows.Forms.Button();
+            this.exportOutputButton = new System.Windows.Forms.Button();
             this.exportpayrollbutton = new System.Windows.Forms.Button();
+            this.bankbillExportbutton = new System.Windows.Forms.Button();
+            this.newSubject2T3button = new System.Windows.Forms.Button();
+            this.localreporttaxbutton = new System.Windows.Forms.Button();
             this.InformationTextBox = new System.Windows.Forms.TextBox();
+            this.refreshButton = new System.Windows.Forms.Button();
+            this.exportIncomeButton = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.menuStrip1.SuspendLayout();
             this.exportInfoPanel.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -77,8 +77,8 @@
             this.subjectPanel.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ClientSubjectDataGridView)).BeginInit();
-            this.exportActionflowLayoutPanel.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -89,7 +89,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(758, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(1070, 25);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -117,7 +117,7 @@
             this.exportInfoPanel.Margin = new System.Windows.Forms.Padding(0);
             this.exportInfoPanel.Name = "exportInfoPanel";
             this.exportInfoPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.exportInfoPanel.Size = new System.Drawing.Size(758, 321);
+            this.exportInfoPanel.Size = new System.Drawing.Size(1070, 321);
             this.exportInfoPanel.TabIndex = 3;
             // 
             // groupBox3
@@ -128,7 +128,7 @@
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox3.Size = new System.Drawing.Size(748, 184);
+            this.groupBox3.Size = new System.Drawing.Size(1060, 184);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "账套信息";
@@ -159,7 +159,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(728, 154);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1040, 154);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // dbIpTextBox
@@ -168,7 +168,7 @@
             this.dbIpTextBox.Location = new System.Drawing.Point(88, 2);
             this.dbIpTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.dbIpTextBox.Name = "dbIpTextBox";
-            this.dbIpTextBox.Size = new System.Drawing.Size(638, 21);
+            this.dbIpTextBox.Size = new System.Drawing.Size(950, 21);
             this.dbIpTextBox.TabIndex = 4;
             this.dbIpTextBox.Text = "localhost";
             // 
@@ -188,7 +188,7 @@
             this.dbUserTextBox.Location = new System.Drawing.Point(88, 27);
             this.dbUserTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.dbUserTextBox.Name = "dbUserTextBox";
-            this.dbUserTextBox.Size = new System.Drawing.Size(638, 21);
+            this.dbUserTextBox.Size = new System.Drawing.Size(950, 21);
             this.dbUserTextBox.TabIndex = 6;
             this.dbUserTextBox.Text = "sa";
             // 
@@ -209,7 +209,7 @@
             this.dbPasswordTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.dbPasswordTextBox.Name = "dbPasswordTextBox";
             this.dbPasswordTextBox.PasswordChar = '*';
-            this.dbPasswordTextBox.Size = new System.Drawing.Size(638, 21);
+            this.dbPasswordTextBox.Size = new System.Drawing.Size(950, 21);
             this.dbPasswordTextBox.TabIndex = 7;
             // 
             // label7
@@ -240,7 +240,7 @@
             this.accsetNameTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.accsetNameTextBox.Name = "accsetNameTextBox";
             this.accsetNameTextBox.ReadOnly = true;
-            this.accsetNameTextBox.Size = new System.Drawing.Size(638, 21);
+            this.accsetNameTextBox.Size = new System.Drawing.Size(950, 21);
             this.accsetNameTextBox.TabIndex = 5;
             // 
             // selectAccessButton
@@ -272,7 +272,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox1.Size = new System.Drawing.Size(748, 130);
+            this.groupBox1.Size = new System.Drawing.Size(1060, 130);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "导出信息";
@@ -299,7 +299,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.11243F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.88757F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(728, 96);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1040, 96);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // createbyTextBox
@@ -309,7 +309,7 @@
             this.createbyTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.createbyTextBox.Name = "createbyTextBox";
             this.createbyTextBox.ReadOnly = true;
-            this.createbyTextBox.Size = new System.Drawing.Size(580, 21);
+            this.createbyTextBox.Size = new System.Drawing.Size(892, 21);
             this.createbyTextBox.TabIndex = 2;
             // 
             // label1
@@ -343,7 +343,7 @@
             this.clientTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.clientTextBox.Name = "clientTextBox";
             this.clientTextBox.ReadOnly = true;
-            this.clientTextBox.Size = new System.Drawing.Size(580, 21);
+            this.clientTextBox.Size = new System.Drawing.Size(892, 21);
             this.clientTextBox.TabIndex = 2;
             // 
             // accountcycleTextBox
@@ -353,7 +353,7 @@
             this.accountcycleTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.accountcycleTextBox.Name = "accountcycleTextBox";
             this.accountcycleTextBox.ReadOnly = true;
-            this.accountcycleTextBox.Size = new System.Drawing.Size(580, 21);
+            this.accountcycleTextBox.Size = new System.Drawing.Size(892, 21);
             this.accountcycleTextBox.TabIndex = 3;
             // 
             // label3
@@ -370,7 +370,7 @@
             // 
             // selectClientButton
             // 
-            this.selectClientButton.Location = new System.Drawing.Point(650, 2);
+            this.selectClientButton.Location = new System.Drawing.Point(962, 2);
             this.selectClientButton.Margin = new System.Windows.Forms.Padding(2);
             this.selectClientButton.Name = "selectClientButton";
             this.selectClientButton.Size = new System.Drawing.Size(76, 28);
@@ -381,7 +381,7 @@
             // 
             // selectAccountcycleButton
             // 
-            this.selectAccountcycleButton.Location = new System.Drawing.Point(650, 36);
+            this.selectAccountcycleButton.Location = new System.Drawing.Point(962, 36);
             this.selectAccountcycleButton.Margin = new System.Windows.Forms.Padding(2);
             this.selectAccountcycleButton.Name = "selectAccountcycleButton";
             this.selectAccountcycleButton.Size = new System.Drawing.Size(76, 28);
@@ -398,7 +398,7 @@
             this.subjectPanel.Margin = new System.Windows.Forms.Padding(2);
             this.subjectPanel.Name = "subjectPanel";
             this.subjectPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.subjectPanel.Size = new System.Drawing.Size(758, 226);
+            this.subjectPanel.Size = new System.Drawing.Size(1070, 203);
             this.subjectPanel.TabIndex = 5;
             // 
             // groupBox2
@@ -409,7 +409,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(748, 216);
+            this.groupBox2.Size = new System.Drawing.Size(1060, 193);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "新科目列表";
@@ -422,139 +422,139 @@
             this.ClientSubjectDataGridView.Margin = new System.Windows.Forms.Padding(2);
             this.ClientSubjectDataGridView.Name = "ClientSubjectDataGridView";
             this.ClientSubjectDataGridView.RowTemplate.Height = 37;
-            this.ClientSubjectDataGridView.Size = new System.Drawing.Size(744, 198);
+            this.ClientSubjectDataGridView.Size = new System.Drawing.Size(1056, 175);
             this.ClientSubjectDataGridView.TabIndex = 0;
-            // 
-            // exportActionflowLayoutPanel
-            // 
-            this.exportActionflowLayoutPanel.Controls.Add(this.refreshButton);
-            this.exportActionflowLayoutPanel.Controls.Add(this.newSubject2T3button);
-            this.exportActionflowLayoutPanel.Controls.Add(this.flowLayoutPanel1);
-            this.exportActionflowLayoutPanel.Controls.Add(this.InformationTextBox);
-            this.exportActionflowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.exportActionflowLayoutPanel.Location = new System.Drawing.Point(0, 572);
-            this.exportActionflowLayoutPanel.Margin = new System.Windows.Forms.Padding(2);
-            this.exportActionflowLayoutPanel.Name = "exportActionflowLayoutPanel";
-            this.exportActionflowLayoutPanel.Size = new System.Drawing.Size(758, 170);
-            this.exportActionflowLayoutPanel.TabIndex = 8;
-            // 
-            // refreshButton
-            // 
-            this.refreshButton.Location = new System.Drawing.Point(3, 3);
-            this.refreshButton.Name = "refreshButton";
-            this.refreshButton.Size = new System.Drawing.Size(91, 30);
-            this.refreshButton.TabIndex = 0;
-            this.refreshButton.Text = "刷新";
-            this.refreshButton.UseVisualStyleBackColor = true;
-            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
-            // 
-            // newSubject2T3button
-            // 
-            this.newSubject2T3button.Location = new System.Drawing.Point(100, 3);
-            this.newSubject2T3button.Name = "newSubject2T3button";
-            this.newSubject2T3button.Size = new System.Drawing.Size(84, 30);
-            this.newSubject2T3button.TabIndex = 1;
-            this.newSubject2T3button.Text = "新科目导出";
-            this.newSubject2T3button.UseVisualStyleBackColor = true;
-            this.newSubject2T3button.Click += new System.EventHandler(this.newSubject2T3button_Click);
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this.exportIncomeButton);
-            this.flowLayoutPanel1.Controls.Add(this.exportOutputButton);
-            this.flowLayoutPanel1.Controls.Add(this.bankbillExportbutton);
-            this.flowLayoutPanel1.Controls.Add(this.paytaxreportbutton);
-            this.flowLayoutPanel1.Controls.Add(this.localreporttaxbutton);
-            this.flowLayoutPanel1.Controls.Add(this.exportpayrollbutton);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 39);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(759, 41);
-            this.flowLayoutPanel1.TabIndex = 10;
-            // 
-            // exportIncomeButton
-            // 
-            this.exportIncomeButton.Location = new System.Drawing.Point(2, 2);
-            this.exportIncomeButton.Margin = new System.Windows.Forms.Padding(2);
-            this.exportIncomeButton.Name = "exportIncomeButton";
-            this.exportIncomeButton.Size = new System.Drawing.Size(100, 34);
-            this.exportIncomeButton.TabIndex = 0;
-            this.exportIncomeButton.Text = "导出进项";
-            this.exportIncomeButton.UseVisualStyleBackColor = true;
-            this.exportIncomeButton.Click += new System.EventHandler(this.exportIncomeButton_Click);
-            // 
-            // exportOutputButton
-            // 
-            this.exportOutputButton.Location = new System.Drawing.Point(106, 2);
-            this.exportOutputButton.Margin = new System.Windows.Forms.Padding(2);
-            this.exportOutputButton.Name = "exportOutputButton";
-            this.exportOutputButton.Size = new System.Drawing.Size(100, 34);
-            this.exportOutputButton.TabIndex = 1;
-            this.exportOutputButton.Text = "导出销项";
-            this.exportOutputButton.UseVisualStyleBackColor = true;
-            this.exportOutputButton.Click += new System.EventHandler(this.exportOutputButton_Click);
-            // 
-            // bankbillExportbutton
-            // 
-            this.bankbillExportbutton.Location = new System.Drawing.Point(210, 2);
-            this.bankbillExportbutton.Margin = new System.Windows.Forms.Padding(2);
-            this.bankbillExportbutton.Name = "bankbillExportbutton";
-            this.bankbillExportbutton.Size = new System.Drawing.Size(100, 34);
-            this.bankbillExportbutton.TabIndex = 2;
-            this.bankbillExportbutton.Text = "导出银行回单";
-            this.bankbillExportbutton.UseVisualStyleBackColor = true;
-            this.bankbillExportbutton.Click += new System.EventHandler(this.bankbillExportbutton_Click);
             // 
             // paytaxreportbutton
             // 
-            this.paytaxreportbutton.Location = new System.Drawing.Point(314, 2);
+            this.paytaxreportbutton.Location = new System.Drawing.Point(300, 44);
             this.paytaxreportbutton.Margin = new System.Windows.Forms.Padding(2);
             this.paytaxreportbutton.Name = "paytaxreportbutton";
-            this.paytaxreportbutton.Size = new System.Drawing.Size(100, 34);
+            this.paytaxreportbutton.Size = new System.Drawing.Size(92, 33);
             this.paytaxreportbutton.TabIndex = 4;
             this.paytaxreportbutton.Text = "导出国税";
             this.paytaxreportbutton.UseVisualStyleBackColor = true;
             this.paytaxreportbutton.Click += new System.EventHandler(this.paytaxreportbutton_Click);
             // 
-            // localreporttaxbutton
+            // exportOutputButton
             // 
-            this.localreporttaxbutton.Location = new System.Drawing.Point(418, 2);
-            this.localreporttaxbutton.Margin = new System.Windows.Forms.Padding(2);
-            this.localreporttaxbutton.Name = "localreporttaxbutton";
-            this.localreporttaxbutton.Size = new System.Drawing.Size(100, 34);
-            this.localreporttaxbutton.TabIndex = 5;
-            this.localreporttaxbutton.Text = "导出地税";
-            this.localreporttaxbutton.UseVisualStyleBackColor = true;
-            this.localreporttaxbutton.Click += new System.EventHandler(this.localreporttaxbutton_Click);
+            this.exportOutputButton.Location = new System.Drawing.Point(108, 43);
+            this.exportOutputButton.Margin = new System.Windows.Forms.Padding(2);
+            this.exportOutputButton.Name = "exportOutputButton";
+            this.exportOutputButton.Size = new System.Drawing.Size(92, 33);
+            this.exportOutputButton.TabIndex = 1;
+            this.exportOutputButton.Text = "导出销项";
+            this.exportOutputButton.UseVisualStyleBackColor = true;
+            this.exportOutputButton.Click += new System.EventHandler(this.exportOutputButton_Click);
             // 
             // exportpayrollbutton
             // 
-            this.exportpayrollbutton.Location = new System.Drawing.Point(522, 2);
+            this.exportpayrollbutton.Location = new System.Drawing.Point(492, 44);
             this.exportpayrollbutton.Margin = new System.Windows.Forms.Padding(2);
             this.exportpayrollbutton.Name = "exportpayrollbutton";
-            this.exportpayrollbutton.Size = new System.Drawing.Size(114, 34);
+            this.exportpayrollbutton.Size = new System.Drawing.Size(92, 33);
             this.exportpayrollbutton.TabIndex = 3;
             this.exportpayrollbutton.Text = "导出工资表";
             this.exportpayrollbutton.UseVisualStyleBackColor = true;
             this.exportpayrollbutton.Click += new System.EventHandler(this.exportpayrollbutton_Click);
             // 
+            // bankbillExportbutton
+            // 
+            this.bankbillExportbutton.Location = new System.Drawing.Point(204, 44);
+            this.bankbillExportbutton.Margin = new System.Windows.Forms.Padding(2);
+            this.bankbillExportbutton.Name = "bankbillExportbutton";
+            this.bankbillExportbutton.Size = new System.Drawing.Size(92, 33);
+            this.bankbillExportbutton.TabIndex = 2;
+            this.bankbillExportbutton.Text = "导出银行回单";
+            this.bankbillExportbutton.UseVisualStyleBackColor = true;
+            this.bankbillExportbutton.Click += new System.EventHandler(this.bankbillExportbutton_Click);
+            // 
+            // newSubject2T3button
+            // 
+            this.newSubject2T3button.Location = new System.Drawing.Point(108, 5);
+            this.newSubject2T3button.Name = "newSubject2T3button";
+            this.newSubject2T3button.Size = new System.Drawing.Size(92, 33);
+            this.newSubject2T3button.TabIndex = 1;
+            this.newSubject2T3button.Text = "新科目导出";
+            this.newSubject2T3button.UseVisualStyleBackColor = true;
+            this.newSubject2T3button.Click += new System.EventHandler(this.newSubject2T3button_Click);
+            // 
+            // localreporttaxbutton
+            // 
+            this.localreporttaxbutton.Location = new System.Drawing.Point(396, 44);
+            this.localreporttaxbutton.Margin = new System.Windows.Forms.Padding(2);
+            this.localreporttaxbutton.Name = "localreporttaxbutton";
+            this.localreporttaxbutton.Size = new System.Drawing.Size(92, 33);
+            this.localreporttaxbutton.TabIndex = 5;
+            this.localreporttaxbutton.Text = "导出地税";
+            this.localreporttaxbutton.UseVisualStyleBackColor = true;
+            this.localreporttaxbutton.Click += new System.EventHandler(this.localreporttaxbutton_Click);
+            // 
             // InformationTextBox
             // 
             this.InformationTextBox.BackColor = System.Drawing.SystemColors.Control;
-            this.InformationTextBox.Dock = System.Windows.Forms.DockStyle.Left;
             this.InformationTextBox.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.InformationTextBox.Location = new System.Drawing.Point(3, 86);
+            this.InformationTextBox.Location = new System.Drawing.Point(12, 82);
             this.InformationTextBox.Name = "InformationTextBox";
             this.InformationTextBox.ReadOnly = true;
-            this.InformationTextBox.Size = new System.Drawing.Size(258, 26);
+            this.InformationTextBox.Size = new System.Drawing.Size(380, 26);
             this.InformationTextBox.TabIndex = 11;
             this.InformationTextBox.Visible = false;
+            // 
+            // refreshButton
+            // 
+            this.refreshButton.Location = new System.Drawing.Point(12, 5);
+            this.refreshButton.Name = "refreshButton";
+            this.refreshButton.Size = new System.Drawing.Size(92, 33);
+            this.refreshButton.TabIndex = 0;
+            this.refreshButton.Text = "刷新";
+            this.refreshButton.UseVisualStyleBackColor = true;
+            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
+            // 
+            // exportIncomeButton
+            // 
+            this.exportIncomeButton.Location = new System.Drawing.Point(12, 43);
+            this.exportIncomeButton.Margin = new System.Windows.Forms.Padding(2);
+            this.exportIncomeButton.Name = "exportIncomeButton";
+            this.exportIncomeButton.Size = new System.Drawing.Size(92, 33);
+            this.exportIncomeButton.TabIndex = 0;
+            this.exportIncomeButton.Text = "导出进项";
+            this.exportIncomeButton.UseVisualStyleBackColor = true;
+            this.exportIncomeButton.Click += new System.EventHandler(this.exportIncomeButton_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.groupBox4);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 549);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1070, 201);
+            this.panel1.TabIndex = 12;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.exportpayrollbutton);
+            this.groupBox4.Controls.Add(this.refreshButton);
+            this.groupBox4.Controls.Add(this.newSubject2T3button);
+            this.groupBox4.Controls.Add(this.localreporttaxbutton);
+            this.groupBox4.Controls.Add(this.paytaxreportbutton);
+            this.groupBox4.Controls.Add(this.InformationTextBox);
+            this.groupBox4.Controls.Add(this.exportIncomeButton);
+            this.groupBox4.Controls.Add(this.bankbillExportbutton);
+            this.groupBox4.Controls.Add(this.exportOutputButton);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox4.Location = new System.Drawing.Point(0, 0);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(1070, 201);
+            this.groupBox4.TabIndex = 12;
+            this.groupBox4.TabStop = false;
             // 
             // YYT3Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(758, 742);
-            this.Controls.Add(this.exportActionflowLayoutPanel);
+            this.ClientSize = new System.Drawing.Size(1070, 750);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.subjectPanel);
             this.Controls.Add(this.exportInfoPanel);
             this.Controls.Add(this.menuStrip1);
@@ -573,9 +573,9 @@
             this.subjectPanel.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ClientSubjectDataGridView)).EndInit();
-            this.exportActionflowLayoutPanel.ResumeLayout(false);
-            this.exportActionflowLayoutPanel.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -612,16 +612,16 @@
         private System.Windows.Forms.Panel subjectPanel;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView ClientSubjectDataGridView;
-        private System.Windows.Forms.FlowLayoutPanel exportActionflowLayoutPanel;
-        private System.Windows.Forms.Button exportIncomeButton;
-        private System.Windows.Forms.Button exportOutputButton;
-        private System.Windows.Forms.Button bankbillExportbutton;
-        private System.Windows.Forms.Button exportpayrollbutton;
         private System.Windows.Forms.Button paytaxreportbutton;
-        private System.Windows.Forms.Button localreporttaxbutton;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button refreshButton;
+        private System.Windows.Forms.Button exportOutputButton;
+        private System.Windows.Forms.Button exportpayrollbutton;
+        private System.Windows.Forms.Button bankbillExportbutton;
         private System.Windows.Forms.Button newSubject2T3button;
+        private System.Windows.Forms.Button localreporttaxbutton;
         private System.Windows.Forms.TextBox InformationTextBox;
+        private System.Windows.Forms.Button refreshButton;
+        private System.Windows.Forms.Button exportIncomeButton;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.GroupBox groupBox4;
     }
 }

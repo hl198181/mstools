@@ -363,7 +363,47 @@ namespace MicroServiceApplication.voucher
         //
         private void initSubjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (this.accset == null)
+            {
+                MessageBox.Show("请先选择账套!");
+                return;
+            }
 
+            if (this.client == null)
+            {
+                MessageBox.Show("请先选择客户!");
+                return;
+            }
+            if (accset.CAcc_Name != client.Name && accset.CAcc_Name != client.Fullname)
+            {
+                DialogResult dr = MessageBox.Show("选择的客户与账套名称不一致，是否继续初始化?", "系统提示", MessageBoxButtons.OKCancel);
+
+                if (dr != DialogResult.OK)
+                {
+                    return;
+                }
+            }
+
+            try
+            {
+                this.InformationTextBox.Visible = true;//打开提示框
+                this.InformationTextBox.Text = "正在初始化会计科目!请稍等……";//提示文本
+                this.InformationTextBox.Font = new Font("宋体", 12);//提示字体
+
+                YYT3Factory yYT3Factory = new YYT3Factory();
+                yYT3Factory.initSubjectByYYT3(this.accset, this.client, Session.GetInstance().User);
+
+                this.InformationTextBox.Visible = false;//关闭提示框
+
+                MessageBox.Show("初始化成功，请打开小微服查看!");
+
+            }
+            catch (Exception e1)
+            {
+                Console.WriteLine(e1.StackTrace);
+                this.InformationTextBox.Visible = false;//关闭提示框
+                MessageBox.Show(e1.Message);
+            }
         }
         //
         //客户初始化end

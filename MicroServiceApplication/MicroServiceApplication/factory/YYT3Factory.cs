@@ -10,6 +10,7 @@ using System.Net.Http;
 using Newtonsoft.Json.Linq;
 using MicroServiceApplication.Common;
 using System.Net.Http.Headers;
+using System.Data.OleDb;
 
 namespace MicroServiceApplication.factory
 {
@@ -146,8 +147,8 @@ namespace MicroServiceApplication.factory
         private string _ccode;//科目代码
         private string _ccode_name;//科目名称
         private string _ccode_engl;//科目名称eng
-        private int _igrade;//去科目长度表，科目级别
-        private int _bproperty;//取上级，借贷方向（1是借，0是贷）
+        private int _igrade;//取科目长度表，科目级别
+        private string _bproperty;//取上级，借贷方向（1是借，0是贷）
         private string _cbook_type;//金额式，数量金额式，外币金额式
         private string _cbook_type_engl;//JES,SLJES,WBJES
         private int _bend;//1
@@ -244,7 +245,7 @@ namespace MicroServiceApplication.factory
             }
         }
 
-        public int Bproperty
+        public string Bproperty
         {
             get
             {
@@ -671,13 +672,13 @@ namespace MicroServiceApplication.factory
     //
     //科目编码级次表end
     //
-    class T3ExportSd3000Context
+    class YYT3ExportContext
     {
         private ExportBean _exportBean;
 
-        private List<YYT3code> _subjects;//科目表
+        private List<YYT3code> _code;//科目表
 
-        private Dictionary<string, YYT3AccInformation> _accoptionsDict;//科目长度级次表
+        private Dictionary<string, YYT3AccInformation> _accInformation;//科目长度级次表
 
         private List<ClientSubject> _clientSubjects;//小微服数据库的科目表
 
@@ -698,29 +699,29 @@ namespace MicroServiceApplication.factory
             }
         }
 
-        internal List<YYT3code> Subjects
+        internal List<YYT3code> Code
         {
             get
             {
-                return _subjects;
+                return _code;
             }
 
             set
             {
-                _subjects = value;
+                _code = value;
             }
         }
 
-        internal Dictionary<string, YYT3AccInformation> AccoptionsDict
+        internal Dictionary<string, YYT3AccInformation> AccInformation
         {
             get
             {
-                return _accoptionsDict;
+                return _accInformation;
             }
 
             set
             {
-                _accoptionsDict = value;
+                _accInformation = value;
             }
         }
 
@@ -766,29 +767,69 @@ namespace MicroServiceApplication.factory
 
     class YYT3Factory
     {
-        //
-        //获取帐套信息表start
-        //
-        public void getaccst(YYT3accset accset)
+        public OleDbConnection Conn;
+        public bool ExecuteSQLNonquery(List<String> sqls)
         {
-            SqlConnection connection = this.createConnection(accset);
-            string sql = "select * from accst";
-            SqlDataAdapter myDataAdapter = new SqlDataAdapter(sql, connection);
-            DataSet myDataSet = new DataSet();      // 创建DataSet
-            List<YYT3accset> yYT3accsetList = new List<YYT3accset>();
+            OleDbCommand cmd = new OleDbCommand();
+            cmd.Connection = Conn;
+            OleDbTransaction tx = Conn.BeginTransaction();
+            cmd.Transaction = tx;
             try
             {
-                myDataAdapter.Fill(myDataSet, "accst");
-                DataTable myTable = myDataSet.Tables["accst"];
+                for (int n = 0; n < sqls.Count; n++)
+                {
+                    string strsql = sqls[n].ToString();
+                    if (strsql.Trim().Length > 1)
+                    {
+                        cmd.CommandText = strsql;
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                tx.Commit();
+                return true;
+            }
+            catch (Exception e)
+            {
+                tx.Rollback();
+                throw e;
+            }
+        }
+        //
+        //获取帐套科目表start
+        //
+        public List<YYT3code> getcode(YYT3accset accset)
+        {
+            SqlConnection connection = this.createConnection(accset);
+            string sql = "select * from code ";
+            SqlDataAdapter myDataAdapter = new SqlDataAdapter(sql, connection);
+            DataSet myDataSet = new DataSet();      // 创建DataSet
+            List<YYT3code> YYT3codeList = new List<YYT3code>();
+            try
+            {
+                myDataAdapter.Fill(myDataSet, "code");
+                DataTable myTable = myDataSet.Tables["code"];
 
                 if (myTable.Rows.Count > 0)
                 {
                     foreach (DataRow row in myTable.Rows)
                     {
-                        YYT3accset yYT3accset = new YYT3accset();
-
-                    }    
+                        YYT3code yYT3code = new YYT3code();
+                        yYT3code.I_id = Int32.Parse(row[myTable.Columns["i_id"]].ToString());
+                        yYT3code.Cclass = row[myTable.Columns["cclass"]].ToString();
+                        yYT3code.Cclass_engl = row[myTable.Columns["cclass_engl"]].ToString();
+                        yYT3code.Ccode = row[myTable.Columns["ccode"]].ToString();
+                        yYT3code.Ccode_engl = row[myTable.Columns["ccode_engl"]].ToString();
+                        yYT3code.Ccode_name = row[myTable.Columns["ccode_name"]].ToString();
+                        yYT3code.Igrade = Int32.Parse(row[myTable.Columns["igrade"]].ToString());
+                        yYT3code.Bproperty = (row[myTable.Columns["bproperty"]].ToString() == "False" ? "cr" : "de").ToString();
+                        yYT3code.Cbook_type = row[myTable.Columns["cbook_type"]].ToString();
+                        yYT3code.Cbook_type_engl = row[myTable.Columns["cbook_type_engl"]].ToString();
+                        yYT3code.Bend = Int32.Parse(row[myTable.Columns["bend"]].ToString());
+                        yYT3code.Bd_c = Int32.Parse(row[myTable.Columns["bd_c"]].ToString()); ;
+                        YYT3codeList.Add(yYT3code);
+                    }                    
                 }
+                return YYT3codeList;
             }
             finally
             {
@@ -798,7 +839,195 @@ namespace MicroServiceApplication.factory
             }
         }
         //
-        //获取帐套信息表end
+        //获取帐套科目表end
+        //
+        //获取会计科目最大序号start
+        //
+        public int getmaxid(YYT3accset accset)
+        {
+            SqlConnection connection = this.createConnection(accset);
+            string sql = "select max(i_id) as maxid from code ";
+            SqlDataAdapter myDataAdapter = new SqlDataAdapter(sql, connection);
+            DataSet myDataSet = new DataSet();
+                       
+            try
+            {
+                int maxi_id = 0;
+                myDataAdapter.Fill(myDataSet, "code");
+                DataTable myTable = myDataSet.Tables["code"];
+                if (myTable.Rows.Count>0)
+                {
+                    maxi_id = Int32.Parse(myTable.Rows[0][myTable.Columns[0]].ToString());
+                }
+                else
+                {
+                    maxi_id = 0;
+                }
+                return maxi_id;
+             }
+            finally
+            {
+                myDataSet.Dispose();
+                myDataAdapter.Dispose();
+                connection.Close();
+            }
+        }
+        //
+        //获取会计科目最大序号end
+        //
+        //获取上一级会计科目信息start
+        //
+        public YYT3code getlastcode(YYT3accset accset , String ccode)
+        {
+            SqlConnection connection = this.createConnection(accset);
+            string sql = "select * from code where ccode = "+ccode+"";
+            SqlDataAdapter myDataAdapter = new SqlDataAdapter(sql, connection);
+            DataSet myDataSet = new DataSet();
+            YYT3code yYT3code = null;
+            try
+            {
+                myDataAdapter.Fill(myDataSet, "ccode");
+                DataTable myTable = myDataSet.Tables["ccode"];
+                if (myTable.Columns.Count>0)
+                {
+                    DataRow row = myTable.Rows[0];
+                    yYT3code = new YYT3code();
+                    yYT3code.Cclass = row["cclass"] == null ? null : row["cclass"].ToString();
+                    yYT3code.Cclass_engl = row["cclass_engl"] == null ? null : row["cclass_engl"].ToString();
+                    yYT3code.Bproperty = row["bproperty"] == null ? null : row["bproperty"].ToString();
+                    yYT3code.Cbook_type = row["cbook_type"] == null ? null : row["cbook_type"].ToString();
+                    yYT3code.Cbook_type_engl = row["cbook_type_engl"] == null ? null : row["cbook_type_engl"].ToString();
+                }
+                return yYT3code;
+            }
+            finally
+            {
+                myDataSet.Dispose();
+                myDataAdapter.Dispose();
+                connection.Close();
+            }
+        }
+        //
+        //获取上一级会计科目信息end
+        //
+        //获取账套科目长度表start
+        //
+        public YYT3AccInformation getAccInformation(YYT3accset accset)
+        {
+            SqlConnection connection = this.createConnection(accset);
+            string cCaption = "科目编码级次";
+            string cName = "cGradeLevel";
+            string sql = "select * from AccInformation where cName = '"+cName+"' and cCaption = '"+ cCaption + "'";
+            SqlDataAdapter myDataAdapter = new SqlDataAdapter(sql, connection);
+            DataSet myDataSet = new DataSet();      // 创建DataSet
+            List<YYT3AccInformation> yYT3AccInformationList = new List<YYT3AccInformation>();
+            try
+            {
+                myDataAdapter.Fill(myDataSet, "AccInformation");
+                DataTable myTable = myDataSet.Tables["AccInformation"];
+                if (myTable.Rows.Count > 0)
+                {
+                    foreach (DataRow row in myTable.Rows)
+                    {
+                        YYT3AccInformation yYT3AccInformation = new YYT3AccInformation();
+                        yYT3AccInformation.CValue = row[myTable.Columns["cValue"]].ToString();
+                        yYT3AccInformationList.Add(yYT3AccInformation);
+                    }
+                }             
+            }
+            finally
+            {
+                myDataSet.Dispose();
+                myDataAdapter.Dispose();
+                connection.Close();
+            }
+            if (yYT3AccInformationList.Count > 0)
+            {
+                return yYT3AccInformationList[0];
+            }
+            else
+            {
+                return null;
+            }
+        }
+        //
+        //获取账套科目长度表end
+        //
+        //获取核算客户表start
+        //
+        public List<YYT3Customer> getCustomer(YYT3accset accset)
+        {
+            SqlConnection connection = this.createConnection(accset);
+            string sql = "select * from Customer";
+            SqlDataAdapter myDataAdapter = new SqlDataAdapter(sql, connection);
+            DataSet myDataSet = new DataSet();      // 创建DataSet
+            List<YYT3Customer> yYT3CustomerList = new List<YYT3Customer>();
+            try
+            {
+                myDataAdapter.Fill(myDataSet, "Customer");
+                DataTable myTable = myDataSet.Tables["Customer"];
+                if (myTable.Rows.Count > 0)
+                    foreach (DataRow row in myTable.Rows)
+                    {
+                        YYT3Customer yYT3Customer = new YYT3Customer();
+                        yYT3Customer.CCusCode = Int32.Parse(row[myTable.Columns["cCusCode"]].ToString());
+                        yYT3Customer.CCusName = row[myTable.Columns["cCusName"]].ToString();
+                        yYT3Customer.CCusAbbName = row[myTable.Columns["cCusAbbName"]].ToString();
+                        yYT3Customer.CCCCode = row[myTable.Columns["cCCCode"]].ToString();
+                        yYT3Customer.CCusHeadCode = row[myTable.Columns["cCusHeadCode"]].ToString();
+                        yYT3Customer.ICostGrade = Int32.Parse(row[myTable.Columns["iCostGrade"]].ToString());
+                        yYT3CustomerList.Add(yYT3Customer);
+                    }
+                return yYT3CustomerList;
+            }
+            finally
+            {
+                myDataSet.Dispose();
+                myDataAdapter.Dispose();
+                connection.Close();
+            }
+
+        }
+        //
+        //获取核算客户表end
+        //
+        //获取可算供应商表start
+        //
+        public List<YYT3Vendor> getVendor(YYT3accset accset)
+        {
+            SqlConnection connection = this.createConnection(accset);
+            string sql = "select * from Customer";
+            SqlDataAdapter myDataAdapter = new SqlDataAdapter(sql, connection);
+            DataSet myDataSet = new DataSet();      // 创建DataSet
+            List<YYT3Vendor> yYT3VendorList = new List<YYT3Vendor>();
+            try
+            {
+                myDataAdapter.Fill(myDataSet, "Vendor");
+                DataTable myTable = myDataSet.Tables["Vendor"];
+                if (myTable.Rows.Count > 0)
+                    foreach (DataRow row in myTable.Rows)
+                    {
+                        YYT3Vendor yYT3Vendor = new YYT3Vendor();
+                        yYT3Vendor.CVenCode = Int32.Parse(row[myTable.Columns["cVenCode"]].ToString());
+                        yYT3Vendor.CVenName = row[myTable.Columns["cVenName"]].ToString();
+                        yYT3Vendor.CVenAbbName = row[myTable.Columns["cVenAbbName"]].ToString();
+                        yYT3Vendor.CVCCode = row[myTable.Columns["cVCCode"]].ToString();
+                        yYT3Vendor.BisFeeVen = Int32.Parse(row[myTable.Columns["bisFeeVen"]].ToString());
+                        yYT3Vendor.BVenTax = Int32.Parse(row[myTable.Columns["bVenTax"]].ToString());
+                        yYT3Vendor.CVenHeadCode = row[myTable.Columns["cVenHeadCode"]].ToString();
+                        yYT3VendorList.Add(yYT3Vendor);
+                    }
+                return yYT3VendorList;
+            }
+            finally
+            {
+                myDataSet.Dispose();
+                myDataAdapter.Dispose();
+                connection.Close();
+            }
+        }
+        //
+        //获取可算供应商表end
         //
         //创建一个打开数据库的连接start
         //
@@ -889,13 +1118,73 @@ namespace MicroServiceApplication.factory
         //
         public void exportSubject(ExportBean exportBean,YYT3accset accset)
         {
-            T3ExportSd3000Context context = new T3ExportSd3000Context();
+            YYT3AccInformation yYT3AccInformation = this.getAccInformation(accset);
+            YYT3ExportContext context = new YYT3ExportContext();
             context.ExportBean = exportBean;
             try
             {
                 ClientSubjectFactory csf = new ClientSubjectFactory();
-                context.ClientSubjects = csf.query(exportBean.Clientid, 1, 1);
-                //context.AccoptionsDict = this.queryAccoptions(accset);
+                List<ClientSubject> clientSubjectList = csf.query(exportBean.Clientid, 1, 1);
+                List<string> sqls = new List<string>();
+                int maxid = this.getmaxid(accset);
+                foreach (ClientSubject item in clientSubjectList)
+                {
+                    maxid++;
+                    String leve1Subject = item.Sn.Substring(0, Int32.Parse(yYT3AccInformation.CValue.Substring(0,1)));//获取上级科目信息
+                    YYT3code yYT3code = this.getlastcode( accset,leve1Subject);
+                    int igrade = 1;
+                    
+                    if (Int32.Parse(yYT3AccInformation.CValue.Substring(0, 1)) == item.Sn.Length && yYT3AccInformation.CValue.Length >0)
+                    {
+                        igrade = 1;
+                    }
+                    if(Int32.Parse(yYT3AccInformation.CValue.Substring(2, 1)) == item.Sn.Length- Int32.Parse(yYT3AccInformation.CValue.Substring(0, 1)) && yYT3AccInformation.CValue.Length > 2)
+                    {
+                        igrade = 2;
+                    }
+                    if (Int32.Parse(yYT3AccInformation.CValue.Substring(4, 1)) == item.Sn.Length- Int32.Parse(yYT3AccInformation.CValue.Substring(2, 1)) && yYT3AccInformation.CValue.Length > 4)
+                    {
+                        igrade = 3;
+                    }
+                    if (Int32.Parse(yYT3AccInformation.CValue.Substring(6, 1)) == item.Sn.Length- Int32.Parse(yYT3AccInformation.CValue.Substring(4, 1)) && yYT3AccInformation.CValue.Length > 6)
+                    {
+                        igrade = 4;
+                    }
+                    if (Int32.Parse(yYT3AccInformation.CValue.Substring(8, 1)) == item.Sn.Length- Int32.Parse(yYT3AccInformation.CValue.Substring(6, 1)) && yYT3AccInformation.CValue.Length > 8)
+                    {
+                        igrade = 5;
+                    }
+                    if (Int32.Parse(yYT3AccInformation.CValue.Substring(10, 1)) == item.Sn.Length- Int32.Parse(yYT3AccInformation.CValue.Substring(8, 1)) && yYT3AccInformation.CValue.Length > 10)
+                    {
+                        igrade = 6;
+                    }
+                    if (Int32.Parse(yYT3AccInformation.CValue.Substring(12, 1)) == item.Sn.Length- Int32.Parse(yYT3AccInformation.CValue.Substring(10, 1)) && yYT3AccInformation.CValue.Length > 12)
+                    {
+                        igrade = 7;
+                    }
+                    if (Int32.Parse(yYT3AccInformation.CValue.Substring(14, 1)) == item.Sn.Length- Int32.Parse(yYT3AccInformation.CValue.Substring(12, 1)) && yYT3AccInformation.CValue.Length > 14)
+                    {
+                        igrade = 8;
+                    }
+                    if (Int32.Parse(yYT3AccInformation.CValue.Substring(16, 1)) == item.Sn.Length- Int32.Parse(yYT3AccInformation.CValue.Substring(14, 1)) && yYT3AccInformation.CValue.Length > 16)
+                    {
+                        igrade = 9;
+                    }
+                    if (Int32.Parse(yYT3AccInformation.CValue.Substring(18, 1)) == item.Sn.Length- Int32.Parse(yYT3AccInformation.CValue.Substring(16, 1)) && yYT3AccInformation.CValue.Length > 18)
+                    {
+                        igrade = 10;
+                    }
+                    List <YYT3code> yYT3codeList = new List<YYT3code>();
+                    yYT3code.Ccode = item.Sn;
+                    yYT3code.Ccode_name = item.Label;
+                    
+                    sqls.Add("SET SET IDENTITY_INSERT[dbo].[code]   ON");
+                    sqls.Add("insert into [dbo].[code] (i_id,cclass,cclass_endl,ccode,ccode_name,ccode_endl,igrade,bproperty,cbook_type,cbook_type_engl,_bend,Bd_c) values (" + maxid + ","+ yYT3code.Cclass+","+yYT3code.Cclass_engl+", "+ yYT3code.Ccode + "," + yYT3code.Ccode_name + "," + yYT3code.Ccode_name + "+ 'engl',"+ igrade + ","+ yYT3code.Bproperty+",‘金额式’，‘JES’，1,1) ");
+
+                }
+                sqls.Add("SET SET IDENTITY_INSERT[dbo].[code]   OFF");
+                SqlConnection connection = this.createConnection(accset);
+                this.ExecuteSQLNonquery(sqls);
             }
             catch (Exception e)
             {
@@ -907,7 +1196,124 @@ namespace MicroServiceApplication.factory
         //
         //科目表导入新科目end
         //
+        //初始化start
         //
-        //
-    }
+        public void initSubjectByYYT3(YYT3accset accset, Client client, User user)
+        {
+            if (client == null) throw new ArgumentException("请选择客户信息！");
+            if (user == null) throw new ArgumentException("用户信息必须输入！");
+            if (accset == null) throw new ArgumentException("请选择账套信息！");
+            if (client.Id == null) throw new ArgumentException("客户信息必须输入！");
+            //查询客户账套科目
+            List<YYT3code> yYT3codeList = this.getcode(accset);
+
+            if (yYT3codeList == null || yYT3codeList.Count <= 0)
+            {
+                throw new Exception("无法从速达读取科目信息！");
+            }
+            //查询客户账套科目长度配置，并同步
+            YYT3AccInformation yYT3AccInformation = this.getAccInformation(accset);
+
+            ClientSubjectLength csl = new ClientSubjectLength();
+            int number = yYT3AccInformation.CValue.Length;
+            if (number > 0)
+            {
+                csl.Subject1 = int.Parse(yYT3AccInformation.CValue.Substring(0, 1));
+            }
+            else
+            {
+                csl.Subject1 = 0;
+            }
+            if (number > 2)
+            {
+                csl.Subject2 = int.Parse(yYT3AccInformation.CValue.Substring(2, 1));
+            }
+            else
+            {
+                csl.Subject2 = 0;
+            }
+            if (number > 4)
+            {
+                csl.Subject3 = int.Parse(yYT3AccInformation.CValue.Substring(4, 1));
+            }
+            else
+            {
+                csl.Subject3 = 0;
+            }
+            if (number > 6)
+            {
+                csl.Subject4 = int.Parse(yYT3AccInformation.CValue.Substring(6, 1));
+            }
+            else
+            {
+                csl.Subject4 = 0;
+            }
+            if (number > 8)
+            {
+                csl.Subject5 = int.Parse(yYT3AccInformation.CValue.Substring(8, 1));
+            }
+            else
+            {
+                csl.Subject5 = 0;
+            }
+            if (number > 10)
+            {
+                csl.Subject6 = int.Parse(yYT3AccInformation.CValue.Substring(10, 1));
+            }
+            else
+            {
+                csl.Subject6 = 0;
+            }
+            if (number > 12)
+            {
+                csl.Subject7 = int.Parse(yYT3AccInformation.CValue.Substring(12, 1));
+            }
+            else
+            {
+                csl.Subject7 = 0;
+            }
+            if (number > 14)
+            {
+                csl.Subject8 = int.Parse(yYT3AccInformation.CValue.Substring(14, 1));
+            }
+            else
+            {
+                csl.Subject8 = 0;
+            }
+            if (number > 16)
+            {
+                csl.Subject9 = int.Parse(yYT3AccInformation.CValue.Substring(16, 1));
+            }
+            else
+            {
+                csl.Subject9 = 0;
+            }
+            if (number > 18)
+            {
+                csl.Subject10 = int.Parse(yYT3AccInformation.CValue.Substring(18, 1));
+            }
+            else
+            {
+                csl.Subject10 = 0;
+            }
+            csl.Clientid = client.Id;
+            csl.Createby = user.Id;
+
+            ClientSubjectLengthFactory cslf = new ClientSubjectLengthFactory();
+            cslf.add(csl);
+            //清理现有科目
+            ClientSubjectFactory csf = new ClientSubjectFactory();
+            csf.clean(client.Id);
+            //写入科目
+            foreach (YYT3code item in yYT3codeList)
+            {
+                ClientSubject subject = new ClientSubject();
+                subject.Sn = item.Ccode;
+                subject.Label = item.Ccode_name;
+                subject.Fullname = item.Ccode_name;
+                subject.Debitcredit = item.Bproperty;
+                csf.add(subject, client, user);
+            }
+        }
+     }
 }
