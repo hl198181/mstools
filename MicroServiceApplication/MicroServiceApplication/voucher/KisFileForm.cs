@@ -11,6 +11,9 @@ namespace MicroServiceApplication.voucher
 {
     public partial class KisFileForm : Form
     {
+        private string vouchernumber;//合并参数
+        private string voucherword;//凭证字参数
+        private string vouchersummary;//凭证摘要参数
         private Client client;
         private KisDbFileParams kisDbFileParams;
         private User user;
@@ -22,7 +25,39 @@ namespace MicroServiceApplication.voucher
         {
             InitializeComponent();
         }
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            this.vouchernumber = "one";
+        }
 
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            this.vouchernumber = "two";
+        }
+
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            this.vouchernumber = "three";
+        }
+        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+            this.voucherword = "yes";
+        }
+
+        private void radioButton5_CheckedChanged(object sender, EventArgs e)
+        {
+            this.voucherword = "no";
+        }
+
+        private void radioButton6_CheckedChanged(object sender, EventArgs e)
+        {
+            this.vouchersummary = "fist";
+        }
+
+        private void radioButton7_CheckedChanged(object sender, EventArgs e)
+        {
+            this.vouchersummary = "all";
+        }
         private void selectClientButton_Click(object sender, EventArgs e)
         {
             List<Client> clientList = CommonManager.selectClient();
@@ -79,6 +114,9 @@ namespace MicroServiceApplication.voucher
             this.user = Session.GetInstance().User;
             this.inst = Session.GetInstance().Inst;
             this.createbyTextBox.Text = this.user.Name;
+            this.radioButton1.Checked = true;//默认不合并
+            this.radioButton4.Checked = true;//默认有凭证字
+            this.radioButton6.Checked = true;//默认只有第一行有摘要
             if (this.inst.Id != "653279009C4211E6A731B9323D2BF7D6")
             {
                 this.修复KIS明细科目名称ToolStripMenuItem.Visible = false;
@@ -247,7 +285,7 @@ namespace MicroServiceApplication.voucher
             }
         }
 
-        private void exports(string categoryname, string vouchernumber)
+        private void exports(string categoryname)
         {
             if (this.inst == null || this.inst.Id == null)
             {
@@ -288,56 +326,30 @@ namespace MicroServiceApplication.voucher
                         return;
                     }
                 }
-                if (this.inst.Id == "653279009C4211E6A731B9323D2BF7D6" || this.inst.Id == "10000001463017")
-                {
-                    if (categoryname == "output")
-                    {
-                        DialogResult dr = MessageBox.Show("是否把3张凭证合为一张凭证?", "系统提示", MessageBoxButtons.YesNoCancel);
-                        if (dr == DialogResult.Yes)
-
-                            vouchernumber = "yes";
-
-                        else if (dr == DialogResult.No)
-
-                            vouchernumber = "no";
-
-                        else if (dr == DialogResult.Cancel)
-                            return;
-                    }
-                    if (categoryname == "bankbill")
-                    {
-                        Choose choose = new Choose();
-                        choose.StartPosition = FormStartPosition.CenterParent;
-                        choose.TopMost = true;
-                        choose.ShowDialog();
-                        vouchernumber = choose.vouchernumber;
-                    }
-                }
-                if (this.inst.Id == "37166870A68711E6BD311D06DD4D005D")
-                {
-                    if (categoryname == "bankbill")
-                    {
-                        Choose choose = new Choose();
-                        choose.StartPosition = FormStartPosition.CenterParent;
-                        choose.TopMost = true;
-                        choose.ShowDialog();
-                        vouchernumber = choose.vouchernumber;
-                        if(vouchernumber == null ||vouchernumber == "")
-                        {
-                            return;
-                        }
-                    }
-                }
-
                 //执行导出凭证到KIS
                 this.InformationTextBox.Visible = true;//打开提示框
                 this.InformationTextBox.Text = "正在导出凭证!请稍等……";//提示文本
                 this.InformationTextBox.Font = new Font("宋体", 12);//提示字体
+                //按钮状态变成不能点击
+                this.exportIncomeButton.Enabled = false;
+                this.exportOutputButton.Enabled = false;
+                this.bankbillExportbutton.Enabled = false;
+                this.exportpayrollbutton.Enabled = false;
+                this.localreporttaxbutton.Enabled = false;
+                this.paytaxreportbutton.Enabled = false;
+
                 if (this.InformationTextBox.Text != null || this.InformationTextBox.Text != "")
                 {
-                    kisDbFileFactory.exportVoucher(vouchernumber, this.inst, this.client, this.accountcycle, this.user, categoryname);
+                    kisDbFileFactory.exportVoucher(vouchernumber, voucherword,vouchersummary, this.inst, this.client, this.accountcycle, this.user, categoryname);
                 }
                 this.InformationTextBox.Visible = false;//关闭提示框
+                //恢复按钮点击状态
+                this.exportIncomeButton.Enabled = true;
+                this.exportOutputButton.Enabled = true;
+                this.bankbillExportbutton.Enabled = true;
+                this.exportpayrollbutton.Enabled = true;
+                this.localreporttaxbutton.Enabled = true;
+                this.paytaxreportbutton.Enabled = true;
                 MessageBox.Show("导出凭证成功!请登录财务系统查看结果");
 
             }
@@ -347,6 +359,13 @@ namespace MicroServiceApplication.voucher
                 Console.WriteLine(e.StackTrace);
                 this.InformationTextBox.Visible = false;//关闭提示框
                 MessageBox.Show(e.Message);
+                //恢复按钮点击状态
+                this.exportIncomeButton.Enabled = true;
+                this.exportOutputButton.Enabled = true;
+                this.bankbillExportbutton.Enabled = true;
+                this.exportpayrollbutton.Enabled = true;
+                this.localreporttaxbutton.Enabled = true;
+                this.paytaxreportbutton.Enabled = true;
 
             }
         }
@@ -374,32 +393,32 @@ namespace MicroServiceApplication.voucher
 
         private void exportIncomeButton_Click(object sender, EventArgs e)
         {
-            this.exports("income", "no");
+            this.exports("income");
         }
 
         private void exportOutputButton_Click(object sender, EventArgs e)
         {
-            this.exports("output", "no");
+            this.exports("output");
         }
 
         private void bankbillExportbutton_Click(object sender, EventArgs e)
         {
-            this.exports("bankbill", "no");
+            this.exports("bankbill");
         }
 
         private void exportpayrollbutton_Click(object sender, EventArgs e)
         {
-            this.exports("payroll", "no");
+            this.exports("payroll");
         }
 
         private void paytaxreportbutton_Click(object sender, EventArgs e)
         {
-            this.exports("paytaxreport", "no");
+            this.exports("paytaxreport");
         }
 
         private void localreporttaxbutton_Click(object sender, EventArgs e)
         {
-            this.exports("localreporttax", "no");
+            this.exports("localreporttax");
         }
 
         private void refreshButton_Click(object sender, EventArgs e)

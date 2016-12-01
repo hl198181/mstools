@@ -75,7 +75,11 @@ namespace MicroServiceApplication.Bean
             HttpClient httpClient = new HttpClient();
             httpClient.MaxResponseContentBufferSize = 25600000;
             httpClient.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)");
-            httpClient.DefaultRequestHeaders.Add("Authorization", "Basic c2VydmljZTpjNUNVN0ZBNVZOczdNOXJUZVlHU3pXZGpETzBWZmY=");
+
+            if (Session.GetInstance().User != null && Session.GetInstance().User.Baseauthtoken != null)
+            {
+                httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + Session.GetInstance().User.Baseauthtoken + " ");
+            }
             return httpClient;
         }
 
