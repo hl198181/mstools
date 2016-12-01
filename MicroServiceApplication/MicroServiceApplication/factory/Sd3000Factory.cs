@@ -1474,6 +1474,7 @@ namespace MicroServiceApplication.factory
         
         private void getData(ExportSd3000Context context)
         {
+
             HttpClient httpClient = AppConfig.GetInstance().crateHttpClient();
             String url = AppConfig.GetInstance().BaseUrl + "/voucher/instance/exports";
 

@@ -2022,6 +2022,7 @@ namespace MicroServiceApplication.factory
         //获取凭证
         private void getData(YYT3ExportContext context)
         {
+
             HttpClient httpClient = AppConfig.GetInstance().crateHttpClient();
             String url = AppConfig.GetInstance().BaseUrl + "/voucher/instance/exports";
 
@@ -2031,7 +2032,7 @@ namespace MicroServiceApplication.factory
             paramList.Add(new KeyValuePair<string, string>("accountcyclesn", context.ExportBean.Accountcyclesn));
             paramList.Add(new KeyValuePair<string, string>("categoryname", context.ExportBean.Categoryname));
             paramList.Add(new KeyValuePair<string, string>("createby", context.ExportBean.Createby));
-            paramList.Add(new KeyValuePair<string, string>("type", "yyt3"));
+            paramList.Add(new KeyValuePair<string, string>("type", "sd3000"));
             HttpResponseMessage response = httpClient.PostAsync(new Uri(url), new FormUrlEncodedContent(paramList)).Result;
             String result = response.Content.ReadAsStringAsync().Result;
             httpClient.Dispose();

@@ -127,6 +127,7 @@ namespace MicroServiceApplication.Bean
     {
         public List<ClientSubject> query(string clientid,int isnew,int audit)
         {
+
             HttpClient httpClient = AppConfig.GetInstance().crateHttpClient();
 
             String url = AppConfig.GetInstance().BaseUrl + "/client/subject?clientid="+clientid+"&isnew="+isnew+"&audit="+ audit + "&disabled=0";
@@ -154,6 +155,7 @@ namespace MicroServiceApplication.Bean
 
         public void updateIsNew(List<ClientSubject> clientSubjects,int isNew)
         {
+
             HttpClient httpClient = AppConfig.GetInstance().crateHttpClient();
 
             String url = AppConfig.GetInstance().BaseUrl + "/client/subject";
@@ -205,6 +207,7 @@ namespace MicroServiceApplication.Bean
 
             string requestJson = jo.ToString();
             string url = AppConfig.GetInstance().BaseUrl + "/client/subject/";
+
             HttpClient httpClient = AppConfig.GetInstance().crateHttpClient();
 
             HttpContent httpContent = new StringContent(requestJson);
@@ -227,6 +230,7 @@ namespace MicroServiceApplication.Bean
 
         public void clean(string clientid)
         {
+
             HttpClient httpClient = AppConfig.GetInstance().crateHttpClient();
 
             String url = AppConfig.GetInstance().BaseUrl + "/client/subject/clean";

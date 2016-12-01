@@ -26,6 +26,7 @@ namespace MicroServiceApplication.Bean
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 JObject jo = JObject.Parse(result);
+
                 //设置登录环境变量
                 Session.GetInstance().User = new Bean.User(jo.ToObject<JObject>());
                 return true;

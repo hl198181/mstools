@@ -8,6 +8,11 @@ namespace MicroServiceApplication.Bean
 {
     class User
     {
+        private string _baseauth;
+        private string _baseauthappid;
+        private string _baseauthappsecret;
+        private string _baseauthid;
+        private string baseauthtoken;
         private string _id;
 
         public string Id
@@ -32,12 +37,81 @@ namespace MicroServiceApplication.Bean
             set { _name = value; }
         }
 
+        public string Baseauth
+        {
+            get
+            {
+                return _baseauth;
+            }
+
+            set
+            {
+                _baseauth = value;
+            }
+        }
+
+        public string Baseauthappid
+        {
+            get
+            {
+                return _baseauthappid;
+            }
+
+            set
+            {
+                _baseauthappid = value;
+            }
+        }
+
+        public string Baseauthappsecret
+        {
+            get
+            {
+                return _baseauthappsecret;
+            }
+
+            set
+            {
+                _baseauthappsecret = value;
+            }
+        }
+
+        public string Baseauthid
+        {
+            get
+            {
+                return _baseauthid;
+            }
+
+            set
+            {
+                _baseauthid = value;
+            }
+        }
+
+        public string Baseauthtoken
+        {
+            get
+            {
+                return baseauthtoken;
+            }
+
+            set
+            {
+                baseauthtoken = value;
+            }
+        }
 
         public User(JObject jobject)
         {
             this.Name = jobject.GetValue("name").ToString();
             this.No = jobject.GetValue("no").ToString();
             this.Id = jobject.GetValue("id").ToString();
+            this.Baseauth = jobject.GetValue("baseauth").ToString();
+            this.Baseauthappid = jobject.GetValue("baseauth")["appid"].ToString();
+            this.Baseauthappsecret = jobject.GetValue("baseauth")["appsecret"].ToString();
+            this.Baseauthid = jobject.GetValue("baseauth")["id"].ToString();
+            this.Baseauthtoken = jobject.GetValue("baseauth")["token"].ToString();
         }
     }
 

@@ -335,7 +335,7 @@ namespace MicroServiceApplication.voucher
             exportBean.Instid = this.inst.Id;
             exportBean.Clientid = this.client.Id;
             exportBean.Categoryname = categoryname;
-            exportBean.Createby = "Demo";
+            exportBean.Createby = this.user.Id; 
             exportBean.Accountcyclesn = this.accountcycle.Sn;
             try
             {
