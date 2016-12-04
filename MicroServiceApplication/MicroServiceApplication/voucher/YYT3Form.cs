@@ -345,7 +345,7 @@ namespace MicroServiceApplication.voucher
                 if (this.InformationTextBox.Visible == true)
                 {
                     YYT3Factory yYT3Factory = new YYT3Factory();
-                    yYT3Factory.exports(exportBean, this.accset);
+                    yYT3Factory.exports(exportBean, this.accset,this.inst,this.client,this.user,this.accountcycle,categoryname);
                 }
                 this.InformationTextBox.Visible = false;
                 MessageBox.Show("凭证导出成功!请登录财务系统查看结果!");

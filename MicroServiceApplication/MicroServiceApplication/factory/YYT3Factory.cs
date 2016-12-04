@@ -17,680 +17,1071 @@ namespace MicroServiceApplication.factory
     //
     //获取凭证start
     //
-    class YYT3Voucher
+    //class YYT3Voucher
+    //{
+    //    private List<YYT3VoucherItem> _items;
+
+    //    public YYT3Voucher(JObject jobject)
+    //    {
+    //        if (jobject == null) return;
+
+    //        if (jobject["items"] != null)
+    //        {
+    //            this.Items = new List<YYT3VoucherItem>();
+    //            foreach (JObject item in jobject["items"])
+    //            {
+    //                var detail = new YYT3VoucherItem(item);
+    //                this.Items.Add(detail);
+    //            }
+    //        }
+    //    }
+
+    //    internal List<YYT3VoucherItem> Items
+    //    {
+    //        get
+    //        {
+    //            return _items;
+    //        }
+
+    //        set
+    //        {
+    //            _items = value;
+    //        }
+    //    }
+    //}
+    ////
+    ////获取凭证end
+    ////
+    ////凭证封装字段start
+    ////
+    //class YYT3VoucherItem
+    //{
+    //    private string _id;
+    //    private string _instid;
+    //    private string _clientid;
+    //    private string _accountcyclesn;
+    //    private string _bizaccountcyclesn;
+    //    private string _libraryid;
+    //    private string _libraryitemid;
+    //    private string _inputtype;
+    //    private string _bizid;
+    //    private string _biztype;
+    //    private DateTime _bizdate;
+    //    private string _summary;
+    //    private string _descr;
+    //    private string _subjectno;
+    //    private string _subjectname;
+    //    private string _subjectno1;
+    //    private string _subjectname1;
+    //    private string _subjectno2;
+    //    private string _subjectname2;
+    //    private string _subjectno3;
+    //    private string _subjectname3;
+    //    private string _subjectno4;
+    //    private string _subjectname4;
+    //    private string _subjectno5;
+    //    private string _subjectname5;
+    //    private string _subjectno6;
+    //    private string _subjectname6;
+    //    private string _debitcredit;
+    //    private decimal _debit;
+    //    private decimal _credit;
+    //    private int _sort;
+    //    private int _disabled;
+    //    private DateTime _createdate;
+    //    private string _createby;
+    //    private string _createbyname;
+    //    private string _librarylabel;
+    //    private string _libraryname;
+    //    private string _categoryname;
+    //    private string _categorylabel;
+    //    private string _groupname;
+    //    private string __createbyheadimgurl;
+    //    private int _voucherNum;
+    //    private int _warn;
+    //    private string _warntext;
+    //    private string _remark;
+
+    //    public string Id
+    //    {
+    //        get
+    //        {
+    //            return _id;
+    //        }
+
+    //        set
+    //        {
+    //            _id = value;
+    //        }
+    //    }
+
+    //    public string Instid
+    //    {
+    //        get
+    //        {
+    //            return _instid;
+    //        }
+
+    //        set
+    //        {
+    //            _instid = value;
+    //        }
+    //    }
+
+    //    public string Clientid
+    //    {
+    //        get
+    //        {
+    //            return _clientid;
+    //        }
+
+    //        set
+    //        {
+    //            _clientid = value;
+    //        }
+    //    }
+
+    //    public string Accountcyclesn
+    //    {
+    //        get
+    //        {
+    //            return _accountcyclesn;
+    //        }
+
+    //        set
+    //        {
+    //            _accountcyclesn = value;
+    //        }
+    //    }
+
+    //    public string Bizaccountcyclesn
+    //    {
+    //        get
+    //        {
+    //            return _bizaccountcyclesn;
+    //        }
+
+    //        set
+    //        {
+    //            _bizaccountcyclesn = value;
+    //        }
+    //    }
+
+    //    public string Libraryid
+    //    {
+    //        get
+    //        {
+    //            return _libraryid;
+    //        }
+
+    //        set
+    //        {
+    //            _libraryid = value;
+    //        }
+    //    }
+
+    //    public string Libraryitemid
+    //    {
+    //        get
+    //        {
+    //            return _libraryitemid;
+    //        }
+
+    //        set
+    //        {
+    //            _libraryitemid = value;
+    //        }
+    //    }
+
+    //    public string Inputtype
+    //    {
+    //        get
+    //        {
+    //            return _inputtype;
+    //        }
+
+    //        set
+    //        {
+    //            _inputtype = value;
+    //        }
+    //    }
+
+    //    public string Bizid
+    //    {
+    //        get
+    //        {
+    //            return _bizid;
+    //        }
+
+    //        set
+    //        {
+    //            _bizid = value;
+    //        }
+    //    }
+
+    //    public string Biztype
+    //    {
+    //        get
+    //        {
+    //            return _biztype;
+    //        }
+
+    //        set
+    //        {
+    //            _biztype = value;
+    //        }
+    //    }
+
+    //    public DateTime Bizdate
+    //    {
+    //        get
+    //        {
+    //            return _bizdate;
+    //        }
+
+    //        set
+    //        {
+    //            _bizdate = value;
+    //        }
+    //    }
+
+    //    public string Summary
+    //    {
+    //        get
+    //        {
+    //            return _summary;
+    //        }
+
+    //        set
+    //        {
+    //            _summary = value;
+    //        }
+    //    }
+
+    //    public string Descr
+    //    {
+    //        get
+    //        {
+    //            return _descr;
+    //        }
+
+    //        set
+    //        {
+    //            _descr = value;
+    //        }
+    //    }
+
+    //    public string Subjectno
+    //    {
+    //        get
+    //        {
+    //            return _subjectno;
+    //        }
+
+    //        set
+    //        {
+    //            _subjectno = value;
+    //        }
+    //    }
+
+    //    public string Subjectname
+    //    {
+    //        get
+    //        {
+    //            return _subjectname;
+    //        }
+
+    //        set
+    //        {
+    //            _subjectname = value;
+    //        }
+    //    }
+
+    //    public string Subjectno1
+    //    {
+    //        get
+    //        {
+    //            return _subjectno1;
+    //        }
+
+    //        set
+    //        {
+    //            _subjectno1 = value;
+    //        }
+    //    }
+
+    //    public string Subjectname1
+    //    {
+    //        get
+    //        {
+    //            return _subjectname1;
+    //        }
+
+    //        set
+    //        {
+    //            _subjectname1 = value;
+    //        }
+    //    }
+
+    //    public string Subjectno2
+    //    {
+    //        get
+    //        {
+    //            return _subjectno2;
+    //        }
+
+    //        set
+    //        {
+    //            _subjectno2 = value;
+    //        }
+    //    }
+
+    //    public string Subjectname2
+    //    {
+    //        get
+    //        {
+    //            return _subjectname2;
+    //        }
+
+    //        set
+    //        {
+    //            _subjectname2 = value;
+    //        }
+    //    }
+
+    //    public string Subjectno3
+    //    {
+    //        get
+    //        {
+    //            return _subjectno3;
+    //        }
+
+    //        set
+    //        {
+    //            _subjectno3 = value;
+    //        }
+    //    }
+
+    //    public string Subjectname3
+    //    {
+    //        get
+    //        {
+    //            return _subjectname3;
+    //        }
+
+    //        set
+    //        {
+    //            _subjectname3 = value;
+    //        }
+    //    }
+
+    //    public string Subjectno4
+    //    {
+    //        get
+    //        {
+    //            return _subjectno4;
+    //        }
+
+    //        set
+    //        {
+    //            _subjectno4 = value;
+    //        }
+    //    }
+
+    //    public string Subjectname4
+    //    {
+    //        get
+    //        {
+    //            return _subjectname4;
+    //        }
+
+    //        set
+    //        {
+    //            _subjectname4 = value;
+    //        }
+    //    }
+
+    //    public string Subjectno5
+    //    {
+    //        get
+    //        {
+    //            return _subjectno5;
+    //        }
+
+    //        set
+    //        {
+    //            _subjectno5 = value;
+    //        }
+    //    }
+
+    //    public string Subjectname5
+    //    {
+    //        get
+    //        {
+    //            return _subjectname5;
+    //        }
+
+    //        set
+    //        {
+    //            _subjectname5 = value;
+    //        }
+    //    }
+
+    //    public string Subjectno6
+    //    {
+    //        get
+    //        {
+    //            return _subjectno6;
+    //        }
+
+    //        set
+    //        {
+    //            _subjectno6 = value;
+    //        }
+    //    }
+
+    //    public string Subjectname6
+    //    {
+    //        get
+    //        {
+    //            return _subjectname6;
+    //        }
+
+    //        set
+    //        {
+    //            _subjectname6 = value;
+    //        }
+    //    }
+
+    //    public string Debitcredit
+    //    {
+    //        get
+    //        {
+    //            return _debitcredit;
+    //        }
+
+    //        set
+    //        {
+    //            _debitcredit = value;
+    //        }
+    //    }
+
+    //    public decimal Debit
+    //    {
+    //        get
+    //        {
+    //            return _debit;
+    //        }
+
+    //        set
+    //        {
+    //            _debit = value;
+    //        }
+    //    }
+
+    //    public decimal Credit
+    //    {
+    //        get
+    //        {
+    //            return _credit;
+    //        }
+
+    //        set
+    //        {
+    //            _credit = value;
+    //        }
+    //    }
+
+    //    public int Sort
+    //    {
+    //        get
+    //        {
+    //            return _sort;
+    //        }
+
+    //        set
+    //        {
+    //            _sort = value;
+    //        }
+    //    }
+
+    //    public int Disabled
+    //    {
+    //        get
+    //        {
+    //            return _disabled;
+    //        }
+
+    //        set
+    //        {
+    //            _disabled = value;
+    //        }
+    //    }
+
+    //    public DateTime Createdate
+    //    {
+    //        get
+    //        {
+    //            return _createdate;
+    //        }
+
+    //        set
+    //        {
+    //            _createdate = value;
+    //        }
+    //    }
+
+    //    public string Createby
+    //    {
+    //        get
+    //        {
+    //            return _createby;
+    //        }
+
+    //        set
+    //        {
+    //            _createby = value;
+    //        }
+    //    }
+
+    //    public string Createbyname
+    //    {
+    //        get
+    //        {
+    //            return _createbyname;
+    //        }
+
+    //        set
+    //        {
+    //            _createbyname = value;
+    //        }
+    //    }
+
+    //    public string Librarylabel
+    //    {
+    //        get
+    //        {
+    //            return _librarylabel;
+    //        }
+
+    //        set
+    //        {
+    //            _librarylabel = value;
+    //        }
+    //    }
+
+    //    public string Libraryname
+    //    {
+    //        get
+    //        {
+    //            return _libraryname;
+    //        }
+
+    //        set
+    //        {
+    //            _libraryname = value;
+    //        }
+    //    }
+
+    //    public string Categoryname
+    //    {
+    //        get
+    //        {
+    //            return _categoryname;
+    //        }
+
+    //        set
+    //        {
+    //            _categoryname = value;
+    //        }
+    //    }
+
+    //    public string Categorylabel
+    //    {
+    //        get
+    //        {
+    //            return _categorylabel;
+    //        }
+
+    //        set
+    //        {
+    //            _categorylabel = value;
+    //        }
+    //    }
+
+    //    public string Groupname
+    //    {
+    //        get
+    //        {
+    //            return _groupname;
+    //        }
+
+    //        set
+    //        {
+    //            _groupname = value;
+    //        }
+    //    }
+
+    //    public string Createbyheadimgurl
+    //    {
+    //        get
+    //        {
+    //            return __createbyheadimgurl;
+    //        }
+
+    //        set
+    //        {
+    //            __createbyheadimgurl = value;
+    //        }
+    //    }
+
+    //    public int VoucherNum
+    //    {
+    //        get
+    //        {
+    //            return _voucherNum;
+    //        }
+
+    //        set
+    //        {
+    //            _voucherNum = value;
+    //        }
+    //    }
+
+    //    public int Warn
+    //    {
+    //        get
+    //        {
+    //            return _warn;
+    //        }
+
+    //        set
+    //        {
+    //            _warn = value;
+    //        }
+    //    }
+
+    //    public string Warntext
+    //    {
+    //        get
+    //        {
+    //            return _warntext;
+    //        }
+
+    //        set
+    //        {
+    //            _warntext = value;
+    //        }
+    //    }
+
+    //    public string Remark
+    //    {
+    //        get
+    //        {
+    //            return _remark;
+    //        }
+
+    //        set
+    //        {
+    //            _remark = value;
+    //        }
+    //    }
+    
+    //public YYT3VoucherItem(JObject jobject)
+    //{
+    //    if (jobject != null)
+    //    {
+    //        this.Id = jobject["id"] == null ? null : jobject["id"].ToString();
+    //        this.Instid = jobject["instid"] == null ? null : jobject["instid"].ToString();
+    //        this.Clientid = jobject["clientid"] == null ? null : jobject["clientid"].ToString();
+    //        this.Accountcyclesn = jobject["accountcyclesn"] == null ? null : jobject["accountcyclesn"].ToString();
+    //        this.Libraryid = jobject["libraryid"] == null ? null : jobject["libraryid"].ToString();
+    //        this.Libraryitemid = jobject["libraryitemid"] == null ? null : jobject["libraryitemid"].ToString();
+    //        this.Inputtype = jobject["inputtype"] == null ? null : jobject["inputtype"].ToString();
+    //        this.Bizid = jobject["bizid"] == null ? null : jobject["bizid"].ToString();
+    //        this.Biztype = jobject["biztype"] == null ? null : jobject["biztype"].ToString();
+    //        if (jobject["bizdate"] != null)
+    //        {
+    //            this.Bizdate = MicroServiceApplication.Common.Util.GetTime(jobject["bizdate"].ToString());
+    //        }
+    //        this.Summary = jobject["summary"] == null ? null : jobject["summary"].ToString();
+    //        this.Descr = jobject["descr"] == null ? null : jobject["descr"].ToString();
+    //        this.Subjectno = jobject["subjectno"] == null ? null : jobject["subjectno"].ToString();
+    //        this.Subjectname = jobject["subjectname"] == null ? null : jobject["subjectname"].ToString();
+    //        this.Subjectno1 = jobject["subjectno1"] == null ? null : jobject["subjectno1"].ToString();
+    //        this.Subjectname1 = jobject["subjectname1"] == null ? null : jobject["subjectname1"].ToString();
+    //        this.Subjectno2 = jobject["subjectno2"] == null ? null : jobject["subjectno2"].ToString();
+    //        this.Subjectname2 = jobject["subjectname2"] == null ? null : jobject["subjectname2"].ToString();
+    //        this.Subjectno3 = jobject["subjectno3"] == null ? null : jobject["subjectno3"].ToString();
+    //        this.Subjectname3 = jobject["subjectname3"] == null ? null : jobject["subjectname3"].ToString();
+    //        this.Subjectno4 = jobject["subjectno4"] == null ? null : jobject["subjectno4"].ToString();
+    //        this.Subjectname4 = jobject["subjectname4"] == null ? null : jobject["subjectname4"].ToString();
+    //        this.Subjectno5 = jobject["subjectno5"] == null ? null : jobject["subjectno5"].ToString();
+    //        this.Subjectname5 = jobject["subjectname5"] == null ? null : jobject["subjectname5"].ToString();
+    //        this.Subjectno6 = jobject["subjectno6"] == null ? null : jobject["subjectno6"].ToString();
+    //        this.Subjectname6 = jobject["subjectname6"] == null ? null : jobject["subjectname6"].ToString();
+
+    //        this.Debitcredit = jobject["debitcredit"] == null ? null : jobject["debitcredit"].ToString();
+
+    //        if (jobject["debit"] != null)
+    //        {
+    //            this.Debit = jobject["debit"].ToObject<decimal>();
+    //        }
+    //        if (jobject["credit"] != null)
+    //        {
+    //            this.Credit = jobject["credit"].ToObject<decimal>();
+    //        }
+    //        if (jobject["sort"] != null)
+    //        {
+    //            this.Sort = jobject["sort"].ToObject<int>();
+    //        }
+    //        if (jobject["disabled"] != null)
+    //        {
+    //            this.Disabled = jobject["disabled"].ToObject<int>();
+    //        }
+    //        if (jobject["createdate"] != null)
+    //        {
+    //            this.Createdate = MicroServiceApplication.Common.Util.GetTime(jobject["createdate"].ToString());
+    //        }
+    //        this.Createby = jobject["createby"] == null ? null : jobject["createby"].ToString();
+    //        this.Biztype = jobject["biztype"] == null ? null : jobject["biztype"].ToString();
+    //        if (jobject["warn"] != null)
+    //        {
+    //            this.Warn = jobject["warn"].ToObject<int>();
+    //        }
+    //        this.Warntext = jobject["warntext"] == null ? null : jobject["warntext"].ToString();
+    //        this.Remark = jobject["remark"] == null ? null : jobject["remark"].ToString();
+    //        this.Librarylabel = jobject["librarylabel"] == null ? null : jobject["librarylabel"].ToString();
+    //        this.Libraryname = jobject["libraryname"] == null ? null : jobject["libraryname"].ToString();
+    //        this.Categoryname = jobject["categoryname"] == null ? null : jobject["categoryname"].ToString();
+    //        this.Categorylabel = jobject["categorylabel"] == null ? null : jobject["categorylabel"].ToString();
+    //        this.Groupname = jobject["groupname"] == null ? null : jobject["groupname"].ToString();
+    //        this.Createbyname = jobject["createbyname"] == null ? null : jobject["createbyname"].ToString();
+    //        this.Createbyheadimgurl = jobject["_createbyheadimgurl"] == null ? null : jobject["_createbyheadimgurl"].ToString();
+    //        if (jobject["voucherNum"] != null)
+    //        {
+    //            this.VoucherNum = jobject["voucherNum"].ToObject<int>();
+    //        }
+    //    }
+    //}
+//}
+
+        class YYT3Voucher
     {
-        private List<YYT3Voucher> _items;
-
-        public YYT3Voucher(JObject jobject)
-        {
-            if (jobject == null) return;
-
-            if (jobject["items"] != null)
-            {
-                this.Items = new List<YYT3Voucher>();
-                foreach (JObject item in jobject["items"])
-                {
-                    var detail = new YYT3Voucher(item);
-                    this.Items.Add(detail);
-                }
-            }
-        }
-
-        internal List<YYT3Voucher> Items
+        private int _iperiod;//会计期间
+        private string _csign;//记
+        private int _isignseq;//1
+        private int _ino_id;//每月凭证号
+        private int _inid;//分录号
+        private  DateTime _dbill_date;//创建日期
+        private int _idoc;//-1
+        private string _cbill;//demo
+        private string _cdigest;//摘要
+        private string _ccode;//科目代码
+        private decimal _md;//借方金额
+        private decimal _mc;//贷方金额
+        private string _ccode_equal;//对方科目
+        private DateTime _doutbilldate;//_dbill_date一样
+        private int _ioutperiod;//_iperiod一样
+        private int _bvouchedit;//1
+        private int _bvalueedit;//1
+        private int _bcodeedit;//1
+        private int _bPCSedit;//1
+        private int _bDeptedit;//1
+        private int _bItemedit;//1
+        private int _bCusSupInput;//1
+        public int Iperiod
         {
             get
             {
-                return _items;
+                return _iperiod;
             }
 
             set
             {
-                _items = value;
+                _iperiod = value;
+            }
+        }
+
+        public string Csign
+        {
+            get
+            {
+                return _csign;
+            }
+
+            set
+            {
+                _csign = value;
+            }
+        }
+
+        public int Isignseq
+        {
+            get
+            {
+                return _isignseq;
+            }
+
+            set
+            {
+                _isignseq = value;
+            }
+        }
+
+        public int Ino_id
+        {
+            get
+            {
+                return _ino_id;
+            }
+
+            set
+            {
+                _ino_id = value;
+            }
+        }
+
+        public int Inid
+        {
+            get
+            {
+                return _inid;
+            }
+
+            set
+            {
+                _inid = value;
+            }
+        }
+
+        public DateTime Dbill_date
+        {
+            get
+            {
+                return _dbill_date;
+            }
+
+            set
+            {
+                _dbill_date = value;
+            }
+        }
+
+        public int Idoc
+        {
+            get
+            {
+                return _idoc;
+            }
+
+            set
+            {
+                _idoc = value;
+            }
+        }
+
+        public string Cbill
+        {
+            get
+            {
+                return _cbill;
+            }
+
+            set
+            {
+                _cbill = value;
+            }
+        }
+
+        public string Cdigest
+        {
+            get
+            {
+                return _cdigest;
+            }
+
+            set
+            {
+                _cdigest = value;
+            }
+        }
+
+        public string Ccode
+        {
+            get
+            {
+                return _ccode;
+            }
+
+            set
+            {
+                _ccode = value;
+            }
+        }
+
+        public decimal Md
+        {
+            get
+            {
+                return _md;
+            }
+
+            set
+            {
+                _md = value;
+            }
+        }
+
+        public decimal Mc
+        {
+            get
+            {
+                return _mc;
+            }
+
+            set
+            {
+                _mc = value;
+            }
+        }
+
+        public string Ccode_equal
+        {
+            get
+            {
+                return _ccode_equal;
+            }
+
+            set
+            {
+                _ccode_equal = value;
+            }
+        }
+
+        public DateTime Doutbilldate
+        {
+            get
+            {
+                return _doutbilldate;
+            }
+
+            set
+            {
+                _doutbilldate = value;
+            }
+        }
+
+        public int Ioutperiod
+        {
+            get
+            {
+                return _ioutperiod;
+            }
+
+            set
+            {
+                _ioutperiod = value;
+            }
+        }
+
+        public int Bvouchedit
+        {
+            get
+            {
+                return _bvouchedit;
+            }
+
+            set
+            {
+                _bvouchedit = value;
+            }
+        }
+
+        public int Bvalueedit
+        {
+            get
+            {
+                return _bvalueedit;
+            }
+
+            set
+            {
+                _bvalueedit = value;
+            }
+        }
+
+        public int Bcodeedit
+        {
+            get
+            {
+                return _bcodeedit;
+            }
+
+            set
+            {
+                _bcodeedit = value;
+            }
+        }
+
+        public int BPCSedit
+        {
+            get
+            {
+                return _bPCSedit;
+            }
+
+            set
+            {
+                _bPCSedit = value;
+            }
+        }
+
+        public int BDeptedit
+        {
+            get
+            {
+                return _bDeptedit;
+            }
+
+            set
+            {
+                _bDeptedit = value;
+            }
+        }
+
+        public int BItemedit
+        {
+            get
+            {
+                return _bItemedit;
+            }
+
+            set
+            {
+                _bItemedit = value;
+            }
+        }
+
+        public int BCusSupInput
+        {
+            get
+            {
+                return _bCusSupInput;
+            }
+
+            set
+            {
+                _bCusSupInput = value;
             }
         }
     }
-    //
-    //获取凭证end
-    //
-    //凭证封装字段start
-    //
-    class YYT3VoucherItem
-    {
-        private string _id;
-        private string _instid;
-        private string _clientid;
-        private string _accountcyclesn;
-        private string _bizaccountcyclesn;
-        private string _libraryid;
-        private string _libraryitemid;
-        private string _inputtype;
-        private string _bizid;
-        private string _biztype;
-        private DateTime _bizdate;
-        private string _summary;
-        private string _descr;
-        private string _subjectno;
-        private string _subjectname;
-        private string _subjectno1;
-        private string _subjectname1;
-        private string _subjectno2;
-        private string _subjectname2;
-        private string _subjectno3;
-        private string _subjectname3;
-        private string _subjectno4;
-        private string _subjectname4;
-        private string _subjectno5;
-        private string _subjectname5;
-        private string _subjectno6;
-        private string _subjectname6;
-        private string _debitcredit;
-        private decimal _debit;
-        private decimal _credit;
-        private int _sort;
-        private int _disabled;
-        private DateTime _createdate;
-        private string _createby;
-        private string _createbyname;
-        private string _librarylabel;
-        private string _libraryname;
-        private string _categoryname;
-        private string _categorylabel;
-        private string _groupname;
-        private string __createbyheadimgurl;
-        private int _voucherNum;
-        private int _warn;
-        private string _warntext;
-        private string _remark;
-
-        public string Id
-        {
-            get
-            {
-                return _id;
-            }
-
-            set
-            {
-                _id = value;
-            }
-        }
-
-        public string Instid
-        {
-            get
-            {
-                return _instid;
-            }
-
-            set
-            {
-                _instid = value;
-            }
-        }
-
-        public string Clientid
-        {
-            get
-            {
-                return _clientid;
-            }
-
-            set
-            {
-                _clientid = value;
-            }
-        }
-
-        public string Accountcyclesn
-        {
-            get
-            {
-                return _accountcyclesn;
-            }
-
-            set
-            {
-                _accountcyclesn = value;
-            }
-        }
-
-        public string Bizaccountcyclesn
-        {
-            get
-            {
-                return _bizaccountcyclesn;
-            }
-
-            set
-            {
-                _bizaccountcyclesn = value;
-            }
-        }
-
-        public string Libraryid
-        {
-            get
-            {
-                return _libraryid;
-            }
-
-            set
-            {
-                _libraryid = value;
-            }
-        }
-
-        public string Libraryitemid
-        {
-            get
-            {
-                return _libraryitemid;
-            }
-
-            set
-            {
-                _libraryitemid = value;
-            }
-        }
-
-        public string Inputtype
-        {
-            get
-            {
-                return _inputtype;
-            }
-
-            set
-            {
-                _inputtype = value;
-            }
-        }
-
-        public string Bizid
-        {
-            get
-            {
-                return _bizid;
-            }
-
-            set
-            {
-                _bizid = value;
-            }
-        }
-
-        public string Biztype
-        {
-            get
-            {
-                return _biztype;
-            }
-
-            set
-            {
-                _biztype = value;
-            }
-        }
-
-        public DateTime Bizdate
-        {
-            get
-            {
-                return _bizdate;
-            }
-
-            set
-            {
-                _bizdate = value;
-            }
-        }
-
-        public string Summary
-        {
-            get
-            {
-                return _summary;
-            }
-
-            set
-            {
-                _summary = value;
-            }
-        }
-
-        public string Descr
-        {
-            get
-            {
-                return _descr;
-            }
-
-            set
-            {
-                _descr = value;
-            }
-        }
-
-        public string Subjectno
-        {
-            get
-            {
-                return _subjectno;
-            }
-
-            set
-            {
-                _subjectno = value;
-            }
-        }
-
-        public string Subjectname
-        {
-            get
-            {
-                return _subjectname;
-            }
-
-            set
-            {
-                _subjectname = value;
-            }
-        }
-
-        public string Subjectno1
-        {
-            get
-            {
-                return _subjectno1;
-            }
-
-            set
-            {
-                _subjectno1 = value;
-            }
-        }
-
-        public string Subjectname1
-        {
-            get
-            {
-                return _subjectname1;
-            }
-
-            set
-            {
-                _subjectname1 = value;
-            }
-        }
-
-        public string Subjectno2
-        {
-            get
-            {
-                return _subjectno2;
-            }
-
-            set
-            {
-                _subjectno2 = value;
-            }
-        }
-
-        public string Subjectname2
-        {
-            get
-            {
-                return _subjectname2;
-            }
-
-            set
-            {
-                _subjectname2 = value;
-            }
-        }
-
-        public string Subjectno3
-        {
-            get
-            {
-                return _subjectno3;
-            }
-
-            set
-            {
-                _subjectno3 = value;
-            }
-        }
-
-        public string Subjectname3
-        {
-            get
-            {
-                return _subjectname3;
-            }
-
-            set
-            {
-                _subjectname3 = value;
-            }
-        }
-
-        public string Subjectno4
-        {
-            get
-            {
-                return _subjectno4;
-            }
-
-            set
-            {
-                _subjectno4 = value;
-            }
-        }
-
-        public string Subjectname4
-        {
-            get
-            {
-                return _subjectname4;
-            }
-
-            set
-            {
-                _subjectname4 = value;
-            }
-        }
-
-        public string Subjectno5
-        {
-            get
-            {
-                return _subjectno5;
-            }
-
-            set
-            {
-                _subjectno5 = value;
-            }
-        }
-
-        public string Subjectname5
-        {
-            get
-            {
-                return _subjectname5;
-            }
-
-            set
-            {
-                _subjectname5 = value;
-            }
-        }
-
-        public string Subjectno6
-        {
-            get
-            {
-                return _subjectno6;
-            }
-
-            set
-            {
-                _subjectno6 = value;
-            }
-        }
-
-        public string Subjectname6
-        {
-            get
-            {
-                return _subjectname6;
-            }
-
-            set
-            {
-                _subjectname6 = value;
-            }
-        }
-
-        public string Debitcredit
-        {
-            get
-            {
-                return _debitcredit;
-            }
-
-            set
-            {
-                _debitcredit = value;
-            }
-        }
-
-        public decimal Debit
-        {
-            get
-            {
-                return _debit;
-            }
-
-            set
-            {
-                _debit = value;
-            }
-        }
-
-        public decimal Credit
-        {
-            get
-            {
-                return _credit;
-            }
-
-            set
-            {
-                _credit = value;
-            }
-        }
-
-        public int Sort
-        {
-            get
-            {
-                return _sort;
-            }
-
-            set
-            {
-                _sort = value;
-            }
-        }
-
-        public int Disabled
-        {
-            get
-            {
-                return _disabled;
-            }
-
-            set
-            {
-                _disabled = value;
-            }
-        }
-
-        public DateTime Createdate
-        {
-            get
-            {
-                return _createdate;
-            }
-
-            set
-            {
-                _createdate = value;
-            }
-        }
-
-        public string Createby
-        {
-            get
-            {
-                return _createby;
-            }
-
-            set
-            {
-                _createby = value;
-            }
-        }
-
-        public string Createbyname
-        {
-            get
-            {
-                return _createbyname;
-            }
-
-            set
-            {
-                _createbyname = value;
-            }
-        }
-
-        public string Librarylabel
-        {
-            get
-            {
-                return _librarylabel;
-            }
-
-            set
-            {
-                _librarylabel = value;
-            }
-        }
-
-        public string Libraryname
-        {
-            get
-            {
-                return _libraryname;
-            }
-
-            set
-            {
-                _libraryname = value;
-            }
-        }
-
-        public string Categoryname
-        {
-            get
-            {
-                return _categoryname;
-            }
-
-            set
-            {
-                _categoryname = value;
-            }
-        }
-
-        public string Categorylabel
-        {
-            get
-            {
-                return _categorylabel;
-            }
-
-            set
-            {
-                _categorylabel = value;
-            }
-        }
-
-        public string Groupname
-        {
-            get
-            {
-                return _groupname;
-            }
-
-            set
-            {
-                _groupname = value;
-            }
-        }
-
-        public string Createbyheadimgurl
-        {
-            get
-            {
-                return __createbyheadimgurl;
-            }
-
-            set
-            {
-                __createbyheadimgurl = value;
-            }
-        }
-
-        public int VoucherNum
-        {
-            get
-            {
-                return _voucherNum;
-            }
-
-            set
-            {
-                _voucherNum = value;
-            }
-        }
-
-        public int Warn
-        {
-            get
-            {
-                return _warn;
-            }
-
-            set
-            {
-                _warn = value;
-            }
-        }
-
-        public string Warntext
-        {
-            get
-            {
-                return _warntext;
-            }
-
-            set
-            {
-                _warntext = value;
-            }
-        }
-
-        public string Remark
-        {
-            get
-            {
-                return _remark;
-            }
-
-            set
-            {
-                _remark = value;
-            }
-        }
-    }
-        //
-        //账套配置的封装字段start
-        //
-        class YYT3accset
+    
+       
+//
+//账套配置的封装字段start
+//
+class YYT3accset
     {
         private string _iSysId;
         private string _cAcc_Id;
@@ -1504,6 +1895,10 @@ namespace MicroServiceApplication.factory
                 }
                 return YYT3codeList;
             }
+            catch (Exception e)
+            {
+                throw (new Exception("数据库出错:" + e.Message));
+            }
             finally
             {
                 myDataSet.Dispose();
@@ -1516,7 +1911,7 @@ namespace MicroServiceApplication.factory
         //
         //获取会计科目最大序号start
         //
-        public int getmaxid(YYT3accset accset)
+        public int getsubjectmaxid(YYT3accset accset)
         {
             SqlConnection connection = this.createConnection(accset);
             string sql = "select max(i_id) as maxid from code ";
@@ -1530,7 +1925,9 @@ namespace MicroServiceApplication.factory
                 DataTable myTable = myDataSet.Tables["code"];
                 if (myTable.Rows.Count>0)
                 {
-                    maxi_id = Int32.Parse(myTable.Rows[0][myTable.Columns[0]].ToString());
+                    string Maxi_id = myTable.Rows[0][myTable.Columns[0]].ToString() == null ? "0" : myTable.Rows[0][myTable.Columns[0]].ToString();
+                    if (Maxi_id == "" || Maxi_id == null) Maxi_id = "0";
+                    maxi_id = int.Parse(Maxi_id);
                 }
                 else
                 {
@@ -1538,6 +1935,10 @@ namespace MicroServiceApplication.factory
                 }
                 return maxi_id;
              }
+            catch (Exception e)
+            {
+                throw (new Exception("数据库出错:" + e.Message));
+            }
             finally
             {
                 myDataSet.Dispose();
@@ -1572,6 +1973,10 @@ namespace MicroServiceApplication.factory
                     yYT3code.Cbook_type_engl = row["cbook_type_engl"] == null ? null : row["cbook_type_engl"].ToString();
                 }
                 return yYT3code;
+            }
+            catch (Exception e)
+            {
+                throw (new Exception("数据库出错:" + e.Message));
             }
             finally
             {
@@ -1653,6 +2058,10 @@ namespace MicroServiceApplication.factory
                     }
                 return yYT3CustomerList;
             }
+            catch (Exception e)
+            {
+                throw (new Exception("数据库出错:" + e.Message));
+            }
             finally
             {
                 myDataSet.Dispose();
@@ -1692,6 +2101,10 @@ namespace MicroServiceApplication.factory
                     }
                 return yYT3VendorList;
             }
+            catch (Exception e)
+            {
+                throw (new Exception("数据库出错:" + e.Message));
+            }
             finally
             {
                 myDataSet.Dispose();
@@ -1702,6 +2115,76 @@ namespace MicroServiceApplication.factory
         //
         //获取可算供应商表end
         //
+        public int getvouchersmaxid(YYT3accset accset)
+        {
+            SqlConnection connection = this.createConnection(accset);
+            string sql = "select max(i_id) as maxid from GL_accvouche ";
+            SqlDataAdapter myDataAdapter = new SqlDataAdapter(sql, connection);
+            DataSet myDataSet = new DataSet();
+
+            try
+            {
+                int maxi_id = 0;
+                myDataAdapter.Fill(myDataSet, "code");
+                DataTable myTable = myDataSet.Tables["code"];
+                if (myTable.Rows.Count > 0)
+                {
+                    string  Maxi_id = myTable.Rows[0][myTable.Columns[0]].ToString() == null ? "0" : myTable.Rows[0][myTable.Columns[0]].ToString();
+                    if (Maxi_id == "" || Maxi_id == null) Maxi_id = "0";
+                    maxi_id = int.Parse(Maxi_id);
+                }
+                else
+                {
+                    maxi_id = 0;
+                }
+                return maxi_id;
+            }
+            catch (Exception e)
+            {
+                throw (new Exception("数据库出错:" + e.Message));
+            }
+            finally
+            {
+                myDataSet.Dispose();
+                myDataAdapter.Dispose();
+                connection.Close();
+            }
+        }
+        public int getvouchersmaxino_id(YYT3accset accset, int Iperiod, string Csign)
+        {
+            SqlConnection connection = this.createConnection(accset);
+            string sql = "select iperiod,csign,ino_id as maxid from GL_accvouche where iperiod = " + Iperiod + " and csign = '"+ Csign + "' ";
+            SqlDataAdapter myDataAdapter = new SqlDataAdapter(sql, connection);
+            DataSet myDataSet = new DataSet();
+
+            try
+            {
+                int maxino_id = 0;
+                myDataAdapter.Fill(myDataSet, "code");
+                DataTable myTable = myDataSet.Tables["code"];
+                if (myTable.Rows.Count > 0)
+                {
+                    string Maxino_id = myTable.Rows[0][myTable.Columns[2]].ToString() == null ? "0" : myTable.Rows[0][myTable.Columns[2]].ToString();
+                    if (Maxino_id == "" || Maxino_id == null) Maxino_id = "0";
+                    maxino_id = int.Parse(Maxino_id);
+                }
+                else
+                {
+                    maxino_id = 0;
+                }
+                return maxino_id;
+            }
+            catch (Exception e)
+            {
+                throw (new Exception("数据库出错:" + e.Message));
+            }
+            finally
+            {
+                myDataSet.Dispose();
+                myDataAdapter.Dispose();
+                connection.Close();
+            }
+        }
         //创建一个打开数据库的连接start
         //
         private SqlConnection createConnection(YYT3accset accset)
@@ -1799,7 +2282,7 @@ namespace MicroServiceApplication.factory
                 ClientSubjectFactory csf = new ClientSubjectFactory();
                 List<ClientSubject> clientSubjectList = csf.query(exportBean.Clientid, 1, 1);
                 List<string> sqls = new List<string>();
-                int maxid = this.getmaxid(accset);
+                int maxid = this.getsubjectmaxid(accset);
                 foreach (ClientSubject item in clientSubjectList)
                 {
                     maxid++;
@@ -1993,58 +2476,86 @@ namespace MicroServiceApplication.factory
         //
         //凭证导入start
         //
-        public void exports(ExportBean exportBean, YYT3accset accset)
+        public void exports(ExportBean exportBean, YYT3accset accset, Inst inst, Client client, User user, Accountcycle accountcycle, String categoryname)
         {
 
             YYT3ExportContext context = new YYT3ExportContext();
             context.ExportBean = exportBean;
 
-            try
+            //查询凭证数据
+            List<YYT3Voucher> vouchers = this.getVoucher(inst.Id, client.Id, accountcycle.Sn, user.Id, categoryname);
+            List<String> sqls = new List<String>();
+            int MaxI_id = -1;
+            int MaxIno_id = -1;
+            foreach (YYT3Voucher kvi in vouchers)
             {
-                //查询凭证数据
-                this.getData(context);
+                if (kvi.Inid == 1)
+                {
+                    if (MaxI_id < 0)
+                    {
+                        MaxI_id = this.getvouchersmaxid(accset);
+                        MaxI_id++;
+                    }
+                    else
+                    {
+                        MaxI_id++;
+                    }
+
+                    if (MaxIno_id < 0)
+                    {
+                        MaxIno_id = this.getvouchersmaxino_id(accset, kvi.Iperiod, kvi.Csign);
+                        MaxIno_id++;
+                    }
+                    else
+                    {
+                        MaxIno_id++;
+                    }
+                }
+                String sql = this.buildItemSql( accset, kvi, MaxI_id, MaxIno_id);
+                if (sql != null && sql != "") sqls.Add(sql);
 
                 //获取当前Credid
                 //this.getCredid(context, accset);
                 //this.getCredcode(context, accset);
                 //this.getCredno(context, accset);
                 //this.execute(context, accset);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.StackTrace);
-                throw e;
-            }
-            finally
-            {
+
             }
         }
         //获取凭证
-        private void getData(YYT3ExportContext context)
+        private List<YYT3Voucher> getVoucher(string instid, string clientid, string accountcyclesn, string createby, string categoryname)
         {
 
             HttpClient httpClient = AppConfig.GetInstance().crateHttpClient();
             String url = AppConfig.GetInstance().BaseUrl + "/voucher/instance/exports";
 
             List<KeyValuePair<String, String>> paramList = new List<KeyValuePair<String, String>>();
-            paramList.Add(new KeyValuePair<string, string>("instid", context.ExportBean.Instid));
-            paramList.Add(new KeyValuePair<string, string>("clientid", context.ExportBean.Clientid));
-            paramList.Add(new KeyValuePair<string, string>("accountcyclesn", context.ExportBean.Accountcyclesn));
-            paramList.Add(new KeyValuePair<string, string>("categoryname", context.ExportBean.Categoryname));
-            paramList.Add(new KeyValuePair<string, string>("createby", context.ExportBean.Createby));
-            paramList.Add(new KeyValuePair<string, string>("type", "sd3000"));
+            paramList.Add(new KeyValuePair<string, string>("instid", instid));
+            paramList.Add(new KeyValuePair<string, string>("clientid", clientid));
+            paramList.Add(new KeyValuePair<string, string>("accountcyclesn", accountcyclesn));
+            paramList.Add(new KeyValuePair<string, string>("categoryname", categoryname));
+            paramList.Add(new KeyValuePair<string, string>("createby", createby));
+            paramList.Add(new KeyValuePair<string, string>("type", "kis"));
             HttpResponseMessage response = httpClient.PostAsync(new Uri(url), new FormUrlEncodedContent(paramList)).Result;
             String result = response.Content.ReadAsStringAsync().Result;
             httpClient.Dispose();
-            JObject jo = JObject.Parse(result);
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                context.Vouchers = this.buildData(jo);
+                JObject results = JObject.Parse(result);
+                List<YYT3Voucher> vouchers = this.buildData(results);
+                return vouchers;
             }
             else
             {
-                string errorMessage = jo["message"] == null ? "" : jo["message"].ToString();
-                throw new Exception("获取凭证数据错误!" + errorMessage);
+                JObject jo = JObject.Parse(result);
+                if (jo != null && jo["statusCode"].ToString() == "500" && jo["message"] != null)
+                {
+                    throw new Exception(jo["message"].ToString());
+                }
+                else
+                {
+                    throw new Exception("获取凭证数据错误!" + response.ReasonPhrase.ToString());
+                }
             }
         }
         // 引进凭证
@@ -2064,13 +2575,75 @@ namespace MicroServiceApplication.factory
 
             foreach (JObject item in jaVoucherItems)
             {
-                YYT3Voucher voucherItem = new YYT3Voucher(item);
+                YYT3Voucher voucherItem = new YYT3Voucher();
+                DateTime bizDate = MicroServiceApplication.Common.Util.GetTime(item["FDate"].ToString());
+
+                voucherItem.Dbill_date = bizDate;
+                voucherItem.Doutbilldate = bizDate;
+                voucherItem.Iperiod = item.GetValue("FPeriod").ToObject<int>();
+                voucherItem.Csign = item.GetValue("FGroup").ToString();
+                voucherItem.Isignseq = 1;
+                voucherItem.Inid = item.GetValue("FEntryID").ToObject<int>()+1;
+                voucherItem.Idoc = -1;
+                voucherItem.Cbill = "demo";
+                voucherItem.Cdigest = item.GetValue("FExp").ToString();
+                voucherItem.Ccode = item.GetValue("FAcctID").ToString();
+                voucherItem.Mc = item.GetValue("FDebit").ToObject<decimal>();
+                voucherItem.Md = item.GetValue("FCredit").ToObject<decimal>();
+                voucherItem.Ioutperiod = item.GetValue("FPeriod").ToObject<int>();
+                voucherItem.Bvouchedit = 1;
+                voucherItem.Bvalueedit = 1;
+                voucherItem.BPCSedit = 1;
+                voucherItem.BItemedit = 1;
+                voucherItem.BDeptedit = 1;
+                voucherItem.BCusSupInput = 1;
+                voucherItem.Bcodeedit = 1;
+
                 vouchers.Add(voucherItem);
             }
             return vouchers;
         }
+        //建立导入凭证sql
+        private String buildItemSql(YYT3accset accset,YYT3Voucher item, int i_id, int ino_id)
+        {
+            if (item == null) return null;
+            if (i_id < 0) throw new ArgumentException("无法获取凭证序列号");
+            if (ino_id < 0) throw new ArgumentException("无法获取凭证号");
+
+            //检查当前科目是否存在
+            YYT3code kda = this.getlastcode( accset, item.Ccode);
+
+            if (kda == null) throw new Exception("科目:" + item.Ccode + ",在财务系统中不存在！");
+
+            String sql = "INSERT INTO GLVch(i_id,iperiod,csign,ino_id,inid,cbill,cdigest,ccode,md,mc,idoc,dbill_date,isignseq,doutbilldate,ioutperiod,bvouchedit,bvalueedit,bcodeedit,bPCSedit,bDeptedit,bItemedit,bCusSupInput) VALUES (" +
+                    "" + i_id + "," +
+                    "" + item.Iperiod + "," +
+                    "'" + item.Csign + "'," +
+                    "" + ino_id + "," +
+                    "" + item.Inid + "," +
+                    "'" + item.Cbill + "'," +
+                    "'" + item.Cdigest + "'," +
+                    "'" + item.Ccode + "'," +
+                    "" + item.Md + "," +
+                    "" + item.Mc + "," +
+                    "" + item.Idoc + "," +
+                    "" + item.Dbill_date + "," +
+                    "" + item.Isignseq + "," +
+                    "'" + item.Doutbilldate + "'," +
+                    "" + item.Ioutperiod + "," +
+                    "" + item.Bvouchedit + "," +
+                    "" + item.Bvalueedit + "," +
+                    "" + item.Bcodeedit + "," +
+                    "" + item.BPCSedit + "," +
+                    "" + item.BDeptedit + "," +
+                    "" + item.BItemedit + "" +
+                    "" + item.BCusSupInput + "" +
+                    ")";
+
+            return sql;
+        }
         //
         //凭证导入end
-        //
+        //       
     }
 }
