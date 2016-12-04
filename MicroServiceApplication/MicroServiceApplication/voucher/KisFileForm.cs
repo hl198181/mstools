@@ -117,6 +117,7 @@ namespace MicroServiceApplication.voucher
             this.radioButton1.Checked = true;//默认不合并
             this.radioButton4.Checked = true;//默认有凭证字
             this.radioButton6.Checked = true;//默认只有第一行有摘要
+            this.调账ToolStripMenuItem.Visible = false;
             if (this.inst.Id != "653279009C4211E6A731B9323D2BF7D6")
             {
                 this.修复KIS明细科目名称ToolStripMenuItem.Visible = false;
@@ -510,7 +511,7 @@ namespace MicroServiceApplication.voucher
         //
         private void 调整科目余额ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.adjustGLBal();
+            this.adjustGLBal();          
         }
         private void adjustGLBal()
         {

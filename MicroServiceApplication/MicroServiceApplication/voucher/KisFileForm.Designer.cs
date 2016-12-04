@@ -599,7 +599,7 @@
             this.groupBox2.Size = new System.Drawing.Size(737, 37);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "凭证合并";
+            this.groupBox2.Text = "凭证合并(销项、银行)";
             // 
             // groupBox3
             // 
