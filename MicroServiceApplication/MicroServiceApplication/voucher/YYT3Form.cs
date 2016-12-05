@@ -352,6 +352,7 @@ namespace MicroServiceApplication.voucher
             }
             catch (Exception e)
             {
+                this.InformationTextBox.Visible = false;
                 Console.WriteLine(e.StackTrace);
                 MessageBox.Show(e.Message);
             }

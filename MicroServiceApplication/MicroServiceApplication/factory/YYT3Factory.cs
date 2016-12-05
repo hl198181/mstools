@@ -790,6 +790,8 @@ namespace MicroServiceApplication.factory
         private int _bDeptedit;//1
         private int _bItemedit;//1
         private int _bCusSupInput;//1
+        private string _ccus_id;//核算客户id
+        private string _csup_id;//核算供应商id
         public int Iperiod
         {
             get
@@ -1073,6 +1075,32 @@ namespace MicroServiceApplication.factory
             set
             {
                 _bCusSupInput = value;
+            }
+        }
+
+        public string Ccus_id
+        {
+            get
+            {
+                return _ccus_id;
+            }
+
+            set
+            {
+                _ccus_id = value;
+            }
+        }
+
+        public string Csup_id
+        {
+            get
+            {
+                return _csup_id;
+            }
+
+            set
+            {
+                _csup_id = value;
             }
         }
     }
@@ -1831,12 +1859,13 @@ class YYT3accset
 
     class YYT3Factory
     {
-        public OleDbConnection Conn;
-        public bool ExecuteSQLNonquery(List<String> sqls)
+        public bool ExecuteSQLNonquery(List<String> sqls,YYT3accset accset)
         {
-            OleDbCommand cmd = new OleDbCommand();
-            cmd.Connection = Conn;
-            OleDbTransaction tx = Conn.BeginTransaction();
+            SqlConnection connection = this.createConnection(accset);
+            connection.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = connection;
+            SqlTransaction tx = connection.BeginTransaction();
             cmd.Transaction = tx;
             try
             {
@@ -1954,15 +1983,15 @@ class YYT3accset
         public YYT3code getlastcode(YYT3accset accset , String ccode)
         {
             SqlConnection connection = this.createConnection(accset);
-            string sql = "select * from code where ccode = "+ccode+"";
+            string sql = "select * from code where ccode = '"+ccode+"'";
             SqlDataAdapter myDataAdapter = new SqlDataAdapter(sql, connection);
             DataSet myDataSet = new DataSet();
             YYT3code yYT3code = null;
             try
             {
-                myDataAdapter.Fill(myDataSet, "ccode");
-                DataTable myTable = myDataSet.Tables["ccode"];
-                if (myTable.Columns.Count>0)
+                myDataAdapter.Fill(myDataSet, "code");
+                DataTable myTable = myDataSet.Tables["code"];
+                if (myTable.Rows.Count>0)
                 {
                     DataRow row = myTable.Rows[0];
                     yYT3code = new YYT3code();
@@ -1973,10 +2002,6 @@ class YYT3accset
                     yYT3code.Cbook_type_engl = row["cbook_type_engl"] == null ? null : row["cbook_type_engl"].ToString();
                 }
                 return yYT3code;
-            }
-            catch (Exception e)
-            {
-                throw (new Exception("数据库出错:" + e.Message));
             }
             finally
             {
@@ -2118,7 +2143,7 @@ class YYT3accset
         public int getvouchersmaxid(YYT3accset accset)
         {
             SqlConnection connection = this.createConnection(accset);
-            string sql = "select max(i_id) as maxid from GL_accvouche ";
+            string sql = "select max(i_id) as maxid from GL_accvouch ";
             SqlDataAdapter myDataAdapter = new SqlDataAdapter(sql, connection);
             DataSet myDataSet = new DataSet();
 
@@ -2153,10 +2178,9 @@ class YYT3accset
         public int getvouchersmaxino_id(YYT3accset accset, int Iperiod, string Csign)
         {
             SqlConnection connection = this.createConnection(accset);
-            string sql = "select iperiod,csign,ino_id as maxid from GL_accvouche where iperiod = " + Iperiod + " and csign = '"+ Csign + "' ";
+            string sql = "select max(ino_id) as maxid from GL_accvouch where iperiod = " + Iperiod + " and csign = '"+ Csign + "' ";
             SqlDataAdapter myDataAdapter = new SqlDataAdapter(sql, connection);
             DataSet myDataSet = new DataSet();
-
             try
             {
                 int maxino_id = 0;
@@ -2164,7 +2188,7 @@ class YYT3accset
                 DataTable myTable = myDataSet.Tables["code"];
                 if (myTable.Rows.Count > 0)
                 {
-                    string Maxino_id = myTable.Rows[0][myTable.Columns[2]].ToString() == null ? "0" : myTable.Rows[0][myTable.Columns[2]].ToString();
+                    string Maxino_id = myTable.Rows[0][myTable.Columns[0]].ToString() == null ? "0" : myTable.Rows[0][myTable.Columns[0]].ToString();
                     if (Maxino_id == "" || Maxino_id == null) Maxino_id = "0";
                     maxino_id = int.Parse(Maxino_id);
                 }
@@ -2283,64 +2307,105 @@ class YYT3accset
                 List<ClientSubject> clientSubjectList = csf.query(exportBean.Clientid, 1, 1);
                 List<string> sqls = new List<string>();
                 int maxid = this.getsubjectmaxid(accset);
+                sqls.Add("SET SET IDENTITY_INSERT code   ON");
                 foreach (ClientSubject item in clientSubjectList)
-                {
+                {                    
                     maxid++;
                     String leve1Subject = item.Sn.Substring(0, Int32.Parse(yYT3AccInformation.CValue.Substring(0,1)));//获取上级科目信息
                     YYT3code yYT3code = this.getlastcode( accset,leve1Subject);
+                    if (yYT3code == null) throw new Exception("无法获取一级科目信息!");
+                    string Bproperty = "1";                   
+                        if (yYT3code.Bproperty == "True")
+                    {
+                        Bproperty = "1";
+                    }
+                        else
+                    {
+                        Bproperty = "0";
+                    }
                     int igrade = 1;
-                    
-                    if (Int32.Parse(yYT3AccInformation.CValue.Substring(0, 1)) == item.Sn.Length && yYT3AccInformation.CValue.Length >0)
+                    int number = yYT3AccInformation.CValue.Length;
+
+                    if (number > 0)
                     {
-                        igrade = 1;
+                        if (Int32.Parse(yYT3AccInformation.CValue.Substring(0, 1)) == item.Sn.Length && yYT3AccInformation.CValue.Length > 0)
+                        {
+                            igrade = 1;
+                        }
                     }
-                    if(Int32.Parse(yYT3AccInformation.CValue.Substring(2, 1)) == item.Sn.Length- Int32.Parse(yYT3AccInformation.CValue.Substring(0, 1)) && yYT3AccInformation.CValue.Length > 2)
+                    if (number > 2)
                     {
-                        igrade = 2;
+                        if (Int32.Parse(yYT3AccInformation.CValue.Substring(2, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(0, 1)) == item.Sn.Length && yYT3AccInformation.CValue.Length > 2)
+                        {
+                            igrade = 2;
+                        }
                     }
-                    if (Int32.Parse(yYT3AccInformation.CValue.Substring(4, 1)) == item.Sn.Length- Int32.Parse(yYT3AccInformation.CValue.Substring(2, 1)) && yYT3AccInformation.CValue.Length > 4)
+                    if (number > 4)
                     {
-                        igrade = 3;
+                        if (Int32.Parse(yYT3AccInformation.CValue.Substring(4, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(2, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(0, 1)) == item.Sn.Length && yYT3AccInformation.CValue.Length > 4)
+                        {
+                            igrade = 3;
+                        }
                     }
-                    if (Int32.Parse(yYT3AccInformation.CValue.Substring(6, 1)) == item.Sn.Length- Int32.Parse(yYT3AccInformation.CValue.Substring(4, 1)) && yYT3AccInformation.CValue.Length > 6)
+                    if (number > 6)
                     {
-                        igrade = 4;
+                        if (Int32.Parse(yYT3AccInformation.CValue.Substring(6, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(4, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(2, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(0, 1)) == item.Sn.Length && yYT3AccInformation.CValue.Length > 6)
+                        {
+                            igrade = 4;
+                        }
                     }
-                    if (Int32.Parse(yYT3AccInformation.CValue.Substring(8, 1)) == item.Sn.Length- Int32.Parse(yYT3AccInformation.CValue.Substring(6, 1)) && yYT3AccInformation.CValue.Length > 8)
+                    if (number > 8)
                     {
-                        igrade = 5;
+                        if (Int32.Parse(yYT3AccInformation.CValue.Substring(8, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(6, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(4, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(2, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(0, 1)) == item.Sn.Length && yYT3AccInformation.CValue.Length > 8)
+                        {
+                            igrade = 5;
+                        }
                     }
-                    if (Int32.Parse(yYT3AccInformation.CValue.Substring(10, 1)) == item.Sn.Length- Int32.Parse(yYT3AccInformation.CValue.Substring(8, 1)) && yYT3AccInformation.CValue.Length > 10)
+                    if (number > 10)
                     {
-                        igrade = 6;
+                        if (Int32.Parse(yYT3AccInformation.CValue.Substring(10, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(8, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(6, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(4, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(2, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(0, 1)) == item.Sn.Length && yYT3AccInformation.CValue.Length > 10)
+                        {
+                            igrade = 6;
+                        }
                     }
-                    if (Int32.Parse(yYT3AccInformation.CValue.Substring(12, 1)) == item.Sn.Length- Int32.Parse(yYT3AccInformation.CValue.Substring(10, 1)) && yYT3AccInformation.CValue.Length > 12)
+                    if (number > 12)
                     {
-                        igrade = 7;
+                        if (Int32.Parse(yYT3AccInformation.CValue.Substring(12, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(10, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(8, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(6, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(4, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(2, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(0, 1)) == item.Sn.Length && yYT3AccInformation.CValue.Length > 12)
+                        {
+                            igrade = 7;
+                        }
                     }
-                    if (Int32.Parse(yYT3AccInformation.CValue.Substring(14, 1)) == item.Sn.Length- Int32.Parse(yYT3AccInformation.CValue.Substring(12, 1)) && yYT3AccInformation.CValue.Length > 14)
+                    if (number > 14)
                     {
-                        igrade = 8;
+                        if (Int32.Parse(yYT3AccInformation.CValue.Substring(14, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(12, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(10, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(8, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(6, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(4, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(2, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(0, 1)) == item.Sn.Length && yYT3AccInformation.CValue.Length > 14)
+                        {
+                            igrade = 8;
+                        }
                     }
-                    if (Int32.Parse(yYT3AccInformation.CValue.Substring(16, 1)) == item.Sn.Length- Int32.Parse(yYT3AccInformation.CValue.Substring(14, 1)) && yYT3AccInformation.CValue.Length > 16)
+                    if (number > 16)
                     {
-                        igrade = 9;
+                        if (Int32.Parse(yYT3AccInformation.CValue.Substring(16, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(14, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(12, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(10, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(8, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(6, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(4, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(2, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(0, 1)) == item.Sn.Length && yYT3AccInformation.CValue.Length > 16)
+                        {
+                            igrade = 9;
+                        }
                     }
-                    if (Int32.Parse(yYT3AccInformation.CValue.Substring(18, 1)) == item.Sn.Length- Int32.Parse(yYT3AccInformation.CValue.Substring(16, 1)) && yYT3AccInformation.CValue.Length > 18)
+                    if (number > 18)
                     {
-                        igrade = 10;
+                        if (Int32.Parse(yYT3AccInformation.CValue.Substring(18, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(16, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(14, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(12, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(10, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(8, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(6, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(4, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(2, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(0, 1)) == item.Sn.Length && yYT3AccInformation.CValue.Length > 18)
+                        {
+                            igrade = 10;
+                        }
                     }
                     List <YYT3code> yYT3codeList = new List<YYT3code>();
                     yYT3code.Ccode = item.Sn;
                     yYT3code.Ccode_name = item.Label;
                     
-                    sqls.Add("SET SET IDENTITY_INSERT[dbo].[code]   ON");
-                    sqls.Add("insert into [dbo].[code] (i_id,cclass,cclass_endl,ccode,ccode_name,ccode_endl,igrade,bproperty,cbook_type,cbook_type_engl,_bend,Bd_c) values (" + maxid + ","+ yYT3code.Cclass+","+yYT3code.Cclass_engl+", "+ yYT3code.Ccode + "," + yYT3code.Ccode_name + "," + yYT3code.Ccode_name + "+ 'engl',"+ igrade + ","+ yYT3code.Bproperty+",‘金额式’，‘JES’，1,1) ");
+                    
+                    sqls.Add("insert into code (i_id,cclass,cclass_engl,ccode,ccode_name,ccode_engl,igrade,bproperty,cbook_type,cbook_type_engl,bend,Bd_c) values ('"+maxid+"','" + yYT3code.Cclass+"','"+yYT3code.Cclass_engl+"','"+ yYT3code.Ccode + "','" + yYT3code.Ccode_name + "','" + yYT3code.Ccode_name + "engl','"+ igrade + "','"+ Bproperty + "','"+yYT3code.Cbook_type+ "','" + yYT3code.Cbook_type_engl + "','1','1') ");
 
                 }
-                sqls.Add("SET SET IDENTITY_INSERT[dbo].[code]   OFF");
-                SqlConnection connection = this.createConnection(accset);
-                this.ExecuteSQLNonquery(sqls);
+                sqls.Add("SET SET IDENTITY_INSERT code   OFF");
+                this.ExecuteSQLNonquery(sqls,accset);
             }
             catch (Exception e)
             {
@@ -2485,12 +2550,11 @@ class YYT3accset
             //查询凭证数据
             List<YYT3Voucher> vouchers = this.getVoucher(inst.Id, client.Id, accountcycle.Sn, user.Id, categoryname);
             List<String> sqls = new List<String>();
+            sqls.Add("SET SET IDENTITY_INSERT GL_accvouch  ON");
             int MaxI_id = -1;
             int MaxIno_id = -1;
             foreach (YYT3Voucher kvi in vouchers)
-            {
-                if (kvi.Inid == 1)
-                {
+            {               
                     if (MaxI_id < 0)
                     {
                         MaxI_id = this.getvouchersmaxid(accset);
@@ -2500,7 +2564,8 @@ class YYT3accset
                     {
                         MaxI_id++;
                     }
-
+                if (kvi.Inid == 1)
+                {
                     if (MaxIno_id < 0)
                     {
                         MaxIno_id = this.getvouchersmaxino_id(accset, kvi.Iperiod, kvi.Csign);
@@ -2512,15 +2577,11 @@ class YYT3accset
                     }
                 }
                 String sql = this.buildItemSql( accset, kvi, MaxI_id, MaxIno_id);
-                if (sql != null && sql != "") sqls.Add(sql);
-
-                //获取当前Credid
-                //this.getCredid(context, accset);
-                //this.getCredcode(context, accset);
-                //this.getCredno(context, accset);
-                //this.execute(context, accset);
-
+                if (sql != null && sql != "") sqls.Add(sql);                
             }
+            //执行SQL
+            sqls.Add("SET SET IDENTITY_INSERT GL_accvouch  OFF");
+            this.ExecuteSQLNonquery(sqls, accset);
         }
         //获取凭证
         private List<YYT3Voucher> getVoucher(string instid, string clientid, string accountcyclesn, string createby, string categoryname)
@@ -2615,29 +2676,29 @@ class YYT3accset
 
             if (kda == null) throw new Exception("科目:" + item.Ccode + ",在财务系统中不存在！");
 
-            String sql = "INSERT INTO GLVch(i_id,iperiod,csign,ino_id,inid,cbill,cdigest,ccode,md,mc,idoc,dbill_date,isignseq,doutbilldate,ioutperiod,bvouchedit,bvalueedit,bcodeedit,bPCSedit,bDeptedit,bItemedit,bCusSupInput) VALUES (" +
-                    "" + i_id + "," +
-                    "" + item.Iperiod + "," +
+            String sql = "INSERT INTO GL_accvouch(i_id,iperiod,csign,ino_id,inid,cbill,cdigest,ccode,md,mc,idoc,dbill_date,isignseq,doutbilldate,ioutperiod,bvouchedit,bvalueedit,bcodeedit,bPCSedit,bDeptedit,bItemedit,bCusSupInput) VALUES (" +
+                    "'" + i_id + "'," +
+                    "'" + item.Iperiod + "'," +
                     "'" + item.Csign + "'," +
-                    "" + ino_id + "," +
-                    "" + item.Inid + "," +
+                    "'" + ino_id + "'," +
+                    "'" + item.Inid + "'," +
                     "'" + item.Cbill + "'," +
                     "'" + item.Cdigest + "'," +
                     "'" + item.Ccode + "'," +
                     "" + item.Md + "," +
                     "" + item.Mc + "," +
-                    "" + item.Idoc + "," +
-                    "" + item.Dbill_date + "," +
-                    "" + item.Isignseq + "," +
+                    "'" + item.Idoc + "'," +
+                    "'" + item.Dbill_date + "'," +
+                    "'" + item.Isignseq + "'," +
                     "'" + item.Doutbilldate + "'," +
-                    "" + item.Ioutperiod + "," +
-                    "" + item.Bvouchedit + "," +
-                    "" + item.Bvalueedit + "," +
-                    "" + item.Bcodeedit + "," +
-                    "" + item.BPCSedit + "," +
-                    "" + item.BDeptedit + "," +
-                    "" + item.BItemedit + "" +
-                    "" + item.BCusSupInput + "" +
+                    "'" + item.Ioutperiod + "'," +
+                    "'" + item.Bvouchedit + "'," +
+                    "'" + item.Bvalueedit + "'," +
+                    "'" + item.Bcodeedit + "'," +
+                    "'" + item.BPCSedit + "'," +
+                    "'" + item.BDeptedit + "'," +
+                    "'" + item.BItemedit + "'," +
+                    "'" + item.BCusSupInput + "'" +
                     ")";
 
             return sql;

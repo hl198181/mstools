@@ -427,7 +427,7 @@
             // 
             // paytaxreportbutton
             // 
-            this.paytaxreportbutton.Location = new System.Drawing.Point(300, 44);
+            this.paytaxreportbutton.Location = new System.Drawing.Point(314, 44);
             this.paytaxreportbutton.Margin = new System.Windows.Forms.Padding(2);
             this.paytaxreportbutton.Name = "paytaxreportbutton";
             this.paytaxreportbutton.Size = new System.Drawing.Size(92, 33);
@@ -449,7 +449,7 @@
             // 
             // exportpayrollbutton
             // 
-            this.exportpayrollbutton.Location = new System.Drawing.Point(492, 44);
+            this.exportpayrollbutton.Location = new System.Drawing.Point(506, 44);
             this.exportpayrollbutton.Margin = new System.Windows.Forms.Padding(2);
             this.exportpayrollbutton.Name = "exportpayrollbutton";
             this.exportpayrollbutton.Size = new System.Drawing.Size(92, 33);
@@ -463,9 +463,9 @@
             this.bankbillExportbutton.Location = new System.Drawing.Point(204, 44);
             this.bankbillExportbutton.Margin = new System.Windows.Forms.Padding(2);
             this.bankbillExportbutton.Name = "bankbillExportbutton";
-            this.bankbillExportbutton.Size = new System.Drawing.Size(92, 33);
+            this.bankbillExportbutton.Size = new System.Drawing.Size(106, 33);
             this.bankbillExportbutton.TabIndex = 2;
-            this.bankbillExportbutton.Text = "导出银行回单";
+            this.bankbillExportbutton.Text = "导出银行对账单";
             this.bankbillExportbutton.UseVisualStyleBackColor = true;
             this.bankbillExportbutton.Click += new System.EventHandler(this.bankbillExportbutton_Click);
             // 
@@ -481,7 +481,7 @@
             // 
             // localreporttaxbutton
             // 
-            this.localreporttaxbutton.Location = new System.Drawing.Point(396, 44);
+            this.localreporttaxbutton.Location = new System.Drawing.Point(410, 44);
             this.localreporttaxbutton.Margin = new System.Windows.Forms.Padding(2);
             this.localreporttaxbutton.Name = "localreporttaxbutton";
             this.localreporttaxbutton.Size = new System.Drawing.Size(92, 33);
