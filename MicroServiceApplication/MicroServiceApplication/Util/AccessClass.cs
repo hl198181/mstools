@@ -33,7 +33,7 @@ namespace MicroServiceApplication.Util
             {
                 throw new Exception("请先设置金蝶KIS安全文件路径!");
             }
-
+            
             ConnString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + dbFilePath + ";User ID=" + strDbUser + ";Password=" + strDBPass + ";Jet OLEDB:Database Password=1;Jet OLEDB:System database="+ securityPath;
             Conn = new OleDbConnection(ConnString);
             Conn.Open();
@@ -142,12 +142,22 @@ namespace MicroServiceApplication.Util
                 }
                 tx.Commit();
                 return true;
+<<<<<<< HEAD
             } 
+=======
+            }
+>>>>>>> yyt3
             catch (Exception e)
             {
                 tx.Rollback();
                 throw e;
             }
+<<<<<<< HEAD
+=======
+
+            //List<String> sqls = new List<string>();
+            //sqls.Add(sql);
+>>>>>>> yyt3
         }
         /**//// <summary>   
                     /// 执行SQL命令，不需要返回数据的修改，删除可以使用本函数   

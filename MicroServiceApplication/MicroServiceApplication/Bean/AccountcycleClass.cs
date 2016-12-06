@@ -92,6 +92,7 @@ namespace MicroServiceApplication
     {
         public List<Accountcycle> query(int lastmonth,int aftermonth)
         {
+            AuthClass authClass = new AuthClass();
             HttpClient httpClient = AppConfig.GetInstance().crateHttpClient();
 
             String url = AppConfig.GetInstance().BaseUrl + "/accountcycle?lastmonth=" + lastmonth + "&aftermonth=" + aftermonth;

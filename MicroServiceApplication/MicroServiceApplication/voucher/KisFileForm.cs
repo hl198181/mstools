@@ -447,7 +447,11 @@ namespace MicroServiceApplication.voucher
         //
         private void SubjectLength()
         {
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> yyt3
             if (this.kisDbFileParams == null || this.kisDbFileParams.DbFilePath == null)
             {
                 MessageBox.Show("请先选择KIS账套文件");
@@ -462,6 +466,7 @@ namespace MicroServiceApplication.voucher
             }
             try
             {
+<<<<<<< HEAD
                 KisDbFileFactory kisDbFileFactory = new KisDbFileFactory(this.kisDbFileParams);             
                 kisDbFileFactory.SubjectLength();//引用工厂里修复账套科目长度的方法
                 MessageBox.Show("科目长度修复成功!");
@@ -501,12 +506,23 @@ namespace MicroServiceApplication.voucher
             catch(Exception e)
             {
                 Console.Write(e.StackTrace);
+=======
+                KisDbFileFactory kisDbFileFactory = new KisDbFileFactory(this.kisDbFileParams);
+                
+                kisDbFileFactory.SubjectLength();//引用工厂里修复账套科目长度的方法
+                MessageBox.Show("科目长度修复成功!");
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+>>>>>>> yyt3
                 MessageBox.Show(e.Message);
             }
         }
         //
         //修复账套科目长度end
         //
+<<<<<<< HEAD
         //调整科目余额start
         //
         private void 调整科目余额ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -558,5 +574,7 @@ namespace MicroServiceApplication.voucher
         //调整科目余额end
         //
 
+=======
+>>>>>>> yyt3
     }
 }

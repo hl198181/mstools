@@ -199,6 +199,7 @@ namespace MicroServiceApplication.Bean
 
         public List<KisVoucherInfo> getKisVoucher(string instid, string clientid, string accountcyclesn, string createby, string categoryname)
         {
+
             HttpClient httpClient = AppConfig.GetInstance().crateHttpClient();
             String url = AppConfig.GetInstance().BaseUrl + "/voucher/instance/exports";
 

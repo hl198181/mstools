@@ -57,9 +57,14 @@
             this.SetupKisDirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InitSubjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.修复KIS账套科目长度ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+<<<<<<< HEAD
             this.修复KIS明细科目名称ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.调账ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.调整科目余额ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+=======
+            this.exportActionGroupBox = new System.Windows.Forms.GroupBox();
+            this.exportActionflowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+>>>>>>> yyt3
             this.exportIncomeButton = new System.Windows.Forms.Button();
             this.exportOutputButton = new System.Windows.Forms.Button();
             this.bankbillExportbutton = new System.Windows.Forms.Button();
@@ -417,8 +422,12 @@
             this.设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.SetupKisDirToolStripMenuItem,
             this.InitSubjectToolStripMenuItem,
+<<<<<<< HEAD
             this.修复KIS账套科目长度ToolStripMenuItem,
             this.修复KIS明细科目名称ToolStripMenuItem});
+=======
+            this.修复KIS账套科目长度ToolStripMenuItem});
+>>>>>>> yyt3
             this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
             this.设置ToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
             this.设置ToolStripMenuItem.Text = "设置";
@@ -444,6 +453,7 @@
             this.修复KIS账套科目长度ToolStripMenuItem.Text = "修复KIS账套科目长度";
             this.修复KIS账套科目长度ToolStripMenuItem.Click += new System.EventHandler(this.修复KIS账套科目长度ToolStripMenuItem_Click);
             // 
+<<<<<<< HEAD
             // 修复KIS明细科目名称ToolStripMenuItem
             // 
             this.修复KIS明细科目名称ToolStripMenuItem.Name = "修复KIS明细科目名称ToolStripMenuItem";
@@ -465,6 +475,35 @@
             this.调整科目余额ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.调整科目余额ToolStripMenuItem.Text = "调整科目余额";
             this.调整科目余额ToolStripMenuItem.Click += new System.EventHandler(this.调整科目余额ToolStripMenuItem_Click);
+=======
+            // exportActionGroupBox
+            // 
+            this.exportActionGroupBox.Controls.Add(this.exportActionflowLayoutPanel);
+            this.exportActionGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.exportActionGroupBox.Location = new System.Drawing.Point(0, 531);
+            this.exportActionGroupBox.Margin = new System.Windows.Forms.Padding(2);
+            this.exportActionGroupBox.Name = "exportActionGroupBox";
+            this.exportActionGroupBox.Padding = new System.Windows.Forms.Padding(2);
+            this.exportActionGroupBox.Size = new System.Drawing.Size(685, 55);
+            this.exportActionGroupBox.TabIndex = 6;
+            this.exportActionGroupBox.TabStop = false;
+            this.exportActionGroupBox.Text = "导出凭证到KIS";
+            // 
+            // exportActionflowLayoutPanel
+            // 
+            this.exportActionflowLayoutPanel.Controls.Add(this.exportIncomeButton);
+            this.exportActionflowLayoutPanel.Controls.Add(this.exportOutputButton);
+            this.exportActionflowLayoutPanel.Controls.Add(this.bankbillExportbutton);
+            this.exportActionflowLayoutPanel.Controls.Add(this.exportpayrollbutton);
+            this.exportActionflowLayoutPanel.Controls.Add(this.paytaxreportbutton);
+            this.exportActionflowLayoutPanel.Controls.Add(this.localreporttaxbutton);
+            this.exportActionflowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.exportActionflowLayoutPanel.Location = new System.Drawing.Point(2, 16);
+            this.exportActionflowLayoutPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.exportActionflowLayoutPanel.Name = "exportActionflowLayoutPanel";
+            this.exportActionflowLayoutPanel.Size = new System.Drawing.Size(681, 37);
+            this.exportActionflowLayoutPanel.TabIndex = 0;
+>>>>>>> yyt3
             // 
             // exportIncomeButton
             // 
@@ -790,6 +829,7 @@
         private System.Windows.Forms.Button subjectToKisButton;
         private System.Windows.Forms.TextBox InformationTextBox;
         private System.Windows.Forms.ToolStripMenuItem 修复KIS账套科目长度ToolStripMenuItem;
+<<<<<<< HEAD
         private System.Windows.Forms.ToolStripMenuItem 修复KIS明细科目名称ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 调账ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 调整科目余额ToolStripMenuItem;
@@ -810,4 +850,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
         private System.Windows.Forms.Button refreshButton;
     }
+=======
+    }
+>>>>>>> yyt3
 }

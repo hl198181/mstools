@@ -1,0 +1,2710 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Data.SqlClient;
+using System.Data;
+using MicroServiceApplication.Bean;
+using System.Windows.Forms;
+using System.Net.Http;
+using Newtonsoft.Json.Linq;
+using MicroServiceApplication.Common;
+using System.Net.Http.Headers;
+using System.Data.OleDb;
+
+namespace MicroServiceApplication.factory
+{
+    //
+    //获取凭证start
+    //
+    //class YYT3Voucher
+    //{
+    //    private List<YYT3VoucherItem> _items;
+
+    //    public YYT3Voucher(JObject jobject)
+    //    {
+    //        if (jobject == null) return;
+
+    //        if (jobject["items"] != null)
+    //        {
+    //            this.Items = new List<YYT3VoucherItem>();
+    //            foreach (JObject item in jobject["items"])
+    //            {
+    //                var detail = new YYT3VoucherItem(item);
+    //                this.Items.Add(detail);
+    //            }
+    //        }
+    //    }
+
+    //    internal List<YYT3VoucherItem> Items
+    //    {
+    //        get
+    //        {
+    //            return _items;
+    //        }
+
+    //        set
+    //        {
+    //            _items = value;
+    //        }
+    //    }
+    //}
+    ////
+    ////获取凭证end
+    ////
+    ////凭证封装字段start
+    ////
+    //class YYT3VoucherItem
+    //{
+    //    private string _id;
+    //    private string _instid;
+    //    private string _clientid;
+    //    private string _accountcyclesn;
+    //    private string _bizaccountcyclesn;
+    //    private string _libraryid;
+    //    private string _libraryitemid;
+    //    private string _inputtype;
+    //    private string _bizid;
+    //    private string _biztype;
+    //    private DateTime _bizdate;
+    //    private string _summary;
+    //    private string _descr;
+    //    private string _subjectno;
+    //    private string _subjectname;
+    //    private string _subjectno1;
+    //    private string _subjectname1;
+    //    private string _subjectno2;
+    //    private string _subjectname2;
+    //    private string _subjectno3;
+    //    private string _subjectname3;
+    //    private string _subjectno4;
+    //    private string _subjectname4;
+    //    private string _subjectno5;
+    //    private string _subjectname5;
+    //    private string _subjectno6;
+    //    private string _subjectname6;
+    //    private string _debitcredit;
+    //    private decimal _debit;
+    //    private decimal _credit;
+    //    private int _sort;
+    //    private int _disabled;
+    //    private DateTime _createdate;
+    //    private string _createby;
+    //    private string _createbyname;
+    //    private string _librarylabel;
+    //    private string _libraryname;
+    //    private string _categoryname;
+    //    private string _categorylabel;
+    //    private string _groupname;
+    //    private string __createbyheadimgurl;
+    //    private int _voucherNum;
+    //    private int _warn;
+    //    private string _warntext;
+    //    private string _remark;
+
+    //    public string Id
+    //    {
+    //        get
+    //        {
+    //            return _id;
+    //        }
+
+    //        set
+    //        {
+    //            _id = value;
+    //        }
+    //    }
+
+    //    public string Instid
+    //    {
+    //        get
+    //        {
+    //            return _instid;
+    //        }
+
+    //        set
+    //        {
+    //            _instid = value;
+    //        }
+    //    }
+
+    //    public string Clientid
+    //    {
+    //        get
+    //        {
+    //            return _clientid;
+    //        }
+
+    //        set
+    //        {
+    //            _clientid = value;
+    //        }
+    //    }
+
+    //    public string Accountcyclesn
+    //    {
+    //        get
+    //        {
+    //            return _accountcyclesn;
+    //        }
+
+    //        set
+    //        {
+    //            _accountcyclesn = value;
+    //        }
+    //    }
+
+    //    public string Bizaccountcyclesn
+    //    {
+    //        get
+    //        {
+    //            return _bizaccountcyclesn;
+    //        }
+
+    //        set
+    //        {
+    //            _bizaccountcyclesn = value;
+    //        }
+    //    }
+
+    //    public string Libraryid
+    //    {
+    //        get
+    //        {
+    //            return _libraryid;
+    //        }
+
+    //        set
+    //        {
+    //            _libraryid = value;
+    //        }
+    //    }
+
+    //    public string Libraryitemid
+    //    {
+    //        get
+    //        {
+    //            return _libraryitemid;
+    //        }
+
+    //        set
+    //        {
+    //            _libraryitemid = value;
+    //        }
+    //    }
+
+    //    public string Inputtype
+    //    {
+    //        get
+    //        {
+    //            return _inputtype;
+    //        }
+
+    //        set
+    //        {
+    //            _inputtype = value;
+    //        }
+    //    }
+
+    //    public string Bizid
+    //    {
+    //        get
+    //        {
+    //            return _bizid;
+    //        }
+
+    //        set
+    //        {
+    //            _bizid = value;
+    //        }
+    //    }
+
+    //    public string Biztype
+    //    {
+    //        get
+    //        {
+    //            return _biztype;
+    //        }
+
+    //        set
+    //        {
+    //            _biztype = value;
+    //        }
+    //    }
+
+    //    public DateTime Bizdate
+    //    {
+    //        get
+    //        {
+    //            return _bizdate;
+    //        }
+
+    //        set
+    //        {
+    //            _bizdate = value;
+    //        }
+    //    }
+
+    //    public string Summary
+    //    {
+    //        get
+    //        {
+    //            return _summary;
+    //        }
+
+    //        set
+    //        {
+    //            _summary = value;
+    //        }
+    //    }
+
+    //    public string Descr
+    //    {
+    //        get
+    //        {
+    //            return _descr;
+    //        }
+
+    //        set
+    //        {
+    //            _descr = value;
+    //        }
+    //    }
+
+    //    public string Subjectno
+    //    {
+    //        get
+    //        {
+    //            return _subjectno;
+    //        }
+
+    //        set
+    //        {
+    //            _subjectno = value;
+    //        }
+    //    }
+
+    //    public string Subjectname
+    //    {
+    //        get
+    //        {
+    //            return _subjectname;
+    //        }
+
+    //        set
+    //        {
+    //            _subjectname = value;
+    //        }
+    //    }
+
+    //    public string Subjectno1
+    //    {
+    //        get
+    //        {
+    //            return _subjectno1;
+    //        }
+
+    //        set
+    //        {
+    //            _subjectno1 = value;
+    //        }
+    //    }
+
+    //    public string Subjectname1
+    //    {
+    //        get
+    //        {
+    //            return _subjectname1;
+    //        }
+
+    //        set
+    //        {
+    //            _subjectname1 = value;
+    //        }
+    //    }
+
+    //    public string Subjectno2
+    //    {
+    //        get
+    //        {
+    //            return _subjectno2;
+    //        }
+
+    //        set
+    //        {
+    //            _subjectno2 = value;
+    //        }
+    //    }
+
+    //    public string Subjectname2
+    //    {
+    //        get
+    //        {
+    //            return _subjectname2;
+    //        }
+
+    //        set
+    //        {
+    //            _subjectname2 = value;
+    //        }
+    //    }
+
+    //    public string Subjectno3
+    //    {
+    //        get
+    //        {
+    //            return _subjectno3;
+    //        }
+
+    //        set
+    //        {
+    //            _subjectno3 = value;
+    //        }
+    //    }
+
+    //    public string Subjectname3
+    //    {
+    //        get
+    //        {
+    //            return _subjectname3;
+    //        }
+
+    //        set
+    //        {
+    //            _subjectname3 = value;
+    //        }
+    //    }
+
+    //    public string Subjectno4
+    //    {
+    //        get
+    //        {
+    //            return _subjectno4;
+    //        }
+
+    //        set
+    //        {
+    //            _subjectno4 = value;
+    //        }
+    //    }
+
+    //    public string Subjectname4
+    //    {
+    //        get
+    //        {
+    //            return _subjectname4;
+    //        }
+
+    //        set
+    //        {
+    //            _subjectname4 = value;
+    //        }
+    //    }
+
+    //    public string Subjectno5
+    //    {
+    //        get
+    //        {
+    //            return _subjectno5;
+    //        }
+
+    //        set
+    //        {
+    //            _subjectno5 = value;
+    //        }
+    //    }
+
+    //    public string Subjectname5
+    //    {
+    //        get
+    //        {
+    //            return _subjectname5;
+    //        }
+
+    //        set
+    //        {
+    //            _subjectname5 = value;
+    //        }
+    //    }
+
+    //    public string Subjectno6
+    //    {
+    //        get
+    //        {
+    //            return _subjectno6;
+    //        }
+
+    //        set
+    //        {
+    //            _subjectno6 = value;
+    //        }
+    //    }
+
+    //    public string Subjectname6
+    //    {
+    //        get
+    //        {
+    //            return _subjectname6;
+    //        }
+
+    //        set
+    //        {
+    //            _subjectname6 = value;
+    //        }
+    //    }
+
+    //    public string Debitcredit
+    //    {
+    //        get
+    //        {
+    //            return _debitcredit;
+    //        }
+
+    //        set
+    //        {
+    //            _debitcredit = value;
+    //        }
+    //    }
+
+    //    public decimal Debit
+    //    {
+    //        get
+    //        {
+    //            return _debit;
+    //        }
+
+    //        set
+    //        {
+    //            _debit = value;
+    //        }
+    //    }
+
+    //    public decimal Credit
+    //    {
+    //        get
+    //        {
+    //            return _credit;
+    //        }
+
+    //        set
+    //        {
+    //            _credit = value;
+    //        }
+    //    }
+
+    //    public int Sort
+    //    {
+    //        get
+    //        {
+    //            return _sort;
+    //        }
+
+    //        set
+    //        {
+    //            _sort = value;
+    //        }
+    //    }
+
+    //    public int Disabled
+    //    {
+    //        get
+    //        {
+    //            return _disabled;
+    //        }
+
+    //        set
+    //        {
+    //            _disabled = value;
+    //        }
+    //    }
+
+    //    public DateTime Createdate
+    //    {
+    //        get
+    //        {
+    //            return _createdate;
+    //        }
+
+    //        set
+    //        {
+    //            _createdate = value;
+    //        }
+    //    }
+
+    //    public string Createby
+    //    {
+    //        get
+    //        {
+    //            return _createby;
+    //        }
+
+    //        set
+    //        {
+    //            _createby = value;
+    //        }
+    //    }
+
+    //    public string Createbyname
+    //    {
+    //        get
+    //        {
+    //            return _createbyname;
+    //        }
+
+    //        set
+    //        {
+    //            _createbyname = value;
+    //        }
+    //    }
+
+    //    public string Librarylabel
+    //    {
+    //        get
+    //        {
+    //            return _librarylabel;
+    //        }
+
+    //        set
+    //        {
+    //            _librarylabel = value;
+    //        }
+    //    }
+
+    //    public string Libraryname
+    //    {
+    //        get
+    //        {
+    //            return _libraryname;
+    //        }
+
+    //        set
+    //        {
+    //            _libraryname = value;
+    //        }
+    //    }
+
+    //    public string Categoryname
+    //    {
+    //        get
+    //        {
+    //            return _categoryname;
+    //        }
+
+    //        set
+    //        {
+    //            _categoryname = value;
+    //        }
+    //    }
+
+    //    public string Categorylabel
+    //    {
+    //        get
+    //        {
+    //            return _categorylabel;
+    //        }
+
+    //        set
+    //        {
+    //            _categorylabel = value;
+    //        }
+    //    }
+
+    //    public string Groupname
+    //    {
+    //        get
+    //        {
+    //            return _groupname;
+    //        }
+
+    //        set
+    //        {
+    //            _groupname = value;
+    //        }
+    //    }
+
+    //    public string Createbyheadimgurl
+    //    {
+    //        get
+    //        {
+    //            return __createbyheadimgurl;
+    //        }
+
+    //        set
+    //        {
+    //            __createbyheadimgurl = value;
+    //        }
+    //    }
+
+    //    public int VoucherNum
+    //    {
+    //        get
+    //        {
+    //            return _voucherNum;
+    //        }
+
+    //        set
+    //        {
+    //            _voucherNum = value;
+    //        }
+    //    }
+
+    //    public int Warn
+    //    {
+    //        get
+    //        {
+    //            return _warn;
+    //        }
+
+    //        set
+    //        {
+    //            _warn = value;
+    //        }
+    //    }
+
+    //    public string Warntext
+    //    {
+    //        get
+    //        {
+    //            return _warntext;
+    //        }
+
+    //        set
+    //        {
+    //            _warntext = value;
+    //        }
+    //    }
+
+    //    public string Remark
+    //    {
+    //        get
+    //        {
+    //            return _remark;
+    //        }
+
+    //        set
+    //        {
+    //            _remark = value;
+    //        }
+    //    }
+    
+    //public YYT3VoucherItem(JObject jobject)
+    //{
+    //    if (jobject != null)
+    //    {
+    //        this.Id = jobject["id"] == null ? null : jobject["id"].ToString();
+    //        this.Instid = jobject["instid"] == null ? null : jobject["instid"].ToString();
+    //        this.Clientid = jobject["clientid"] == null ? null : jobject["clientid"].ToString();
+    //        this.Accountcyclesn = jobject["accountcyclesn"] == null ? null : jobject["accountcyclesn"].ToString();
+    //        this.Libraryid = jobject["libraryid"] == null ? null : jobject["libraryid"].ToString();
+    //        this.Libraryitemid = jobject["libraryitemid"] == null ? null : jobject["libraryitemid"].ToString();
+    //        this.Inputtype = jobject["inputtype"] == null ? null : jobject["inputtype"].ToString();
+    //        this.Bizid = jobject["bizid"] == null ? null : jobject["bizid"].ToString();
+    //        this.Biztype = jobject["biztype"] == null ? null : jobject["biztype"].ToString();
+    //        if (jobject["bizdate"] != null)
+    //        {
+    //            this.Bizdate = MicroServiceApplication.Common.Util.GetTime(jobject["bizdate"].ToString());
+    //        }
+    //        this.Summary = jobject["summary"] == null ? null : jobject["summary"].ToString();
+    //        this.Descr = jobject["descr"] == null ? null : jobject["descr"].ToString();
+    //        this.Subjectno = jobject["subjectno"] == null ? null : jobject["subjectno"].ToString();
+    //        this.Subjectname = jobject["subjectname"] == null ? null : jobject["subjectname"].ToString();
+    //        this.Subjectno1 = jobject["subjectno1"] == null ? null : jobject["subjectno1"].ToString();
+    //        this.Subjectname1 = jobject["subjectname1"] == null ? null : jobject["subjectname1"].ToString();
+    //        this.Subjectno2 = jobject["subjectno2"] == null ? null : jobject["subjectno2"].ToString();
+    //        this.Subjectname2 = jobject["subjectname2"] == null ? null : jobject["subjectname2"].ToString();
+    //        this.Subjectno3 = jobject["subjectno3"] == null ? null : jobject["subjectno3"].ToString();
+    //        this.Subjectname3 = jobject["subjectname3"] == null ? null : jobject["subjectname3"].ToString();
+    //        this.Subjectno4 = jobject["subjectno4"] == null ? null : jobject["subjectno4"].ToString();
+    //        this.Subjectname4 = jobject["subjectname4"] == null ? null : jobject["subjectname4"].ToString();
+    //        this.Subjectno5 = jobject["subjectno5"] == null ? null : jobject["subjectno5"].ToString();
+    //        this.Subjectname5 = jobject["subjectname5"] == null ? null : jobject["subjectname5"].ToString();
+    //        this.Subjectno6 = jobject["subjectno6"] == null ? null : jobject["subjectno6"].ToString();
+    //        this.Subjectname6 = jobject["subjectname6"] == null ? null : jobject["subjectname6"].ToString();
+
+    //        this.Debitcredit = jobject["debitcredit"] == null ? null : jobject["debitcredit"].ToString();
+
+    //        if (jobject["debit"] != null)
+    //        {
+    //            this.Debit = jobject["debit"].ToObject<decimal>();
+    //        }
+    //        if (jobject["credit"] != null)
+    //        {
+    //            this.Credit = jobject["credit"].ToObject<decimal>();
+    //        }
+    //        if (jobject["sort"] != null)
+    //        {
+    //            this.Sort = jobject["sort"].ToObject<int>();
+    //        }
+    //        if (jobject["disabled"] != null)
+    //        {
+    //            this.Disabled = jobject["disabled"].ToObject<int>();
+    //        }
+    //        if (jobject["createdate"] != null)
+    //        {
+    //            this.Createdate = MicroServiceApplication.Common.Util.GetTime(jobject["createdate"].ToString());
+    //        }
+    //        this.Createby = jobject["createby"] == null ? null : jobject["createby"].ToString();
+    //        this.Biztype = jobject["biztype"] == null ? null : jobject["biztype"].ToString();
+    //        if (jobject["warn"] != null)
+    //        {
+    //            this.Warn = jobject["warn"].ToObject<int>();
+    //        }
+    //        this.Warntext = jobject["warntext"] == null ? null : jobject["warntext"].ToString();
+    //        this.Remark = jobject["remark"] == null ? null : jobject["remark"].ToString();
+    //        this.Librarylabel = jobject["librarylabel"] == null ? null : jobject["librarylabel"].ToString();
+    //        this.Libraryname = jobject["libraryname"] == null ? null : jobject["libraryname"].ToString();
+    //        this.Categoryname = jobject["categoryname"] == null ? null : jobject["categoryname"].ToString();
+    //        this.Categorylabel = jobject["categorylabel"] == null ? null : jobject["categorylabel"].ToString();
+    //        this.Groupname = jobject["groupname"] == null ? null : jobject["groupname"].ToString();
+    //        this.Createbyname = jobject["createbyname"] == null ? null : jobject["createbyname"].ToString();
+    //        this.Createbyheadimgurl = jobject["_createbyheadimgurl"] == null ? null : jobject["_createbyheadimgurl"].ToString();
+    //        if (jobject["voucherNum"] != null)
+    //        {
+    //            this.VoucherNum = jobject["voucherNum"].ToObject<int>();
+    //        }
+    //    }
+    //}
+//}
+
+        class YYT3Voucher
+    {
+        private int _iperiod;//会计期间
+        private string _csign;//记
+        private int _isignseq;//1
+        private int _ino_id;//每月凭证号
+        private int _inid;//分录号
+        private  DateTime _dbill_date;//创建日期
+        private int _idoc;//-1
+        private string _cbill;//demo
+        private string _cdigest;//摘要
+        private string _ccode;//科目代码
+        private decimal _md;//借方金额
+        private decimal _mc;//贷方金额
+        private string _ccode_equal;//对方科目
+        private DateTime _doutbilldate;//_dbill_date一样
+        private int _ioutperiod;//_iperiod一样
+        private int _bvouchedit;//1
+        private int _bvalueedit;//1
+        private int _bcodeedit;//1
+        private int _bPCSedit;//1
+        private int _bDeptedit;//1
+        private int _bItemedit;//1
+        private int _bCusSupInput;//1
+        private string _ccus_id;//核算客户id
+        private string _csup_id;//核算供应商id
+        public int Iperiod
+        {
+            get
+            {
+                return _iperiod;
+            }
+
+            set
+            {
+                _iperiod = value;
+            }
+        }
+
+        public string Csign
+        {
+            get
+            {
+                return _csign;
+            }
+
+            set
+            {
+                _csign = value;
+            }
+        }
+
+        public int Isignseq
+        {
+            get
+            {
+                return _isignseq;
+            }
+
+            set
+            {
+                _isignseq = value;
+            }
+        }
+
+        public int Ino_id
+        {
+            get
+            {
+                return _ino_id;
+            }
+
+            set
+            {
+                _ino_id = value;
+            }
+        }
+
+        public int Inid
+        {
+            get
+            {
+                return _inid;
+            }
+
+            set
+            {
+                _inid = value;
+            }
+        }
+
+        public DateTime Dbill_date
+        {
+            get
+            {
+                return _dbill_date;
+            }
+
+            set
+            {
+                _dbill_date = value;
+            }
+        }
+
+        public int Idoc
+        {
+            get
+            {
+                return _idoc;
+            }
+
+            set
+            {
+                _idoc = value;
+            }
+        }
+
+        public string Cbill
+        {
+            get
+            {
+                return _cbill;
+            }
+
+            set
+            {
+                _cbill = value;
+            }
+        }
+
+        public string Cdigest
+        {
+            get
+            {
+                return _cdigest;
+            }
+
+            set
+            {
+                _cdigest = value;
+            }
+        }
+
+        public string Ccode
+        {
+            get
+            {
+                return _ccode;
+            }
+
+            set
+            {
+                _ccode = value;
+            }
+        }
+
+        public decimal Md
+        {
+            get
+            {
+                return _md;
+            }
+
+            set
+            {
+                _md = value;
+            }
+        }
+
+        public decimal Mc
+        {
+            get
+            {
+                return _mc;
+            }
+
+            set
+            {
+                _mc = value;
+            }
+        }
+
+        public string Ccode_equal
+        {
+            get
+            {
+                return _ccode_equal;
+            }
+
+            set
+            {
+                _ccode_equal = value;
+            }
+        }
+
+        public DateTime Doutbilldate
+        {
+            get
+            {
+                return _doutbilldate;
+            }
+
+            set
+            {
+                _doutbilldate = value;
+            }
+        }
+
+        public int Ioutperiod
+        {
+            get
+            {
+                return _ioutperiod;
+            }
+
+            set
+            {
+                _ioutperiod = value;
+            }
+        }
+
+        public int Bvouchedit
+        {
+            get
+            {
+                return _bvouchedit;
+            }
+
+            set
+            {
+                _bvouchedit = value;
+            }
+        }
+
+        public int Bvalueedit
+        {
+            get
+            {
+                return _bvalueedit;
+            }
+
+            set
+            {
+                _bvalueedit = value;
+            }
+        }
+
+        public int Bcodeedit
+        {
+            get
+            {
+                return _bcodeedit;
+            }
+
+            set
+            {
+                _bcodeedit = value;
+            }
+        }
+
+        public int BPCSedit
+        {
+            get
+            {
+                return _bPCSedit;
+            }
+
+            set
+            {
+                _bPCSedit = value;
+            }
+        }
+
+        public int BDeptedit
+        {
+            get
+            {
+                return _bDeptedit;
+            }
+
+            set
+            {
+                _bDeptedit = value;
+            }
+        }
+
+        public int BItemedit
+        {
+            get
+            {
+                return _bItemedit;
+            }
+
+            set
+            {
+                _bItemedit = value;
+            }
+        }
+
+        public int BCusSupInput
+        {
+            get
+            {
+                return _bCusSupInput;
+            }
+
+            set
+            {
+                _bCusSupInput = value;
+            }
+        }
+
+        public string Ccus_id
+        {
+            get
+            {
+                return _ccus_id;
+            }
+
+            set
+            {
+                _ccus_id = value;
+            }
+        }
+
+        public string Csup_id
+        {
+            get
+            {
+                return _csup_id;
+            }
+
+            set
+            {
+                _csup_id = value;
+            }
+        }
+    }
+    
+       
+//
+//账套配置的封装字段start
+//
+class YYT3accset
+    {
+        private string _iSysId;
+        private string _cAcc_Id;
+        private string _cAcc_Name;
+        private string _iYear;
+        private string _dbHost;
+        private string _dbName;
+        private string _dbUser;
+        private string _dbPassword;
+
+        public string ISysId
+        {
+            get
+            {
+                return _iSysId;
+            }
+
+            set
+            {
+                _iSysId = value;
+            }
+        }
+
+        public string CAcc_Id
+        {
+            get
+            {
+                return _cAcc_Id;
+            }
+
+            set
+            {
+                _cAcc_Id = value;
+            }
+        }
+
+        public string CAcc_Name
+        {
+            get
+            {
+                return _cAcc_Name;
+            }
+
+            set
+            {
+                _cAcc_Name = value;
+            }
+        }
+
+        public string IYear
+        {
+            get
+            {
+                return _iYear;
+            }
+
+            set
+            {
+                _iYear = value;
+            }
+        }
+
+        public string DbHost
+        {
+            get
+            {
+                return _dbHost;
+            }
+
+            set
+            {
+                _dbHost = value;
+            }
+        }
+
+        public string DbName
+        {
+            get
+            {
+                return _dbName;
+            }
+
+            set
+            {
+                _dbName = value;
+            }
+        }
+
+        public string DbUser
+        {
+            get
+            {
+                return _dbUser;
+            }
+
+            set
+            {
+                _dbUser = value;
+            }
+        }
+
+        public string DbPassword
+        {
+            get
+            {
+                return _dbPassword;
+            }
+
+            set
+            {
+                _dbPassword = value;
+            }
+        }
+    }
+    //
+    //账套配置的封装字段end
+    //
+    //科目表start
+    //
+    class YYT3code
+    {
+        //SET SET IDENTITY_INSERT[dbo].[code]   ON    //开启插入功能
+        //SET SET IDENTITY_INSERT[dbo].[code]   OFF   //关闭插入功能
+        private int _i_id;//id
+        private string _cclass;//取上级，资产、负债、损益
+        private string _cclass_engl;//取上级，（资产、负债、损益）的简称
+        private string _ccode;//科目代码
+        private string _ccode_name;//科目名称
+        private string _ccode_engl;//科目名称eng
+        private int _igrade;//取科目长度表，科目级别
+        private string _bproperty;//取上级，借贷方向（1是借，0是贷）
+        private string _cbook_type;//金额式，数量金额式，外币金额式
+        private string _cbook_type_engl;//JES,SLJES,WBJES
+        private int _bend;//1
+        private int _bd_c;//1
+
+        public int I_id
+        {
+            get
+            {
+                return _i_id;
+            }
+
+            set
+            {
+                _i_id = value;
+            }
+        }
+
+        public string Cclass
+        {
+            get
+            {
+                return _cclass;
+            }
+
+            set
+            {
+                _cclass = value;
+            }
+        }
+
+        public string Cclass_engl
+        {
+            get
+            {
+                return _cclass_engl;
+            }
+
+            set
+            {
+                _cclass_engl = value;
+            }
+        }
+
+        public string Ccode
+        {
+            get
+            {
+                return _ccode;
+            }
+
+            set
+            {
+                _ccode = value;
+            }
+        }
+
+        public string Ccode_name
+        {
+            get
+            {
+                return _ccode_name;
+            }
+
+            set
+            {
+                _ccode_name = value;
+            }
+        }
+
+        public string Ccode_engl
+        {
+            get
+            {
+                return _ccode_engl;
+            }
+
+            set
+            {
+                _ccode_engl = value;
+            }
+        }
+
+        public int Igrade
+        {
+            get
+            {
+                return _igrade;
+            }
+
+            set
+            {
+                _igrade = value;
+            }
+        }
+
+        public string Bproperty
+        {
+            get
+            {
+                return _bproperty;
+            }
+
+            set
+            {
+                _bproperty = value;
+            }
+        }
+
+        public string Cbook_type
+        {
+            get
+            {
+                return _cbook_type;
+            }
+
+            set
+            {
+                _cbook_type = value;
+            }
+        }
+
+        public string Cbook_type_engl
+        {
+            get
+            {
+                return _cbook_type_engl;
+            }
+
+            set
+            {
+                _cbook_type_engl = value;
+            }
+        }
+
+        public int Bend
+        {
+            get
+            {
+                return _bend;
+            }
+
+            set
+            {
+                _bend = value;
+            }
+        }
+
+        public int Bd_c
+        {
+            get
+            {
+                return _bd_c;
+            }
+
+            set
+            {
+                _bd_c = value;
+            }
+        }
+    }
+    //
+    //科目表end
+    //
+    //核算客户表start
+    //
+    class YYT3Customer
+    {
+        private int _cCusCode;//id
+        private string _cCusName;//客户名称
+        private string _cCusAbbName;//客户名称
+        private string _cCCCode;//01
+        private DateTime _dCusDevDate;//创建日期
+        private string _cCusHeadCode;//id
+        private int _iCostGrade;//-1
+        public string CCusName
+        {
+            get
+            {
+                return _cCusName;
+            }
+
+            set
+            {
+                _cCusName = value;
+            }
+        }
+
+        public string CCusAbbName
+        {
+            get
+            {
+                return _cCusAbbName;
+            }
+
+            set
+            {
+                _cCusAbbName = value;
+            }
+        }
+
+        public string CCCCode
+        {
+            get
+            {
+                return _cCCCode;
+            }
+
+            set
+            {
+                _cCCCode = value;
+            }
+        }
+
+        public DateTime DCusDevDate
+        {
+            get
+            {
+                return _dCusDevDate;
+            }
+
+            set
+            {
+                _dCusDevDate = value;
+            }
+        }
+
+        public string CCusHeadCode
+        {
+            get
+            {
+                return _cCusHeadCode;
+            }
+
+            set
+            {
+                _cCusHeadCode = value;
+            }
+        }
+
+        public int ICostGrade
+        {
+            get
+            {
+                return _iCostGrade;
+            }
+
+            set
+            {
+                _iCostGrade = value;
+            }
+        }
+
+        public int CCusCode
+        {
+            get
+            {
+                return _cCusCode;
+            }
+
+            set
+            {
+                _cCusCode = value;
+            }
+        }
+    }
+    //
+    //核算客户表end
+    //
+    //核算供应商表start
+    //
+    class YYT3Vendor
+    {
+        private int _cVenCode;//id
+        private string _cVenName;//供应商名称
+        private string _cVenAbbName;//供应商名称
+        private string _cVCCode;//01
+        private DateTime _dVenDevDate;//创建时间
+        private string _cVenHeadCode;//id
+        private int _bVenTax;//1
+        private int _bisFeeVen;//0
+
+        public int CVenCode
+        {
+            get
+            {
+                return _cVenCode;
+            }
+
+            set
+            {
+                _cVenCode = value;
+            }
+        }
+
+        public string CVenName
+        {
+            get
+            {
+                return _cVenName;
+            }
+
+            set
+            {
+                _cVenName = value;
+            }
+        }
+
+        public string CVenAbbName
+        {
+            get
+            {
+                return _cVenAbbName;
+            }
+
+            set
+            {
+                _cVenAbbName = value;
+            }
+        }
+
+        public string CVCCode
+        {
+            get
+            {
+                return _cVCCode;
+            }
+
+            set
+            {
+                _cVCCode = value;
+            }
+        }
+
+        public DateTime DVenDevDate
+        {
+            get
+            {
+                return _dVenDevDate;
+            }
+
+            set
+            {
+                _dVenDevDate = value;
+            }
+        }
+
+        public string CVenHeadCode
+        {
+            get
+            {
+                return _cVenHeadCode;
+            }
+
+            set
+            {
+                _cVenHeadCode = value;
+            }
+        }
+
+        public int BVenTax
+        {
+            get
+            {
+                return _bVenTax;
+            }
+
+            set
+            {
+                _bVenTax = value;
+            }
+        }
+
+        public int BisFeeVen
+        {
+            get
+            {
+                return _bisFeeVen;
+            }
+
+            set
+            {
+                _bisFeeVen = value;
+            }
+        }
+    }
+    //
+    //核算供应商表end
+    //
+    //科目编码级次表start
+    //
+    class YYT3AccInformation
+    {
+        private string _cSysID;//AA
+        private string _cID;//08
+        private string _cName;//cGradeLevel
+        private string _cCaption;//科目编码级次
+        private string _cType;//Text
+        private string _cValue;//4，2，2，2，2
+        private string _cDefault;//4，2，2，2，
+        private int _bVisible;//0
+        private int _bEnable;//0
+
+        public string CSysID
+        {
+            get
+            {
+                return _cSysID;
+            }
+
+            set
+            {
+                _cSysID = value;
+            }
+        }
+
+        public string CID
+        {
+            get
+            {
+                return _cID;
+            }
+
+            set
+            {
+                _cID = value;
+            }
+        }
+
+        public string CName
+        {
+            get
+            {
+                return _cName;
+            }
+
+            set
+            {
+                _cName = value;
+            }
+        }
+
+        public string CCaption
+        {
+            get
+            {
+                return _cCaption;
+            }
+
+            set
+            {
+                _cCaption = value;
+            }
+        }
+
+        public string CType
+        {
+            get
+            {
+                return _cType;
+            }
+
+            set
+            {
+                _cType = value;
+            }
+        }
+
+        public string CValue
+        {
+            get
+            {
+                return _cValue;
+            }
+
+            set
+            {
+                _cValue = value;
+            }
+        }
+
+        public string CDefault
+        {
+            get
+            {
+                return _cDefault;
+            }
+
+            set
+            {
+                _cDefault = value;
+            }
+        }
+
+        public int BVisible
+        {
+            get
+            {
+                return _bVisible;
+            }
+
+            set
+            {
+                _bVisible = value;
+            }
+        }
+
+        public int BEnable
+        {
+            get
+            {
+                return _bEnable;
+            }
+
+            set
+            {
+                _bEnable = value;
+            }
+        }
+    }
+    //
+    //科目编码级次表end
+    //
+    class YYT3ExportContext
+    {
+        private ExportBean _exportBean;
+
+        private List<YYT3Voucher> _vouchers;//凭证
+
+        private Dictionary<string, YYT3AccInformation> _accInformation;//科目长度级次表
+
+        private List<ClientSubject> _clientSubjects;//小微服数据库的科目表
+
+        private int _maxSubid;
+
+        private List<string> _sqls = new List<string>();
+
+        internal ExportBean ExportBean
+        {
+            get
+            {
+                return _exportBean;
+            }
+
+            set
+            {
+                _exportBean = value;
+            }
+        }
+
+        internal Dictionary<string, YYT3AccInformation> AccInformation
+        {
+            get
+            {
+                return _accInformation;
+            }
+
+            set
+            {
+                _accInformation = value;
+            }
+        }
+
+        internal List<ClientSubject> ClientSubjects
+        {
+            get
+            {
+                return _clientSubjects;
+            }
+
+            set
+            {
+                _clientSubjects = value;
+            }
+        }
+
+        public int MaxSubid
+        {
+            get
+            {
+                return _maxSubid;
+            }
+
+            set
+            {
+                _maxSubid = value;
+            }
+        }
+
+        public List<string> Sqls
+        {
+            get
+            {
+                return _sqls;
+            }
+
+            set
+            {
+                _sqls = value;
+            }
+        }
+
+        internal List<YYT3Voucher> Vouchers
+        {
+            get
+            {
+                return _vouchers;
+            }
+
+            set
+            {
+                _vouchers = value;
+            }
+        }
+    } 
+
+    class YYT3Factory
+    {
+        public bool ExecuteSQLNonquery(List<String> sqls,YYT3accset accset)
+        {
+            SqlConnection connection = this.createConnection(accset);
+            connection.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = connection;
+            SqlTransaction tx = connection.BeginTransaction();
+            cmd.Transaction = tx;
+            try
+            {
+                for (int n = 0; n < sqls.Count; n++)
+                {
+                    string strsql = sqls[n].ToString();
+                    if (strsql.Trim().Length > 1)
+                    {
+                        cmd.CommandText = strsql;
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                tx.Commit();
+                return true;
+            }
+            catch (Exception e)
+            {
+                tx.Rollback();
+                throw e;
+            }
+        }
+        //
+        //获取帐套科目表start
+        //
+        public List<YYT3code> getcode(YYT3accset accset)
+        {
+            SqlConnection connection = this.createConnection(accset);
+            string sql = "select * from code ";
+            SqlDataAdapter myDataAdapter = new SqlDataAdapter(sql, connection);
+            DataSet myDataSet = new DataSet();      // 创建DataSet
+            List<YYT3code> YYT3codeList = new List<YYT3code>();
+            try
+            {
+                myDataAdapter.Fill(myDataSet, "code");
+                DataTable myTable = myDataSet.Tables["code"];
+
+                if (myTable.Rows.Count > 0)
+                {
+                    foreach (DataRow row in myTable.Rows)
+                    {
+                        YYT3code yYT3code = new YYT3code();
+                        yYT3code.I_id = Int32.Parse(row[myTable.Columns["i_id"]].ToString());
+                        yYT3code.Cclass = row[myTable.Columns["cclass"]].ToString();
+                        yYT3code.Cclass_engl = row[myTable.Columns["cclass_engl"]].ToString();
+                        yYT3code.Ccode = row[myTable.Columns["ccode"]].ToString();
+                        yYT3code.Ccode_engl = row[myTable.Columns["ccode_engl"]].ToString();
+                        yYT3code.Ccode_name = row[myTable.Columns["ccode_name"]].ToString();
+                        yYT3code.Igrade = Int32.Parse(row[myTable.Columns["igrade"]].ToString());
+                        yYT3code.Bproperty = (row[myTable.Columns["bproperty"]].ToString() == "False" ? "cr" : "de").ToString();
+                        yYT3code.Cbook_type = row[myTable.Columns["cbook_type"]].ToString();
+                        yYT3code.Cbook_type_engl = row[myTable.Columns["cbook_type_engl"]].ToString();
+                        yYT3code.Bend = Int32.Parse(row[myTable.Columns["bend"]].ToString() == "false"? "0" :"1");
+                        yYT3code.Bd_c = Int32.Parse(row[myTable.Columns["bd_c"]].ToString() == "false"? "0" :"1"); 
+                        YYT3codeList.Add(yYT3code);
+                    }                    
+                }
+                return YYT3codeList;
+            }
+            catch (Exception e)
+            {
+                throw (new Exception("数据库出错:" + e.Message));
+            }
+            finally
+            {
+                myDataSet.Dispose();
+                myDataAdapter.Dispose();
+                connection.Close();
+            }
+        }
+        //
+        //获取帐套科目表end
+        //
+        //获取会计科目最大序号start
+        //
+        public int getsubjectmaxid(YYT3accset accset)
+        {
+            SqlConnection connection = this.createConnection(accset);
+            string sql = "select max(i_id) as maxid from code ";
+            SqlDataAdapter myDataAdapter = new SqlDataAdapter(sql, connection);
+            DataSet myDataSet = new DataSet();
+                       
+            try
+            {
+                int maxi_id = 0;
+                myDataAdapter.Fill(myDataSet, "code");
+                DataTable myTable = myDataSet.Tables["code"];
+                if (myTable.Rows.Count>0)
+                {
+                    string Maxi_id = myTable.Rows[0][myTable.Columns[0]].ToString() == null ? "0" : myTable.Rows[0][myTable.Columns[0]].ToString();
+                    if (Maxi_id == "" || Maxi_id == null) Maxi_id = "0";
+                    maxi_id = int.Parse(Maxi_id);
+                }
+                else
+                {
+                    maxi_id = 0;
+                }
+                return maxi_id;
+             }
+            catch (Exception e)
+            {
+                throw (new Exception("数据库出错:" + e.Message));
+            }
+            finally
+            {
+                myDataSet.Dispose();
+                myDataAdapter.Dispose();
+                connection.Close();
+            }
+        }
+        //
+        //获取会计科目最大序号end
+        //
+        //获取上一级会计科目信息start
+        //
+        public YYT3code getlastcode(YYT3accset accset , String ccode)
+        {
+            SqlConnection connection = this.createConnection(accset);
+            string sql = "select * from code where ccode = '"+ccode+"'";
+            SqlDataAdapter myDataAdapter = new SqlDataAdapter(sql, connection);
+            DataSet myDataSet = new DataSet();
+            YYT3code yYT3code = null;
+            try
+            {
+                myDataAdapter.Fill(myDataSet, "code");
+                DataTable myTable = myDataSet.Tables["code"];
+                if (myTable.Rows.Count>0)
+                {
+                    DataRow row = myTable.Rows[0];
+                    yYT3code = new YYT3code();
+                    yYT3code.Cclass = row["cclass"] == null ? null : row["cclass"].ToString();
+                    yYT3code.Cclass_engl = row["cclass_engl"] == null ? null : row["cclass_engl"].ToString();
+                    yYT3code.Bproperty = row["bproperty"] == null ? null : row["bproperty"].ToString();
+                    yYT3code.Cbook_type = row["cbook_type"] == null ? null : row["cbook_type"].ToString();
+                    yYT3code.Cbook_type_engl = row["cbook_type_engl"] == null ? null : row["cbook_type_engl"].ToString();
+                }
+                return yYT3code;
+            }
+            finally
+            {
+                myDataSet.Dispose();
+                myDataAdapter.Dispose();
+                connection.Close();
+            }
+        }
+        //
+        //获取上一级会计科目信息end
+        //
+        //获取账套科目长度表start
+        //
+        public YYT3AccInformation getAccInformation(YYT3accset accset)
+        {
+            SqlConnection connection = this.createConnection(accset);
+            string cCaption = "科目编码级次";
+            string cName = "cGradeLevel";
+            string sql = "select * from AccInformation where cName = '"+cName+"' and cCaption = '"+ cCaption + "'";
+            SqlDataAdapter myDataAdapter = new SqlDataAdapter(sql, connection);
+            DataSet myDataSet = new DataSet();      // 创建DataSet
+            List<YYT3AccInformation> yYT3AccInformationList = new List<YYT3AccInformation>();
+            try
+            {
+                myDataAdapter.Fill(myDataSet, "AccInformation");
+                DataTable myTable = myDataSet.Tables["AccInformation"];
+                if (myTable.Rows.Count > 0)
+                {
+                    foreach (DataRow row in myTable.Rows)
+                    {
+                        YYT3AccInformation yYT3AccInformation = new YYT3AccInformation();
+                        yYT3AccInformation.CValue = row[myTable.Columns["cValue"]].ToString();
+                        yYT3AccInformationList.Add(yYT3AccInformation);
+                    }
+                }             
+            }
+            finally
+            {
+                myDataSet.Dispose();
+                myDataAdapter.Dispose();
+                connection.Close();
+            }
+            if (yYT3AccInformationList.Count > 0)
+            {
+                return yYT3AccInformationList[0];
+            }
+            else
+            {
+                return null;
+            }
+        }
+        //
+        //获取账套科目长度表end
+        //
+        //获取核算客户表start
+        //
+        public List<YYT3Customer> getCustomer(YYT3accset accset)
+        {
+            SqlConnection connection = this.createConnection(accset);
+            string sql = "select * from Customer";
+            SqlDataAdapter myDataAdapter = new SqlDataAdapter(sql, connection);
+            DataSet myDataSet = new DataSet();      // 创建DataSet
+            List<YYT3Customer> yYT3CustomerList = new List<YYT3Customer>();
+            try
+            {
+                myDataAdapter.Fill(myDataSet, "Customer");
+                DataTable myTable = myDataSet.Tables["Customer"];
+                if (myTable.Rows.Count > 0)
+                    foreach (DataRow row in myTable.Rows)
+                    {
+                        YYT3Customer yYT3Customer = new YYT3Customer();
+                        yYT3Customer.CCusCode = Int32.Parse(row[myTable.Columns["cCusCode"]].ToString());
+                        yYT3Customer.CCusName = row[myTable.Columns["cCusName"]].ToString();
+                        yYT3Customer.CCusAbbName = row[myTable.Columns["cCusAbbName"]].ToString();
+                        yYT3Customer.CCCCode = row[myTable.Columns["cCCCode"]].ToString();
+                        yYT3Customer.CCusHeadCode = row[myTable.Columns["cCusHeadCode"]].ToString();
+                        yYT3Customer.ICostGrade = Int32.Parse(row[myTable.Columns["iCostGrade"]].ToString());
+                        yYT3CustomerList.Add(yYT3Customer);
+                    }
+                return yYT3CustomerList;
+            }
+            catch (Exception e)
+            {
+                throw (new Exception("数据库出错:" + e.Message));
+            }
+            finally
+            {
+                myDataSet.Dispose();
+                myDataAdapter.Dispose();
+                connection.Close();
+            }
+
+        }
+        //
+        //获取核算客户表end
+        //
+        //获取可算供应商表start
+        //
+        public List<YYT3Vendor> getVendor(YYT3accset accset)
+        {
+            SqlConnection connection = this.createConnection(accset);
+            string sql = "select * from Customer";
+            SqlDataAdapter myDataAdapter = new SqlDataAdapter(sql, connection);
+            DataSet myDataSet = new DataSet();      // 创建DataSet
+            List<YYT3Vendor> yYT3VendorList = new List<YYT3Vendor>();
+            try
+            {
+                myDataAdapter.Fill(myDataSet, "Vendor");
+                DataTable myTable = myDataSet.Tables["Vendor"];
+                if (myTable.Rows.Count > 0)
+                    foreach (DataRow row in myTable.Rows)
+                    {
+                        YYT3Vendor yYT3Vendor = new YYT3Vendor();
+                        yYT3Vendor.CVenCode = Int32.Parse(row[myTable.Columns["cVenCode"]].ToString());
+                        yYT3Vendor.CVenName = row[myTable.Columns["cVenName"]].ToString();
+                        yYT3Vendor.CVenAbbName = row[myTable.Columns["cVenAbbName"]].ToString();
+                        yYT3Vendor.CVCCode = row[myTable.Columns["cVCCode"]].ToString();
+                        yYT3Vendor.BisFeeVen = Int32.Parse(row[myTable.Columns["bisFeeVen"]].ToString());
+                        yYT3Vendor.BVenTax = Int32.Parse(row[myTable.Columns["bVenTax"]].ToString());
+                        yYT3Vendor.CVenHeadCode = row[myTable.Columns["cVenHeadCode"]].ToString();
+                        yYT3VendorList.Add(yYT3Vendor);
+                    }
+                return yYT3VendorList;
+            }
+            catch (Exception e)
+            {
+                throw (new Exception("数据库出错:" + e.Message));
+            }
+            finally
+            {
+                myDataSet.Dispose();
+                myDataAdapter.Dispose();
+                connection.Close();
+            }
+        }
+        //
+        //获取可算供应商表end
+        //
+        public int getvouchersmaxid(YYT3accset accset)
+        {
+            SqlConnection connection = this.createConnection(accset);
+            string sql = "select max(i_id) as maxid from GL_accvouch ";
+            SqlDataAdapter myDataAdapter = new SqlDataAdapter(sql, connection);
+            DataSet myDataSet = new DataSet();
+
+            try
+            {
+                int maxi_id = 0;
+                myDataAdapter.Fill(myDataSet, "code");
+                DataTable myTable = myDataSet.Tables["code"];
+                if (myTable.Rows.Count > 0)
+                {
+                    string  Maxi_id = myTable.Rows[0][myTable.Columns[0]].ToString() == null ? "0" : myTable.Rows[0][myTable.Columns[0]].ToString();
+                    if (Maxi_id == "" || Maxi_id == null) Maxi_id = "0";
+                    maxi_id = int.Parse(Maxi_id);
+                }
+                else
+                {
+                    maxi_id = 0;
+                }
+                return maxi_id;
+            }
+            catch (Exception e)
+            {
+                throw (new Exception("数据库出错:" + e.Message));
+            }
+            finally
+            {
+                myDataSet.Dispose();
+                myDataAdapter.Dispose();
+                connection.Close();
+            }
+        }
+        public int getvouchersmaxino_id(YYT3accset accset, int Iperiod, string Csign)
+        {
+            SqlConnection connection = this.createConnection(accset);
+            string sql = "select max(ino_id) as maxid from GL_accvouch where iperiod = " + Iperiod + " and csign = '"+ Csign + "' ";
+            SqlDataAdapter myDataAdapter = new SqlDataAdapter(sql, connection);
+            DataSet myDataSet = new DataSet();
+            try
+            {
+                int maxino_id = 0;
+                myDataAdapter.Fill(myDataSet, "code");
+                DataTable myTable = myDataSet.Tables["code"];
+                if (myTable.Rows.Count > 0)
+                {
+                    string Maxino_id = myTable.Rows[0][myTable.Columns[0]].ToString() == null ? "0" : myTable.Rows[0][myTable.Columns[0]].ToString();
+                    if (Maxino_id == "" || Maxino_id == null) Maxino_id = "0";
+                    maxino_id = int.Parse(Maxino_id);
+                }
+                else
+                {
+                    maxino_id = 0;
+                }
+                return maxino_id;
+            }
+            catch (Exception e)
+            {
+                throw (new Exception("数据库出错:" + e.Message));
+            }
+            finally
+            {
+                myDataSet.Dispose();
+                myDataAdapter.Dispose();
+                connection.Close();
+            }
+        }
+        //创建一个打开数据库的连接start
+        //
+        private SqlConnection createConnection(YYT3accset accset)
+        {
+            string connecturl = "Data Source=" + accset.DbHost + ";Initial Catalog=" + accset.DbName + ";Persist Security Info=True;User ID=" + accset.DbUser + ";Password=" + accset.DbPassword;//数据库的ip、用户名、密码
+            SqlConnection connection = new SqlConnection(connecturl);//用上面的ip、用户名、密码创建一个打开数据库的连接
+            return connection;
+        }
+        //
+        //创建一个打开数据库的连接end
+        //
+        //选择账套的方法start
+        //
+        public List<YYT3accset> queryAccset(string dbuser,string dbpassword,string dbip,string dbprefix)
+        {
+            if (dbip == "" || dbprefix == "" || dbip == null || dbprefix == null)return null;
+            List<YYT3accset> accsetList = new List<YYT3accset>();
+
+            string connecturl = "Data Source=" + dbip + ";Initial Catalog=master;Persist Security Info=True;User ID=" + dbuser + ";Password=" + dbpassword;
+            SqlConnection connection = new SqlConnection(connecturl);//打开数据库
+
+            string tableName ="UFSystem..UA_Account";//给tableName赋值为总表的名称
+            string sql = "select iSysID,cAcc_Id,cAcc_Name,iYear from "+ tableName +"";//账套总表
+
+            SqlDataAdapter myDataAdapter = new SqlDataAdapter(sql, connection);//创建一个填充DataSet的数据库连接
+            DataSet myDataSet = new DataSet();//创建一个缓存
+
+            try
+            {
+                myDataAdapter.Fill(myDataSet, tableName);
+                DataTable myDataTable = myDataSet.Tables[tableName];//把tableName赋值到创建的一个新表
+                if(myDataTable.Rows.Count > 0)//如果表的行数>0,即表示有数据
+                {
+                    foreach(DataRow row in myDataTable.Rows)//循环新表里取值
+                    {
+                        YYT3accset accset = new YYT3accset();
+
+                        accset.ISysId = row[myDataTable.Columns["iSysId"]].ToString();//账套配置ISysID封装字段赋值
+                        accset.CAcc_Id = row[myDataTable.Columns["cAcc_Id"]].ToString();//账套配置CAcc_Id封装字段赋值
+                        accset.CAcc_Name = row[myDataTable.Columns["cAcc_Name"]].ToString();//账套配置CAcc_Name封装字段赋值
+                        accset.IYear = row[myDataTable.Columns["iYear"]].ToString();//账套配置IYear封装字段赋值
+                        accset.DbName = dbprefix + accset.CAcc_Id+"_"+accset.IYear;//账套配置DbName封装字段赋值
+                        accset.DbHost = dbip;//账套配置DbHost封装字段赋值
+                        accset.DbPassword = dbpassword;
+                        accset.DbUser = dbuser;
+                        accsetList.Add(accset);
+                         
+                    }
+                }
+                return accsetList;
+            }
+            finally
+            {
+                myDataSet.Dispose();
+                myDataAdapter.Dispose();
+                connection.Close();
+            }
+        }
+        //
+        //选择账套的方法end
+        //
+        //测试连接的方法start
+        //
+        public void connectTest(YYT3accset accset)
+        {
+            SqlConnection connection = this.createConnection(accset);//引用数据库打开的方法赋值到一个新的数据库打开方法
+            string sql = "select max(i_id) as i_id from GL_accvouch where 1=2 ";//创建sql语句
+            SqlDataAdapter myDataAdapter = new SqlDataAdapter(sql, connection);//把sql语句和connection数据库打开方法赋值到一个数据库连接
+            DataSet myDataSet = new DataSet();//创建一个新的缓存
+            try
+            {
+                myDataAdapter.Fill(myDataSet, "GL_accvouch");//在DataSet中添加数据源
+                DataTable myTable = myDataSet.Tables["GL_accvouch"];//创建一个新表
+                string i_id = myTable.Rows[0][myTable.Columns["i_id"]].ToString();//声明一个变量把表的(第一行row[0][i_id]列)赋值到i_id
+            } 
+            finally
+            {
+                myDataSet.Dispose();
+                myDataAdapter.Dispose();
+                connection.Close();//关闭数据库
+            }
+        }
+        //
+        //测试连接的方法end
+        //
+        //科目表导入新科目start
+        //
+        public void exportSubject(ExportBean exportBean,YYT3accset accset)
+        {
+            YYT3AccInformation yYT3AccInformation = this.getAccInformation(accset);
+            YYT3ExportContext context = new YYT3ExportContext();
+            context.ExportBean = exportBean;
+            try
+            {
+                ClientSubjectFactory csf = new ClientSubjectFactory();
+                List<ClientSubject> clientSubjectList = csf.query(exportBean.Clientid, 1, 1);
+                List<string> sqls = new List<string>();
+                int maxid = this.getsubjectmaxid(accset);
+                sqls.Add("SET SET IDENTITY_INSERT code   ON");
+                foreach (ClientSubject item in clientSubjectList)
+                {                    
+                    maxid++;
+                    String leve1Subject = item.Sn.Substring(0, Int32.Parse(yYT3AccInformation.CValue.Substring(0,1)));//获取上级科目信息
+                    YYT3code yYT3code = this.getlastcode( accset,leve1Subject);
+                    if (yYT3code == null) throw new Exception("无法获取一级科目信息!");
+                    string Bproperty = "1";                   
+                        if (yYT3code.Bproperty == "True")
+                    {
+                        Bproperty = "1";
+                    }
+                        else
+                    {
+                        Bproperty = "0";
+                    }
+                    int igrade = 1;
+                    int number = yYT3AccInformation.CValue.Length;
+
+                    if (number > 0)
+                    {
+                        if (Int32.Parse(yYT3AccInformation.CValue.Substring(0, 1)) == item.Sn.Length && yYT3AccInformation.CValue.Length > 0)
+                        {
+                            igrade = 1;
+                        }
+                    }
+                    if (number > 2)
+                    {
+                        if (Int32.Parse(yYT3AccInformation.CValue.Substring(2, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(0, 1)) == item.Sn.Length && yYT3AccInformation.CValue.Length > 2)
+                        {
+                            igrade = 2;
+                        }
+                    }
+                    if (number > 4)
+                    {
+                        if (Int32.Parse(yYT3AccInformation.CValue.Substring(4, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(2, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(0, 1)) == item.Sn.Length && yYT3AccInformation.CValue.Length > 4)
+                        {
+                            igrade = 3;
+                        }
+                    }
+                    if (number > 6)
+                    {
+                        if (Int32.Parse(yYT3AccInformation.CValue.Substring(6, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(4, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(2, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(0, 1)) == item.Sn.Length && yYT3AccInformation.CValue.Length > 6)
+                        {
+                            igrade = 4;
+                        }
+                    }
+                    if (number > 8)
+                    {
+                        if (Int32.Parse(yYT3AccInformation.CValue.Substring(8, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(6, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(4, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(2, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(0, 1)) == item.Sn.Length && yYT3AccInformation.CValue.Length > 8)
+                        {
+                            igrade = 5;
+                        }
+                    }
+                    if (number > 10)
+                    {
+                        if (Int32.Parse(yYT3AccInformation.CValue.Substring(10, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(8, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(6, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(4, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(2, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(0, 1)) == item.Sn.Length && yYT3AccInformation.CValue.Length > 10)
+                        {
+                            igrade = 6;
+                        }
+                    }
+                    if (number > 12)
+                    {
+                        if (Int32.Parse(yYT3AccInformation.CValue.Substring(12, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(10, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(8, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(6, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(4, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(2, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(0, 1)) == item.Sn.Length && yYT3AccInformation.CValue.Length > 12)
+                        {
+                            igrade = 7;
+                        }
+                    }
+                    if (number > 14)
+                    {
+                        if (Int32.Parse(yYT3AccInformation.CValue.Substring(14, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(12, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(10, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(8, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(6, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(4, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(2, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(0, 1)) == item.Sn.Length && yYT3AccInformation.CValue.Length > 14)
+                        {
+                            igrade = 8;
+                        }
+                    }
+                    if (number > 16)
+                    {
+                        if (Int32.Parse(yYT3AccInformation.CValue.Substring(16, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(14, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(12, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(10, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(8, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(6, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(4, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(2, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(0, 1)) == item.Sn.Length && yYT3AccInformation.CValue.Length > 16)
+                        {
+                            igrade = 9;
+                        }
+                    }
+                    if (number > 18)
+                    {
+                        if (Int32.Parse(yYT3AccInformation.CValue.Substring(18, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(16, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(14, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(12, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(10, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(8, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(6, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(4, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(2, 1)) + Int32.Parse(yYT3AccInformation.CValue.Substring(0, 1)) == item.Sn.Length && yYT3AccInformation.CValue.Length > 18)
+                        {
+                            igrade = 10;
+                        }
+                    }
+                    List <YYT3code> yYT3codeList = new List<YYT3code>();
+                    yYT3code.Ccode = item.Sn;
+                    yYT3code.Ccode_name = item.Label;
+                    
+                    
+                    sqls.Add("insert into code (i_id,cclass,cclass_engl,ccode,ccode_name,ccode_engl,igrade,bproperty,cbook_type,cbook_type_engl,bend,Bd_c) values ('"+maxid+"','" + yYT3code.Cclass+"','"+yYT3code.Cclass_engl+"','"+ yYT3code.Ccode + "','" + yYT3code.Ccode_name + "','" + yYT3code.Ccode_name + "engl','"+ igrade + "','"+ Bproperty + "','"+yYT3code.Cbook_type+ "','" + yYT3code.Cbook_type_engl + "','1','1') ");
+
+                }
+                sqls.Add("SET SET IDENTITY_INSERT code   OFF");
+                this.ExecuteSQLNonquery(sqls,accset);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+                throw e;
+            }
+
+        }
+        //
+        //科目表导入新科目end
+        //
+        //初始化start
+        //
+        public void initSubjectByYYT3(YYT3accset accset, Client client, User user)
+        {
+            if (client == null) throw new ArgumentException("请选择客户信息！");
+            if (user == null) throw new ArgumentException("用户信息必须输入！");
+            if (accset == null) throw new ArgumentException("请选择账套信息！");
+            if (client.Id == null) throw new ArgumentException("客户信息必须输入！");
+            
+            //查询客户账套科目长度配置，并同步
+            YYT3AccInformation yYT3AccInformation = this.getAccInformation(accset);
+
+            ClientSubjectLength csl = new ClientSubjectLength();
+            int number = yYT3AccInformation.CValue.Length;
+            if (number > 0)
+            {
+                csl.Subject1 = int.Parse(yYT3AccInformation.CValue.Substring(0, 1));
+            }
+            else
+            {
+                csl.Subject1 = 0;
+            }
+            if (number > 2)
+            {
+                csl.Subject2 = int.Parse(yYT3AccInformation.CValue.Substring(2, 1));
+            }
+            else
+            {
+                csl.Subject2 = 0;
+            }
+            if (number > 4)
+            {
+                csl.Subject3 = int.Parse(yYT3AccInformation.CValue.Substring(4, 1));
+            }
+            else
+            {
+                csl.Subject3 = 0;
+            }
+            if (number > 6)
+            {
+                csl.Subject4 = int.Parse(yYT3AccInformation.CValue.Substring(6, 1));
+            }
+            else
+            {
+                csl.Subject4 = 0;
+            }
+            if (number > 8)
+            {
+                csl.Subject5 = int.Parse(yYT3AccInformation.CValue.Substring(8, 1));
+            }
+            else
+            {
+                csl.Subject5 = 0;
+            }
+            if (number > 10)
+            {
+                csl.Subject6 = int.Parse(yYT3AccInformation.CValue.Substring(10, 1));
+            }
+            else
+            {
+                csl.Subject6 = 0;
+            }
+            if (number > 12)
+            {
+                csl.Subject7 = int.Parse(yYT3AccInformation.CValue.Substring(12, 1));
+            }
+            else
+            {
+                csl.Subject7 = 0;
+            }
+            if (number > 14)
+            {
+                csl.Subject8 = int.Parse(yYT3AccInformation.CValue.Substring(14, 1));
+            }
+            else
+            {
+                csl.Subject8 = 0;
+            }
+            if (number > 16)
+            {
+                csl.Subject9 = int.Parse(yYT3AccInformation.CValue.Substring(16, 1));
+            }
+            else
+            {
+                csl.Subject9 = 0;
+            }
+            if (number > 18)
+            {
+                csl.Subject10 = int.Parse(yYT3AccInformation.CValue.Substring(18, 1));
+            }
+            else
+            {
+                csl.Subject10 = 0;
+            }
+            csl.Clientid = client.Id;
+            csl.Createby = user.Id;
+            ClientSubjectLengthFactory cslf = new ClientSubjectLengthFactory();
+            cslf.add(csl);//写入科目长度表
+            //清理现有科目
+            ClientSubjectFactory csf = new ClientSubjectFactory();
+            csf.clean(client.Id);
+            //查询客户账套科目
+            List<YYT3code> yYT3codeList = this.getcode(accset);
+
+            if (yYT3codeList == null || yYT3codeList.Count <= 0)
+            {
+                throw new Exception("无法从速达读取科目信息！");
+            }
+            //写入科目
+            foreach (YYT3code item in yYT3codeList)
+            {
+                ClientSubject subject = new ClientSubject();
+                subject.Sn = item.Ccode;
+                subject.Label = item.Ccode_name;
+                subject.Fullname = item.Ccode_name;
+                subject.Debitcredit = item.Bproperty;
+                csf.add(subject, client, user);
+            }
+        }
+        //
+        //初始化end
+        //
+        //凭证导入start
+        //
+        public void exports(ExportBean exportBean, YYT3accset accset, Inst inst, Client client, User user, Accountcycle accountcycle, String categoryname)
+        {
+
+            YYT3ExportContext context = new YYT3ExportContext();
+            context.ExportBean = exportBean;
+
+            //查询凭证数据
+            List<YYT3Voucher> vouchers = this.getVoucher(inst.Id, client.Id, accountcycle.Sn, user.Id, categoryname);
+            List<String> sqls = new List<String>();
+            sqls.Add("SET SET IDENTITY_INSERT GL_accvouch  ON");
+            int MaxI_id = -1;
+            int MaxIno_id = -1;
+            foreach (YYT3Voucher kvi in vouchers)
+            {               
+                    if (MaxI_id < 0)
+                    {
+                        MaxI_id = this.getvouchersmaxid(accset);
+                        MaxI_id++;
+                    }
+                    else
+                    {
+                        MaxI_id++;
+                    }
+                if (kvi.Inid == 1)
+                {
+                    if (MaxIno_id < 0)
+                    {
+                        MaxIno_id = this.getvouchersmaxino_id(accset, kvi.Iperiod, kvi.Csign);
+                        MaxIno_id++;
+                    }
+                    else
+                    {
+                        MaxIno_id++;
+                    }
+                }
+                String sql = this.buildItemSql( accset, kvi, MaxI_id, MaxIno_id);
+                if (sql != null && sql != "") sqls.Add(sql);                
+            }
+            //执行SQL
+            sqls.Add("SET SET IDENTITY_INSERT GL_accvouch  OFF");
+            this.ExecuteSQLNonquery(sqls, accset);
+        }
+        //获取凭证
+        private List<YYT3Voucher> getVoucher(string instid, string clientid, string accountcyclesn, string createby, string categoryname)
+        {
+
+            HttpClient httpClient = AppConfig.GetInstance().crateHttpClient();
+            String url = AppConfig.GetInstance().BaseUrl + "/voucher/instance/exports";
+
+            List<KeyValuePair<String, String>> paramList = new List<KeyValuePair<String, String>>();
+            paramList.Add(new KeyValuePair<string, string>("instid", instid));
+            paramList.Add(new KeyValuePair<string, string>("clientid", clientid));
+            paramList.Add(new KeyValuePair<string, string>("accountcyclesn", accountcyclesn));
+            paramList.Add(new KeyValuePair<string, string>("categoryname", categoryname));
+            paramList.Add(new KeyValuePair<string, string>("createby", createby));
+            paramList.Add(new KeyValuePair<string, string>("type", "kis"));
+            HttpResponseMessage response = httpClient.PostAsync(new Uri(url), new FormUrlEncodedContent(paramList)).Result;
+            String result = response.Content.ReadAsStringAsync().Result;
+            httpClient.Dispose();
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                JObject results = JObject.Parse(result);
+                List<YYT3Voucher> vouchers = this.buildData(results);
+                return vouchers;
+            }
+            else
+            {
+                JObject jo = JObject.Parse(result);
+                if (jo != null && jo["statusCode"].ToString() == "500" && jo["message"] != null)
+                {
+                    throw new Exception(jo["message"].ToString());
+                }
+                else
+                {
+                    throw new Exception("获取凭证数据错误!" + response.ReasonPhrase.ToString());
+                }
+            }
+        }
+        // 引进凭证
+        private List<YYT3Voucher> buildData(JObject resultObject)
+        {
+            if (resultObject == null) throw new ArgumentException("构建凭证参数不能为空!");
+            List<YYT3Voucher> vouchers = new List<YYT3Voucher>();
+
+            var joDatas = resultObject["datas"];
+            if (joDatas == null) throw new Exception("服务器返回数据错误。无法获取datas属性");
+
+            var joResult = joDatas["result"];
+            if (joResult == null) throw new Exception("当月无导出数据!");
+
+            var jaVoucherItems = joResult["voucherItems"];
+            if (jaVoucherItems == null) throw new Exception("当月无凭证分录数据！");
+
+            foreach (JObject item in jaVoucherItems)
+            {
+                YYT3Voucher voucherItem = new YYT3Voucher();
+                DateTime bizDate = MicroServiceApplication.Common.Util.GetTime(item["FDate"].ToString());
+
+                voucherItem.Dbill_date = bizDate;
+                voucherItem.Doutbilldate = bizDate;
+                voucherItem.Iperiod = item.GetValue("FPeriod").ToObject<int>();
+                voucherItem.Csign = item.GetValue("FGroup").ToString();
+                voucherItem.Isignseq = 1;
+                voucherItem.Inid = item.GetValue("FEntryID").ToObject<int>()+1;
+                voucherItem.Idoc = -1;
+                voucherItem.Cbill = "demo";
+                voucherItem.Cdigest = item.GetValue("FExp").ToString();
+                voucherItem.Ccode = item.GetValue("FAcctID").ToString();
+                voucherItem.Mc = item.GetValue("FDebit").ToObject<decimal>();
+                voucherItem.Md = item.GetValue("FCredit").ToObject<decimal>();
+                voucherItem.Ioutperiod = item.GetValue("FPeriod").ToObject<int>();
+                voucherItem.Bvouchedit = 1;
+                voucherItem.Bvalueedit = 1;
+                voucherItem.BPCSedit = 1;
+                voucherItem.BItemedit = 1;
+                voucherItem.BDeptedit = 1;
+                voucherItem.BCusSupInput = 1;
+                voucherItem.Bcodeedit = 1;
+
+                vouchers.Add(voucherItem);
+            }
+            return vouchers;
+        }
+        //建立导入凭证sql
+        private String buildItemSql(YYT3accset accset,YYT3Voucher item, int i_id, int ino_id)
+        {
+            if (item == null) return null;
+            if (i_id < 0) throw new ArgumentException("无法获取凭证序列号");
+            if (ino_id < 0) throw new ArgumentException("无法获取凭证号");
+
+            //检查当前科目是否存在
+            YYT3code kda = this.getlastcode( accset, item.Ccode);
+
+            if (kda == null) throw new Exception("科目:" + item.Ccode + ",在财务系统中不存在！");
+
+            String sql = "INSERT INTO GL_accvouch(i_id,iperiod,csign,ino_id,inid,cbill,cdigest,ccode,md,mc,idoc,dbill_date,isignseq,doutbilldate,ioutperiod,bvouchedit,bvalueedit,bcodeedit,bPCSedit,bDeptedit,bItemedit,bCusSupInput) VALUES (" +
+                    "'" + i_id + "'," +
+                    "'" + item.Iperiod + "'," +
+                    "'" + item.Csign + "'," +
+                    "'" + ino_id + "'," +
+                    "'" + item.Inid + "'," +
+                    "'" + item.Cbill + "'," +
+                    "'" + item.Cdigest + "'," +
+                    "'" + item.Ccode + "'," +
+                    "" + item.Md + "," +
+                    "" + item.Mc + "," +
+                    "'" + item.Idoc + "'," +
+                    "'" + item.Dbill_date + "'," +
+                    "'" + item.Isignseq + "'," +
+                    "'" + item.Doutbilldate + "'," +
+                    "'" + item.Ioutperiod + "'," +
+                    "'" + item.Bvouchedit + "'," +
+                    "'" + item.Bvalueedit + "'," +
+                    "'" + item.Bcodeedit + "'," +
+                    "'" + item.BPCSedit + "'," +
+                    "'" + item.BDeptedit + "'," +
+                    "'" + item.BItemedit + "'," +
+                    "'" + item.BCusSupInput + "'" +
+                    ")";
+
+            return sql;
+        }
+        //
+        //凭证导入end
+        //       
+    }
+}

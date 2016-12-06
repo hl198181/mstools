@@ -12,7 +12,11 @@ namespace MicroServiceApplication.Bean
         private string _baseauthappid;
         private string _baseauthappsecret;
         private string _baseauthid;
+<<<<<<< HEAD
         private string _baseauthtoken;
+=======
+        private string baseauthtoken;
+>>>>>>> yyt3
         private string _id;
 
         public string Id
@@ -93,12 +97,20 @@ namespace MicroServiceApplication.Bean
         {
             get
             {
+<<<<<<< HEAD
                 return _baseauthtoken;
+=======
+                return baseauthtoken;
+>>>>>>> yyt3
             }
 
             set
             {
+<<<<<<< HEAD
                 _baseauthtoken = value;
+=======
+                baseauthtoken = value;
+>>>>>>> yyt3
             }
         }
 

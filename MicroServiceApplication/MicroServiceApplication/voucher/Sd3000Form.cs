@@ -111,7 +111,7 @@ namespace MicroServiceApplication.voucher
             try
             {
                 this.InformationTextBox.Visible = true;//打开提示框
-                this.InformationTextBox.Text = "正在初始化会计科目!请稍等……";//提示文本
+                this.InformationTextBox.Text = "正在导出凭证!请稍等……";//提示文本
                 this.InformationTextBox.Font = new Font("宋体", 12);//提示字体
 
                 Sd3000Factory factory = new Sd3000Factory();
@@ -414,7 +414,7 @@ namespace MicroServiceApplication.voucher
             }
             if (this.accset.Corpname != this.client.Fullname)
             {
-                DialogResult dr = MessageBox.Show("选择的客户与账套名称不一致，是否继续导入?", "系统提示", MessageBoxButtons.OKCancel);
+                DialogResult dr = MessageBox.Show("选择的客户与账套名称不一致，是否继续初始化?", "系统提示", MessageBoxButtons.OKCancel);
 
                 if (dr != DialogResult.OK)
                 {
