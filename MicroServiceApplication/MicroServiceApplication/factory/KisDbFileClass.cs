@@ -854,6 +854,22 @@ namespace MicroServiceApplication.Factory
     //
     //科目余额表end
     //
+    //核算科目表start
+    //
+    class GLObj
+    {
+        private int _fClsID;
+        private string _fObjID;
+        private string _fObjName;
+        private string _fUnit;
+        private string _fDeleted;
+        private string _fCompanyID;
+        private string _fParentID;
+        private int _fLevel;
+        private string _fDetail;
+        private string _fullPath;
+    }
+
     class KisDbFileFactory
     {
 
@@ -4536,6 +4552,38 @@ namespace MicroServiceApplication.Factory
         }
         //
         //获取科目余额表方法end
+        //
+        //获取核算科目表start
+        //
+        public List<GLObj> getGLObj()
+        {
+            AccessDbClass access = new AccessDbClass(this.KdbParams.DbFilePath);
+            string sql = "select * from GLObj";
+            List<GLObj> gLobjList = new List<GLObj>();
+            try
+            {
+                DataTable dt = access.SelectToDataTable(sql);
+                if (dt.Rows.Count > 0)
+                {
+                    foreach (DataRow item in dt.Rows)
+                    {
+                        GLObj globj = new GLObj();
+                      
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw (new Exception("获取核算科目错误" + e.Message));
+            }
+            finally
+            {
+                access.Close();
+            }
+            return gLobjList;
+        }
+        //
+        //获取核算科目表end
         //
     }
 }
