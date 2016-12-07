@@ -18,6 +18,7 @@ namespace MicroServiceApplication.Bean
         private string _fullname;
         private string _debitcredit;
         private int _isnew;
+        private string unit;
 
         public string Id
         {
@@ -110,6 +111,19 @@ namespace MicroServiceApplication.Bean
             }
         }
 
+        public string Unit
+        {
+            get
+            {
+                return unit;
+            }
+
+            set
+            {
+                unit = value;
+            }
+        }
+
         public ClientSubject() { }
 
         public ClientSubject(JObject jobject)
@@ -120,6 +134,7 @@ namespace MicroServiceApplication.Bean
             this.Isnew = jobject["isnew"].ToObject<int>();
             this.Debitcredit = jobject["debitcredit"] == null ? null : jobject["debitcredit"].ToString();
             this.Clientid = jobject["clientid"] == null ? null : jobject["clientid"].ToString();
+            this.Unit = jobject["unit"] == null ? null : jobject["unit"].ToString();
         }
     }
 

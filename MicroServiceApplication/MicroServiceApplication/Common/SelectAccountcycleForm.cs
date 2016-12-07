@@ -38,7 +38,7 @@ namespace MicroServiceApplication.Common
         private void SelectAccountcycleForm_Load(object sender, EventArgs e)
         {
             AccountcycleFactory af = new AccountcycleFactory();
-            this.accountcycleList = af.query(-6,1);
+            this.accountcycleList = af.query(-11,1);
 
             accountcycleDt = new DataTable();
 

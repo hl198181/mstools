@@ -11,6 +11,9 @@ namespace MicroServiceApplication.voucher
 {
     public partial class KisFileForm : Form
     {
+        private string vouchernumber;//合并参数
+        private string voucherword;//凭证字参数
+        private string vouchersummary;//凭证摘要参数
         private Client client;
         private KisDbFileParams kisDbFileParams;
         private User user;
@@ -22,11 +25,44 @@ namespace MicroServiceApplication.voucher
         {
             InitializeComponent();
         }
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            this.vouchernumber = "one";
+        }
 
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            this.vouchernumber = "two";
+        }
+
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            this.vouchernumber = "three";
+        }
+        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+            this.voucherword = "yes";
+        }
+
+        private void radioButton5_CheckedChanged(object sender, EventArgs e)
+        {
+            this.voucherword = "no";
+        }
+
+        private void radioButton6_CheckedChanged(object sender, EventArgs e)
+        {
+            this.vouchersummary = "fist";
+        }
+
+        private void radioButton7_CheckedChanged(object sender, EventArgs e)
+        {
+            this.vouchersummary = "all";
+        }
         private void selectClientButton_Click(object sender, EventArgs e)
         {
-            List<Client> clientList =  CommonManager.selectClient();
-            if (clientList != null && clientList.Count >0){
+            List<Client> clientList = CommonManager.selectClient();
+            if (clientList != null && clientList.Count > 0)
+            {
                 this.client = clientList[0];
                 this.clientNameTextBox.Text = this.client.Fullname;
                 this.queryClientNewSubject(this.client.Id);
@@ -55,7 +91,7 @@ namespace MicroServiceApplication.voucher
         }
         private void testConnectButton_Click(object sender, EventArgs e)
         {
-            if (this.kisDbFileParams == null ||  this.kisDbFileParams.DbFilePath == null || this.kisDbFileParams.DbFilePath == "")
+            if (this.kisDbFileParams == null || this.kisDbFileParams.DbFilePath == null || this.kisDbFileParams.DbFilePath == "")
             {
                 MessageBox.Show("请选择数据库文件!");
                 return;
@@ -66,9 +102,10 @@ namespace MicroServiceApplication.voucher
             {
                 kisDbFileFactory.testConnect();
                 MessageBox.Show("连接数据库成功！");
-            }catch(Exception e1)
+            }
+            catch (Exception e1)
             {
-                MessageBox.Show("连接数据库错误！"+e1.Message);
+                MessageBox.Show("连接数据库错误！" + e1.Message);
             }
         }
 
@@ -77,6 +114,14 @@ namespace MicroServiceApplication.voucher
             this.user = Session.GetInstance().User;
             this.inst = Session.GetInstance().Inst;
             this.createbyTextBox.Text = this.user.Name;
+            this.radioButton1.Checked = true;//默认不合并
+            this.radioButton4.Checked = true;//默认有凭证字
+            this.radioButton6.Checked = true;//默认只有第一行有摘要
+            this.调账ToolStripMenuItem.Visible = false;
+            if (this.inst.Id != "653279009C4211E6A731B9323D2BF7D6")
+            {
+                this.修复KIS明细科目名称ToolStripMenuItem.Visible = false;
+            }
 
             this.initAccountcycle();
         }
@@ -284,12 +329,28 @@ namespace MicroServiceApplication.voucher
                 }
                 //执行导出凭证到KIS
                 this.InformationTextBox.Visible = true;//打开提示框
-                this.InformationTextBox.Text = "正在初始化会计科目!请稍等……";//提示文本
+                this.InformationTextBox.Text = "正在导出凭证!请稍等……";//提示文本
                 this.InformationTextBox.Font = new Font("宋体", 12);//提示字体
+                //按钮状态变成不能点击
+                this.exportIncomeButton.Enabled = false;
+                this.exportOutputButton.Enabled = false;
+                this.bankbillExportbutton.Enabled = false;
+                this.exportpayrollbutton.Enabled = false;
+                this.localreporttaxbutton.Enabled = false;
+                this.paytaxreportbutton.Enabled = false;
 
-                kisDbFileFactory.exportVoucher(this.inst, this.client, this.accountcycle, this.user, categoryname);
-
+                if (this.InformationTextBox.Text != null || this.InformationTextBox.Text != "")
+                {
+                    kisDbFileFactory.exportVoucher(vouchernumber, voucherword, vouchersummary, this.inst, this.client, this.accountcycle, this.user, categoryname);
+                }
                 this.InformationTextBox.Visible = false;//关闭提示框
+                //恢复按钮点击状态
+                this.exportIncomeButton.Enabled = true;
+                this.exportOutputButton.Enabled = true;
+                this.bankbillExportbutton.Enabled = true;
+                this.exportpayrollbutton.Enabled = true;
+                this.localreporttaxbutton.Enabled = true;
+                this.paytaxreportbutton.Enabled = true;
                 MessageBox.Show("导出凭证成功!请登录财务系统查看结果");
 
             }
@@ -299,6 +360,13 @@ namespace MicroServiceApplication.voucher
                 Console.WriteLine(e.StackTrace);
                 this.InformationTextBox.Visible = false;//关闭提示框
                 MessageBox.Show(e.Message);
+                //恢复按钮点击状态
+                this.exportIncomeButton.Enabled = true;
+                this.exportOutputButton.Enabled = true;
+                this.bankbillExportbutton.Enabled = true;
+                this.exportpayrollbutton.Enabled = true;
+                this.localreporttaxbutton.Enabled = true;
+                this.paytaxreportbutton.Enabled = true;
 
             }
         }
@@ -379,7 +447,7 @@ namespace MicroServiceApplication.voucher
         //
         private void SubjectLength()
         {
-            
+
             if (this.kisDbFileParams == null || this.kisDbFileParams.DbFilePath == null)
             {
                 MessageBox.Show("请先选择KIS账套文件");
@@ -395,18 +463,100 @@ namespace MicroServiceApplication.voucher
             try
             {
                 KisDbFileFactory kisDbFileFactory = new KisDbFileFactory(this.kisDbFileParams);
-                
                 kisDbFileFactory.SubjectLength();//引用工厂里修复账套科目长度的方法
                 MessageBox.Show("科目长度修复成功!");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.StackTrace);
+                MessageBox.Show(e.Message);
+            }
+        }
+
+        private void 修复KIS明细科目名称ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.SubjectName();
+        }
+        private void SubjectName()
+        {
+
+            if (this.kisDbFileParams == null || this.kisDbFileParams.DbFilePath == null)
+            {
+                MessageBox.Show("请先选择KIS账套文件");
+            }
+            else
+            {
+                DialogResult dr = MessageBox.Show("KIS账套科目名称将会被修复,是否继续?", "系统警告", MessageBoxButtons.OKCancel);
+                if (dr != DialogResult.OK)
+                {
+                    return;
+                }
+            }
+            try
+            {
+                KisDbFileFactory kisDbFileFactory = new KisDbFileFactory(this.kisDbFileParams);
+                kisDbFileFactory.SubjectName();//调用工厂里修复明细科目方法
+                MessageBox.Show("账套明细科目修复成功");
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.StackTrace);
                 MessageBox.Show(e.Message);
             }
         }
         //
         //修复账套科目长度end
         //
+        //调整科目余额start
+        //
+        private void 调整科目余额ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.adjustGLBal();
+        }
+        private void adjustGLBal()
+        {
+            if (this.client == null)
+            {
+                MessageBox.Show("请选择客户信息!");
+                return;
+            }
+
+            if (this.kisDbFileParams == null || this.kisDbFileParams.DbFilePath == null)
+            {
+                MessageBox.Show("请选择数据库文件!");
+                return;
+            }
+            KisDbFileFactory kisDbFileFactory = new KisDbFileFactory(this.kisDbFileParams);
+            KisDbPref kisDbPref = kisDbFileFactory.getGLPref();
+            try
+            {
+                if (this.client.Name != kisDbPref.Fcompany && this.client.Fullname != kisDbPref.Fcompany)
+                {
+                    DialogResult dr = MessageBox.Show("选择的客户与账套名称不一致,是否继续初始化?", "系统提示", MessageBoxButtons.OKCancel);
+                    if (dr != DialogResult.OK)
+                    {
+                        return;
+                    }
+                }
+                this.InformationTextBox.Text = "正在初始化会计科目余额";
+                this.InformationTextBox.Visible = true;
+                this.InformationTextBox.Font = new Font("宋体", 12);
+                if (this.InformationTextBox.Text != null || this.InformationTextBox.Text != "")
+                {
+                    kisDbFileFactory.initGLBal(this.client, this.user);
+                }
+                this.InformationTextBox.Visible = false;//关闭提示框
+                MessageBox.Show("初始化科目完成,请登录小微服查看!");
+            }
+            catch (Exception e1)
+            {
+                this.InformationTextBox.Visible = false;
+                MessageBox.Show("初始化科目余额表错误" + e1.Message);
+            }
+        }
+        //
+        //调整科目余额end
+        //
+
     }
 }
